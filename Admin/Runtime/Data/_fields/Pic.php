@@ -7,7 +7,7 @@ return array (
   4 => 'user_id',
   5 => 'author',
   6 => 'remark',
-  7 => 'content',
+  7 => 'shop_id',
   8 => 'sortrank',
   9 => 'add_time',
   10 => 'pic_url',
@@ -17,7 +17,6 @@ return array (
   14 => 'keywords',
   15 => 'hits',
   16 => 'default_attach_id',
-  17 => 'shop_id',
   '_autoinc' => true,
   '_pk' => 'id',
 );
