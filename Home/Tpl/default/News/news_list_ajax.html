@@ -1,0 +1,113 @@
+        <div class="height_35px">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td width="28" height="35" class="bian_bottom">&nbsp;</td>
+              <td width="118" height="35" valign="middle" id="new_list_title">{$dump.partname}</td>
+              <td width="475" height="35" align="right" class="bian_bottom">{$page_base}</td>
+              <td width="27" height="35" class="bian_bottom">&nbsp;</td>
+            </tr>
+          </table>
+        </div>
+		<iterate name="list" id="vo">
+        <div class="height_135px">
+          <div class="height_10px"></div>
+          <div class="heigth_115px">
+		  <!--是否图片新闻-->
+		  <eq name="vo.pic_url" value=""><else/>
+            <div class="height_112pxh_142pxw"><img src="__PUBLIC__/Upload/news/thumb_{$vo.pic_url}" width="138" height="108" border="0" /></div>
+            <div class="width_10px_space"></div>
+		  </eq>
+		  <!--是否图片新闻结束-->
+            <div class="news_list_con">
+              <div class="height_25px"><span class="blue_bian_a"><a href="__URL__/view/id/{$vo.id}" class="blue_14px_f"><strong>{$vo.title}</strong></a></span></div>
+              <div class="heigth_20px">来自：<strong><span class="gray_12px_fs">{$vo.source}</span></strong> &nbsp;&nbsp;发布：<span class="gray_12px_fs">{$vo.add_time}</span></div>
+              <div class="lineheight22px_12px"><span class="gray_12px_fs">{$vo.content} </span></div>
+              <div class="height_5px"></div>
+              <div class="heigth_20px"><img src="../Public/Images/de_pi.gif" align="absmiddle"  />
+			  <a href="__URL__/view/id/{$vo.id}">阅读全文</a>&nbsp; |&nbsp; 
+			  <img src="../Public/Images/de_msg_ico.gif" align="absmiddle"  />复制链接给我的朋友&nbsp; | &nbsp;阅读：<span class="orange_12px_f">({$vo.click})</span></div>
+            </div>
+          </div>
+          <div class="heigth_dian_bian_10px"></div>
+        </div>
+		</iterate>
+        <!--<div class="height_135px">
+          <div class="height_10px"></div>
+          <div class="heigth_115px">
+            <div class="height_112pxh_142pxw"><img src="../Public/Images/news_list_pic.jpg" width="138" height="108" border="0" /></div>
+            <div class="width_10px_space"></div>
+            <div class="news_list_con">
+              <div class="height_25px"><span class="blue_bian_a"><a href="#" class="blue_14px_f"><strong>刚需板块抢占一季度楼市 盘点沪上18000元以下热销楼盘</strong></a></span></div>
+              <div class="heigth_20px">来自：<strong><span class="gray_12px_fs">CCTV</span></strong> &nbsp;&nbsp;发布：<span class="gray_12px_fs">2007年01月13日10：26：45</span></div>
+              <div class="lineheight22px_12px"><span class="gray_12px_fs">2011年1月26日新国八条出台后，各地限购令也相继出台，第三轮楼市调控从购房资格、交易税费等多方面力控楼市，并且收紧信贷，首套优惠取消、二套房首付增加…… </span></div>
+              <div class="height_5px"></div>
+              <div class="heigth_20px"><img src="../Public/Images/de_pi.gif" align="absmiddle"  />阅读全文&nbsp; |&nbsp; <img src="../Public/Images/de_msg_ico.gif" align="absmiddle"  />复制链接给我的朋友&nbsp; | &nbsp;阅读：<span class="orange_12px_f">(90)</span></div>
+            </div>
+          </div>
+          <div class="heigth_dian_bian_10px"></div>
+        </div>
+        <div class="height_135px">
+          <div class="height_10px"></div>
+          <div class="heigth_115px">
+            <div class="height_112pxh_142pxw"><img src="../Public/Images/news_list_pic.jpg" width="138" height="108" border="0" /></div>
+            <div class="width_10px_space"></div>
+            <div class="news_list_con">
+              <div class="height_25px"><span class="blue_bian_a"><a href="#" class="blue_14px_f"><strong>刚需板块抢占一季度楼市 盘点沪上18000元以下热销楼盘</strong></a></span></div>
+              <div class="heigth_20px">来自：<strong><span class="gray_12px_fs">CCTV</span></strong> &nbsp;&nbsp;发布：<span class="gray_12px_fs">2007年01月13日10：26：45</span></div>
+              <div class="lineheight22px_12px"><span class="gray_12px_fs">2011年1月26日新国八条出台后，各地限购令也相继出台，第三轮楼市调控从购房资格、交易税费等多方面力控楼市，并且收紧信贷，首套优惠取消、二套房首付增加…… </span></div>
+              <div class="height_5px"></div>
+              <div class="heigth_20px"><img src="../Public/Images/de_pi.gif" align="absmiddle"  />阅读全文&nbsp; |&nbsp; <img src="../Public/Images/de_msg_ico.gif" align="absmiddle"  />复制链接给我的朋友&nbsp; | &nbsp;阅读：<span class="orange_12px_f">(90)</span></div>
+            </div>
+          </div>
+          <div class="heigth_dian_bian_10px"></div>
+        </div>
+        <div class="height_135px">
+          <div class="height_10px"></div>
+          <div class="heigth_115px">
+            <div class="height_112pxh_142pxw"><img src="../Public/Images/news_list_pic.jpg" width="138" height="108" border="0" /></div>
+            <div class="width_10px_space"></div>
+            <div class="news_list_con">
+              <div class="height_25px"><span class="blue_bian_a"><a href="#" class="blue_14px_f"><strong>刚需板块抢占一季度楼市 盘点沪上18000元以下热销楼盘</strong></a></span></div>
+              <div class="heigth_20px">来自：<strong><span class="gray_12px_fs">CCTV</span></strong> &nbsp;&nbsp;发布：<span class="gray_12px_fs">2007年01月13日10：26：45</span></div>
+              <div class="lineheight22px_12px"><span class="gray_12px_fs">2011年1月26日新国八条出台后，各地限购令也相继出台，第三轮楼市调控从购房资格、交易税费等多方面力控楼市，并且收紧信贷，首套优惠取消、二套房首付增加…… </span></div>
+              <div class="height_5px"></div>
+              <div class="heigth_20px"><img src="../Public/Images/de_pi.gif" align="absmiddle"  />阅读全文&nbsp; |&nbsp; <img src="../Public/Images/de_msg_ico.gif" align="absmiddle"  />复制链接给我的朋友&nbsp; | &nbsp;阅读：<span class="orange_12px_f">(90)</span></div>
+            </div>
+          </div>
+          <div class="heigth_dian_bian_10px"></div>
+        </div>
+        <div class="height_135px">
+          <div class="height_10px"></div>
+          <div class="heigth_115px">
+            <div class="height_112pxh_142pxw"><img src="../Public/Images/news_list_pic.jpg" width="138" height="108" border="0" /></div>
+            <div class="width_10px_space"></div>
+            <div class="news_list_con">
+              <div class="height_25px"><span class="blue_bian_a"><a href="#" class="blue_14px_f"><strong>刚需板块抢占一季度楼市 盘点沪上18000元以下热销楼盘</strong></a></span></div>
+              <div class="heigth_20px">来自：<strong><span class="gray_12px_fs">CCTV</span></strong> &nbsp;&nbsp;发布：<span class="gray_12px_fs">2007年01月13日10：26：45</span></div>
+              <div class="lineheight22px_12px"><span class="gray_12px_fs">2011年1月26日新国八条出台后，各地限购令也相继出台，第三轮楼市调控从购房资格、交易税费等多方面力控楼市，并且收紧信贷，首套优惠取消、二套房首付增加…… </span></div>
+              <div class="height_5px"></div>
+              <div class="heigth_20px"><img src="../Public/Images/de_pi.gif" align="absmiddle"  />阅读全文&nbsp; |&nbsp; <img src="../Public/Images/de_msg_ico.gif" align="absmiddle"  />复制链接给我的朋友&nbsp; | &nbsp;阅读：<span class="orange_12px_f">(90)</span></div>
+            </div>
+          </div>
+          <div class="heigth_dian_bian_10px"></div>
+        </div>
+        <div class="height_135px">
+          <div class="height_10px"></div>
+          <div class="heigth_115px">
+            <div class="height_112pxh_142pxw"><img src="../Public/Images/news_list_pic.jpg" width="138" height="108" border="0" /></div>
+            <div class="width_10px_space"></div>
+            <div class="news_list_con">
+              <div class="height_25px"><span class="blue_bian_a"><a href="#" class="blue_14px_f"><strong>刚需板块抢占一季度楼市 盘点沪上18000元以下热销楼盘</strong></a></span></div>
+              <div class="heigth_20px">来自：<strong><span class="gray_12px_fs">CCTV</span></strong> &nbsp;&nbsp;发布：<span class="gray_12px_fs">2007年01月13日10：26：45</span></div>
+              <div class="lineheight22px_12px"><span class="gray_12px_fs">2011年1月26日新国八条出台后，各地限购令也相继出台，第三轮楼市调控从购房资格、交易税费等多方面力控楼市，并且收紧信贷，首套优惠取消、二套房首付增加…… </span></div>
+              <div class="height_5px"></div>
+              <div class="heigth_20px"><img src="../Public/Images/de_pi.gif" align="absmiddle"  />阅读全文&nbsp; |&nbsp; <img src="../Public/Images/de_msg_ico.gif" align="absmiddle"  />复制链接给我的朋友&nbsp; | &nbsp;阅读：<span class="orange_12px_f">(90)</span></div>
+            </div>
+          </div>      
+		<div class="heigth_dian_bian_10px"></div>
+
+      </div>-->
+        <div class="heigth_10px"></div>
+<!--<div id="news_pageheight_30px">  <a href="#" class="blue_a"><span class="newslist_page_updown">&nbsp;&nbsp;&nbsp;首页&nbsp;&nbsp;&nbsp;&nbsp;</span></a>&nbsp;&nbsp;<a href="#" class="blue_a"><span class="newslist_page_updown">&nbsp;&nbsp;上一页&nbsp;&nbsp;</span></a>&nbsp;<span class="blue_12px_f">&nbsp;共<strong>156</strong>页/20条</span> <span class="gray_12px_fs">第 </span><span class="blue_a"><strong><a href="#">1</a></strong></span> <span class="gray_a"><a href="#">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">5</a> <a href="#">6 7</a> <a href="#">8</a> <a href="#">9</a> <a href="#">10</a></span><span class="gray_12px_fs">&nbsp;页&nbsp;&nbsp;</span><a href="#" class="blue_a"><span class="newslist_page_updown">&nbsp;&nbsp;下一页&nbsp;&nbsp;</span>&nbsp;&nbsp;<span class="newslist_page_updown">&nbsp;&nbsp;&nbsp;尾页&nbsp;&nbsp;&nbsp;</span></a></div>
+<div style="clear:both"></div><!--con_left_center_bg促使图层高度随内容增加面增加-->  
+<div class="page">{$page}</div>

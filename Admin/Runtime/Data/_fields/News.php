@@ -1,0 +1,27 @@
+<?php
+return array (
+  0 => 'id',
+  1 => 'title',
+  2 => 'sub_title',
+  3 => 'class_id',
+  4 => 'curr_path',
+  5 => 'user_id',
+  6 => 'author',
+  7 => 'remark',
+  8 => 'content',
+  9 => 'sortrank',
+  10 => 'add_time',
+  11 => 'pic_url',
+  12 => 'flag',
+  13 => 'isshow_sub_title',
+  14 => 'tag',
+  15 => 'source',
+  16 => 'keywords',
+  17 => 'click',
+  18 => 'ispublish',
+  19 => 'title_color',
+  20 => 'redirecturl',
+  '_autoinc' => true,
+  '_pk' => 'id',
+);
+?>

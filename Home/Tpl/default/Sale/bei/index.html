@@ -1,0 +1,127 @@
+<include file="Public:html_header" /> 
+
+
+<link href="../Public/Css/news_com.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/class_com.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/sale.css" rel="stylesheet" type="text/css" />
+
+<body >
+
+
+<!--start腾房新闻公共头部-->
+<!--%%当前是否在首页嵌入为1在首页-->
+<include file="Sale:sale_header" />
+<!--end腾房新闻公共头部-->
+
+<!--png图片在ie6下正常显示-->
+<!--[if IE 6]>
+<script type="text/javascript" src="__PUBLIC__/Js/png.js"></script>
+<script>
+  DD_belatedPNG.fix('.tf_logo');
+</script>
+<![endif]-->
+
+<div class="content_inc">   
+  <div class="height_30px_text"><img src="../Public/Images/dp_jian_left.gif" width="10" height="10" alt="箭头" />腾房网 > 楼盘大全 > <strong><span class="green_12px_f">销售中心</span></strong></div>
+  <div class="sale_left_content_inc">
+    <div class="width_690px">
+      <div class="width_7px_float"></div>
+      <div class="width_674px_float">
+        <div id="lp_title_left">
+            <div class="float_left">&nbsp;选择您的意向<strong>楼栋</strong></div>
+            <div class="float_right"><strong>万科花园&nbsp;&nbsp;</strong></div>
+        </div>
+        <div class="height_10px"></div>
+        
+        <volist name="loudong" id="vo" mod="5">
+        	<a href="__APP__/Sale/index/id/{$info_id}-{$vo.proid}"><div class="loudong_num<?php if($vo['proid']==$loudong_info['proid']) echo '_c';?>">{$vo.proname}</div></a>
+            <eq name= "mod" value= "0" ><div class="height_5px_float"></div><else/><div class="width_6px_float"></div></eq>
+        </volist>
+
+        <div class="clear"></div>
+        <div class="height_10px"></div>
+        <div class="height_22px_text">选中楼座：<span class="red_text"> {$loudong_name}</span> 建筑类别： <span class="red_text"></span><br>
+        销售进度： <span class="red_text">总房源<?php echo $loudong_info['prosalenum']+$loudong_info['pronoaleanum']+$loudong_info['proydnum']; ?>套  已销售{$loudong_info.prosalenum}套  可销售{$loudong_info.pronoaleanum}套  已预订{$loudong_info.proydnum}套</span></div>
+        <div class="height_10px"></div>
+        <div id="lp_title_left">
+          <div class="float_left">&nbsp;选择您的意向<strong>单元</strong></div>
+        </div>
+        <div class="height_10px"></div>
+        
+        <volist name="unit" id="vo" mod="5">
+       	  <div class="loudong_num<?php if($vo['id']==$unit_id) echo '_c';?>">{$vo.runit}</div>
+            <eq name= "mod" value= "0" ><div class="height_5px_float"></div><else/><div class="width_6px_float"></div></eq>
+        </volist>
+        
+        <div class="height_10px"></div>
+		<div class="clear"></div>
+      </div>
+      <div class="clear"></div>
+    </div>
+    <div class="loudong_title">&nbsp;&nbsp;<strong>1#楼</strong> &nbsp;所有房源列表&nbsp;&nbsp;<span class="gray_a">room</span></div>
+    <div class="height_5px"></div>
+    <table width="100%" border="0" cellpadding="0" cellspacing="0" id="room_list">
+      <tr>
+        <td height="30" align="center" bgcolor="#FFFFFF" class="room_column">房号</td>
+        <td height="30" align="center" bgcolor="#FFFFFF" class="room_column">面积</td>
+        <td height="30" align="center" bgcolor="#FFFFFF" class="room_column">户型</td>
+        <td height="30" align="center" bgcolor="#FFFFFF" class="room_column">公摊面积</td>
+        <td height="30" align="center" bgcolor="#FFFFFF" class="room_column">阳台面积</td>
+        <td height="30" align="center" bgcolor="#FFFFFF" class="room_column">状态</td>
+        <td height="30" align="center" bgcolor="#FFFFFF" class="room_column">详情</td>
+      </tr>
+      
+      <volist name="room" id="vo">
+      <?php
+      	if($last_rlayer!=$vo['rlayer']){
+        ?>
+        <tr>
+        <td height="30" bgcolor="#FFFFFF">&nbsp;</td>
+        <td height="30" bgcolor="#FFFFFF">&nbsp;</td>
+        <td height="30" bgcolor="#FFFFFF">&nbsp;</td>
+        <td height="30" bgcolor="#FFFFFF">&nbsp;</td>
+        <td height="30" bgcolor="#FFFFFF">&nbsp;</td>
+        <td height="30" bgcolor="#FFFFFF">&nbsp;</td>
+        <td height="30" bgcolor="#FFFFFF">&nbsp;</td>
+       </tr>
+       <tr>
+        <td height="30" bgcolor="#FFFFFF">{$vo.rlayer}层</td>
+        <td height="30" bgcolor="#FFFFFF">{$last_rlayer}</td>
+        <td height="30" bgcolor="#FFFFFF">&nbsp;</td>
+        <td height="30" bgcolor="#FFFFFF">&nbsp;</td>
+        <td height="30" bgcolor="#FFFFFF">&nbsp;</td>
+        <td height="30" bgcolor="#FFFFFF">&nbsp;</td>
+        <td height="30" bgcolor="#FFFFFF">&nbsp;</td>
+       </tr>
+      <?php
+     	}
+      	$last_rlayer=$vo['rlayer'];
+      ?>
+      <tr>
+        <td height="30" align="center" bgcolor="#FFFFFF">{$vo.rroomnum}室</td>
+        <td height="30" align="center" bgcolor="#FFFFFF">{$vo.rarea}</td>
+        <td height="30" align="center" bgcolor="#FFFFFF">{$vo.rroomtype}</td>
+        <td height="30" align="center" bgcolor="#FFFFFF">{$vo.routarea}㎡</td>
+        <td height="30" align="center" bgcolor="#FFFFFF">{$vo.rbalcony}㎡</td>
+        <td height="30" align="center" bgcolor="#FFFFFF">{$vo.rstatus}</td>
+        <td height="30" align="center" bgcolor="#FFFFFF"><a href="__APP__/Sale/view/{$vo.id}">查看详情</a></td>
+      </tr>
+      </volist>
+      <tr>
+        <td height="30" bgcolor="#FFFFFF">&nbsp;</td>
+        <td height="30" bgcolor="#FFFFFF">&nbsp;</td>
+        <td height="30" bgcolor="#FFFFFF">&nbsp;</td>
+        <td height="30" bgcolor="#FFFFFF">&nbsp;</td>
+        <td height="30" bgcolor="#FFFFFF">&nbsp;</td>
+        <td height="30" bgcolor="#FFFFFF">&nbsp;</td>
+        <td height="30" bgcolor="#FFFFFF">&nbsp;</td>
+      </tr>
+    </table>
+  </div>
+  <div class="clear"></div>
+</div>
+<!--页脚start-->
+ <include file="Public:com_footer" />
+<!--页脚end-->
+</body>
+</html>

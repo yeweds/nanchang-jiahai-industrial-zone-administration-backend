@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>腾房网-您的意见</title>
+<link href="../Public/Css/about.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/class_com.css" rel="stylesheet" type="text/css" />
+<script language="javascript"> 
+//指定当前组模块URL地址
+var URL = '__URL__';
+var APP	 =	 '__APP__';
+var PUBLIC = '__PUBLIC__';
+</script> 
+<script language="javascript" src="/Home/Tpl/default/Public/Js/base.js" /></script> 
+<script language="javascript" src="/Public/Js/jquery.min.js" /></script> 
+<script language="javascript">
+function smilie(thesmilie) { //表情
+	document.form2.content.value += thesmilie+" ";
+	document.form2.content.focus();
+}
+
+function checkform1()
+{ 
+  var uanme= document.form2.uname.value;
+  if (form2.uname.value=="") {
+		alert("请输入您的尊姓大名！");
+		form2.uname.focus();		
+		    return (false);
+  }
+  var qq= document.form2.qq.value;
+   if (form2.qq.value=="") {
+    alert("请输入qq号！");
+    document.form2.qq.focus();
+             return (false);   
+  }
+  var title= document.form2.title.value;
+  if (form2.title.value=="") {
+		alert("请输入标题！");
+		form2.title.focus();		
+		    return (false);
+  }
+ var content = document.form2.content.value;
+  if (form2.content.value=="") {
+		alert("请输入留言内容！");
+		form2.content.focus();		
+		    return (false);
+  }
+ if (content.length > 200){ 
+  alert("留言内容不能超过200个字符!");
+  return false;
+  }
+  return true;
+}
+</script>
+</head>
+<body>
+<!--页头_s-->
+<include file="About:header_inc" /><!--头部 -->
+<!--页头_e-->
+<div class="height_10px"></div>
+<!--中部_s-->
+<div id="about_middle" class="width_970px_about">
+ <!--左边_s-->  
+	<include file="About:left_inc" /><!--左侧 -->
+ <!--左边_e--> 
+
+ <!--右边_s-->  
+ <div class="width_753px_float">
+   <div id="bg_top"></div>
+   <div id="bg_middle">
+      <!--文本区_s-->
+      <div id="yijian">
+       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <form action="__APP__/Guestbook/insert" method="post" name="form2" id="form2" onsubmit="return checkform1();">
+          <tr>
+            <td height="60" colspan="3"><strong class="black_14px">&nbsp;欢迎您提出宝贵建议和意见&cedil;您的意见和建议将帮助我们改进产品和服务！</strong></td>
+          </tr>
+          <tr>
+            <td width="12%" height="35" align="center">您的姓名：</td>
+            <td width="72%" height="35">
+              <input type="text" name="uname" id="uname" class="text_text" />
+              <span class="red_12px_gf">*</span></td>
+            <td width="16%" height="35">&nbsp;</td>
+            </tr>
+          <tr>
+            <td height="35" align="center">所在地区：</td>
+            <td height="35">
+              <input type="text" name="title" id="title"  class="text_text"/>            </td>
+            <td height="35">&nbsp;</td>
+            </tr>
+          <tr>
+            <td height="35" align="center">您的mail：</td>
+            <td height="35">
+              <input type="text" name="email" id="email"  class="text_text"/>
+              <span class="red_12px_gf">*</span></td>
+            <td height="35">&nbsp;</td>
+            </tr>
+          <tr>
+            <td height="35" align="center">联系电话：</td>
+            <td height="35">
+              <input type="text" name="qq" id="qq"  class="text_text"/>
+              <span class="red_12px_gf">*</span></td>
+            <td height="35">&nbsp;</td>
+            </tr>
+          <tr>
+            <td height="40" align="center">&nbsp;</td>
+            <td height="40" class="gray_12px_f"><p><span class="red_12px_gf">*</span>填写联系方式信息,有助于我们尽快解决您提出的问题,并及时与您沟通处理<br />
+&nbsp;结果.</p></td>
+            <td height="40">&nbsp;</td>
+            </tr>
+          <tr>
+            <td height="35" align="center">意见建议：</td>
+            <td rowspan="2">
+              <textarea name="content" id="content" cols="45" rows="5"  class="text_area"></textarea>            </td>
+            <td height="24">&nbsp;</td>
+            </tr>
+          <tr>
+            <td height="70" align="center">&nbsp;</td>
+            <td height="24">&nbsp;</td>
+            </tr>
+          <tr>
+            <td height="35">&nbsp;验 证 码：</td>
+            <td><input name="CheckCode" type="text" class="text_text" style="width:80px;" id="CheckCode" size="10" />
+&nbsp; <img id="verify" src="__APP__/Public/verify/" border="0" alt="验证码" align="absmiddle" /> <a href="javascript:fleshVerify()">看不清?</a> &nbsp; </td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td height="60">&nbsp;</td>
+            <td height="60"><input type="submit" class="text_button_1" onclick="this.className='text_button_2'" onmouseout="this.className='text_button_1'" value=" " style="border:0;padding:0; margin:0; background-color:#fff;" /></td>
+            <td height="60">&nbsp;</td>
+            </tr>
+        </form>
+        </table>
+     </div>
+     <!--文本区_e-->
+   </div>
+   <div id="bg_bottom"></div>
+   <div class="clear"></div>
+ </div>
+ <!--右边_e--> 
+<div class="clear"></div> 
+</div>
+<!--中部_e-->
+<div class="clear"></div>
+<div class="height_10px"></div>
+<!--页脚_s-->
+<!--声明start-->
+  <div id="about_foot" class="height_20px_text_gray">
+   <table width="100%" border="0" cellspacing="0" cellpadding="0">
+   <tr>
+    <td height="5">&nbsp;</td>
+   </tr>
+   <tr>
+    <td height="40" align="center">    
+    本站郑重声明：腾房网所载文章、数据仅供参考，使用前请核实，风险自负。赣ICP备10201200号 <br />
+    Copyright 腾房网 tengfang.net All Rights Reserved 版权所有 复制必究
+    
+    </td>
+   </tr>
+   <tr>
+    <td height="5">&nbsp;</td>
+   </tr>
+   </table>
+</div>
+<!--声明end-->
+<!--页脚_e-->
+</body>
+</html>

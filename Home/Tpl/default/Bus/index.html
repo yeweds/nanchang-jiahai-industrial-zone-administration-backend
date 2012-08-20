@@ -1,0 +1,268 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$lp.lpname}公交线路-腾房网</title>
+<meta name="keywords" content="{$lp.lpname}公交线路">
+<meta name="description" content="腾房网为您提供{$lp.lpname}公交线路">
+
+<link href="../Public/Css/ct_loupan.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/ct_lp_common.css" rel="stylesheet" type="text/css" />
+<script language="JavaScript" type="text/javascript">
+var WEBROOT='';
+</script>
+<script type="text/javascript" src="../Public/Js/photos.js"></script>
+<style type="text/css">
+.line_blue {
+	border-top-width: 0px;
+	border-right-width: 0px;
+	border-bottom-width: 0px;
+	border-left-width: 0px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #A8E07E;
+	border-right-color: #A8E07E;
+	border-bottom-color: #A8E07E;
+	border-left-color: #A8E07E;
+	background-image: url(../Public/Images/bus_hr.gif);
+	background-repeat: no-repeat;
+}
+.line_gray {
+	border-top-width: 0px;
+	border-right-width: 0px;
+	border-bottom-width: 1px;
+	border-left-width: 0px;
+	border-top-style: dashed;
+	border-right-style: dashed;
+	border-bottom-style: dashed;
+	border-left-style: dashed;
+	border-top-color: #CCC;
+	border-right-color: #CCC;
+	border-bottom-color: #CCC;
+	border-left-color: #CCC;
+}
+.bus_bg {
+	background-image: url(../Public/Images/bus_bg.png);
+	background-repeat: no-repeat;
+	background-position: 820px;
+}
+.bus_logo {
+	background-image: url(../Public/Images/bus.gif);
+	background-repeat: no-repeat;
+	background-position: 7px 3px;
+}
+.bus_line_style {
+	writing-mode: tb-rl;
+	word-break:break-all;
+	wrap-break:break-all;
+	letter-spacing: 3px;
+}
+</style>
+</head>
+<body>
+
+<div id="content_bg">
+
+  <include file="Public:header_ct" /> <!-- 传统页公共头部 -->
+  
+  <div id="content">
+    <!--<div class="ad_head"></div>-->
+	<!-- 通栏广告start -->
+	<include file="Ad:news_index_top" /> 
+	<!-- 通栏广告end -->
+    <div class="height_10px"></div>
+    <div class="height_30px"><img src="../Public/Images/dp_jian_left.gif" width="10" height="10" />腾房网  >&nbsp;<a href="__APP__/lp">楼盘大全</a>&nbsp;>&nbsp;<strong><span class="green_12px_f">{$lp.lpname} 公交线路</span></strong></div>
+<div class="content_inc">
+  <div id="lou_include_border">
+    <div id="lou_include" style="font-family:宋体;font-size:12px;">
+    
+    <volist name="bus" id="vo">
+    
+      <table width="100%" border="0" cellpadding="0" cellspacing="0" class="bian_4gray_1px">
+        <tr>
+          <td height="40" colspan="2" align="left" valign="bottom" bgcolor="#FCFCFC" class="bus_logo"><span class="black_28px_f"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$vo.bus.name}</strong></span><strong>&nbsp;</strong>&nbsp; <span class="orange_16px_f">{$vo.station}</span>&nbsp;&nbsp; <span class="blue_12px_f">{$vo.bus.line_intro}</span></td>
+        </tr>
+        <tr>
+          <td height="30" colspan="2" bgcolor="#FeFeFe" class="line_blue">&nbsp;</td>
+        </tr>
+        <tr>
+          <td width="2%" height="150">&nbsp;</td>
+          <td width="98%" height="150" valign="top" class="bus_bg">
+          
+          <table border="0" cellspacing="0" cellpadding="0" width="800">
+            <tr>
+              <volist name="vo.bus.bus_line" id="v" key="k">
+                <if condition="$v eq $vo['station']">
+                  <td width="2%" align="left" valign="top" class="red_12px_fg bus_line_style"><strong>{$v}</strong></td>
+                   <?php if(count($vo['bus']['bus_line'])<30&&count($vo['bus']['bus_line'])!=$k){
+
+                	   echo '<td width="'.$vo['bus']['count'].'%">&nbsp;</td>';
+                  
+                  }
+                  ?>
+                  <else/>
+                  <td width="2%" align="left" valign="top" class="bus_line_style">{$v}</td>
+                   <?php if(count($vo['bus']['bus_line'])<30&&count($vo['bus']['bus_line'])!=$k){
+
+                		echo '<td width="'.$vo['bus']['count'].'%">&nbsp;</td>';
+                  
+                  }
+                  ?>
+
+                </if>
+              </volist>
+            </tr>
+          </table>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+      </table>
+      <div class="height_20px_content"></div>
+      
+   </volist>   
+      <div style="clear:both"></div>
+    </div>
+    <div style="clear:both"></div>
+  </div>
+<div style="clear:both"></div>
+          <!--con_inc促使图层高度随内容增加面增加-->
+        </div>
+<div class="height_10px"></div>
+<!-- 共用热门楼盘 -->
+	<include file="Html:hot_lp_inc" />
+<!-- 共用 -->
+    <div class="height_10px"></div>        
+         
+    <div style="clear:both"></div><!--content促使图层高度随内容增加面增加-->    
+  </div>
+
+	<include file="Public:footer" /> {//共用尾部}
+	
+<div style="clear:both"></div><!--content_bg促使图层高度随内容增加面增加-->
+</div>
+</body>
+</html>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	//今日一周
+	$('#news_week').mouseover(function(){
+		$('#news_week').removeClass().addClass('left_bottom_bian1pxm');	
+		$('#news_today').addClass('bottom_bian1pxm');	
+		domAjax('news_pai_ajax','__APP__/News/news_pai_ajax/type/0','get');
+		
+	});
+	$('#news_today').mouseover(function(){
+		$('#news_week').removeClass().addClass('left_bottom_bian1px');	
+		$('#news_today').removeClass();	
+		domAjax('news_pai_ajax','__APP__/News/news_pai_ajax/type/1','get');
+	});
+	domAjax('news_pai_ajax','__APP__/News/news_pai_ajax/type/1','get');
+	
+			//播放图片效果
+			var lMC = 2;
+			var rMC = 0;
+
+			jQuery("#photo_left").click(function(){
+				if(rMC>0){
+					scrollto("r");
+					rMC--;
+					lMC++;
+					jQuery("#photo_right").css("cursor","pointer");
+					if(rMC<=0){
+						jQuery("#photo_left").css("cursor","no-drop");
+					}
+				}
+
+			});
+
+			jQuery("#photo_right").click(function(){
+
+				if(lMC>0){
+					scrollto("l");
+					lMC--;
+					rMC++;
+					jQuery("#photo_left").css("cursor","pointer");
+					if(lMC<=0){
+						jQuery("#photo_right").css("cursor","no-drop");
+					}
+				}
+
+			});
+
+			jQuery("#star_item_list").css("width",(950*3)+"px");
+			jQuery("#photo_left").css("cursor","no-drop");
+
+			if(lMC>0){
+				jQuery("#photo_right").css("cursor","pointer");
+			}
+
+			function scrollto(way){
+				if(way=="l"){
+					jQuery("#star_item_list").animate({marginLeft:"-=950px"},2000);
+				}else{
+					jQuery("#star_item_list").animate({marginLeft:"+=950px"},2000);
+				}
+
+			}	
+
+			
+	//楼盘相关信息滑块效果
+		$('#lou_sha_title .lou_sha_title').mouseover(function(){
+			if(!$(this).hasClass('lou_sha_title_c')){
+			$(this).removeClass().addClass('lou_sha_title_m');
+			}
+	
+		});
+		$('#lou_sha_title .lou_sha_title_c').mouseover(function(){
+			if(!$(this).hasClass('lou_sha_title_c')){
+			$(this).removeClass().addClass('lou_sha_title_m');
+			}
+		});
+		$('#lou_sha_title .lou_sha_title').mouseout(function(){
+			if(!$(this).hasClass('lou_sha_title_c')){
+			$(this).removeClass().addClass('lou_sha_title');
+			}
+	
+		});
+		$('#lou_sha_title .lou_sha_title_c').mouseout(function(){
+			if(!$(this).hasClass('lou_sha_title_c')){
+			$(this).removeClass().addClass('lou_sha_title');
+			}
+	
+		});						
+
+});
+
+</script>
+
+<script type="text/javascript">
+//alert('__APP__/Attach/viewall/info_id/{$vo_add.info_id}/cid/13/rid/{$vo_add.range_id}/num');
+//定义一个对像专门接收相册参数;
+var currLpName = '{$vo_add.lpname}';
+var currLpInfoId='{$vo_add.info_id}';
+var currLpRangeId='{$vo_add.range_id}';
+var currLpCount0='{$count_hx}';
+var currLpCount1='{$count_sj}';
+var currLpCount2='{$count_xg}';
+var currLpCount3='{$count_gh}';
+var currLpCount4='{$count_wz}';
+var currLpCount5='{$count_pt}';
+var currLpCount6='{$count_bg}';
+//alert('__URL__/viewall/info_id/{$info_id}/cid/14/rid/{$range_id}/num/');
+var more_photo=[
+{"name":currLpName,"typename":"户型图","type":0,"url":APP+"/Attach/viewall/info_id/"+currLpInfoId+"/cid/13/rid/"+currLpRangeId+"/num/","total":currLpCount0},
+{"name":currLpName,"typename":"实景图","type":1,"url":APP+"/Attach/viewall/info_id/"+currLpInfoId+"/cid/14/rid/"+currLpRangeId+"/num/","total":currLpCount1},
+{"name":currLpName,"typename":"效果图","type":2,"url":APP+"/Attach/viewall/info_id/"+currLpInfoId+"/cid/15/rid/"+currLpRangeId+"/num/","total":currLpCount2},
+{"name":currLpName,"typename":"规划图","type":3,"url":APP+"/Attach/viewall/info_id/"+currLpInfoId+"/cid/16/rid/"+currLpRangeId+"/num/","total":currLpCount3},
+{"name":currLpName,"typename":"位置图","type":4,"url":APP+"/Attach/viewall/info_id/"+currLpInfoId+"/cid/17/rid/"+currLpRangeId+"/num/","total":currLpCount4},
+{"name":currLpName,"typename":"配套图","type":5,"url":APP+"/Attach/viewall/info_id/"+currLpInfoId+"/cid/18/rid/"+currLpRangeId+"/num/","total":currLpCount5},
+{"name":currLpName,"typename":"报广","type":6,"url":APP+"/Attach/viewall/info_id/"+currLpInfoId+"/cid/35/rid/"+currLpRangeId+"/num/","total":currLpCount6}
+];
+</script>

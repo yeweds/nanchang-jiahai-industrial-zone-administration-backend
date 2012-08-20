@@ -1,0 +1,324 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$news.news.title} - 资讯详情 - {$Think.config.cfg_sitename}</title>
+<meta name="keywords" content="{$news.news.keywords} {$Think.config.cfg_metakeyword}">
+<meta name="description" content="{$news.news.remark} {$Think.config.cfg_metakeyword}">
+
+</head>
+<script type="text/javascript">
+//指定当前组模块URL地址
+var URL = '__URL__';
+var APP	 =	 '__APP__';
+var PUBLIC = '__PUBLIC__';
+var SELF = '__SELF__';
+</script>
+<script type="text/javascript" src="../Public/Js/base.js"></script><!--前台公共JS函数-->
+<script type="text/javascript" src="__PUBLIC__/Js/jquery.min.js"></script>
+
+<link href="../Public/Css/news.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/base.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/class_com.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/select_box.css" rel="stylesheet" type="text/css" />
+
+<link href="../Public/Css/news_detail.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+a:link { color: #000; }
+a:visited { color: #000; text-decoration: none; }
+a:hover { color: #999; }
+a:active { color: #999; text-decoration: none; }
+#news_txt a{
+	/*text-decoration:underline;*/
+	padding-bottom:1px;
+	border-bottom:dashed 1px #f00;
+} 
+</style>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+	//今日一周
+	$('#news_week').mouseover(function(){
+		$('#news_week').removeClass().addClass('left_bottom_bian1pxm');	
+		$('#news_today').addClass('bottom_bian1pxm');	
+		domAjax('news_pai_ajax','__URL__/news_pai_ajax/type/0','get');
+		
+	})
+	$('#news_today').mouseover(function(){
+		$('#news_week').removeClass().addClass('left_bottom_bian1px');	
+		$('#news_today').removeClass();	
+		domAjax('news_pai_ajax','__URL__/news_pai_ajax/type/1','get');
+	})	
+	
+});
+</script>
+<body>
+
+<include file="News:news_header" /> <!--头部包含共用 -->
+
+    <!--start==所有正文内容在此处显示-->
+    <div class="content_inc">
+	 <!--内页广告位--> 
+      <div class="height_30px_text blue_a"><strong class="blue_14px_f">&gt;&gt;</strong><a href="__URL__/"> 新闻首页</a> <span class="gray_14px_f">&gt;</span> <a href="__APP__/news-list-{$news.cid}">{$news.cname}</a> <span class="gray_14px_f">&gt;</span> 正文详细</div>
+    <div class="height_10px"></div> 
+      
+      
+    <div class="content_inc">
+    <div class="con_left_all">
+    
+      <div class="con_left_center_bg">
+      
+      	<div class="de_con_inc">
+        
+      		<div class="height_20px_text"></div>
+      		<div class="height_40px_text" align="center"><h1 class="blue_24px_heif">{$news.news.title}</h1></div>
+      		<div class="height_30px_text" align="center">来源：{$news.news.source}&nbsp;&nbsp; 时间：{$news.news.add_time}&nbsp;&nbsp; 作者：{$news.news.author}&nbsp;&nbsp; 人气：{$news.news.click}</div>
+          <div class="de_con_summary_inc">
+          	<div class="de_con_summary"><strong><span class="blue_12px_f">摘要：</span></strong>{$news.news.remark}</div>
+           	<div style="clear:both"></div><!--de_con_summary促使图层高度随内容增加面增加-->           
+          </div>
+          <div class="height_10px"></div>
+			<!--<div class="de_con_summary_inc" style="margin-bottom:10px;">
+            --导入中间广告--
+			</div>-->
+         
+          <div class="lineheight25px" id="news_txt">
+            <!--<eq name="news.news.pic_url" value=""><else/><center><img src="__PUBLIC__/Upload/news/{$news.news.pic_url}" width="500" alt="缩略图" ></center><br></eq>-->
+			{$news.news.content}
+          </div>
+		  <div id="content_page" style="font-size:14px;text-align:center;margin:10px 0;">{$text_page}</div>
+
+          <div class="height_35px" align="center"><a href="__APP__/News"><img src="../Public/Images/de_to_news.gif" width="170" height="35" border="0" alt="返回"/></a></div>
+<div class="height_20px_text"></div>
+          <div class="height_25px_text"><img src="../Public/Images/de_pi.gif" align="absmiddle" alt="评" />
+		  <span class="blue_bian_a"><a href="#pingrun">评论</a></span><span class="gray_12px_f">({$news.replynum})</span></div>
+          <div class="height_25px_text"><span class="gray_12px_f">声明：本稿件为{$news.news.source}原创稿件,版权所有,引用或转载必须注明出处,若有引用及转载行为视为已默认本条款</span></div>
+          <div class="height_25px_text"><span class="black_14px_f">原文刊载：{$news.news.source} | 选稿编辑：{$news.news.username}</span></div>
+<!-- JiaThis Button BEGIN -->
+<div id="ckepop">
+	<span class="jiathis_txt">分享到：</span>
+	<a class="jiathis_button_tsina">新浪微博</a>
+	<a class="jiathis_button_tqq">腾讯微博</a>
+	<a class="jiathis_button_t163">网易微博</a>
+	<a class="jiathis_button_qzone">QQ空间</a>
+	<!-- <a href="http://www.jiathis.com/share/" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a> 
+	<a class="jiathis_counter_style"></a>-->
+</div>
+<script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->          
+          <div class="height_10px"></div>
+          <div style="clear:both"></div><!--de_con_inc促使图层高度随内容增加面增加-->  
+        </div>
+      	<div style="clear:both"></div><!--con_left_center_bg促使图层高度随内容增加面增加-->      
+      </div>
+      <div class="height_10px_float"></div>
+      <div class="con_left_center_bg">
+        <div class="de_con_inc">
+          <div class="height_10px"></div>
+          <a name='pingrun' ></a>
+          <div class="height_30px_text" >
+            <div class="float_left"><strong><span class="blue_14px_f">网友评论(不超过100个字)</span></strong></div>
+            <div class="float_right">共<strong>{$news.replynum}</strong>条评论</div>
+          </div>
+          <form id="form1" name="form1" method="post" action="__APP__/Reviews/insert"  style="margin:0; padding:0;">
+            <textarea name="content" cols="45" rows="5" class="de_ping_text" id="textarea"></textarea>
+            <div class="height_5px"></div>
+            <div class="height_35px">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td width="15%" height="35">验证码:<!--用户名 --></td>
+                  <td width="33%" height="35"><input id="checkcode" name="checkcode" type="text" size="4" maxlength="4" />
+<img id="verify" src="__APP__/Public/verify" alt="验证码" align="absmiddle" /> <a href="javascript:fleshVerify()">看不清？</a>
+				
+				<input name="model_name" type="hidden"  value="news"/>
+				<input name="info_id" type="hidden"  value="{$news.news.id}"/>
+                    <!-- <input name="username" type="text" class="input_style" id="username" <neq name="username" value="">value="{$news.news.username}"</neq> /> (必须填写email)--></td>
+                  <!--<td width="6%" height="35">密码</td>
+   		          <label for="checkbox"></label></td>
+   		        <td width="22%" height="35">匿名</td>-->
+                  <td width="32%" height="35">&nbsp;</td>
+                  <td width="12%" height="35"><input type="image" name="imageField" id="imageField" src="../Public/Images/sub_bn.gif" /></td>
+                </tr>
+              </table>
+            </div>
+          </form>
+          <div class="heigth_bian_10px"></div>
+          <div class="de_ping_con">
+            <!--开始一条评论-->
+            <present name="news.news_reply" >
+              <volist name="news.news_reply" id="vo" >
+                <div class="height_10px"></div>
+                <div class="height_30px_text" >
+                  <div class="float_left"><strong><span class="blue_14px_f">{$vo.user_name} </span></strong> 于 <span class="gray_12px_f">{$vo.add_time|date="Y-m-d H:i:s",###}</span> 评论说：</div>
+                  <div class="float_right">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                      <tr>
+                        <td><span class="green_12px_fg">支持人气：{$vo.hits} </span> </td>
+                        <td>&nbsp; <a href="__URL__/replyvote/id/{$vo.id}/tid/1"><img src="../Public/Images/de_hao_ico.gif" border="0" align="absmiddle" title="支持" alt="好"/></a></td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+                <div class="lineheight25px_12px">{$vo.content}</div>
+                <div class="heigth_dian_bian_10px"></div>
+                <!--<div class="de_ping_con">-->
+              </volist>
+            </present>
+            <!--结束一条评论-->
+          </div>
+          <div style="clear:both"></div>
+          <!--de_con_inc促使图层高度随内容增加面增加-->
+        </div>
+        <div style="clear:both"></div>
+        <!--con_left_center_bg促使图层高度随内容增加面增加-->
+      </div>
+<div style="clear:both"></div><!--con_left促使图层高度随内容增加面增加--> 
+      </div><!--con_left end-->
+      <div class="width_10px_float"></div>
+      <div class="con_right_bg3">
+          <div class="de_ad_270px">
+            <!--导入右边广告-->
+            <include file="$AD_right" />
+             <!--end导入右边广告-->
+          </div>
+        <div class="height_10px"></div>
+        <div class="con_right_4bian268px">
+          <div class="height_30px">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td width="37%" height="30" align="center"  id="news_today" style="cursor:pointer"><strong class="blue_12px_f">今日最受关注</strong></td>
+                <td width="63%" height="30" class="left_bottom_bian1px" id="news_week"><span class="blue_12px_f">&nbsp;&nbsp;一周新闻排行</span></td>
+              </tr>
+            </table>
+          </div>
+          <div id="news_pai_ajax">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <present name="news.news_gz" >
+                <volist name="news.news_gz" id="vo" key="k" >
+                  <tr>
+                    <td width="14%" height="30" align="center"><if condition= "$k lt 4" >
+                      <div class="num_style1">0{$k}</div>
+                      <elseif condition= "$k eq 10" />
+                      <div class="num_style2">{$k}</div>
+                      <else/>
+                      <div class="num_style2">0{$k}</div>
+                    </if></td>
+                    <td width="86%" height="30" class="black_a"><a href="__APP__/news-{$vo.id}" title="{$vo.title|mystr_replace=###}">{$vo.title|mb_substr=###,0,23,'utf-8'}</a></td>
+                  </tr>
+                </volist>
+              </present>
+            </table>
+          </div>
+        </div>
+        <div class="height_10px"></div>
+        <div class="con_right_4bian268px">
+          <div class="height_30px">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td height="30" align="left" class="title_style1" ><span class="blue_12px_f"><strong>&nbsp;&nbsp;热点专题</strong></span></td>
+              </tr>
+            </table>
+          </div>
+          <div class="height_10px"></div>
+          <div class="height_90px_fixed">
+            <div class="width_10px_float"></div>
+            <div class="height_80px_100px">
+              <!--第一条用图文形式-->
+              <img src="__PUBLIC__/Upload/News/thumb_{$news.rdzt.h.pic_url}" width="100" height="80" alt="热点" /><br />
+            </div>
+            <div class="width_10px_float"></div>
+            <div class="width_170_float">
+              <div class="blue_h4"><span class="blue_a"> <a href="{$news.rdzt.h.id|get_arc_url=###, $news['rdzt']['h']['redirecturl']}" title="{$news.rdzt.h.title|mystr_replace=###}">{$news.rdzt.h.title|mb_substr=###,0,13,'utf-8'}</a></span></div>
+              <div class="height_20px_text"><span class="gray_12px_f">{$news.rdzt.h.remark|mb_substr=###,0,40}</span><span class="blue_a"><a href="{$news.rdzt.h.id|get_arc_url=###, $news['rdzt']['h']['redirecturl']}">详细&gt;&gt;</a></span></div>
+            </div>
+          </div>
+          <!--第一条用图文形式结束-->
+          <div class="clear"></div>
+          <volist name="news.rdzt.titles" id="vo" >
+            <div class="black_a height_25px_text">&nbsp;&nbsp;&middot;<a href="{$vo.id|get_arc_url=###, $vo['redirecturl']}" title="{$vo.title|mystr_replace=###}">{$vo.title|mb_substr=###,0,21,'utf-8'}</a></div>
+          </volist>
+          <div class="height_10px"></div>
+        </div>
+        <div class="height_10px"></div>
+        
+        
+        <!--相关阅读-->
+<div class="con_right_4bian268px">
+<div class="height_30px_text">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td height="30" align="left" class="title_style1" ><span class="blue_12px_f"><strong>&nbsp;&nbsp;相关阅读</strong></span></td>
+                </tr>
+              </table>
+          </div>
+          <div class="height_10px"></div>
+          
+          <volist name="news.nextnew" id="vo" >
+            <div class="black_a height_25px_text">&nbsp;&nbsp;&middot;<a href="__APP__/news-{$vo.id}" title="{$vo.title|mystr_replace=###}">{$vo.title|mb_substr=###,0,25,'utf-8'}</a></div>
+          </volist>
+                    
+            <div class="height_10px"></div>
+        </div>        
+        
+        <!--end 相关阅读-->
+        
+        <!--楼盘微评-->
+	<div class="height_10px"></div>
+	<div class="con_right_4bian268px">
+		  <div class="height_30px_text">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td height="30" align="left" class="title_style1" ><span class="blue_12px_f"><strong>&nbsp;&nbsp;商家微评</strong></span></td>
+                </tr>
+              </table>
+          </div>
+          <div class="height_10px"></div>
+          
+          <volist name="news.lp_reviews" id="vo" >
+            <div class="black_a height_25px_text">&nbsp;&nbsp;&middot;<a href="__APP__/Reviews/view/id/{$vo.id}" title="[{$vo.lpname}]-{$vo.content|mb_substr=###,0,60,'utf-8'}">{$vo.content|mb_substr=###,0,21,'utf-8'}..</a></div>
+          </volist>
+                    
+            <div class="height_10px"></div>
+        </div>        
+        
+        <!--end 楼盘微评-->
+        
+<div style="clear:both"></div>
+        <!--con_left1促使图层高度随内容增加面增加-->
+      </div>
+<div style="clear:both"></div><!--con_inc促使图层高度随内容增加面增加-->               
+    </div>
+    <div class="height_10px"></div>
+    <div class="width_960px_4bian">
+      <!--策划公司标题-->
+      <div class="title_style5">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="90" height="30" align="center" class="black_14px"><strong>推荐商家</strong></td>
+            <td width="826" height="30">&nbsp;</td>
+            <td width="44" class="black_a"><a href="__APP__/Shop">更多&gt;&gt;</a></td>
+          </tr>
+        </table>
+      </div>
+      <!--策划公司内容-->
+      <div class="height_10px_float"></div>
+      <div class="width_960px"> 
+        <volist name="news.tj_shop" id="vo">
+		   <div class="width_240px_float">&nbsp;&nbsp;<a href="__APP__/shop-{$vo.id}" title="{$vo.name}">{$vo.name|trim|mb_substr=###,0,18,'utf-8'}</a></div>
+		</volist>
+		<!--公共策划公司 -->
+        <div class="clear"></div>
+        <!--自动拉伸width_960px-->
+      </div>
+      <div class="clear"></div>
+      <!--自动拉伸width_960px-->
+    </div>
+    <div class="height_10px"></div>
+	<include file="Public:footer" /> {//共用尾部}
+    <div style="clear:both"></div><!--促使图层高度随内容增加面增加==正文内容--> 
+   </div>
+
+</body>
+</html>

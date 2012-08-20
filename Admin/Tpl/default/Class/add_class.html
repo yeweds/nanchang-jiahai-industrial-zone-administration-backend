@@ -1,0 +1,83 @@
+<include file="Public:header" />
+<link href="../Public/Css/main.css" rel="stylesheet" type="text/css"/>
+<div class="bodyTitle">
+	<div class="bodyTitleLeft"></div>
+  <div class="bodyTitleText">添加分类</div>
+</div>
+<div id="result" class="result none"></div>
+<FORM method="post" action="__URL__/insert/" id="form1" >
+<table cellSpacing=0 cellPadding=0 align=center border=0>
+<notpresent name="class_id">{//增加顶级分类}
+  <tr >
+    <td width="235"></td>
+	<td colspan="5"></td>
+  </tr>
+</notpresent>
+<tr>
+  <td height="30" valign="middle">&nbsp;</td>
+  <td height="30" colspan="5" align="right" valign="middle" ><a href="javascript:history.go(-1)">返回&gt;&gt;&nbsp;&nbsp;</a></td>
+</tr>
+<present name="class_id">
+<tr>
+	<td height="30" valign="middle">所属分类：</td>
+	<td height="30" colspan="5" valign="middle" >{$classname} [ {$level}级 ]</td>
+</tr>
+	<input type="hidden" name="class_id" value="{$class_id}">
+</present>
+<tr>
+	<td height="30" valign="middle">分类名称：</td>
+	<td height="30" colspan="5" valign="middle"><input name="name" type="text" class="txt redtxt" id="name" style="width:250px;"></td>
+</tr>
+<tr>
+	  <td height="30" valign="middle">状态：</td>
+	<td height="30" colspan="5" valign="middle"><select name="ishide" id="ishide" >
+	<option value="1" selected="selected">启用</option>
+	<option value="0">禁用</option>
+	</select></td>
+</tr>
+<tr>
+    <td height="30" valign="middle">是否用于菜单导航：</td>
+    <td height="30" colspan="5" valign="middle">
+	<input name="isnav" TYPE="radio" id="isnav" value="0">否
+	<input name="isnav" TYPE="radio" id="isnav" value="1" checked="checked" >是
+	</td>
+  </tr>
+<tr>
+	<td height="30" valign="middle">排序：</td>
+	<td height="30" colspan="5" valign="middle"><input name="sortrank" type="text" id="sortrank"></td>
+</tr>
+<tr>
+	<td height="30" valign="middle">附加表名：</td>
+	<td height="30" colspan="5" valign="middle"><input name="table_name" type="text" id="table_name">此处不建议非开发人员填写或修改</td>
+</tr>
+<tr>
+  <td height="30" valign="middle">栏目标题：</td>
+  <td height="30" colspan="5" valign="middle"><textarea name="title_content" cols="50" rows="4" class="txt redtxt" id="title_content" ></textarea>
+  注:用于seo优化</td>
+</tr>
+<tr>
+	<td height="30" valign="middle">栏目关键字：</td>
+	<td height="30" colspan="5" valign="middle"><textarea name="meta_keyword" cols="50" rows="4" id="meta_keyword" ></textarea>
+	  注:用于seo优化</td>
+</tr>
+<tr>
+	<td height="30" valign="middle">栏目描述：</td>
+	<td height="30" colspan="5" valign="middle"><textarea name="description" cols="50" rows="4" id="description" ></textarea>
+	  注:用于seo优化</td>
+</tr>
+<tr>
+  <td height="30" valign="middle">&nbsp;</td>
+  <td height="30" colspan="5" valign="middle">&nbsp;</td>
+</tr>
+
+<tr>
+  <td></td>
+  <td colspan="5" class="center"><div style="width:85%;margin:5px">
+    <input type="submit" value="添 加" class="df_button">
+    &nbsp;&nbsp;
+    <input type="reset" value="清 空" class="df_button">
+    </div></td>
+</tr>
+</table>
+</FORM>  
+<include file="Public:footer" />

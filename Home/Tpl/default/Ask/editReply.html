@@ -1,0 +1,206 @@
+<include file="Public:html_header" /> 
+
+<link href="../Public/Css/news_com.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/class_com.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/select_box.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/law.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/law_xiangqing.css" rel="stylesheet" type="text/css" />
+<body>
+<include file="News:news_header" /> <!--头部包含共用 -->
+
+<script type="text/javascript" src="../Public/Js/law.js"></script> 
+<script type="text/javascript">
+function fleshVerify(){
+//重载验证码
+	var timenow = new Date().getTime();
+	document.getElementById('verifyImg').src= '__URL__/verify/'+timenow;
+}
+</script> 
+
+ 
+
+<!--law_head_s-->
+<div id="law_head"><include file="Law:ad" /></div>
+
+<!--law_head_e-->
+<div class="height_30px_text blue_a" style="width:970px;margin:0 auto"><strong class="blue_14px_f">&gt;&gt;</strong><a href="__URL__/"> 新闻首页</a> <span class="gray_14px_f">&gt;</span> <a href="__APP__/Law/">律师在线</a>  &gt; 修改回答</div> 
+<div class="height_10px"></div>
+<!--law_master_s-->
+<div class="width_966px"> 
+  <!--左边s-->
+  <div id="law_left"> 
+    <!--左边上部分s-->
+    <div id="law_left_top">
+      <table width="651" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="15" height="56" align="center" valign="middle" nowrap="nowrap">&nbsp;</td>
+          <td width="35" height="56" align="center" valign="middle" nowrap="nowrap"><img src="../Public/Images/law/law_small_10.png" width="30" height="22" /></td>
+          <td width="177" height="56" align="left" valign="middle" nowrap="nowrap"><span class="green_a"> &nbsp;修改回答</span></td>
+          <td width="153" height="56" align="center" valign="middle" nowrap="nowrap">&nbsp;</td>
+          <td width="16" height="56" align="center" valign="middle" nowrap="nowrap">&nbsp;</td>
+          <td width="40" height="56" align="center" valign="middle" nowrap="nowrap">&nbsp;</td>
+          <td width="16" height="56" align="center" valign="middle" nowrap="nowrap">&nbsp;</td>
+          <td width="25" height="56" align="center" valign="middle" nowrap="nowrap">&nbsp;</td>
+          <td width="18" height="56" align="center" valign="middle" nowrap="nowrap">&nbsp;</td>
+          <td width="11" height="56" align="center" valign="middle" nowrap="nowrap">&nbsp;</td>
+          <td width="16" height="56" align="center" valign="middle" nowrap="nowrap">&nbsp;</td>
+          <td width="46" height="56" align="center" valign="middle" nowrap="nowrap">&nbsp;</td>
+          <td width="16" height="56" align="center" valign="middle" nowrap="nowrap">&nbsp;</td>
+          <td width="41" height="56" align="center" valign="middle" nowrap="nowrap" class="green_a"><a href="javascript:history.go(-1)">返回</a></td>
+          <td width="26" height="56" align="center" valign="middle" nowrap="nowrap">&nbsp;</td>
+        </tr>
+      </table>
+    </div>
+    <!--左边上部分e--> 
+    <!--左边中间部分s-->
+    <div id="law_left_middle"> 
+      <!--左边搜索条s--><!--左边搜索条e--> 
+      <!--左边问答部分s--> 
+      
+      <!--问答2s-->
+      <div class="width_608px_auto">
+        <div class="height_15px"></div>
+        <!--问-->
+        <div class="law_wen1">
+          <table width="607" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td width="24" height="25" align="center" valign="top"><img src="../Public/Images/law/law_small_05.png" width="21" height="21" /></td>
+              <td height="25" colspan="5" valign="middle" class="green_14px">{$askList.title}</td>
+            </tr>
+            <tr>
+              <td width="24" rowspan="4" align="center">&nbsp;</td>
+            </tr>
+            <tr>
+              <td height="50" colspan="5" class="height_20px_text_black">{$askList.content}</td>
+            </tr>
+            <tr>
+              <td width="153" height="18" class="green_12px"><span class="gray_12px_f">咨询时间{$askList.time|date='Y-m-d H:i',###} </span></td>
+              <td width="16" height="18"><img src="../Public/Images/law/law_small_07.png" width="14" height="14" /></td>
+              <td width="86" height="18" class="gray_12px_f">咨询者:{$askList.name} </td>
+              <td width="62" height="18" align="center" >
+              </td>
+              <td width="160"  height="18">
+                &nbsp;&nbsp;<!--<span class="blue_a_12px"><a  style="cursor:pointer" onmouseover="this.style.color='#39f'" onmouseout="this.style.color='#006691'" onclick="openReply({$i-1},2)">我要回复</a></span>--></td>
+            </tr>
+          </table>
+        </div>
+        <div class="width_608px" >
+          <div class="width_42px_float"></div>
+          <div class="law_reply">
+            <table width="553" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td width="8">&nbsp;</td>
+                <td height="13" class="arrow_gray">&nbsp;</td>
+                <td width="8">&nbsp;</td>
+              </tr>
+              <tr>
+                <td width="8">&nbsp;</td>
+                <td width="533" height="13">&nbsp;</td>
+                <td width="8">&nbsp;</td>
+              </tr>
+              <tr>
+                <td width="8">&nbsp;</td>
+                <td height="228" valign="top" bgcolor="#FFFFFF">
+<!-- 编辑器调用开始 -->
+  <form id="form2" name="form2" method="post" action="__URL__/edit_reply/id/{$list.id}/ask_id/{$askList.id}/prev_url/{$prev_url}">
+    <label for="text_area"></label>
+    <textarea id="content" name="content" cols="60" rows="20">{$list.content}</textarea>
+  </form>
+
+<script type="text/javascript" src="__PUBLIC__/Js/FCKeditor/fckeditor.js"></script> 
+<script type="text/javascript"> var oFCKeditor = new FCKeditor( "content","100%","184px" ) ; oFCKeditor.BasePath = "__PUBLIC__/Js/FCKeditor/" ; oFCKeditor.ReplaceTextarea() ;function resetEditor(){setContents("content",document.getElementById("content").value)}; function saveEditor(){document.getElementById("content").value = getContents("content");} function InsertHTML(html){ var oEditor = FCKeditorAPI.GetInstance("content") ;if (oEditor.EditMode == FCK_EDITMODE_WYSIWYG ){oEditor.InsertHtml(html) ;}else	alert( "FCK必须处于WYSIWYG模式!" ) ;}</script><!-- 编辑器调用结束 -->        <!--问-->
+                
+                
+                
+                </td>
+                <td width="8">&nbsp;</td>
+              </tr>
+              <tr>
+                <td width="8">&nbsp;</td>
+                <td height="36"><div id="law_button_sumbit" class="law_button_sumbit1" onMouseOver="this.className='law_button_sumbit2'" onMouseOut="this.className='law_button_sumbit1'" onClick="editReply()"></div></td>
+                <td width="8">&nbsp;</td>
+              </tr>
+            </table>
+          </div>
+          <div class="clear"></div>
+        </div>
+        
+        
+        <div class="height_15px">&nbsp;</div>
+        
+       
+  <div class="clear"></div>
+</div>
+  <div class="clear"></div>
+</div>
+    <!--左边底部分s-->
+    <div id="law_left_bottom"></div>
+    <!--左边底部分e--> 
+  </div>
+    <div class="clear"></div>
+</div>
+<!--law_master_e--> 
+<include file="Public:com_footer" /> {//共用尾部}
+</body>
+</html>
+<script type="text/javascript">
+$(function(){
+	
+	//移动到问题上的效果
+	$('.width_608px_auto').mouseover(function(){
+		$(this).css({'background-color':'#fcfcfc'});
+	});
+	$('.width_608px_auto').mouseout(function(){
+		$(this).css({'background-color':'#fff'});
+	});	
+	
+	$('.reply_box').hide();
+
+	
+	
+});
+
+var reply_index=0;  //上一个打开的对话框
+var reply_id=0;//上一个id
+//点击回复，找开回复框，如果存在一个已打开的框，则将已打开的框放到当前节点
+function openReply(re_index,id){
+		//alert($('#content').val());
+	var html=$('#law_left_middle .width_608px_auto:eq('+reply_index+')').find('.reply_box').html();
+	
+
+	//$('#reply_box').hide();
+	$('#law_left_middle .width_608px_auto:eq('+reply_index+')').find('.reply_box').html('&nbsp;');
+
+	$('#law_left_middle .width_608px_auto:eq('+reply_index+')').find('.reply_box').hide();
+	$('#law_left_middle .width_608px_auto:eq('+reply_index+')').find('.ff_reply').show();
+	//移动填写框至点击位置
+	var offset=$('#law_left_middle .f_reply:eq('+re_index+')').offset();
+	$('#edit').css({'top':offset.top+13,'left':offset.left+5});	
+	
+	$('#law_left_middle .width_608px_auto:eq('+re_index+')').find('.ff_reply').hide();	
+	$('#law_left_middle .width_608px_auto:eq('+re_index+')').find('.reply_box').html(html);
+	$('#law_left_middle .width_608px_auto:eq('+re_index+')').find('.reply_box').show();
+	//$('#law_left_middle .width_608px_auto:eq('+re_index+')').find('.reply_box').blur();
+	//$('#content').focus();
+	reply_index=re_index;
+	reply_id=id;
+}
+
+function replyUser(){
+	/*if($('#content').val()==''){
+		msgBox('请输入回复内容',0,'提示');
+		return;	
+	}*/
+
+	//通过改变action地址传递参数
+	var url=APP+'/Law/reply/id/'+reply_id;
+	$('#form2').attr('action',url);
+	$('#form2').submit();
+
+}
+
+function editReply(id){
+
+	$('#form2').submit();
+	 }
+</script>

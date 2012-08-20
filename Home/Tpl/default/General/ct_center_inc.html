@@ -1,0 +1,111 @@
+<link href="../Public/Css/ct_loupan.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/ct_lp_common.css" rel="stylesheet" type="text/css" />
+	  <!--start-->
+        <div id="lou_left_intro">
+          <div id="lou_map_inc">
+            <div id="lou_map_ctrl">
+              <div class="lou_map_c_style" onclick="lou_switch_attach( 15 )">效果图</div>
+              <div class="lou_map_c_style" onclick="lou_switch_attach( 13 )">户型图</div>
+              <div class="lou_map_c_style" onclick="lou_switch_attach( 17 )">位置图</div>
+              <div class="lou_map_c_style" onclick="lou_switch_attach( 14 )">实景图</div>
+            </div>
+            <span id="lou_switch_attach" onclick="loadPhoto('__APP__/Attach/viewall/info_id/{$vo_add.info_id}/rid/{$vo_add.range_id}/num/',1,'{$vo_add.lpname}图'); return false;">{$default_pic}
+              <!-- 此处显示图片 270*220-->
+            </span></div>
+          <div id="lou_simple_intro">
+            <table width="655" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td width="74" rowspan="2" class="xian_dian_bottom" ><strong class="red_font_yahei"><strong>参考售价:</strong></strong></td>
+                <td width="249" rowspan="2" class="xian_dian_bottom"><eq name="vo_add.lpprice" value="0"><span class="red_font_yahei">待定&nbsp;&nbsp;</span>
+                  <else/>
+                  <strong class="red_title_font">{$vo_add.lpprice}</strong><span class="red_font_yahei">&nbsp;元/平方米</span></eq></td>
+                <td width="92" height="25" valign="middle"><!--<img src="../Public/Images/note.gif" width="16" height="16" align="left" /><span class="blue_a"><a href="#">降价通知</a></span>--></td>
+              </tr>
+              <tr>
+                <td height="25" valign="middle" class="xian_dian_bottom"><!--<img src="../Public/Images/calc.gif" width="16" height="16" align="left" /><span class="blue_a"><a href="#">房贷计算器</a></span>--></td>
+              </tr>
+              <tr>
+                <td height="30" valign="middle" class="gray_12px_f"><strong>均价区间:</strong></td>
+                <td height="30" colspan="2" valign="middle" class="gray_12px_f"><span class="orange_12px_f">{$vo_add.lp_min_price}</span> 至 <span class="orange_12px_f">{$vo_add.lp_max_price} </span>元/平方米。</td>
+              </tr>
+              <tr>
+                <td height="40" valign="middle" class="gray_font"><strong>价格走势:</strong></td>
+                <td height="40" colspan="2" valign="middle" class="gray_font"> 与上月比
+                  <egt name="up_span" value="0">上涨
+                    <else/>
+                    下跌</egt>
+                  {$up_span}% &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="red_a"><a href="__APP__/lp-{$vo.info_id}-jg#lou_xx" ><img src="../Public/Images/price_ico.gif" width="16" height="16" border="0" align="baseline" />价格分析&gt;&gt;</a></span></td>
+              </tr>
+              <tr>
+                <td height="40" valign="middle" class="gray_font"><strong>主推户型:</strong></td>
+                <td height="45" colspan="2" valign="middle" class="gray_font">{$vo_add.lp_zhutui}</td>
+              </tr>
+              <tr>
+                <td rowspan="2">&nbsp;</td>
+                <td height="26" colspan="2" class="gray_12px_f">售楼处免费咨询电话(工作时间: 9:00-17:30)</td>
+              </tr>
+              <tr>
+                <td height="26" colspan="2" class="red_title_font">{$vo_add.lptel}</td>
+              </tr>
+            </table>
+          </div>
+          <div id="lou_left_intro_m">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td height="5" colspan="4">&nbsp;</td>
+              </tr>
+              <tr>
+                <td height="35" colspan="4" valign="top"><span class="blue_12px_f">共有 {$count_pic} 张户型图、实景图、楼盘平面图 </span><span class="blue_a"><a href="__APP__/lp-{$vo.info_id}-xc#lou_xx" > 点击查看&gt;&gt;</a></span>
+                  <!--&nbsp;&nbsp;<img src="../Public/Images/fav_lou.gif" width="16" height="16" align="texttop" /><span class="blue_a"><a href="#" onclick="add_favorite(); return false;">收藏本楼盘</a></span>&nbsp;&nbsp;| &nbsp;&nbsp;<img src="../Public/Images/read_lou.gif" alt="" width="16" height="16" align="texttop" /><span class="blue_a"><a href="#">订阅最新消息</a></span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<img src="../Public/Images/to_mobile_lou.gif" alt="" width="16" height="16" align="texttop" /><span class="blue_a"> <a href="#">发送到手机</a></span>--></td>
+              </tr>
+              <tr>
+                <td height="40" valign="top"><span class="gray_font"><strong>楼盘地址:</strong></span></td>
+                <td height="40" colspan="2" valign="top"><span class="gray_font">{$vo_add.lpaddr}</span></td>
+                <td height="40" valign="top">&nbsp;</td>
+              </tr>
+              <tr>
+                <td width="11%" height="40" valign="top"><strong>交通情况：</strong></td>
+                <td height="40" colspan="2" valign="top">{$vo_add.lpjiaotong|mb_substr=###,0,100,'utf-8'}</td>
+                <td width="17%" height="40" valign="top"><span class="red_a"><a href="__APP__/lp-{$vo.info_id}-pt#lou_xx" ><img src="../Public/Images/bus_ico.png" width="16" height="16" border="0" align="absmiddle" />交通情况详细&gt;&gt;</a></span></td>
+              </tr>
+              <tr>
+                <td height="30"><strong>楼盘特色：</strong></td>
+                <td height="30" colspan="3" align="left"><empty name="vo_add.lp_tese"><!--暂无-->
+                  <else />
+                  <foreach name="vo_add.lp_tese" item="vo_tese">
+                    <ul style="list-style:none;padding:0;margin:0;">
+                      <li style="float:left;"><img src="__PUBLIC__/Images/Tese/{$vo_tese}.gif" align="absmiddle" /></li>
+                      <li style="float:left;">&nbsp;&nbsp;<span class="gray_font">{$vo_tese|getLpTese}</span>&nbsp;&nbsp;&nbsp;&nbsp;</li>
+                    </ul>
+                  </foreach>
+                </empty></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <div id="lou_dp_include">
+          <div id="lou_com_title">&nbsp;</div>
+          <div class="lou_comment">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td width="11%" height="60">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="../Public/Images/dp_ico.png" alt="" width="30" height="30" />&nbsp;</td>
+                <td width="89%" height="60" class="xian_dian_bottom"><present name="goodReviews" >{$goodReviews.content}
+                  <else />
+                  暂无编辑好评</present></td>
+              </tr>
+            </table>
+          </div>
+          <div class="lou_comment">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td width="11%" height="60">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="../Public/Images/dp_cha_ico.png" alt="" width="30" height="30" />&nbsp;</td>
+                <td width="89%" height="60" class="xian_dian_bottom"><present name="badReviews" >{$badReviews.content}
+                  <else />
+                  暂无编辑差评</present></td>
+              </tr>
+            </table>
+          </div>
+          <div class="lou_com_more"><u class="blue_a"><a href="__APP__/lp-{$vo.info_id}-dp#lou_xx">看看更多人怎么说&gt;&gt;</a></u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+        </div>
+		
+		<!--end-->

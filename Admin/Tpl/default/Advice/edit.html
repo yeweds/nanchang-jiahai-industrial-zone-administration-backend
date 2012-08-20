@@ -1,0 +1,31 @@
+<include file="Public:header" />
+
+<div class="bodyTitle">
+	<div class="bodyTitleLeft"></div>
+  <div class="bodyTitleText">修改点评</div>
+</div>
+
+<form method="post" action="__URL__/update">
+		<table width="95%" style="font-family: '宋体', Simsun;">
+		  <tr>
+			  <td>ID：</td>
+		  <td>
+		  <input type="hidden" name="act" value="update"/>
+		  <input type="text" name="id" value="{$vo.id}" readOnly/></td>
+		  </tr>
+		  <tr>
+			  <td>楼盘名称： </td>
+	        <td>{$vo.lpname}</td>
+		  </tr>
+		  <tr>
+			  <td>本站info_id：</td>
+		  <td><input name="info_id" type='text'  id='info_id' size="22" value="{$vo.info_id}" />
+		    被点评楼盘ID</td>
+		  </tr>
+		</table>
+		<div style="margin:12px;"><input type="submit"  value="确定修改" class="df_button" />&nbsp;&nbsp;
+			<input type="reset" value="还原重填" class="df_button" /></div>
+</form>
+<p class="i">注意：非系统管理员，请勿随意修改，以免影响网站数据！</p>
+
+<include file="Public:footer" />

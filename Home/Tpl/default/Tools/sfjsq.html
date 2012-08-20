@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" /> 
+<title>税费计算器_贷款计算器_腾房网</title>
+<meta name="keywords" content="贷款计算器,等额本息还款,等额本金还款,公积金贷款,购房能力评估,购房税费,购房税费计算器,公积金贷款计算器,提前还贷计算器," />
+<meta name="description" content="贷款计算器大全，腾房网提供专业的贷款计算器，包括等额本息还款贷款计算器，等额本金还款贷款计算器，公积金贷款计算器，提前还贷计算器，税费计算器，购房能力评估计算器等一应俱全，找贷款计算器就来腾房网" />
+<link href="../Public/style/css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/Js/jquery.min.js"></script>
+<script src="../Public/style/js/ui.js" type="text/javascript"></script>
+</head>
+<body>
+<style>
+.breadcrumb {height:35px;line-height:35px;margin:0 auto;padding-left:10px;width:940px;}
+.breadcrumb,.breadcrumb a {color:#000099;}
+.breadcrumb a:hover,.breadcrumb a:active {color:#cc0000};
+.breadcrumb a:visited {color:#800080;}
+</style>
+<div class="breadcrumb">
+<a class="a02" href="__APP__/News">&gt;&gt;返回资讯首页</a>
+</div>
+<div id="wrap">
+	<div class="t"></div>
+	<div class="con clearfix">
+		<div class="left">
+			<ul class="btn clearfix">
+				<li><a href="__URL__/gfnl" class="m1">购房能力评估</a></li>
+				<li><a href="__URL__/debx" class="m2">等额本息还款法</a></li>
+				<li><a href="__URL__/debj" class="m3">等额本金还款法</a></li>
+				<li><a href="__URL__/sfjsq" class="m4_activ">税费计算器</a></li>
+				<li><a href="__URL__/gjjjsq" class="m5">公积金贷款计算器</a></li>
+				<li><a href="__URL__/tqhd" class="m6">提前还贷计算器</a></li>
+			</ul>
+			<div class="ico2"></div>
+			<div class="calculator">
+				<h2 class="title4">税费计算器</h2>
+				<div class="top"></div>
+				<div class="center">
+<FORM name=formt3 action="" method=post>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table1">
+	<tr>
+		<td width="70"><strong>单　　价：</strong></td>
+		<td><INPUT maxLength=6 size=8 name=dj3 class="txt"> 元/平米
+		</td>
+	</tr>
+	<tr>
+		<td><strong>面　　积：</strong></td>
+		<td><INPUT maxLength=7 size=8 name=mj3 class="txt"> 平方米</td>
+	</tr>
+	<tr>
+		<td  colspan="3">
+		<div align="center">
+		<INPUT onclick=runjs3(this.form) type=button value="" name=math3 class="btn1">
+		<input type=reset value="" name=reset class="btn2">
+		</div>
+		</td>
+	</tr>
+</table>
+ 
+<h3>计算结果：</h3>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table1">
+	<tr>
+		<td width="259"><strong>房款总价：</strong><INPUT size=8 name=fkz3 class="txt2"> 元</td>
+		<td width="259"><strong>印 花 税：</strong><INPUT size=8 name=yh class="txt2"> 元</td>
+		</tr>
+	<tr>
+		<td><strong>公 证 费：</strong><INPUT size=8 name=gzh class="txt2"> 元</td>
+		<td><strong>契　　税：</strong><INPUT size=8 name=q class="txt2"> 元</td>
+		</tr>
+	<tr>
+		<td><strong>委托办理产权手续费：</strong><INPUT size=8 name=wt class="txt2"> 元</td>
+		<td><strong>房屋买卖手续费：</strong><INPUT size=8 name=fw class="txt2"> 元</td>
+		</tr>
+</table>
+<SCRIPT language=JavaScript>
+function runjs3(obj){dj3=parseFloat(obj.dj3.value)
+mj3=parseFloat(obj.mj3.value)
+fkz3=dj3*mj3
+yh=fkz3*0.0005
+if (dj3<=9432) q=fkz3*0.015
+else if (dj3>9432) q=fkz3*0.03
+if (mj3<=120)  fw=500;
+else if (120<mj3<=5000)   fw=1500;
+ if (mj3>5000)  fw=5000
+gzh=fkz3*0.003
+obj.yh.value=Math.round(yh*100,5)/100
+obj.fkz3.value=Math.round(fkz3*100,5)/100
+obj.q.value=Math.round(q*100,5)/100
+obj.gzh.value=Math.round(gzh*100,5)/100
+obj.wt.value=Math.round(gzh*100,5)/100
+obj.fw.value=Math.round(fw*100,5)/100}
+</SCRIPT>
+</form>
+				</div>
+				<div class="bottom"></div>
+<p class="red lh20">购房需交纳的第一组税费是契税、印花税、交易手续费、权属登记费。</p>
+<p class="lh20"><strong>契税</strong>金额是房价的1.5%，一般情况下是在交易签证时交一半，入住后拿房产证时交另一半<br />
+<strong>印花税</strong>金额为房价的0.05%，在交易签证时交纳<br />
+<strong>交易手续费</strong>一般是每平方米2.5元，也在交易签证时交纳<br />
+<strong>权属登记费</strong>100元到200元之间</p>
+			</div>
+		</div>
+		<div class="right">
+			<h3>贷款计算器：公积金贷款利率</h3>
+			<table  width="100%" border="0" cellpadding="0" cellspacing="0" id="table1">
+					<tr>
+						<th>年限</th>
+						<th>1-5年</th>
+						<th>5-30年</th>
+					</tr>
+					<tr>
+						<td>2010.10.20后</td>
+						<td align="center">3.50%</td>
+						<td align="center">4.05%</td>
+					</tr>
+					<tr>
+						<td>2008.12.23后</td>
+						<td align="center">3.33%</td>
+						<td align="center">3.87%</td>
+					</tr>
+					<tr>
+						<td>2008.11.27后</td>
+						<td align="center">3.51%</td>
+						<td align="center">4.05%</td>
+					</tr>
+					<tr>
+						<td>2008.10.09后</td>
+						<td align="center">4.32%</td>
+						<td align="center">4.86%</td>
+					</tr>
+					<tr>
+						<td>2007.9.16后</td>
+						<td align="center">4.59%</td>
+						<td align="center">5.13%</td>
+					</tr>
+					<tr>
+						<td>2007.9.15后</td>
+						<td align="center">5.04%</td>
+						<td align="center">5.22%</td>
+					</tr>
+					<tr>
+						<td>2007.8.22后</td>
+						<td align="center">4.59%</td>
+						<td align="center">5.04%</td>
+					</tr>
+					<tr>
+						<td>2007.7.21后</td>
+						<td align="center">4.50%</td>
+						<td align="center">4.95%</td>
+					</tr>
+					<tr>
+						<td>2007.5.19后</td>
+						<td align="center">4.41%</td>
+						<td align="center">4.86%</td>
+					</tr>
+					<tr>
+						<td>2007.3.18后 </td>
+						<td align="center">4.32%</td>
+						<td align="center">4.77%</td>
+					</tr>
+					<tr>
+						<td>2006.5.8后 </td>
+						<td align="center">4.14%</td>
+						<td align="center">4.59%</td>
+					</tr>
+					<tr>
+						<td>2005.3.17-2006.5.7 </td>
+						<td align="center">3.96%</td>
+						<td align="center">4.41%</td>
+					</tr>
+					<tr>
+						<td>2005.1.1-3.16</td>
+						<td align="center">3.78%</td>
+						<td align="center">4.23%</td>
+					</tr>
+					<tr>
+						<td>2005.1.1前</td>
+						<td align="center">3.60%</td>
+						<td align="center">4.05%</td>
+					</tr>
+				</table>
+			<a href="#" class="show_btn" id="show_btn1">显示所有年份</a>
+			<h3>贷款计算器：商业贷款利率</h3>
+			<table  width="100%" border="0"  cellpadding="0" cellspacing="0" id="table2">
+					<tr>
+						<th>年限</th>
+						<th>1-5年</th>
+						<th>5-30年</th>
+					</tr>
+					<tr>
+						<td>2010.10.20后1.1倍</td>
+						<td align="center">6.56%</td>
+						<td align="center">6.75% </td>
+					</tr>
+					<tr>
+						<td>2010.10.20后基准</td>
+						<td align="center">5.96%</td>
+						<td align="center">6.14% </td>
+					</tr>
+					<tr>
+						<td>2010.10.20后85折</td>
+						<td align="center">5.07%</td>
+						<td align="center">5.22% </td>
+					</tr>
+                    <tr>
+                        <td>2008.12.23后85折</td>
+                        <td align="center">4.90%</td>
+                        <td align="center">5.05% </td>
+                    </tr>
+                    <tr>
+                        <td>2008.12.23后7折</td>
+                        <td align="center">4.03%</td>
+                        <td align="center">4.16% </td>
+                    </tr>
+                    <tr>
+                        <td>08.12.23后1.1倍</td>
+                        <td align="center">6.34%</td>
+                        <td align="center">6.53%</td>
+                    </tr>
+                    <tr>
+                        <td>2008.12.23后基准</td>
+                        <td align="center">5.76%</td>
+                        <td align="center">5.94%</td>
+                    </tr>
+                    <tr>
+                        <td>2008.11.27后下限</td>
+                        <td align="center">4.16%</td>
+                        <td align="center">4.28%</td>
+                    </tr>
+                    <tr>
+                        <td>2008.11.27后上限</td>
+                        <td align="center">6.53%</td>
+                        <td align="center">6.73%</td>
+                    </tr>
+                    <tr>
+                        <td>2008.11.27后基准</td>
+                        <td align="center">5.94%</td>
+                        <td align="center">6.12%</td>
+                    </tr>
+                    <tr>
+                        <td>2008.10.30后下限</td>
+                        <td align="center">4.91%</td>
+                        <td align="center">5.04%</td>
+                    </tr>
+                    <tr>
+                        <td>2008.10.30后上限</td>
+                        <td align="center">7.72%</td>
+                        <td align="center">7.92%</td>
+                    </tr>
+                    <tr style="display: none;">
+                        <td>2008.10.30后基准</td>
+                        <td align="center">7.02%</td>
+                        <td align="center">7.20%</td>
+                    </tr>
+                    <tr style="display: none;">
+                        <td>2008.10.27后下限</td>
+                        <td align="center">5.10%</td>
+                        <td align="center">5.23%</td>
+                    </tr>
+                    <tr style="display: none;">
+                        <td>2008.10.27后上限</td>
+                        <td align="center">8.02%</td>
+                        <td align="center">8.22%</td>
+                    </tr>
+                    <tr style="display: none;">
+                        <td>2008.10.27后基准</td>
+                        <td align="center">7.29%</td>
+                        <td align="center">7.47%</td>
+                    </tr>
+                    <tr style="display: none;">
+                        <td>2008.10.09后下限</td>
+                        <td align="center">6.20%</td>
+                        <td align="center">6.35%</td>
+                    </tr>
+                    <tr style="display: none;">
+                        <td>2008.10.09后上限</td>
+                        <td align="center">8.02%</td>
+                        <td align="center">8.22%</td>
+                    </tr>
+                    <tr style="display: none;">
+                        <td>2008.10.09后基准</td>
+                        <td align="center">7.29%</td>
+                        <td align="center">7.47%</td>
+                    </tr>
+                    <tr style="display: none;">
+                        <td>2008.09.16后下限</td>
+                        <td align="center">6.426%</td>
+                        <td align="center">6.579% </td>
+                    </tr>
+                    <tr style="display: none;">
+                        <td>2008.09.16后上限</td>
+                        <td align="center"> 8.32%</td>
+                        <td align="center">8.51% </td>
+                    </tr>
+                    <tr style="display: none;">
+                        <td>2008.09.16后基准</td>
+                        <td align="center">7.56%</td>
+                        <td align="center">7.74% </td>
+                    </tr>
+                    <tr style="display: none;">
+                        <td>2007.12.21后下限</td>
+                        <td align="center">6.579%</td>
+                        <td align="center">6.65%</td>
+                    </tr>
+                    <tr style="display: none;">
+                        <td>2007.12.21后上限</td>
+                        <td align="center">8.51%</td>
+                        <td align="center">8.61% </td>
+                    </tr>
+                    <tr style="display: none;">
+                        <td>2007.12.21后基准</td>
+                        <td align="center">7.74%</td>
+                        <td align="center">7.83%</td>
+                    </tr>
+                    <tr style="display: none;">
+                        <td>2007.9.15后</td>
+                        <td align="center">7.56%</td>
+                        <td align="center">7.83%</td>
+                    </tr>
+                    <tr style="display: none;">
+                        <td>2007.8.22后</td>
+                        <td align="center">7.38%</td>
+                        <td align="center">7.56%</td>
+                    </tr>
+                    <tr style="display: none;">
+                        <td>2007.7.21后</td>
+                        <td align="center">7.20%</td>
+                        <td align="center">7.38%</td>
+                    </tr>
+                    <tr style="display: none;">
+                        <td>2007.5.19后</td>
+                        <td align="center">6.93%</td>
+                        <td align="center">7.20%</td>
+                    </tr>
+                    <tr style="display: none;">
+                        <td>2007.3.18后上限</td>
+                        <td align="center">6.75%</td>
+                        <td align="center">7.11%</td>
+                    </tr>
+                    <tr style="display: none;">
+                        <td>2007.3.18后下限</td>
+                        <td align="center">5.74%</td>
+                        <td align="center">6.04%</td>
+                    </tr>
+                    <tr style="display: none;">
+                        <td>2006.8.19后上限</td>
+                        <td align="center">6.48%</td>
+                        <td align="center">6.84%</td>
+                    </tr>
+                    <tr style="display: none;">
+                        <td>2006.8.19后下限</td>
+                        <td align="center">5.51%</td>
+                        <td align="center">5.81%</td>
+                    </tr>
+                    <tr style="display: none;">
+                        <td>2006.4.28后上限</td>
+                        <td align="center">6.12%</td>
+                        <td align="center">6.39%</td>
+                    </tr>
+                    <tr style="display: none;">
+                        <td>2006.4.28后下限</td>
+                        <td align="center">5.51%</td>
+                        <td align="center">5.75%</td>
+                    </tr>
+				</table>
+			<a href="#" class="show_btn" id="show_btn2">显示所有年份</a>
+		</div>
+		<div class="ico"></div>
+		<div class="ico" style="top:580px"></div>
+	</div>
+	<div class="b"></div>
+<dl id="suitsm" class="blk clearfix"></dl>
+<dl id="suitmonm" class="blk clearfix"></dl>
+</div>
+
+	<!-- footer begin -->
+	<div id="footer"><span class="blue_a"><a href="#">恭候您的意见</a> -<a href="#"> 联系我们</a> - <a href="#">关于我们</a> - <a href="#">广告服务</a></span><br />
+      本站郑重声明：腾房网所载文章、数据仅供参考，使用前请核实，风险自负。赣ICP备10201200号<br />
+   Copyright腾房网 nc.tengfang.net All Rights Reserved 版权所有 复制必究</div>
+    <!--end==正文内容-->
+   <div style="clear:both"></div><!--促使图层高度随内容增加面增加-->
+</div>
+ 
+</body>
+</html>

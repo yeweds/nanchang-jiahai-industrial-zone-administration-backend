@@ -1,0 +1,78 @@
+<include file="Public:header" />
+<!--导入编辑器开始-->
+<link rel="stylesheet" href="__PUBLIC__/Js/Kindeditor/themes/default/default.css" />
+<script charset="utf-8" src="__PUBLIC__/Js/Kindeditor/kindeditor.js"></script>
+<script charset="utf-8" src="__PUBLIC__/Js/Kindeditor/lang/zh_CN.js"></script>
+<script type="text/javascript">
+//-- 自定义在线编辑器
+	var editor;
+	var mini_items = ['source','undo','redo','fontname','fontsize','forecolor',
+					  'hilitecolor','bold','italic','emoticons','removeformat',
+					  'fullscreen'];  //迷你元素
+	var full_items = ['source','undo','redo','preview','fontname','fontsize','forecolor',
+					  'hilitecolor','bold','italic','underline','strikethrough','justifyleft',
+					  'justifycenter','justifyright','justifyfull','insertorderedlist',
+					  'insertunorderedlist','indent','outdent','emoticons','removeformat',
+					  'fullscreen'];  //完全元素
+	
+	KindEditor.ready(function(K) {
+		editor = K.create('#my_editor', {
+					 themeType : 'default',//样式
+					 newlineTag: 'br', //换行格式
+					 filterMode: true, //过滤代码
+					 uploadJson: '__PUBLIC__/Js/Kindeditor/php/upload_json.php',
+					 fileManagerJson : '__PUBLIC__/Js/Kindeditor/php/file_manager_json.php',
+					 allowFileManager : true,											 
+					 items: mini_items  //当前自定义元素列表
+		});
+	});
+
+	//获取数据	
+	function checkForm(){
+		editor.sync('my_editor'); //同步编辑器内容
+		return true;
+	}
+</script>
+<!-- 编辑器调用结束 -->
+
+<div class="bodyTitle">
+	<div class="bodyTitleLeft"></div>
+  <div class="bodyTitleText">添加公告</div>
+</div>
+<br><h3 class="marginbot"><a href="__URL__" class="sgbtn">＋公告管理</a></h3>
+		
+          <table width="100%">
+		  <form method="post" name="form1" action="__URL__/Insert">
+            <tr>
+              <td width="13%">标题</td>
+              <td width="87%">
+                <input name="title" type="text"  class="txt" id="title" size="50"/></td>
+            </tr>
+            <tr>
+              <td>备注</td>
+              <td>
+                <textarea name="excerpt" cols="60" rows="4" id="excerpt" ></textarea>
+              简单概要描述，可以留空</td>
+            </tr>
+            <tr>
+              <td>内容</td>
+              <td><!-- 编辑器调用开始 --><textarea id="my_editor" name="content" style="width:700px;height:300px;"></textarea> <!-- 编辑器调用结束 --></td>
+            </tr>
+            <tr>
+              <td>排序</td>
+              <td><input type="text" name="sortrank" size="5" /></td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+              <td>
+                <input type="submit"  value="确定新增" class="df_button" />
+                <input type="reset"  value="还原重填" class="df_button" /></td>
+            </tr>
+          </form></table>
+        <p class="i">删除不可恢复,谨慎操作</p>
+<br>
+<include file="Public:footer" />

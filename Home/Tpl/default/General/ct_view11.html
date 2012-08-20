@@ -1,0 +1,818 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$vo.title}楼盘详情(均价:{$vo_add.lpprice|default="待定"}元/㎡，位置:{$vo_add.lpaddr}，电话：{$vo_add.lptel}) -腾房网南昌站</title>
+<meta name="keywords" content="{$vo.title},{$vo.title}楼盘详情,价格，位置，户型，电话">
+<meta name="description" content="腾房网为您提供{$vo.title}的楼盘详情，包括：价格，位置，户型，电话，点评等，点击进入{$vo.title}楼盘详情页，全面了解{$vo.title}">
+<link href="../Public/Css/view_lp.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+	#wuye table td{ height: 30px;}
+</style>
+<script language="JavaScript" type="text/javascript">
+//提交验证
+function sub_reviews(){
+	var content = $("#lpdp_content");
+	if(content.val() == ''){
+		alert('请输入评论内容！');
+		//content.fouce();
+		return false;
+	}
+	return true;
+}
+
+</script>
+</head>
+
+<body>
+<div id="content_bg">
+   <include file="Public:header_ct" /> <!-- 传统页公共头部 -->
+  <div id="content">
+    <div class="height_10px"></div>
+	<div class="height_30px"><img src="../Public/Images/dp_jian_left.gif" width="10" height="10" />腾房网 >&nbsp;<a href="__APP__/lp">楼盘大全</a>&nbsp;>&nbsp;<strong><span class="green_12px_f">{$vo.title} 楼盘信息</span></strong></div>
+    <div id="content_inc">
+      <div id="con_left">
+	    <div class="lp_info">
+		<!--楼盘资料左边S-->
+	      <div class="lp_info_left">
+		     <!--幻灯图-->
+		    <div class="film_ph">
+			   <div class="height_10px"></div>
+			   <div class="height_12px_space"></div>
+	           <div class="ph">{$default_pic}</div>
+		    </div>
+			<div class="lp_title"><h1 class="lp_title">{$vo.title}</h1>
+			  <div class="lp_tag"><if condition="($vo_add.lp_state eq 1)">在售<elseif condition="$vo_add.lp_state eq 2" />待售<else />售完</if></div>
+			</div>
+			<!--今日可售房源-->
+			<div class="today_sale">
+			  <div class="sale_hd"> &nbsp;<img src="../Public/Images/house.png" width="18" height="18" /> <strong>今日可售房源</strong><span class="red_16px_ge"><strong> {$vo_add.lpnosalecount}</strong></span> <strong>套</strong> <span class="blue_a"><a href="http://nc.tengfang.net/General/can_sell_mx/info_id/{$vo.info_id}" target="_blank">[查看详细]</a></span></div>
+              <div class="sale_hd"> &nbsp;<img src="../Public/Images/note_c_ico.gif" width="16" height="16" /> 均价 <span class="red_16px_ge"><strong>{$vo_add.lpprice|default="待定"} </strong></span>元/㎡
+			  <!-- 力高视频 -->
+			  <eq name="vo.info_id" value="72">&nbsp;[<a href="http://nc.tengfang.net/News/view/id/7323">视频看房</a>]</eq></div>
+			  
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr class="tr_line_height">
+    <td width="53%" class="border-style1">&nbsp;首次预售：{$vo_add.lptimeb|default="未知"}</td> 
+    <td width="47%" class="border-style2">&nbsp;最近预售：{$vo_add.lptimee|default="未知"}</td>
+  </tr>
+  <tr class="tr_line_height"> 
+    <td width="53%" class="border-style1"> &nbsp;累计成交面积：{$vo_add.lpsalearea|intval}㎡</td>
+    <td width="47%" class="border-style2">&nbsp;累计成交套数：{$vo_add.lpsalecount}套</td>
+  </tr>
+  <tr class="tr_line_height"> 
+    <td width="53%" class="border-style3" style="overflow:hidden; word-break:break-all;">&nbsp;当前可售面积：{$vo_add.lpnosalearea|intval}㎡</td>
+    <td width="47%">&nbsp;总预售栋数：{$vo_add.lpbuildcount|default="0"}栋</td>
+  </tr>
+</table>
+				<div style="clear:both;"></div>
+			</div>
+		  </div>
+		  <!--楼盘资料左边E-->
+		   
+		  <div class="width_10px_space"></div>
+		  	
+		  <!--楼盘资料右边-->  
+	      <div class="lp_info_right">
+	        <div class="info_right_top">
+			  <div class="height_25px" id="tel" style="font-family: Arial Black,Gadget, sans-serif; font-weight: bold;"><span class="gray_16px">&nbsp;&nbsp;售楼电话：</span><span class="red_16px">{$vo_add.lptel}</span></div>
+			  <div class="day_30">
+		      <div id="zhuzhai">
+				    <div class="price"><gt name="vo_add.lpmprice" value="0">{$vo_add.lpmprice}<else/>{$vo_add.lpprice|default="待定"}</gt> 元/㎡</div>
+				</div>
+		      <div id="fei_zhuzhai">
+			    <div class="price">{$vo_add.lpnomprice} 元/㎡</div>
+				</div>
+			  </div>
+		    </div>
+<!--物业类型-->
+<div id="wuye">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="6">&nbsp;</td>
+    <td width="47%"><span class="black_blod"><strong>物业类型</strong>：</span>{$vo_add.lpwuyetype}</td>
+    <td width="53%"><span class="black_blod"><strong>建筑类别</strong>：</span>{$vo_add.lp_jzlb}</td>
+    <td width="6">&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td width="47%"><span class="black_blod"><strong>所属区域</strong>：</span>{$vo.area_name}</td>
+    <td width="53%"><span class="black_blod"><strong>装修状况</strong>：</span>{$vo_add.lp_zxqk}</td>
+    <td width="6">&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+   <td width="47%"><span class="black_blod"><strong>所属商圈</strong>：</span>无</td>
+    <td width="53%"><span class="black_blod"><strong>车位</strong>：</span>{$vo_add.lpcar}个<span class="gray_a_12pxu">【<a style="cursor:pointer" onclick="showDom($(this),6)">{$chewei_remark}</a>】</span></td>
+    <td width="6">&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+	<td width="47%"><span class="black_blod"><strong>容积率</strong>：</span>{$vo_add.lprongjilv} <span class="gray_a_12pxu">【<a style="cursor:pointer" onclick="showDom($(this),5)">{$rongjilv_remark}</a>】</span></td>
+    <td width="53%"><span class="black_blod"><strong>物业费</strong>：</span>{$vo_add.lpwuyefei}元/平米<span class="gray_a_12pxu">【<a style="cursor:pointer" onclick="showDom($(this),8)">{$wuyefei_remark}</a>】</span></td>
+    <td width="6">&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td colspan="2"><span class="black_blod"><strong>占地面积</strong>：</span>
+      <php>echo round($vo_add['zhandi_area']*0.0015,1);</php>
+      亩<span class="gray_a_12pxu">【<a style="cursor:pointer" onclick="showDom($(this),7)">{$zdmj_remark}</a>】</span></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td colspan="2"><span class="black_blod"><strong>开发商</strong>：</span>{$vo_add.lpcom} <span class="gray_a_12pxu"><a  style="cursor:pointer" onclick="showDom($(this),1)">[开发其他楼盘]</a></span></td>
+    <td width="6">&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td colspan="2"><span class="black_blod"><strong>物业公司</strong>：</span>{$vo_add.lpwycom} <span class="gray_a_12pxu"><a style="cursor:pointer" onclick="showDom($(this),2)">[管理的其他楼盘]</a></span></td>
+    <td width="6">&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td colspan="2"><span class="black_blod"><strong>在售户型面积类型</strong>：</span>{$vo_add.lp_zhutui}</td>
+    <td width="6">&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td colspan="2"><span class="black_blod"><strong>交通线路</strong>：</span>{$vo_add.lpjiaotong|mb_substr=###,0,80,'utf-8'}</td>
+    <td width="6">&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td colspan="2"><span class="black_blod"><strong>最近开盘</strong>：</span>{$vo_add.lptimee} <span class="gray_a_12pxu"><a style="cursor:pointer" onclick="showDom($(this),3)">[更多开盘]</a></span></td>
+    <td width="6">&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td colspan="2"><span class="black_blod"><strong>预售许可证</strong>：</span>{$prolisence.prolisence}（{$prolisence.proname|default="无"}）<span class="gray_a_12pxu"><a style="cursor:pointer" onclick="showDom($(this),4)">[更多..]</a></span></td>
+    <td width="6">&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td width="47%"><span class="black_blod"><strong>土地信息</strong>：</span><span class="gray_a_12pxu">【<eq name="td_vo.bianhao" value="">无<else/><a href="http://nc.tengfang.net/cotton.php/Gtj/view/gtj_id/{$td_vo.id}" target="_blank">宗地：{$td_vo.bianhao}</a></eq>】</span></td>
+    <td width="53%"><span class="black_blod"><strong>规划信息</strong>：</span><span class="gray_a_12pxu">【无】</span></td>
+    <td width="6">&nbsp;</td>
+  </tr>
+</table>
+		    </div>
+<!-- 分享 s-->
+<div>
+<!-- JiaThis Button BEGIN -->
+<div id="ckepop">
+	<span class="jiathis_txt">分享到：</span>
+	<a class="jiathis_button_tsina">新浪微博</a>
+	<a class="jiathis_button_tqq">腾讯微博</a>
+	<a class="jiathis_button_t163">网易微博</a>
+	<a class="jiathis_button_qzone">QQ空间</a>
+	<!-- <a href="http://www.jiathis.com/share/" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a> 
+	<a class="jiathis_counter_style"></a>-->
+</div>
+<script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+</div> 
+<!-- 分享 e -->
+			
+	      </div>
+		 <!--楼盘资料右边E--> 
+	    </div>
+	  <div style="clear:both"></div>
+	  <div class="height_10px"></div>
+	  
+	  <div id="lp_dongtai">
+	    <div id="dongtai_hd">&nbsp;<span class="green_14px_b">楼盘动态</span><span class="green_light_12px">&nbsp;|&nbsp;{$vo.title}最新消息</span></div>
+		  <ul>
+              <volist name="news_list" id="new">
+                <li style="height:25px"><span class="left"><span class="gray_a_12px">·</span> [{$new.class_id|getClassName}] &nbsp;&nbsp;<a href="__APP__/News/view/id/{$new.id}" title="{$new.title}" target="_blank">{$new.title|mb_substr=###,0,30,'utf-8'}...</a> &nbsp;</span><span class="gray_12px_f" style="float:right;">( {$new.add_time|date='Y-m-d H',###} )</span></li>
+              </volist>
+              <notpresent name="news_list">
+                <li>暂未找到该楼盘相关新闻</li>
+              </notpresent>
+          </ul>
+            <div style="clear:both"></div>
+	  </div> 
+	   <div style="clear:both"></div> 
+	  <div class="height_10px"></div>
+	  
+	  <!--在线看房S-->
+	  <div id="online_view_lp">
+	    <div id="online_hed">
+		  <div id="hd_right">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="15%" align="center" valign="top" ><span class="base white_12px" onclick="loadFrame(1)">实景看房</span></td>
+    <td width="1%" align="center" valign="top">&nbsp;</td>
+    <td width="15%" height="38" align="center" valign="top" ><span class="base white_12px"  onclick="loadFrame(2)">生活配套</span></td>
+    <td width="1%" valign="top">&nbsp;</td>
+    <td width="15%" height="38" align="center" valign="top" ><span class="base white_12px"  onclick="loadFrame(3)">楼盘相册</span></td>
+    <td width="1%" valign="top">&nbsp;</td>
+    <td width="15%" height="38" align="center" valign="top" ><span class="base white_12px"  onclick="loadFrame(4)">楼盘信息</span></td>
+    <td width="1%" valign="top">&nbsp;</td>
+<!--    <td width="15%" height="38" align="center" class="white_12px"id="base"><a href="#">楼盘点评</a></td>
+    <td width="1%">&nbsp;</td> -->
+    <td width="15%" height="38" align="center" valign="top" ><span class="base white_12px"  onclick="loadFrame(5)">价格分析</span></td>
+    <td width="1%" valign="top">&nbsp;</td>
+    <td width="15%" height="38" align="center" valign="top" ><span class="base white_12px"  onclick="loadFrame(6)">人工荐房</span></td>
+  </tr>
+</table>
+</div>     <!-- /3d/<present name="zxkf_info_id">{$zxkf_info_id}<else/>404.html</present> -->
+	      <div id="3d">
+	        <div id="load_img"></div>
+          
+          <iframe id="load_frame" name=="load_frame" width="678" height="500" src='/3d/<present name="zxkf_info_id">{$zxkf_info_id}<else/>404.html</present>' scrolling="no" frameborder="0" style="background-color:#FFF;" ></iframe></div>
+          <div style="clear:both"></div>
+	    </div>
+	  </div>
+      </div>
+	  <div class="width_10px_space"></div>
+      <div id="con_right">
+        <div id="check_item">
+          <table width="270" height="22" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+              <td width="16%">&nbsp;</td>
+              <td width="34%"> 
+			  <label for="add_favorite" onclick="add_favorite()">
+                  <input type="checkbox" name="add_favorite" value="checkbox" id="add_favorite"/> 我要收藏</label></td>
+              <td width="7%"><input type="checkbox" name="compare" value="checkbox" id="compare" /></td>
+              <td width="26%">我要对比</td>
+              <td id="compare_content">
+			  
+                <div id="CompareFrame" style="z-index:1;">
+				
+				  <div id="com_tit"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="77%">&nbsp;房源对比</td>
+    <td width="12%"><img id="Switch" src="../Public/Images/icon_small.gif" alt="" /></td>
+    <td width="11%">&nbsp;<img id="compareclose" src="../Public/Images/icon_close.gif" alt="" /></td>
+  </tr>
+</table>
+</div>
+<div id="com_content">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" id="com_content">
+<tr>
+    <td width="3%">&nbsp;</td>
+    <td width="75%">&nbsp;</td>
+    <td width="19%">&nbsp;</td>
+    <td width="3%">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="3%">&nbsp;</td>
+    <td width="75%"><div class="red_12px_f">您已选择了 <strong id="CompareCount">0</strong> 条房源 </div></td>
+    <td width="19%">&nbsp;</td>
+    <td width="3%">&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td colspan="2"><img  id="close" src="../Public/Images/blue_hr.gif" width="173" /></td>
+    <td>&nbsp;</td>
+  </tr>
+  </table>
+  <table id="choice_lp">
+  <tr>
+    <td width="3%">&nbsp;</td>
+    <td width="75%">中山路傅家坡~79.8万元</td>
+    <td width="19%"><img   id="close_lp" src="../Public/Images/icon_close.gif" alt="" /></td>
+    <td width="3%">&nbsp;</td>
+  </tr>
+   <tr>
+    <td>&nbsp;</td>
+    <td colspan="2"><img src="../Public/Images/blue_hr.gif" width="173" /></td>
+    <td>&nbsp;</td>
+  </tr>
+  </table>
+  <table width="198">
+  <tr>
+    <td width="10">&nbsp;</td>
+    <td colspan="2" align="center"><input name="compare2" type="button" value="开始对比" /></td>
+    <td width="10">&nbsp;</td>
+  </tr>
+</table>
+</div>
+				</div>               
+			</td>
+            </tr>
+          </table>
+		  
+        </div>
+		<!--小区印象-->
+        <div id="impression">
+		  <div class="title">&nbsp;&nbsp;<span class="green_14px_b">小区印象</span><span class="green_light_12px">&nbsp;|&nbsp;{$vo.title}小区印象</span></div>
+		  <div id="im_con">
+		  <div id="biaoqian">
+		     <div class="height_10px"></div>
+			 <div class="width_10px_space"></div>
+		    <div class="bq_bg" align="center"><span id="ft_color">想买但很远</span></div>
+		  </div>
+		  <div class="height_10px"></div>
+          <div id="imp_submit">
+            <table width="270" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td width="4%">&nbsp;</td>
+                <td width="63%"><input name="lp_xqyx_tag" id="lp_xqyx_tag" type="text" class="border-gray" value="我的印象，限填5个字" onfocus="this.value='';"  /></td>
+                <td width="20%"><a onclick="add_xqyx_tag()" title="提交小区印象"><img src="../Public/Images/sub_bt.gif" width="50" height="26" border="0" /></a></td>
+                <td>&nbsp;</td>
+              </tr>
+			  <tr>
+                <td colspan="4" height="20">&nbsp;</td>
+              </tr>
+			  <tr>
+                <td colspan="4"><img src="../Public/Images/im_hr.gif" width="270" height="5" /></td>
+              </tr>
+            </table>
+          </div>
+		 </div> 
+		
+		  <!--同价位楼盘-->
+		  <div class="lp_more">
+		  <div class="lp_tilte"><div class="width_20px_space"></div>同价位楼盘</div>
+		  <div id="commom_price">
+          <table width="100%" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+              <td width="5%">&nbsp;</td>
+              <td width="93%">
+		  <volist name="same_price_list" id="sp_vo">
+			 <div class="lp_name_mu" title="{$sp_vo.lpname}"><a href="__APP__/lp-{$sp_vo.info_id}">{$sp_vo.lpname|mb_substr=###,0,6,'utf-8'}</a></div>
+		  </volist> 
+              
+              
+              </td>
+              <td width="2%">&nbsp;</td>
+            </tr>
+          </table>          
+          
+
+			 <div style="clear:both;"></div>
+		  </div>
+		  </div>
+		  <!--同区域楼盘-->
+		  <div class="lp_more">
+		  <div class="lp_tilte"> <div class="width_20px_space"></div>同区域楼盘</div>
+		  <div id="commom_area">
+          <table width="100%" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+              <td width="5%">&nbsp;</td>
+              <td width="93%">
+		  <volist name="same_range_list" id="sp_vo">
+			 <div class="lp_name_mu" title="{$sp_vo.lpname}"><a href="__APP__/lp-{$sp_vo.info_id}">{$sp_vo.lpname|mb_substr=###,0,6,'utf-8'}</a></div>
+		  </volist>             
+              
+              
+              </td>
+              <td width="2%">&nbsp;</td>
+            </tr>
+          </table>           
+       
+
+			 <div style="clear:both;"></div>
+		  </div>
+		  </div>
+		  <!--同类型楼盘-->
+		  <div class="lp_more">
+		  <div class="lp_tilte"><div class="width_20px_space"></div>同类型楼盘</div>
+		  <div id="commom_type">
+          
+          <table width="100%" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+              <td width="5%">&nbsp;</td>
+              <td width="93%">
+              <volist name="same_type_list" id="sp_vo">
+                <div class="lp_name_mu" title="{$sp_vo.lpname}"><a href="__APP__/lp-{$sp_vo.info_id}">{$sp_vo.lpname|mb_substr=###,0,6,'utf-8'}</a></div>
+    		</volist>         
+              
+              
+              </td>
+              <td width="2%">&nbsp;</td>
+            </tr>
+          </table>             
+          
+
+			 <div style="clear:both;"></div>
+
+		  </div>
+         </div>
+      </div>
+
+	  <div class="height_10px"></div>
+	  
+	  <!--楼盘点评Start-->
+	         <div id="discuss">
+		  <div class="title">&nbsp;&nbsp;<span class="green_14px_b">楼盘点评</span><span class="green_light_12px">&nbsp;|&nbsp;{$vo.title}点评讨论</span></div>
+		  <div id="dis_con">
+		  <div class="height_10px"></div>
+          <div id="dis_submit">
+<table width="270" border="0" cellspacing="0" cellpadding="0">
+  <form id="disuss_content" name="disuss_content" method="post" action="__APP__/Reviews/ct_insert" onsubmit="return sub_reviews();">
+  <tr>
+    <td width="14">&nbsp;<input name="info_id" type="hidden" value="{$vo.info_id}" /></td>
+    <td colspan="2" height="80">
+        <textarea id="lpdp_content" name="lpdp_content" class="border-gray"></textarea>	</td>
+    <td width="19">&nbsp;</td>
+  </tr>
+  <tr>
+    <td height="30">&nbsp;</td>
+    <td width="181" height="30">&nbsp;</td>
+    <td width="58" height="30"><a title="提交评论" ><input type="image" src="../Public/Images/sub_bt.gif" width="50" height="26" border="0" /></a></td>
+    <td height="30">&nbsp;</td>
+  </tr>
+  </form>
+  <tr>
+    <td colspan="4"><img src="../Public/Images/im_hr.gif" width="270" height="5" /></td>
+  </tr>
+  <tr>
+    <td width="14">&nbsp;</td>
+    <td colspan="2" align="left">
+<style>
+#demo1{
+height:auto;
+}
+#demo2{
+height:auto;
+}
+</style>    
+<br />
+
+    <div id="demo" style="overflow:hidden;height:650px;width:100%; word-break:break-all;">
+	<ul id="demo1">
+	<volist name="reviews_list" id="rvo">
+	<li><span class="gray_a_12px">·</span>{$rvo.content} <span class="gray_a_12pxu">({$rvo.user_name})</span></li>
+	</volist>
+	<li></li>
+	</ul>	
+ <div id="demo2"></div>
+</div>
+    <div class="dianping_more"><span class="blue_12px_a"><a href="__APP__/Reviews/ct_list/info_id/{$vo.info_id}" target="_blank">更多&gt;&gt;</a></span></div>
+<script type="text/javascript"> 
+var speed=40;
+var demo=document.getElementById("demo"); 
+var demo2=document.getElementById("demo2"); 
+var demo1=document.getElementById("demo1"); 
+demo2.innerHTML = demo1.innerHTML;
+function Marquee(){ 
+if(demo2.offsetTop-demo.scrollTop<=0) 
+  demo.scrollTop-=demo1.offsetHeight; 
+else{ 
+  demo.scrollTop++;
+} 
+} 
+var MyMar=setInterval(Marquee,speed); 
+
+demo.onmouseover=function() {clearInterval(MyMar)} 
+demo.onmouseout=function() {MyMar=setInterval(Marquee,speed)} 
+$(function(){
+	if($('#demo1').height()<650){
+		$('#demo').height($('#demo1').height());	
+	}
+
+	
+		$('#hd_right .base').mouseover(function(){
+			if($(this).hasClass('base')&&!$(this).hasClass('hd_left_m')){
+			   $(this).removeClass('base').addClass('hd_left');
+			}
+		
+	});
+	
+	$('#hd_right .base').mouseout(function(){
+	if($(this).hasClass('hd_left')&&!$(this).hasClass('hd_left_m')){
+	   $(this).removeClass('hd_left').addClass('base');
+	}
+	
+	});
+		$('#hd_right .base').click(function(){
+			$('#hd_right .hd_left_m').removeClass('hd_left_m').addClass('base'); 
+			//if($(this).hasClass('hd_left')){
+			   $(this).removeClass('hd_left').addClass('hd_left_m');
+			//}
+	
+	});
+		$('#hd_right .base:eq(0)').removeClass('base').addClass('hd_left_m');
+
+});
+</script>     
+	</td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+
+          </div>
+		 </div> 
+		 
+		  <!--同价位楼盘-->
+<div style="clear:both"></div>
+      </div>
+ <!--楼盘点评End-->	 
+	<div style="clear:both"></div>	
+	</div>
+	<div style="clear:both"></div>
+	<div class="height_10px"></div>
+	
+	<!--正在看的楼盘S-->
+		<!-- 共用热门楼盘 -->
+		<include file="Html:hot_lp_inc" />
+		<!-- 共用 -->
+	<!--正在看的楼盘E-->
+	<div class="height_10px"></div>
+	<div style="clear:both"></div>
+	
+	<!--友情链接-->
+	<include file="Public:footer" /> {//共用尾部}
+</div>
+</body>
+</html>
+<script type="text/javascript" src="../Public/Js/view_lp.js"></script>
+<script type="text/javascript">
+var infoid = "{$vo_add.info_id}"; 
+$(document).ready(function(){
+	show_xqyx_tag();          //默认显示楼盘印象列表
+	domAjax('news_pai_ajax','__APP__/News/news_pai_ajax/type/1','get');	
+
+//--根据地址栏参数选中-- s
+var  srcc  =   window.location;   //得到地址栏连接 
+srcc   =   srcc.toString();     //转换成string类型，可略 
+var start  =   srcc.indexOf("#");       //返回 "# "在字串中第一次出现的位置 
+var end    =   srcc.length;     //字串的长度 
+eval_str = srcc.substring(start+1, end);     //得到#后部分字串 
+//alert(dd);
+if(eval_str != ''){
+	eval(eval_str);  //执行  xiongyan添加
+}
+//--根据地址栏参数选中-- e
+	
+	//播放图片效果
+	var lMC = 2;
+	var rMC = 0;
+
+	jQuery("#photo_left").click(function(){
+		if(rMC>0){
+			scrollto("r");
+			rMC--;
+			lMC++;
+			jQuery("#photo_right").css("cursor","pointer");
+			if(rMC<=0){
+				jQuery("#photo_left").css("cursor","no-drop");
+			}
+		}
+	});
+
+	jQuery("#photo_right").click(function(){
+
+		if(lMC>0){
+			scrollto("l");
+			lMC--;
+			rMC++;
+			jQuery("#photo_left").css("cursor","pointer");
+			if(lMC<=0){
+				jQuery("#photo_right").css("cursor","no-drop");
+			}
+		}
+	});
+
+	jQuery("#star_item_list").css("width",(950*3)+"px");
+	jQuery("#photo_left").css("cursor","no-drop");
+
+	if(lMC>0){
+		jQuery("#photo_right").css("cursor","pointer");
+	}
+
+	function scrollto(way){
+		if(way=="l"){
+			jQuery("#star_item_list").animate({marginLeft:"-=950px"},2000);
+		}else{
+			jQuery("#star_item_list").animate({marginLeft:"+=950px"},2000);
+		}
+	}
+
+					
+
+});
+
+//相关功能
+	function lou_switch_attach( classid ) //缩略图切换
+	{
+		
+		var data;
+		if(classid != 0){
+			 data = {"info_id": infoid , "class_id": classid };
+		}else{
+			 data = {"info_id": infoid };
+		}
+		$("#lou_switch_attach").load('__APP__/Loupan/switchAttach', data ,function(){
+			//先将将绑定事件移除
+			$('#lou_switch_attach').unbind();
+			$("#lou_switch_attach").click(function(){
+				//loadPhoto('__APP__/Attach/viewall/info_id/{$vo_add.info_id}/rid/{$vo_add.range_id}/num/',1,'{$vo_add.lpname}图')
+				//alert('{$vo_add.info_id}');
+				//alert('__APP__/Attach/viewall/info_id/{$vo_add.info_id}/cid/13/rid/{$vo_add.range_id}/num');
+				switch(classid){
+				case 13:loadPhoto('__APP__/Attach/viewall/info_id/{$vo_add.info_id}/cid/13/rid/{$vo_add.range_id}/num/',1,'{$vo_add.lpname}户型图',2);
+					break;
+				case 14:loadPhoto('__APP__/Attach/viewall/info_id/{$vo_add.info_id}/cid/14/rid/{$vo_add.range_id}/num/',1,'{$vo_add.lpname}实景图',0);
+					break;
+				case 15:loadPhoto('__APP__/Attach/viewall/info_id/{$vo_add.info_id}/cid/15/rid/{$vo_add.range_id}/num/',1,'{$vo_add.lpname}效果图',1);
+					break;
+				case 17:loadPhoto('__APP__/Attach/viewall/info_id/{$vo_add.info_id}/cid/17/rid/{$vo_add.range_id}/num/',1,'{$vo_add.lpname}位置图',3);
+					break;
+				}
+				//alert(classid);
+			});
+
+		}); //附件类
+	}
+	
+	function add_xqyx_tag() //添加楼盘印象
+	{
+		var tagName = $("#lp_xqyx_tag").val();
+		if(tagName == ''){
+			//msgBox('请输入您对该小区的印象!',status='0',title='操作失败',width=300); //提示
+			alert('请输入您对该小区的印象!');
+			return;
+		}
+		if(tagName.length > 5){
+			//msgBox('您的输入太长了!',status='0',title='操作失败',width=300); //提示
+			alert('您的输入太长了!');
+			return;
+		}
+
+		$.post( '__APP__/Interaction/in_xqyx_tag/', {"lp_xqyx_tag": tagName, "info_id": infoid }, function(msg) {		
+			//在这里显示操作结果 或成功 或失败
+			if(msg && msg['success']){
+				//刷新一次
+				show_xqyx_tag();
+				alert(msg["info"]);
+				//msgBox(msg["info"],status='1',title='操作成功',width=300); //提示
+			}else{
+				alert(msg["info"]);
+				//msgBox(msg["info"],status='0',title='操作失败',width=300); //提示
+			}
+		}
+		, "json"
+		);
+	}
+	
+	function show_xqyx_tag() //刷新楼盘印象列表
+	{
+		$("#biaoqian").load('__APP__/Loupan/lp_tag_inc/info_id/' + infoid ); //印象标签
+	}
+</script>
+<!--[if IE 6]>
+<script type="text/javascript" src="__PUBLIC__/Js/png.js"></script>
+<![endif]-->
+ <link href="../Public/Css/prompt.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../Public/Js/prompt.js"></script><!--显示引导提示框-->
+<script type="text/javascript">
+function showDom(thisDom,num,info_id){
+	//writeFgDiv();	
+	//alert(thisDom.html());
+	if(info_id == undefined){
+		info_id = infoid;
+	}
+	var offset=thisDom.offset();	
+	var url;
+	//alert(offset.left);
+	switch(num){
+		case 1:url=APP+'/Tips/lp_same_kfs/info_id/'+info_id; break;  //相同开发商
+		case 2:url=APP+'/Tips/lp_same_wuye/info_id/'+info_id; break; //相同物业
+		case 3:url=URL+'/more_kanpan/'; break;     //最近开盘
+		case 4:url=URL+'/get_prolisence/info_id/'+info_id; break;     //许可证
+
+		case 5:url=APP+'/Tips/lp_rongjilv/'; break;//容积率说明
+		case 6:url=APP+'/Tips/lp_chewei/'; break; //车位
+		case 7:url=APP+'/Tips/lp_zdmj/';    break;//占地面积
+		case 8:url=APP+'/Tips/lp_wuyefei/';  break;//物业费说明
+	}
+	
+	$.get(url,function(content){
+			//var content='Hi，你好！我是腾房小秘书,很高兴为您服务，接下来我将带您去熟悉我们的网站功能!';
+			var Shtml='<div id="remove" style="position:absolute;top:-1000px;left:0px;>'+content+'</div>';
+			$('body').append(Shtml);
+			var Swidth=$('.show_dom').width()+30;
+			var Sheight=$('.show_dom').height()+30;
+			$('#remove').remove();
+			//alert(typeof(Swidth));
+			if(Swidth<200){
+				Swidth=200;	
+			}
+			if(Sheight<150){
+				Sheight=150;	
+			}			
+			var promptArgu={title:'',content:content,pageX:offset.left+10,pageY:offset.top+10,width:Swidth,height:Sheight,autoClose:0,closeLast:1};
+			var a=new promptBox(promptArgu);				
+	});
+	
+
+}
+
+var infoid = "{$vo_add.info_id}"; 
+//加载框架
+function loadFrame(num){
+
+$('#hd_right .hd_left_m').removeClass('hd_left_m').addClass('base'); 
+$('#hd_right .base:eq('+(num-1)+')').removeClass('base').addClass('hd_left_m');
+	//$('#hd_right .base:eq('+(num-1)+')');
+	$('#load_img').html('');
+	$('#load_img').height(100);
+	switch(num){
+		//实景看房
+		case 1:	$("#load_frame",parent.document.body).attr("src",'/3d/<present name="zxkf_info_id">{$zxkf_info_id}<else/>404.html</present>');
+					var fHeight=500; 
+					break;
+		//生活配套
+		case 2:	$("#load_frame",parent.document.body).attr("src",'__APP__/Loupan/lp_shpt/info_id/' + infoid);
+					break;	
+		//楼盘相册
+		case 3:	//$("#load_frame",parent.document.body).attr("src",'__APP__/Attach/index/info_id/' + infoid);
+					//加载入div
+					$('#load_img').css('height','auto');
+					$('#load_img').load('__APP__/Attach/index/info_id/' + infoid);
+					$("#load_frame").height(0);
+					return;				
+					break;	
+		//楼盘信息
+		case 4:	$("#load_frame",parent.document.body).attr("src",'__APP__/Loupan/lp_lpxx/info_id/' + infoid);
+					break;	
+		//价格分析
+		case 5:	$("#load_frame",parent.document.body).attr("src",'__APP__/Loupan/lp_jgfx/info_id/' + infoid);
+					break;	
+		//人工荐房
+		case 6:	$("#load_frame",parent.document.body).attr("src",'__APP__/General/rg_jianfang/' );
+					break;							
+		
+	}
+	
+	//根据内容调整框架大小
+	$("#load_frame").load(function(){
+				if(!fHeight){
+					fHeight=$(this).contents().find("#load").height();
+				}
+		       $(this).height(fHeight); 
+		         $('#load_img').height(0);
+				//var iframeBodyHeight=$(window.frames["load_frame"].document).find("#load").height();
+				//$("#load_frame").height(iframeBodyHeight);
+
+	});
+}
+
+//收藏楼盘
+	function add_favorite() 
+	{
+		$.get( '__APP__/Interaction/in_favorite/info_id/' + infoid,'', function(msg) {
+				if(msg && msg['success']){
+					alert(msg["info"]);
+					//msgBox(msg["info"],status='1',title='操作成功',width='300'); //提示
+					return;
+				}else{
+					if(msg['data'] == 'notLogin'){
+						//alert('请先登录，才能收藏');
+						location.href= APP+"/Login";
+						//loginTF();   //让其先登录
+						return;
+					}
+					alert(msg["info"]);
+					//msgBox(msg["info"],status='0',title='操作失败',width='300'); //提示
+				}
+			} 
+			, "json"
+		);	
+	}
+
+	function lp_spzf() //沙盘找房
+	{
+		$("#lou_sha_map").load('__APP__/Loupan/lp_spzf/info_id/' + infoid,"","");
+	}
+    function lp_jgfx() //价格分析
+	{
+		$("#lou_sha_map").load('__APP__/Loupan/lp_jgfx/info_id/' + infoid,"","");
+	}
+	function lp_zxkf() //在线看房
+	{
+		$("#lou_sha_map").load('__APP__/Loupan/lp_zxkf/info_id/' + infoid,"","");
+	}
+	function lp_lpxx() //楼盘信息
+	{
+		$("#lou_sha_map").load('__APP__/Loupan/lp_lpxx/info_id/' + infoid,"","");
+	}
+    function lp_shpt() //生活配套
+	{
+		$("#lou_sha_map").load('__APP__/Loupan/lp_shpt/info_id/' + infoid,"","");
+	}
+	function lp_lpdp() //楼盘点评
+	{
+		$("#lou_sha_map").load('__APP__/Reviews/index/info_id/' + infoid,"","");
+	}
+	function lp_bmkf() //报名看房
+	{
+		$("#lou_sha_map").load('__APP__/Loupan/lp_bmkf/info_id/' + infoid,"","");
+	}
+
+ </script>
+ 
+<!--png图片在ie6下正常显示-->
+<!--[if IE 6]>
+<script type="text/javascript">
+	//png display in IE6.0 of the map 
+  DD_belatedPNG.fix('.lp_tag');
+</script>
+<![endif]-->
+<!--<link href="../Public/Css/common.css" rel="stylesheet" type="text/css" />-->
+<link href="../Public/Css/loupan.css" rel="stylesheet" type="text/css" />

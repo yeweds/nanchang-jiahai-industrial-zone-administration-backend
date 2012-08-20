@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>修改密码-南昌婚庆网</title>
+<link href="../Public/Css/common.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/account.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/Js/jquery.min.js" /></script>
+<script type="text/javascript" src="__PUBLIC__/Js/jquery.validate.min.js" /></script>
+<script type="text/javascript" src="../Public/Js/common.js" /></script>
+<script type="text/javascript">
+//指定当前组模块URL地址
+var URL = '__URL__';
+var APP	= '__APP__';
+var PUBLIC = '__PUBLIC__';
+
+var CURRENT_ITEM  = "nav_lf_pwd";  //当前选中
+
+</script>
+</head>
+
+<body>
+<include file="Public:header" /><!--共享登录头部 -->
+<div class="clear"></div>
+<!--面包屑s -->
+  <div class="height_30px_text gray_14px_r_a" style="line-height:50px; height:50px;">
+  <a href="__APP__/">首页</a> <strong>&gt;&gt; </strong>  修改密码
+  </div>
+<!--面包屑e -->
+
+<!--个人信息开始-->
+<div class="edit_user">
+
+	<!-- ///////////////////内容开始///////////////////////// -->
+    <div class="user_main">       
+    
+		<!-- title begin -->
+		<div class="user_title"> 
+            <h2>帐号管理</h2>
+		</div>
+        <!-- title end -->
+        <div class="clear"></div>
+        <div class="float_height_10px"></div>
+        <div class="clear"></div>
+        <!-- 左菜单 s __URL__/edit_user-->
+      <div class="user_menu">
+            <include file="Account:account_left" /><!--共享左侧 -->
+      </div>
+        <!-- 左菜单 e  -->
+        
+        <!-- /////////////////右 s   -->
+        <div id="user_content">
+        <!-- 右top s   -->
+      	<div class="user_content_t"></div>
+        <!-- 右top e   -->
+        <div class="clear"></div>
+        <!-- 右middle s   -->
+        <div class="user_content_m">
+        	<div class="float_height_30px"></div>
+          <div class="clear"></div>
+            <!-- 切换块1  -->
+            <div class="c_box" id="edit_u" style="display:block;">
+		  <!-- 修改资料 begin  -->
+         
+            <div class="clear"></div>
+
+      <div class="data" style="padding-left:80px;"><!-- 修改密码 begin  -->
+            <ul>
+                <form action="__URL__/changePw" method="post" id="regform">
+                    <li>
+                        <div class="float_l alR" style="width: 15%;">当前密码：</div><div class="float_l" style="width: 70%;">
+                            <input name="oldpass" type="password" class="input_text" id="currentPWD" value="" require="true" />
+                        </div>
+                     </li>
+                    <li>
+                    <div class="float_l alR" style="width: 15%;">&nbsp;</div>
+                        <div class="float_l alL" style="width:70%;"> 
+                            <table width="205" border="0" cellpadding="0" cellspacing="0" style="margin:0;">
+                                <tr>
+                                  <td width="169">  <table width="205" border="0" align="center" cellpadding="2" cellspacing="1" bordercolor="#eeeeee" style="height:12px">
+                                            <tr align="center" bgcolor="#f5f5f5">
+                                                <td width="33%" id="strength_L" style="height:5px">弱</td>
+                                                <td width="33%" id="strength_M" style="height:5px">中</td>
+                                              <td width="33%" id="strength_H" style="height:5px">强</td>
+                                            </tr>
+                                  </table></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="float_l alR" style="width: 15%;">新密码：</div>
+                        <div class="float_l" style="width: 70%;">
+                            <input name="passwd" type="password" class="input_text" id="passwd" value="" onKeyUp="pwStrength(this.value)"  require="true" />
+                        </div>
+                    </li>
+                    <li>
+                        <div class="float_l alR" style="width: 15%;">确认新密码：</div><div class="float_l" style="width: 70%;">
+                            <input name="repasswd" type="password" class="input_text" id="repasswd" value="" require="true" />
+                        </div>
+                    </li>
+                    <li>
+                        <div class="float_l alR" style="width: 15%;">&nbsp;</div>
+                        <div class="float_l" style="width: 70%;">
+                            <input name="button" type="submit" class="input_button" id="button" value="确认修改" />
+                        </div>
+                    </li>
+                </form>
+            </ul>
+        </div><!-- 修改密码 end  -->
+     <div class="clear"></div> 
+    </div>
+    <!-- 切换块1  -->
+    <div class="clear"></div>
+    <div class="float_height_10px"></div>
+    <div class="clear"></div>
+    <!-- 修改资料 end  -->
+	</div>
+     <!-- 右middle e   -->
+     <div class="clear"></div>
+	 <!-- 右bottom s   -->
+     <div class="user_content_b"></div>
+     <!-- 右bottom e   -->
+    <div class="clear"></div>
+	</div>
+    <!-- /////////////////右 e   -->
+ 	<div class="clear"></div>
+	</div>
+	<!-- ///////////////////内容结束///////////////////////// -->
+
+<div class="clear"></div>
+</div>
+<!-- 个人信息结束 -->
+<div class="clear"></div>
+<div class="float_height_30px"></div>
+<div class="clear"></div>
+<!-- footer -->
+<include file="Public:footer" /> {//共用尾部}
+</body>
+</html>
+<script type="text/javascript">
+$(document).ready(function(){
+
+//以下验证表单
+ $("#regform").validate({
+	  rules: {
+		   oldpass: "required",
+		   passwd: {
+			required: true,
+			minlength: 6
+		   },
+		   repasswd: {
+			required: true,
+			minlength: 6,
+			equalTo: "#passwd"
+		   }
+	  },
+	   messages: {
+		   oldpass: "密码由6-16个英文字母、数字或特殊字符组成",
+		   passwd: {
+			required: "请输入密码",
+			minlength: jQuery.format("密码不能小于{0}个字 符")
+		   },
+		   repasswd: {
+			required: "请输入确认密码",
+			minlength: "确认密码不能小于6个字符",
+			equalTo: "两次输入密码不一致"
+		   }
+	  }
+});
+//验证表单 end
+//13607341097
+});
+
+</script>
+ 
+<script type="text/javascript" src="__PUBLIC__/Js/pwStrength.js"></script>

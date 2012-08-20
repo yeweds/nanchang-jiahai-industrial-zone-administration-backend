@@ -1,0 +1,60 @@
+<include file="Public:html_header" /> 
+
+<link href="../Public/Css/news.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/base.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/class_com.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/select_box.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/news_detail.css" rel="stylesheet" type="text/css" />
+
+<body>
+
+<include file="News:news_header" /> <!--头部包含共用 -->
+
+    <!--start==所有正文内容在此处显示-->
+    <div class="content_inc">
+      <div class="ad_head">
+  <!--广告 --></div>
+      <div class="height_30px_text blue_a"><strong class="blue_14px_f">&gt;&gt;</strong><a href="__URL__/"> 新闻首页</a> <span class="gray_14px_f">&gt;</span> <a href="__APP__/news-list-{$news.partid}">{$news.partname}</a> <span class="gray_14px_f">&gt;</span> 正文详细</div>
+    <div class="height_10px"></div> 
+      
+      
+    <div class="content_inc" style="background-color: #FFF0F0; border: 1px solid #DBDBDB;">
+        
+      		<div class="height_20px_text"></div>
+      		<div class="height_30px_text" align="center"><span class="blue_24px_heif">{$news.news.title}</span></div>
+      		<div class="height_30px_text" align="center"> 更新时间：{$news.news.add_time|date='Y-m-d',###}  &nbsp;&nbsp;&nbsp;&nbsp; [<a href="__APP__/shop-{$news.news.shop_id}"><strong>查看该商家信息</strong></a>]</div>
+<div class="height_10px"></div>
+          <div class="height_20px_text"></div>
+          <div class="lineheight25px">
+			{$news.news.content}
+          </div>
+
+          <div class="height_35px" align="center"><a href="__APP__/News"><img src="../Public/Images/de_to_news.gif" width="170" height="35" border="0" alt="返回" /></a></div>
+<div class="height_20px_text"></div>
+          <div class="height_25px_text"></div>
+          <!-- JiaThis Button BEGIN -->
+<div id="ckepop">
+	<span class="jiathis_txt">&nbsp;分享到：</span>
+	<a class="jiathis_button_tsina">新浪微博</a>
+	<a class="jiathis_button_tqq">腾讯微博</a>
+	<a class="jiathis_button_t163">网易微博</a>
+	<a class="jiathis_button_qzone">QQ空间</a>
+	<!-- <a href="http://www.jiathis.com/share/" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a> 
+	<a class="jiathis_counter_style"></a>-->
+</div>
+<script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->          
+          <div class="height_10px"></div>
+
+     
+
+<div style="clear:both"></div><!--con_inc促使图层高度随内容增加面增加-->               
+    </div>
+
+    <div class="height_10px"></div>
+	<include file="Public:footer" /> {//共用尾部}
+    <div style="clear:both"></div><!--促使图层高度随内容增加面增加==正文内容--> 
+   </div>
+
+</body>
+</html>

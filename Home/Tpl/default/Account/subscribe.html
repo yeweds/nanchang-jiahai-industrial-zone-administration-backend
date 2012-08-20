@@ -1,0 +1,100 @@
+<include file="__THEME__/header" />
+
+<link href="../Public/accounts.css" rel="stylesheet" type="text/css" />
+
+<div class="content"><!-- 内容 begin  -->
+  
+  <include file="__THEME__/apps" />
+
+  <div class="main"> <!-- 右侧内容 begin  -->
+  <div class=page_title> <!-- page_title begin -->
+  <h2><img src="../Public/images/applications.gif" />帐号管理</h2>
+  <div class="c"></div>
+</div><!-- page_title end -->
+  <div class="tab-menu"><!-- 切换标签 begin  -->
+      <ul>
+      <li><a href="__URL__"><span>修改密码</span></a></li>
+      <li><a href="__URL__/account"><span>修改账号</span></a></li>
+      <li><a href="__URL__/security"><span>账号安全</span></a></li>
+      <li><a href="__URL__/score"><span>积分记录</span></a></li>
+	  <li><a href="__URL__/score_faq"><span>积分说明</span></a></li>
+      <li><a href="__URL__/subscribe" class="on"><span>邮件提醒</span></a></li>
+      </ul>
+  </div><!-- 切换标签 end  -->
+
+<form action="__URL__/doSubscribe" method="post" class="form_validator">
+<div class="data" style="padding-top:30px;"><!-- 提醒邮件 begin  -->
+    <h2 class="lh35 f14px btmline"><strong>以下动态，发送提醒邮件到你的邮箱{$email}中：</strong></h2>
+      <h3 class="lh35 btmlineD"><strong>我与好友间的交流：</strong></h3>
+            <p>
+              <input type="checkbox" name="message" value="1" <php>if($privacy["message"] == 1 || $null == 1){</php> checked='true' <php>}</php> />
+            好友给我发送，或回复短消息</p>
+            <p>
+              <input type="checkbox" name="wall" value="1" <php>if($privacy["wall"] == 1 || $null == 1){</php> checked='true' <php>}</php> />
+            好友给我留言，或回复我的留言</p>
+            <p>
+              <input type="checkbox" name="comment" value="1" <php>if($privacy["comment"] == 1 || $null == 1){</php> checked='true' <php>}</php> />
+            好友评论了我的照片、日记及其他内容，或回复我对他的评论</p>
+            <p>
+              <input type="checkbox" name="quan" value="1" <php>if($privacy["quan"] == 1 || $null == 1){</php> checked='true' <php>}</php> />
+            好友评论了一张圈有我的照片、日记及其他内容</p>
+      <h3 class="lh35 btmlineD"><strong>系统消息：</strong></h3>
+            <p>
+              <input type="checkbox" name="add_friend" value="1" <php>if($privacy["add_friend"] == 1 || $null == 1){</php> checked='true' <php>}</php> />
+            好友请求</p>
+            <p>
+              <input type="checkbox" name="invite_group" value="1" <php>if($privacy["invite_group"] == 1 || $null == 1){</php> checked='true' <php>}</php> />
+            别人邀请我加入群</p>
+            <p>
+              <input type="checkbox" name="agree_group" value="1" <php>if($privacy["agree_group"] == 1 || $null == 1){</php> checked='true' <php>}</php> />
+            群的管理员已经同意我加入群</p>
+            <p>
+              <input type="checkbox" name="birthday" value="1" <php>if($privacy["birthday"] == 1 || $null == 1){</php> checked='true' <php>}</php> />
+            好友的生日提醒</p>
+      <h3 class="lh35 btmlineD"><strong>我与好友间的交流：</strong></h3>
+            <p>
+              <input type="checkbox" name="fri_feed" value="1" <php>if($privacy["fri_feed"] == 1 || $null == 1){</php> checked='true' <php>}</php> />
+            好友更新了他的状态</p>
+            <p>
+              <input type="checkbox" name="fri_photo" value="1" <php>if($privacy["fri_photo"] == 1 || $null == 1){</php> checked='true' <php>}</php> />
+            好友上传了新照片</p>
+            <p>
+              <input type="checkbox" name="fri_friend" value="1" <php>if($privacy["fri_friend"] == 1 || $null == 1){</php> checked='true' <php>}</php> />
+            好友与某人相互成为好友</p>
+            <p>
+              <input type="checkbox" name="fri_head" value="1" <php>if($privacy["fri_head"] == 1 || $null == 1){</php> checked='true' <php>}</php> />
+            好友更新了他的头像</p>
+            <p>
+              <input type="checkbox" name="fri_join_group" value="1" <php>if($privacy["fri_join_group"] == 1 || $null == 1){</php> checked='true' <php>}</php> />
+            好友加入了群</p>
+            <p>
+              <input type="checkbox" name="fri_create_group" value="1" <php>if($privacy["fri_create_group"] == 1 || $null == 1){</php> checked='true' <php>}</php> />
+            好友创建了群</p>
+            <p>
+              <input type="checkbox" name="fri_add_app" value="1" <php>if($privacy["fri_add_app"] == 1 || $null == 1){</php> checked='true' <php>}</php> />
+            好友添加了新组件</p>
+            <p>
+              <input type="checkbox" name="fri_wall" value="1" <php>if($privacy["fri_wall"] == 1 || $null == 1){</php> checked='true' <php>}</php> />
+            好友间的留言</p>
+            <p>
+              <input type="checkbox" name="fri_comment" value="1" <php>if($privacy["fri_comment"] == 1 || $null == 1){</php> checked='true' <php>}</php> />
+            好友间的评论</p>
+      <h3 class="lh35 btmlineD"><strong>邮件发送频率：</strong></h3>
+        	<p><select name="frequency" id="u214">
+              <option value="0" <php>if($privacy["frequency"] == 0 || $null == 1){</php> selected="selected" <php>}</php>>实时发送</option>
+              <option value="1" <php>if($privacy["frequency"] == 1 || $null == 1){</php> selected="selected" <php>}</php>>每天发送一次</option>
+              <option value="2" <php>if($privacy["frequency"] == 2 || $null == 1){</php> selected="selected" <php>}</php>>每周发送一次</option>
+            </select>
+        	</p>
+   	  <h3 class="lh35 btmlineD"><strong>你的动态，是否通过邮件发送给你邀请过、但还未加入开心网的人：</strong></h3>
+      <p><input name="not_in" type="radio" value="1" <php>if($privacy["not_in"] == 1 ){</php> checked='true' <php>}</php>/>是 &nbsp;
+      <input name="not_in" type="radio" value="0"<php>if($privacy["not_in"] == 0 ){</php> checked='true' <php>}</php> />
+      否</p>
+      <input type="submit" class="btn_b" value="保存修改" />
+        	</div>
+  <!-- 提醒邮件 end  -->
+
+</form>    </div><!-- 右侧内容 end  -->
+<div class="c"></div>
+</div><!-- 内容 end -->
+<include file="__THEME__/footer" />

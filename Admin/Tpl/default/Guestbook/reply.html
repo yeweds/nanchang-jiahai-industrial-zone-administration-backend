@@ -1,0 +1,55 @@
+<include file="Public:header" />
+<script language="JavaScript">
+<!-- Begin
+function checkform()
+{
+  var reply = document.form1.reply.value;
+  if (form1.reply.value=="") {
+		alert("请填写回复内容！");
+		form1.reply.focus();		
+		    return (false);
+  } 
+  return true;
+}
+//  End -->
+</script>
+<div class="bodyTitle">
+	<div class="bodyTitleLeft"></div>
+  <div class="bodyTitleText">回复留言</div>
+</div>
+<br><h3 class="marginbot"><a href="__URL__" class="sgbtn">＋返回留言</a></h3>
+
+<table width="95%" height="386"  border="0" align="center" cellpadding="2" cellspacing="1" class="table_southidc">
+  <tr>
+    <td align="center" valign="top" class="td_southidc" scope="col"><table width="100%" height="25" border="0" align="center" cellpadding="0" cellspacing="0" class="back_southidc">
+      <tr>
+        <td class="topbg" scope="col"><strong>留言回复</strong></td>
+      </tr>
+    </table>
+    <br>
+    <table width="80%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td align="left">留言标题：{$msg}
+		<p></p>
+		</td>
+      </tr>
+      <tr>
+        <td align="left">
+<form name="form1" method="post" onSubmit="return checkform()" action="__URL__/save_reply">
+ 请输入留言回复的内容<br>
+ <br>
+ <textarea name="reply" cols="60" rows="10" id="reply"></textarea> 
+ <br>
+ <br>
+      <input type="submit" name="Submit" value="回 复" class="inputButton" >
+	  <input type="hidden" name="ID" value="{$ID}">
+	  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <input type="reset" name="Submit" value="取 消" class="inputButton" >
+</form></td>
+      </tr>
+    </table></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<include file="Public:footer" />

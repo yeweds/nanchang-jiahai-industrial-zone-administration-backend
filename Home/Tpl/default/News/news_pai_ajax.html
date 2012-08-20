@@ -1,0 +1,18 @@
+ 
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+
+				  <volist name="news_gz" id="vo" key="k">
+						 <tr>
+							<td width="14%" height="30" align="center">
+                            <if condition= "$k lt 4" >
+								<div class="num_style1">0{$k}</div>
+                            <elseif condition= "$k eq 10" />
+                                 <div class="num_style2">{$k}</div>
+                            <else/>
+								<div class="num_style2">0{$k}</div>
+                              </if></td>
+							<td width="86%" height="30" class="black_a"><a href="__APP__/news-{$vo.id}" title="{$vo.title}">{$vo.title|mb_substr=###,0,23,'utf-8'}</a></td>
+						 </tr>
+				  </volist> 
+          
+            </table>

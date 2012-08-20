@@ -1,0 +1,679 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$vo.title}点评，{$vo.title}口碑-腾房网</title>
+<meta name="keywords" content="{$vo.title}点评，{$vo.title}口碑，{$vo.title}论坛，{$vo.title}评分，{$vo.title}印象">
+<meta name="description" content="腾房网为您提供{$vo.title}的口碑点评，参考广大的{$cityname}朋友对{$vo.title}的口碑点评情况，腾房网楼盘微点评，点评{$vo.title}的方方面面，极力呈现最真实的{$vo.title}给您">
+
+<link href="../Public/Css/ct_loupan.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/ct_lp_common.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+.rating {}
+.starRating {	position:relative;
+	z-index:1;
+	background:url(../Public/Images/bg_norp.gif) repeat-x -140px -238px;
+	width:140px;
+	height:15px;
+	overflow:hidden;
+	margin: 0px;
+	padding: 0px;
+	top: 10px;
+}
+</style>
+</head>
+<body>
+
+<div id="content_bg">
+
+  <include file="Public:header_ct" /> <!-- 传统页公共头部 -->
+  
+  <div id="content">
+    <!--<div class="ad_head"></div>-->
+	<!-- 通栏广告start -->
+	<include file="Ad:news_center_tl" /> 
+	<!-- 通栏广告end -->
+    <div class="height_10px"></div>
+    <div class="height_30px"><img src="../Public/Images/dp_jian_left.gif" width="10" height="10" />腾房网  >&nbsp;<a href="__APP__/lp">楼盘大全</a>&nbsp;>&nbsp;<strong><span class="green_12px_f">{$vo.title} 楼盘微评</span></strong></div>
+<div class="content_inc">
+  <div id="lou_include_border">
+    <div id="lou_include">
+      <div id="lou_title">
+		<include file="General:ct_lptitle_inc" /> <!-- 楼盘标题 -->
+      </div>
+      <div id="lou_left_include">
+        <div id="lou_sha_title"> <a name="lou_xx" id="lou_xx"></a>
+          <table width="100%" border="0" cellpadding="0" cellspacing="0" class="gray_a">
+            <tr>
+              <td class="lou_sha_title"><a href="__APP__/lp-{$vo.info_id}">楼盘信息</a></td>
+              <!--<td class="lou_sha_title"><span onclick="lp_spzf();">沙盘找房</span></td>-->
+              <td class="lou_sha_title"><a href="__APP__/lp-{$vo.info_id}-jg">价格分析</a></td>
+              <td class="lou_sha_title"><a href="__APP__/lp-{$vo.info_id}-kf">在线看房</a></td>
+              <td class="lou_sha_title"><a href="__APP__/lp-{$vo.info_id}-pt">生活配套</a></td>
+              <td class="lou_sha_title"><a href="__APP__/lp-{$vo.info_id}-xc">楼盘相册</a></td>
+              <td class="lou_sha_title_c"><a href="__APP__/lp-{$vo.info_id}-dp">楼盘点评</a></td>
+              <td class="lou_sha_title"><a href="__APP__/lp-{$vo.info_id}-bm">报名看房</a></td>
+              <td class="gray_bottom_bian1px">&nbsp;</td>
+            </tr>
+          </table>
+        </div> 
+        <div id="lou_sha_map">
+        
+        <!--楼盘详情-->
+        <div id="lpdp_include">
+          <div class="lpxc_title"><span class="gray_14px_f">{$lpname}</span>(<span class="blue_12px_f">微评论</span>)</div>
+          <div class="height_200px_space">
+            <div id="lpdp_pf_flash">
+              <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0" width="170" height="150" id="xiongyan" align="middle">
+                <param name="wmode" value="opaque" />
+                <param name="allowScriptAccess" value="sameDomain" />
+                <param name="allowFullScreen" value="false" />
+                <param name="movie" value="../Public/Flash/radar.swf?url=__PUBLIC__/Xml/{$flashXmlUrl}" />
+                <param name="quality" value="high" />
+                <param name="bgcolor" value="#ffffff" />
+                <embed src="../Public/Flash/radar.swf?url=__PUBLIC__/Xml/{$flashXmlUrl}" wmode="opaque" quality="high" bgcolor="#ffffff" width="170" height="150" name="xiongyan" align="middle" allowscriptaccess="sameDomain" allowfullscreen="false" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" /></embed>
+              </object>
+              <!--此处显示  id "lpdp_pf_flash" 的内容 -->
+            </div>
+            <div id="lpdp_pf" class="rating">
+              <form>
+                <div class="lpdp_star_inc">
+                  <div class="lpdp_star_title" >价格:</div>
+                  <div class="lpdp_star">
+                    <ul class="starRating" id="xing1">
+                      <!--14的倍数，当前10分(10-10)*14-->
+                      <li><a href="javascript:rememberDesign('1','1')" title="1分" class="s1">1</a></li>
+                      <li><a href="javascript:rememberDesign('1','2')" title="2分" class="s2">2</a></li>
+                      <li><a href="javascript:rememberDesign('1','3')" title="3分" class="s3">3</a></li>
+                      <li><a href="javascript:rememberDesign('1','4')" title="4分" class="s4">4</a></li>
+                      <li><a href="javascript:rememberDesign('1','5')" title="5分" class="s5">5</a></li>
+                      <li><a href="javascript:rememberDesign('1','6')" title="6分" class="s6">6</a></li>
+                      <li><a href="javascript:rememberDesign('1','7')" title="7分" class="s7">7</a></li>
+                      <li><a href="javascript:rememberDesign('1','8')" title="8分" class="s8">8</a></li>
+                      <li><a href="javascript:rememberDesign('1','9')" title="9分" class="s9">9</a></li>
+                      <li><a href="javascript:rememberDesign('1','10')" title="10分" class="s10">10</a></li>
+                    </ul>
+                    <input type="hidden" id="vote1" name="vote1" value="0" />
+                  </div>
+                  <span id="voteul1">0分</span> </div >
+                <div class="lpdp_star_inc">
+                  <div class="lpdp_star_title">环境</div>
+                  <div  class="lpdp_star">
+                    <ul class="starRating" id="xing2" >
+                      <!--14的倍数，当前6分(10-6)*14-->
+                      <li><a href="javascript:rememberDesign('2','1')" title="1分" class="s1">1</a></li>
+                      <li><a href="javascript:rememberDesign('2','2')" title="2分" class="s2">2</a></li>
+                      <li><a href="javascript:rememberDesign('2','3')" title="3分" class="s3">3</a></li>
+                      <li><a href="javascript:rememberDesign('2','4')" title="4分" class="s4">4</a></li>
+                      <li><a href="javascript:rememberDesign('2','5')" title="5分" class="s5">5</a></li>
+                      <li><a href="javascript:rememberDesign('2','6')" title="6分" class="s6">6</a></li>
+                      <li><a href="javascript:rememberDesign('2','7')" title="7分" class="s7">7</a></li>
+                      <li><a href="javascript:rememberDesign('2','8')" title="8分" class="s8">8</a></li>
+                      <li><a href="javascript:rememberDesign('2','9')" title="9分" class="s9">9</a></li>
+                      <li><a href="javascript:rememberDesign('2','10')" title="10分" class="s10">10</a></li>
+                    </ul>
+                    <input type="hidden" id="vote2" name="vote2" value="0" />
+                  </div>
+                  <span id="voteul2">0分</span> </div>
+                <div class="lpdp_star_inc">
+                  <div  class="lpdp_star_title">地段</div>
+                  <div  class="lpdp_star">
+                    <ul class="starRating" id="xing3" >
+                      <!--14的倍数，当前6分(10-3)*14-->
+                      <li><a href="javascript:rememberDesign('3','1')" title="1分" class="s1">1</a></li>
+                      <li><a href="javascript:rememberDesign('3','2')" title="2分" class="s2">2</a></li>
+                      <li><a href="javascript:rememberDesign('3','3')" title="3分" class="s3">3</a></li>
+                      <li><a href="javascript:rememberDesign('3','4')" title="4分" class="s4">4</a></li>
+                      <li><a href="javascript:rememberDesign('3','5')" title="5分" class="s5">5</a></li>
+                      <li><a href="javascript:rememberDesign('3','6')" title="6分" class="s6">6</a></li>
+                      <li><a href="javascript:rememberDesign('3','7')" title="7分" class="s7">7</a></li>
+                      <li><a href="javascript:rememberDesign('3','8')" title="8分" class="s8">8</a></li>
+                      <li><a href="javascript:rememberDesign('3','9')" title="9分" class="s9">9</a></li>
+                      <li><a href="javascript:rememberDesign('3','10')" title="10分" class="s10">10</a></li>
+                    </ul>
+                    <input type="hidden" id="vote3" name="vote3" value="0" />
+                  </div>
+                  <span id="voteul3">0分</span> </div>
+                <div class="lpdp_star_inc">
+                  <div  class="lpdp_star_title">户型</div>
+                  <div  class="lpdp_star">
+                    <ul class="starRating" id="xing4">
+                      <!--14的倍数，当前6分(10-1)*14-->
+                      <li><a href="javascript:rememberDesign('4','1')" title="1分" class="s1">1</a></li>
+                      <li><a href="javascript:rememberDesign('4','2')" title="2分" class="s2">2</a></li>
+                      <li><a href="javascript:rememberDesign('4','3')" title="3分" class="s3">3</a></li>
+                      <li><a href="javascript:rememberDesign('4','4')" title="4分" class="s4">4</a></li>
+                      <li><a href="javascript:rememberDesign('4','5')" title="5分" class="s5">5</a></li>
+                      <li><a href="javascript:rememberDesign('4','6')" title="6分" class="s6">6</a></li>
+                      <li><a href="javascript:rememberDesign('4','7')" title="7分" class="s7">7</a></li>
+                      <li><a href="javascript:rememberDesign('4','8')" title="8分" class="s8">8</a></li>
+                      <li><a href="javascript:rememberDesign('4','9')" title="9分" class="s9">9</a></li>
+                      <li><a href="javascript:rememberDesign('4','10')" title="10分" class="s10">10</a></li>
+                    </ul>
+                    <input type="hidden" id="vote4" name="vote4" value="0" />
+                  </div>
+                  <span id="voteul4">0分</span> </div>
+                <div class="lpdp_star_inc">
+                  <div  class="lpdp_star_title">配套</div>
+                  <div  class="lpdp_star">
+                    <ul class="starRating" id="xing5" >
+                      <!--14的倍数，当前6分(10-1)*14-->
+                      <li><a href="javascript:rememberDesign('5','1')" title="1分" class="s1">1</a></li>
+                      <li><a href="javascript:rememberDesign('5','2')" title="2分" class="s2">2</a></li>
+                      <li><a href="javascript:rememberDesign('5','3')" title="3分" class="s3">3</a></li>
+                      <li><a href="javascript:rememberDesign('5','4')" title="4分" class="s4">4</a></li>
+                      <li><a href="javascript:rememberDesign('5','5')" title="5分" class="s5">5</a></li>
+                      <li><a href="javascript:rememberDesign('5','6')" title="6分" class="s6">6</a></li>
+                      <li><a href="javascript:rememberDesign('5','7')" title="7分" class="s7">7</a></li>
+                      <li><a href="javascript:rememberDesign('5','8')" title="8分" class="s8">8</a></li>
+                      <li><a href="javascript:rememberDesign('5','9')" title="9分" class="s9">9</a></li>
+                      <li><a href="javascript:rememberDesign('5','10')" title="10分" class="s10">10</a></li>
+                    </ul>
+                    <input type="hidden" id="vote5" name="vote5" value="0" />
+                  </div>
+                  <span id="voteul5">0分</span> </div>
+              </form>
+              <input type="button" onclick="vote()" value="提交" class="btn" />
+            </div>
+          </div>
+          <div class="height_30px_center_bg">已有<span class="orange_12px_f">{$sum_pepole}</span>名网友参与点评&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;有<span class="orange_12px_f">{$goumailv}%</span>的人支持购买&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;      共有<span class="orange_12px_f">{$sum_reviews}</span>条评论</div>
+          <!--<div class="title_120px_bg_blue"><strong>&nbsp;我关注</strong>(打勾即关注）</div> -->
+          <div id="lpdp_wgz">
+            <!--start 我关注包含图层-->
+            <div  class="lpdp_wgzd">
+              <!----liyou每个类包含一个类别-->
+              <div style="clear:both"></div>
+            </div>
+            <div style="clear:both"></div>
+          </div>
+          <!--end 我关注包含图层-->
+          <div class="title_120px_bg_button"><strong >&nbsp;<span class="white_a"><a href="#" onclick="lpdp_wyzm($(this).html(),$(this));return false;">网友点评&lt;&lt;</a></span></strong></div>
+          <div id="lpdp_wyzm">
+            <div>
+              <!----liyou-->
+                <!--开始循环 -->
+                <!--排除前两个 -->
+                <div class="lpdp_ly_width" id="lpdp_zm{$typeKey}_g">
+                  <fieldset class="more_fieldset">
+                    <p>
+                      <legend class="green_12px_f">
+                        <img src="../Public/Images/house.png" width="25" height="25" border="0" align="bottom" />
+                        <label for="lpdp_fj{$typeKey}"></label>
+                        <strong>{$typeVo}</strong></legend>
+                    </p>
+                    <ul id='lpdp_gzul{$typeKey}_g'>
+                      <li class="gray_bian_bottom"> 
+
+	<div id="lpdp_gz{$typeKey}_g">
+                      <div class="height_120px_space">
+                        <div class="white_20px_space"><a name="post_reviews" id="post_reviews"></a></div>
+                        <div class="widthspace_10px"></div>
+                        <div class="lpdp_fb_inc_width">
+                          <div class="heigth_25px">&nbsp;&nbsp;期待您对  <strong>{$lpname}</strong> 发表点评：
+                            <input name="info_id" type="hidden" value="{$vo.info_id}" />
+                            <input name="type_id" type="hidden" value="{$typeKey}" />
+                          </div>
+                          <div class="height_20px_content"><span class="blue_more_font_yahei"> &nbsp;&nbsp;</span>
+                            <label> <span class="blue_12px_f"><strong>您的认为该楼盘:</strong></span>
+                              <input name="g_or_b"  type="radio" value="g"/>
+                              <span class="blue_more_font_yahei">好</span></label>
+                            <label>
+                              <input name="g_or_b"  type="radio"  value="b"/>
+                              <span class="blue_more_font_yahei">不好</span></span></label>
+                            <label>
+                              <input name="g_or_b"  type="radio"  value="n"/>
+                              <span class="blue_more_font_yahei">一般</span></span></label>
+                            <br />
+                            <div class="widthspace_10px"></div>
+                            <div class="lpdp_fb_content_width">
+                              <textarea name="content" cols="45" rows="5" class="textarea_100" id="content[]" onpaste="lpdp_pasteCheck($(this),'{$typeKey}_g')" onkeyup="lpdp_check($(this),'{$typeKey}_g')" onfocus="lpdp_check($(this),'{$typeKey}_g')"></textarea>
+                            </div>
+                            <div class="height_20px_content">&nbsp;&nbsp;&nbsp;<a href="javascript:submit_reviews_mx('{$typeKey}_g');"><img src="../Public/Images/fb.png" width="50" height="25" border="0" align="absmiddle" /></a> <!--<img src="../Public/Images/qx.png" alt="" width="50" height="25" align="absmiddle"  onclick="lpdp_fb('{$typeKey}_g',0);"/> --><span class="blue_12px_f">&nbsp;&nbsp;&nbsp;&nbsp;(还可以写</span><span class="orange_12px_f" id="lpdp_checkMax{$typeKey}_g">140</span><span class="blue_12px_f">字)</span></div>
+                          </div>
+                          <div  style="clear:both"></div>
+                        </div>
+                      </div>
+                      
+                    </div>
+					  
+					  </li>
+                      <volist name="list" id="vo">
+                        <li class="xian_dian_bottom">
+                          <table width="100%" border="0" cellpadding="0" cellspacing="0" class="line_height_20px">
+                            <tr>
+                              <td width="20" valign="top"><img src="../Public/Images/user_dp.gif" width="20" height="20" align="absmiddle" /></td>
+                              <td width="100" align="center" valign="top"><span class="blue_more_font_yahei">{$vo.user_name}：</span></td>
+                              <td height="40" valign="top"><span class="gray_12px_f_block">{$vo.content}</span></td>
+                            </tr>
+                          </table>
+                        </li>
+                      </volist>
+                    </ul>
+                    <br />
+					<div class="height_30px_content_bg">
+                        <div class="height_30px_right_float"><span class="blue_a">&nbsp;&nbsp;&nbsp;<a href="#post_reviews">发表点评</a>&nbsp;| <a href="__APP__/Reviews/ct_list/info_id/{$info_id}" title="查看所有">更多</a></span><span class="orange_12px_f">({$sum_reviews})</span></div>
+                      </div>
+                    <!--lpgz+id-end-->
+                  </fieldset>
+                  <div style="clear:both"></div>
+                </div>
+                <!-- 奇偶判断 -->
+              <!-- 结束循环 -->
+              <!--end--1房价-->
+              <!--<div class="height_10px"></div>-->
+              <div style="clear:both"></div>
+            </div>
+            <!--end--liyou-->
+            <!--购买理由-->
+          </div>
+          <!--end--网友琢磨更多-->
+          <div style="clear:both"></div>
+        </div>
+        <!--end 楼盘详情-->
+        
+        
+        
+        </div>
+        <div style="clear:both"></div>
+      </div>
+      <div style="clear:right;"></div>
+	  
+	  
+      <div style="clear:both"></div>
+    </div>
+    <div style="clear:both"></div>
+  </div>
+<div style="clear:both"></div>
+          <!--con_inc促使图层高度随内容增加面增加-->
+        </div>
+<div class="height_10px"></div>     
+         
+    <div style="clear:both"></div><!--content促使图层高度随内容增加面增加-->    
+  </div>
+
+	<include file="Public:footer" /> {//共用尾部}
+	
+<div style="clear:both"></div><!--content_bg促使图层高度随内容增加面增加-->
+</div>
+</body>
+</html>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	//今日一周
+	$('#news_week').mouseover(function(){
+		$('#news_week').removeClass().addClass('left_bottom_bian1pxm');	
+		$('#news_today').addClass('bottom_bian1pxm');	
+		domAjax('news_pai_ajax','__APP__/News/news_pai_ajax/type/0','get');
+		
+	})
+	$('#news_today').mouseover(function(){
+		$('#news_week').removeClass().addClass('left_bottom_bian1px');	
+		$('#news_today').removeClass();	
+		domAjax('news_pai_ajax','__APP__/News/news_pai_ajax/type/1','get');
+	})	
+	
+                    //播放图片效果
+					var lMC = 2;
+                    var rMC = 0;
+
+                    jQuery("#photo_left").click(function(){
+                        if(rMC>0){
+                            scrollto("r");
+                            rMC--;
+                            lMC++;
+                            jQuery("#photo_right").css("cursor","pointer");
+                            if(rMC<=0){
+                                jQuery("#photo_left").css("cursor","no-drop");
+                            }
+                        }
+
+                    });
+
+                    jQuery("#photo_right").click(function(){
+
+                        if(lMC>0){
+                            scrollto("l");
+                            lMC--;
+                            rMC++;
+                            jQuery("#photo_left").css("cursor","pointer");
+                            if(lMC<=0){
+                                jQuery("#photo_right").css("cursor","no-drop");
+                            }
+                        }
+
+                    });
+
+                    jQuery("#star_item_list").css("width",(950*3)+"px");
+                    jQuery("#photo_left").css("cursor","no-drop");
+
+                    if(lMC>0){
+                        jQuery("#photo_right").css("cursor","pointer");
+                    }
+
+                    function scrollto(way){
+                        if(way=="l"){
+                            jQuery("#star_item_list").animate({marginLeft:"-=950px"},2000);
+                        }else{
+                            jQuery("#star_item_list").animate({marginLeft:"+=950px"},2000);
+                        }
+
+                    }	
+					
+					
+					
+					
+			//楼盘相关信息滑块效果
+				$('#lou_sha_title .lou_sha_title').mouseover(function(){
+					if(!$(this).hasClass('lou_sha_title_c')){
+					$(this).removeClass().addClass('lou_sha_title_m');
+					}
+			
+				});
+				$('#lou_sha_title .lou_sha_title_c').mouseover(function(){
+					if(!$(this).hasClass('lou_sha_title_c')){
+					$(this).removeClass().addClass('lou_sha_title_m');
+					}
+				});
+				$('#lou_sha_title .lou_sha_title').mouseout(function(){
+					if(!$(this).hasClass('lou_sha_title_c')){
+					$(this).removeClass().addClass('lou_sha_title');
+					}
+			
+				});
+				$('#lou_sha_title .lou_sha_title_c').mouseout(function(){
+					if(!$(this).hasClass('lou_sha_title_c')){
+					$(this).removeClass().addClass('lou_sha_title');
+					}
+			
+				});						
+
+});
+
+</script>
+
+
+<style>
+/* 星级评分 */
+.rating {/*margin-left:12px; text-align:left*/}
+.starRating{
+	position:relative;
+	z-index:1;
+	background:url(../Public/Images/bg_norp.gif) repeat-x -140px -238px;
+	width:140px;
+	height:15px;
+	overflow:hidden;
+	margin: 0px;
+	padding: 0px;
+	top: 10px;
+}
+.starRating ul{
+	margin:0;
+	padding:0;
+	list-style-type: none;
+}
+.rating span{
+	float:left;
+	width:200px;
+	height:30px;
+	;
+	overflow:hidden;
+	line-height: 30px;
+	color: #F90;
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+}
+.starRating li{
+	margin:0;
+	padding:0;
+	float:left;
+	list-style-type: none;	
+}
+.starRating li a{
+	display:block;
+	position:absolute;
+	z-index:3;
+	width:14px;
+	height:15px;;
+	overflow:hidden;
+	line-height: 60px;
+}
+.starRating li a:hover{ background:url(../Public/Images/bg_norp.gif) repeat-x 0 -238px; z-index:2; left:0; width:140px;}
+.starRating li a.s1{ left:0;}
+.starRating li a.s2{ left:14px;}
+.starRating li a.s3{ left:28px;}
+.starRating li a.s4{ left:42px;}
+.starRating li a.s5{ left:56px;}
+.starRating li a.s6{ left:70px;}
+.starRating li a.s7{ left:84px;}
+.starRating li a.s8{ left:98px;}
+.starRating li a.s9{ left:112px;}
+.starRating li a.s10{ left:126px;}
+.starRating li a.s1:hover{ left:0; background-position:-126px -238px;}
+.starRating li a.s2:hover{ left:0; background-position:-112px -238px;}
+.starRating li a.s3:hover{ left:0; background-position:-98px -238px;}
+.starRating li a.s4:hover{ left:0; background-position:-84px -238px;}
+.starRating li a.s5:hover{ left:0; background-position:-70px -238px;}
+.starRating li a.s6:hover{ left:0; background-position:-56px -238px;}
+.starRating li a.s7:hover{ left:0; background-position:-42px -238px;}
+.starRating li a.s8:hover{ left:0; background-position:-28px -238px;}
+.starRating li a.s9:hover{ left:0; background-position:-14px -238px;}
+.starRating li a.s10:hover{ left:0; background-position:0 -238px;}
+.rating .btn{
+	clear:both;
+	background:url(../Public/Images/bg_norp.gif) no-repeat -111px -164px;
+	border:0;
+	width:85px;
+	height:23px;
+	line-height:23px;
+	cursor:pointer;
+	margin-top: 10px;
+	margin-right: 0;
+	margin-bottom: 10px;
+	margin-left: 60px;
+	padding: 0px;
+	font-family: "微软雅黑";
+	display: block;
+}
+</style>
+
+<script type="text/javascript" src="__PUBLIC__/Js/jquery.cookie.js"></script>
+<script language="javascript">
+var isvote = false;
+productid = '{$info_id}';
+//提交评星
+function vote()
+{
+	//var votecookie = jQuery.cookie("isvote"+productid);
+	//if( isvote == true || votecookie == true){
+	//	alert("你已经投过票了，请不要重复投票！")
+	//}else{
+		if( $("#vote1").attr("value") == 0 || $("#vote2").attr("value")==0 ) {
+			//msgBox('请先选择各项分数!',status='0',title='操作失败',width='300');
+			alert('请先选择各项分数!');
+			return;
+		} 
+		var point=$("#vote1").attr("value")+','+$("#vote2").attr("value")+','+$("#vote3").attr("value")+','+$("#vote4").attr("value")+','+$("#vote5").attr("value");
+		$.post(
+			"__APP__/Reviews/insert_scroe", 
+			{"info_id": productid , "point_str": point }, 
+			function(msg){
+				 //返回的JSON数据格式为{"total":1,"score":"0.0","success":false}
+				 if(msg && msg["success"]){
+					//msgBox(msg["info"],status='1',title='操作成功',width='300');
+					alert(msg["info"]);
+				 }else{
+					//msgBox(msg["info"],status='0',title='操作失败',width='300');
+					alert(msg["info"]);
+				 }
+			},
+			"json"
+		);
+		
+		lp_lpdp();  //刷新
+	//}
+	isvote=true;
+}
+
+//提交微评
+function submit_reviews_mx( type_get ,type_add){
+	//type_add:是否处于index_add页面的发表 1为是
+	var info_id  =  productid ;  //全局
+	var currDiv  =  "#lpdp_gz"+ type_get;
+	var type_id  =  $(currDiv+" input:[name='type_id']").val();
+	var g_or_b;
+	if ($(currDiv+" input:[name='g_or_b']").val() == ''){
+		g_or_b   =  $(currDiv+" input:[@type=radio][name='g_or_b'][checked]").val();   
+	}else{
+		g_or_b   =  $(currDiv+" input:[name='g_or_b']").val();
+	}
+	var content  =  $(currDiv+" textarea:[name='content']").val();
+	//alert(info_id + '-'+ type_id + '-'+ g_or_b +'-' + content);
+	if(content == ''){
+		alert('请输入点评内容！');
+		//msgBox('请输入点评内容！', '0', '操作失败', 300);
+		return;
+	}
+
+	$.post(
+		"__APP__/Reviews/insert", 
+		{"info_id": info_id , "type_id":type_id, "g_or_b":g_or_b, "content":content}, 
+		function(msg){
+			 //返回的JSON数据格式为{"total":1,"score":"0.0","success":false}
+			 if(msg && msg["success"]){
+			   $(currDiv+ " textarea:[name='content']").val('');         //置空
+				var html= msg["data"];
+				if(type_add==1){
+					$("#lpdp_gzul"+type_get+" li:nth-child(3)").remove();					
+					$("#lpdp_gzul"+type_get+" li:nth-child(1)").before(html);						
+				}else{
+					$("#lpdp_gzul"+type_get+" li:nth-child(4)").remove();					
+					$("#lpdp_gzul"+type_get+" li:nth-child(1)").after(html);
+				}
+				//lp_lpdp();  
+				lpdp_fb(type_get, 0);
+				alert(msg["info"]);
+				//msgBox(msg["info"],'1',title='操作成功',300); //提示
+			 }else{
+				if(msg['data'] == 'notLogin'){
+					//loginTF();   //让其先登录
+					location.href = "__APP__/Login/index/fromUrl/{$Think.const.__SELF__|base64_encode}";
+					return;
+				}
+				//msgBox(msg["info"],'0',title='操作失败',300);
+				alert(msg["info"]);
+			 }
+		},
+		"json"
+	);
+	
+}
+
+function rememberDesign(id,point){
+		var cla= 's'+point;
+		if(cla=='s1') document.getElementById('xing'+id).style.backgroundPosition='-126px -238px';
+		if(cla=='s2') document.getElementById('xing'+id).style.backgroundPosition='-112px -238px';
+		if(cla=='s3') document.getElementById('xing'+id).style.backgroundPosition='-98px -238px';
+		if(cla=='s4') document.getElementById('xing'+id).style.backgroundPosition='-84px -238px';
+		if(cla=='s5') document.getElementById('xing'+id).style.backgroundPosition='-70px -238px';
+		if(cla=='s6') document.getElementById('xing'+id).style.backgroundPosition='-56px -238px';
+		if(cla=='s7') document.getElementById('xing'+id).style.backgroundPosition='-42px -238px';
+		if(cla=='s8') document.getElementById('xing'+id).style.backgroundPosition='-28px -238px';
+		if(cla=='s9') document.getElementById('xing'+id).style.backgroundPosition='-14px -238px';
+		if(cla=='s10') document.getElementById('xing'+id).style.backgroundPosition='0 -238px';
+		
+		document.getElementById('voteul'+id).innerHTML = point+'分';
+		document.getElementById('vote'+id).value = point;
+}
+
+var lpdp_fb_lastId=0;	
+//发布折叠框
+function lpdp_fb(id,fb){
+	//id:只是lpdp_gz的一个尾数
+	//fb:值为0或1,为1	发表框,0时隐藏发表框
+	//if( !isLoginAjax() ){
+		//loginTF();   //让其先登录
+		//return;
+	//}
+	if(fb==1){	
+		//关闭上一个打开的发布框.始终只打开一个发布框
+		if(lpdp_fb_lastId){	//如果存在一个已打开窗口	
+			$("#lpdp_gz"+lpdp_fb_lastId+" .height_120px_space").hide();
+			$("#lpdp_gz"+lpdp_fb_lastId+" .height_30px_content_bg").show();			
+		}
+		
+		$("#lpdp_gz"+id+" .height_120px_space").show();
+		$("#lpdp_gz"+id+" .height_30px_content_bg").hide();
+		
+		lpdp_fb_lastId=id;
+	}else{
+		$("#lpdp_gz"+id+" .height_120px_space").hide();
+		$("#lpdp_gz"+id+" .height_30px_content_bg").show();	
+		lpdp_fb_lastId=0;
+	}
+	
+}
+//初始化时隐藏所有发表框;
+
+
+//折叠展示网友琢磨更多
+function lpdp_wyzm(html,id){
+	//alert(html)
+	if(html=="&nbsp;网友点评&gt;&gt;"){
+		id.html("&nbsp;网友点评&lt;&lt;");
+	}else{
+		id.html("&nbsp;网友点评&gt;&gt;");		
+	}
+	$("#lpdp_wyzm").toggle();
+	
+}
+
+//将其它内容加入我关注框中
+function lpdp_add_gz(id, num){
+	//id :当前id
+	//num:当前关注项目的编号，以此加载不同的信息入框
+	
+	//1.先给关注内容中添加一个编号图层作为容器，
+	$('<div  id="lpdp_wgzd'+num+'"></div>').appendTo('#lpdp_wgz');
+	
+	//2.通过ajax,加载相关信息入上一创建的编号图层
+	$('#lpdp_wgzd'+num).load("__APP__/Reviews/index_add/type_id/"+num+"/info_id/"+productid, function() {
+	   $('#lpdp_wgzd'+num+' .height_120px_space').hide()
+	});	
+	
+	$("#lpdp_zm"+num+'_g').hide();
+	document.getElementById(id).checked=false;
+	
+}
+
+//将其它内容从我关注框中删除
+function lpdp_del_gz(id,num){
+	//id :当前id
+	//num:当前关注项目的编号，以此加载不同的信息入框
+	
+	//1.先给关注内容中添加一个编号图层作为容器，
+	//$().hide();
+	$("#lpdp_wgzd"+num).remove();
+
+	$("#lpdp_zm"+num+'_g').show();
+	
+}
+
+
+function lpdp_pasteCheck(id,num){
+var t=setTimeout(function(){lpdp_check(id,num)},200);
+//alert('sdf');
+}
+function lpdp_check(id,num){ 
+//alert(num);
+var val= id.val(); 
+if(val.length >140){ 
+val = val.substring(0,140); 
+id.val(val);
+}else{ 
+$("#lpdp_checkMax"+num).html(140 - val.length); 
+} 
+}
+
+</script>

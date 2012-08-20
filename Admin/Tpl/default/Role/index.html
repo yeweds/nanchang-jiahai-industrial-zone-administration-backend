@@ -1,0 +1,39 @@
+<include file="Public:header" />
+
+<div class="bodyTitle">
+	<div class="bodyTitleLeft"></div>
+  <div class="bodyTitleText">角色管理</div>
+</div>
+<h3 class="marginbot"><a href="__URL__/add" class="sgbtn">＋添加用户组</a><a href="__APP__/User/add" class="sgbtn">＋添加用户</a></h3>
+		
+        
+          <table class="datalist fixwidth" ><form name="form1" method="post" action="__URL__/submit">
+             <tr>
+          <th height="30">ID</th>
+          <th>角色组名称</th>
+          <th>状态</th>
+          <th>操作</th>
+          <th>权限查询</th>
+        </tr>
+        <present name="list">
+            <volist name="list" id="vo">
+           <tr>
+              <td class="option"> {$vo.id}</td>
+              <td><strong>{$vo.name}</strong></td>
+              <td><eq name="vo.status" value="1">正常</eq>
+                  <eq name="vo.status" value="0"><span class="red">禁用</span></eq> </td>
+              <td>
+			  <lt name="vo['id']" value="3">内置<else /><a href="__URL__/edit/id/{$vo.id}">授权/编辑</a>&nbsp;　<a href="__URL__/submit/id/{$vo.id}" onClick="return confirm('确定删除吗，此操作不可恢复');">-删除</a></lt>
+			  </td>
+              <td><a href="__URL__/getRoleList/rid/{$vo.id}">该组权限查询</a>
+			  &nbsp;&nbsp;&nbsp;
+			  <a href="__APP__/User/index/rid/{$vo.id}">该组用户列表</a></td>
+            </tr>
+            </volist>
+         <else />
+			  <tr><td colspan="6" align="center">无内容</td></tr>
+			</present>
+         </form> </table>
+<p class="i">角色删除后，所属这个角色的用户将会转移到“禁止访问”角色组</p>
+        <br>
+<include file="Public:footer" />

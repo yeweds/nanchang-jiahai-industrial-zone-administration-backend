@@ -1,0 +1,63 @@
+<!--   <div class="green_a" id="index_login">
+<php> if(!$userInfo){ </php> 
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="10%" height="25" align="right">E-mail:&nbsp; </td>
+        <td width="29%" height="25"><label for="index_email"></label>
+        <input name="index_email" type="text" class="input_login_head" id="index_email" /></td>
+        <td width="8%" height="25" align="right">密码:&nbsp; </td>
+        <td width="29%" height="25"><input name="index_pwd" type="password" class="input_login_head" id="index_pwd" /></td>
+        <td width="12%" height="25"><img src="../Public/Images/index_log_bn.gif" width="55" height="25" onclick="submitLoginIndex()" 
+		id="index_sub_login" alt="登录" /></td>
+        <td width="12%" height="25">&nbsp;<a href="__APP__/Login/forgetPassword">忘记密码</a></td>
+      </tr>
+    </table>
+<php>} </php>
+  </div> -->
+  
+  <div id="index_head_right" class="white_bian_a">  
+<php> if($userInfo){ </php> 
+<!-- <a href="__APP__/Account" target="_blank"> --><a href="#"><strong>{$userInfo.username}</strong></a> <a href="__APP__/Account/logout/">退出</a>
+<php>} else{</php>
+        <!--<a href="__APP__/Login/index/fromUrl/{$Think.const.__SELF__|base64_encode}">登录</a> | href="__APP__/Reg"   --><a href="#" onClick="registerTF(); return false;">注册</a>
+<php>} </php>
+ |&nbsp;<a href="#" onClick="loginTF(); return false;">登录</a> |&nbsp;<a href="http://old.tengfang.net" target="_blank">旧版入口</a>&nbsp;| <a href="javascript:bookmark();">加入收藏</a><!-- | <a href="__APP__/">二手房</a> | <a href="__APP__/News" target="_blank">新闻</a> -->
+ </div>
+ 
+<script language="JavaScript" type="text/javascript">
+//提交Ajax登录 -- xiongyan
+/*
+function submitLoginIndex(){
+
+		//var postData = $("#search_form").serialize();
+		var postData = {"email": $("#index_email").val(), "password": $("#index_pwd").val(), "hideVerify": 1 };
+		if(postData.email == ''){
+			//msgBox('请输入您注册时使用的邮箱!',status='0',title='操作失败',width='300'); //提示
+			alert('请输入您注册时使用的邮箱!');
+			return; 
+		}
+		$.post( '__APP__/Login/checkLoginAjax', postData, function(msg) {	
+				if(msg && msg['success']){
+					$("#index_login").html('');  //清空登录框
+					var login_html='<a href="__APP__/Account"><strong>'+msg['data']+'</strong></a> <a href="__APP__/Account/logout/">退出</a> | <a href="__APP__/">首页</a> | <a href="javascript:bookmark();">加入收藏</a>';
+					$("#index_head_right").html(login_html);  //写入登录头信息
+					
+					msgBox(msg["info"],status='1',title='操作成功',width='300'); //提示
+					//setTimeOut("msgBoxClose",1000);
+				}else{
+					alert(msg["info"]);	
+					//msgBox(msg["info"],status='0',title='操作失败',width='300'); //提示
+				}
+				
+		}, 
+		"json"
+		);
+}
+//增加登录键盘支持
+   $('#index_login').keyup(function(event) {
+		 if(event.keyCode==13){    
+			$("#index_sub_login").click();
+		 }
+   });
+   */
+</script>

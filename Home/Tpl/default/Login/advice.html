@@ -1,0 +1,170 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>申请咨询 - 0791婚庆网</title>
+<link href="../Public/Css/common.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/advice.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/Js/jquery.min.js" /></script>
+<script type="text/javascript" src="../Public/Js/common.js" /></script>
+<script type="text/javascript">
+//指定当前组模块URL地址
+var URL = '__URL__';
+var APP	= '__APP__';
+var PUBLIC = '__PUBLIC__';
+</script>
+<script language="javascript" src="__PUBLIC__/DatePicker/WdatePicker.js"></script>
+<!-- 日历插件 -->
+</head>
+<body>
+<!--共用头部 s-->
+<include file="Public:header" /><!--共用头部 e-->
+<!--主体内容 s-->
+<div id="advice">
+	<!--导语 s-->
+    <div id="adv_title">
+    	<div id="adv_title_top"></div>
+    	<div id="adv_title_bottom" class="black_12px">
+          <p>是否在为想去拍摄婚纱照却又因为有许多疑问而烦恼呢？        </p>
+          <p>请咨询0791hunqing.com有专门针对中国顾客服务的负责人将通过电话或电子邮件针对性的为您详细、</p>
+          <p> 亲切的解答您的疑问。</p>
+            更加方便、更加经济、更加稳定的婚纱摄影！ </p>
+          <p>南昌最大的IT婚纱摄影服务公司0791hunqing.com将为您提供服务            </p>
+          <p>我们0791hunqing.com将通过可信的品牌竭诚为您提供有价值的满足、高档的舒适、无法比拟的自豪感。<br>
+            <br>
+            正在为您服务的是：<strong style="color:#FF0000">{$curr_shop|default="0791hunqing.Com"}</strong>
+          </p>
+    	</div>
+	<div class="clear"></div>
+    </div>
+    <!--导语 e-->
+	<div class="clear"></div>
+    <!--内容 s-->
+	<form action="__APP__/Shop/save_advice" method="post" >
+    <div id="adv_content" >
+    	<!--输入部分 s-->
+	  <div id="adv_content_top">
+        <table width="848" border="0" cellspacing="0" cellpadding="0" class="black_14px"  valign="middle">
+          <tr>
+            <td width="37" rowspan="6"><input name="info_id" type="hidden" value="{$Think.get.info_id}">&nbsp;</td>
+            <td width="155">&nbsp;</td>
+            <td width="26" rowspan="6">&nbsp;</td>
+            <td colspan="7">&nbsp;</td>
+            <td width="122" rowspan="6" >&nbsp;</td>
+          </tr>
+          <tr>
+            <td width="155" height="52" bgcolor="#E3E3E3">&nbsp;</td>
+            <td width="140" height="52">姓名</td>
+            <td height="52" colspan="6">
+                <input  class="adv_input_long" type="text" name="username" id="username">
+            </td>
+          </tr>
+          <tr>
+            <td width="155" height="52" bgcolor="#E3E3E3">&nbsp;</td>
+            <td width="140" height="52">电话号码</td>
+            <td height="52" colspan="6">
+                <input  class="adv_input_long" type="text" name="tel" id="tel">
+            </td>
+          </tr>
+          <tr>
+            <td width="155" height="52"  bgcolor="#E3E3E3" class="text_indent_50px">顾客信息</td>
+            <td width="140" height="52">E-MAIL</td>
+            <td height="52" colspan="6">
+                <input  class="adv_input_long" type="text" name="email" id="email">
+            </td>
+          </tr>
+          <tr>
+            <td width="155" height="52" bgcolor="#E3E3E3">&nbsp;</td>
+            <td width="140" height="52">拍摄预定日期</td>
+            <td height="52" colspan="6">
+                <input  class="adv_input_short" type="text" name="order_date" id="order_date" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" />
+                点输入框可选择
+            </td>
+          </tr>
+          <tr>
+            <td width="155" height="50" bgcolor="#E3E3E3">&nbsp;</td>
+            <td width="140" height="50">回复方法</td>
+            
+            <td width="30" height="50">
+                <input name="reply_type[]"  type="checkbox" id="reply_type[]" value="在线回复">
+            </td>
+            <td width="68" height="50">在线回复</td>
+            <td width="30">
+                <input name="reply_type[]"  type="checkbox" id="reply_type[]" value="E-mail">
+            </td>
+            <td width="68">E-MAIL</td>
+            
+            <td width="30" height="50">
+                <input name="reply_type[]"  type="checkbox" id="reply_type[]" value="电话回复"></td>
+            <td width="142" height="50">电话回复 </td>
+          </tr>
+          <tr>
+            <td width="37" height="60" class="border_t_b_1px">&nbsp;</td>
+            <td width="155" height="60"  bgcolor="#E3E3E3" class="text_indent_50px  border_t_b_1px">申请咨询信息</td>
+            <td width="26" height="60" class="border_t_b_1px">&nbsp;</td>
+            <td height="60" colspan="8" class="border_t_b_1px">申请免费咨询</td>
+          </tr>
+          <tr>
+            <td width="37" rowspan="4">&nbsp;</td>
+            <td width="155" rowspan="2" bgcolor="#E3E3E3">&nbsp;</td>
+            <td width="26" rowspan="4">&nbsp;</td>
+            <td height="32" colspan="7">&nbsp;</td>
+            <td width="122" rowspan="4" >&nbsp;</td>
+          </tr>
+          <tr>
+            <td height="32" colspan="7">疑问或要求请写在下面</td>
+          </tr>
+          <tr>
+            <td width="155" height="30" bgcolor="#E3E3E3" class="text_indent_50px" >您咨询的问题</td>
+            <td height="137" colspan="7" rowspan="2">
+            <textarea class="adv_input_textarea" name="content" id="content" cols="45" rows="5"></textarea>
+            </td>
+          </tr>     
+           <tr>
+            <td width="155" height="110"  bgcolor="#E3E3E3">&nbsp;</td>
+          </tr>
+        </table>
+        </div>
+        <!--输入部分 e-->
+       <div class="clear"></div>
+       <!--按键部分 s-->
+      <div id="adv_content_bottom">
+		<table width="848"  height="98" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="332" height="29">&nbsp;</td>
+            <td width="82" height="29">&nbsp;</td>
+            <td width="20" height="29">&nbsp;</td>
+            <td width="82" height="29">&nbsp;</td>
+            <td width="332" height="29">&nbsp;</td>
+          </tr>
+          <tr>
+            <td width="332" height="40">&nbsp;</td>
+            <td width="82" height="40"><input type="image" src="../Public/Images/adv_button_enter.png" width="80" height="32" alt="提交" /></td>
+            <td width="20" height="40">&nbsp;</td>
+            <td width="82" height="40"><a href="#" onClick="closeWindow()" title="关闭"><img src="../Public/Images/adv_button_close.png" width="80" height="32" alt="关闭"></a></td>
+            <td width="332" height="40">&nbsp;</td>
+          </tr>
+          <tr>
+            <td width="332" height="29">&nbsp;</td>
+            <td width="82" height="29">&nbsp;</td>
+            <td width="20" height="29">&nbsp;</td>
+            <td width="82" height="29">&nbsp;</td>
+            <td width="332" height="29">&nbsp;</td>
+          </tr>
+		</table>
+		</div>
+		<!--按键部分 e-->
+	<div class="clear"></div>   
+</div>
+</form>
+    <!--内容 e-->
+<div class="clear"></div>
+</div>
+<!--主体内容 e-->
+<!-- 共用尾部s -->
+<div class="clear"></div>
+<include file="Public:footer" />
+<!-- 共用尾部e -->
+</body>
+</html>
+

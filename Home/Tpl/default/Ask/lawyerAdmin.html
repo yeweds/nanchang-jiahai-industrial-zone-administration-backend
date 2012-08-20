@@ -1,0 +1,71 @@
+<include file="Public:html_header" />
+<link href="../Public/Css/news_com.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/class_com.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/select_box.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/law.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/law_xiangqing.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="../Public/Js/base.js"></script> 
+<body>
+<include file="News:news_header" /> <!--头部包含共用 --> 
+
+<!--顶图片s-->
+<div id="law_xiangqing_head"><include file="Ask:ad" /></div>
+<div class="height_30px_text blue_a" style="width:970px;margin:0 auto"><strong class="blue_14px_f">&gt;&gt;</strong><a href="__APP__/"> 0791首页</a> <span class="gray_14px_f">&gt;</span> <a href="__URL__/">婚庆在线</a></div>
+<!--顶图片e-->
+<div class="height_10px"> </div>
+<!--主体s-->
+<div id="law_xiangqing_master">
+  <div class="height_10px"> </div>
+  <table width="752" border="0" cellspacing="0" cellpadding="0" align="center">
+    <tr>
+      <td width="124">&nbsp;</td>
+      <td width="283"><span class="green_a"><span class="green_a"><a href="__URL__/lawyer_edit">管理首页</a></span>: |咨询师管理 |<a href="__URL__/pageSet">页面设置</a></span></td>
+      <td width="345" align="right"><span class="green_a"><a href="javascript:history.go(-1)">返回</a>&nbsp;&nbsp;&nbsp; &nbsp; </span></td>
+    </tr>
+    <tr>
+      <td colspan="3"  height="10px"></td>
+    </tr>
+  </table>
+  <table width="752" cellspacing="1" cellpadding="0" align="center" bgcolor="#e3e3e3">
+    <tr  bgcolor="#99FFFF">
+      <td width="32" height="35" align="center" valign="middle" ><span class="green_12px">编号</span></td>
+      <td width="60" height="35" align="center" valign="middle"><span class="green_12px">姓名</span></td>
+      <td width="81" height="35" align="center" valign="middle"><span class="green_12px">电话</span></td>
+      <td width="127" height="35" align="center" valign="middle"><span class="green_12px">邮箱</span></td>
+      <td width="128" height="35" align="center" valign="middle"><span class="green_12px">联系地址</span></td>
+      <td width="72" height="35" align="center" valign="middle"><span class="green_12px">是否为管理员</span></td>
+      <td width="152" height="35" align="center" valign="middle"><span class="green_12px">操作</span></td>
+    </tr>
+    <volist name="list" id="vo">
+      <tr  bgcolor="#fdfdfd">
+        <td width="32" height="35" align="center" valign="middle">{$vo.pid}</td>
+        <td width="60" height="35" align="center" valign="middle">{$vo.name}</td>
+        <td width="81" align="center" valign="middle">{$vo.telephone}</td>
+        <td width="127" align="center" valign="middle">{$vo.mail}</td>
+        <td width="128" align="center" valign="middle">{$vo.address}</td>
+        <td width="72" align="center" valign="middle"><eq name="vo.is_admin" value="1">是
+            <else />
+            否</eq></td>
+        <td width="152" height="35" align="center" valign="middle"><span class="green_a"><a href="__URL__/addLawyer">添加</a> <a href="__URL__/lawyer_intro/id/{$vo.id}">查看</a> <a href="__URL__/lawyer_edit/id/{$vo.id}">编辑</a> <a href="javascript:delLawyer({$vo.id})">删除</a></span></td>
+      </tr>
+    </volist>
+    <empty name="list">
+      <tr>
+        <td colspan="7" align="center" height="30"><span class="green_a">暂无用户,点击此处<a href="__URL__/addLawyer">添加</a></span></td>
+      </tr>
+    </empty>
+  </table>
+  <div class="height_10px"></div>
+</div>
+<!--主体e--> 
+<include file="Public:footer" /> {//共用尾部}
+</body>
+</html>
+<script type="text/javascript">
+    function delLawyer(id){
+	      if(confirm('删除之后不可恢复，你确认要删除吗？')){  
+				window.location.href = URL+ '/delLawyer/id/' + id;  
+		  }
+	}
+</script>

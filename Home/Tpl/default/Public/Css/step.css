@@ -1,0 +1,148 @@
+/*--------------------step-----------------*/
+.step_inc {
+	background-color: #FFF;
+}
+.step_inc .step1 {
+	height: 60px;
+	width: 30px;
+	background-image: url(../Images/step1.png);
+	background-repeat: no-repeat;
+	cursor: pointer;
+}
+.step_inc .step2 {
+	height: 60px;
+	width: 30px;
+	background-image: url(../Images/step2.png);
+	background-repeat: no-repeat;
+	cursor: pointer;
+}
+.step_inc .step3 {
+	height: 60px;
+	width: 30px;
+	background-image: url(../Images/step3.png);
+	background-repeat: no-repeat;
+	cursor: pointer;
+}
+.step_inc .step1_m {
+	height: 60px;
+	width: 30px;
+	background-image: url(../Images/step1_m.png);
+	background-repeat: no-repeat;
+	cursor: pointer;	
+}
+.step_inc .step2_m {
+	height: 60px;
+	width: 30px;
+	background-image: url(../Images/step2_m.png);
+	background-repeat: no-repeat;	
+	cursor: pointer;	
+}
+.step_inc .step3_m {
+	height: 60px;
+	width: 30px;
+	background-image: url(../Images/step3_m.png);
+	background-repeat: no-repeat;	
+	cursor: pointer;	
+}
+.step_inc .step1_dis {
+	height: 60px;
+	width: 30px;
+	background-image: url(../Images/step1_dis.png);
+	background-repeat: no-repeat;
+}
+.step_inc .step2_dis {
+	height: 60px;
+	width: 30px;
+	background-image: url(../Images/step2_dis.png);
+	background-repeat: no-repeat;	
+}
+.step_inc .step3_dis {
+	height: 60px;
+	width: 30px;
+	background-image: url(../Images/step3_dis.png);
+	background-repeat: no-repeat;	
+}
+/*-------------------step-----------------------------------*/
+
+
+
+/*-------------------goto---------------------------------*/
+.goto_inc {
+	border:1px solid #f3f0f0;
+	position: fixed;
+	bottom:0px;
+	right: 10px;
+	width: 30px;
+	background-color: #FFF;
+	 _position:absolute; 
+	 _top: expression(documentElement.scrollTop + documentElement.clientHeight-this.offsetHeight);
+	
+}
+.goto_inc .totop {
+	height: 60px;
+	width: 30px;
+	background-image: url(../Images/totop.png);
+	background-repeat: no-repeat;
+	cursor: pointer;		
+}
+.goto_inc .tomap {
+	height: 60px;
+	width: 30px;
+	background-image: url(../Images/tomap.png);
+	background-repeat: no-repeat;
+	cursor: pointer;		
+}
+.goto_inc .tomapdown {
+	height: 60px;
+	width: 30px;
+	background-image: url(../Images/tomapdown.png);
+	background-repeat: no-repeat;
+	cursor: pointer;		
+}
+.goto_inc .toloupan {
+	height: 60px;
+	width: 30px;
+	background-image: url(../Images/toloupan.png);
+	background-repeat: no-repeat;
+	cursor: pointer;		
+}
+.goto_inc .tonew {
+	height: 100px;
+	width: 30px;
+	background-image: url(../Images/tonew.gif);
+	background-repeat: no-repeat;	
+}
+.goto_inc .totop_m {
+	height: 60px;
+	width: 30px;
+	background-image: url(../Images/totop_m.png);
+	background-repeat: no-repeat;
+	cursor: pointer;		
+}
+.goto_inc .tomap_m {
+	height: 60px;
+	width: 30px;
+	background-image: url(../Images/tomap_m.png);
+	background-repeat: no-repeat;
+	cursor: pointer;		
+}
+.goto_inc .tomapdown_m {
+	height: 60px;
+	width: 30px;
+	background-image: url(../Images/tomapdown_m.png);
+	background-repeat: no-repeat;
+	cursor: pointer;		
+}
+.goto_inc .toloupan_m {
+	height: 60px;
+	width: 30px;
+	background-image: url(../Images/toloupan_m.png);
+	background-repeat: no-repeat;
+	cursor: pointer;		
+}
+.goto_inc .tonew_m {
+	height: 100px;
+	width: 30px;
+	background-image: url(../Images/tonew_m.png);
+	background-repeat: no-repeat;		
+}

@@ -1,0 +1,24 @@
+<div class="more black_a"><a href="__URL__/type/classid/{$news.hygc.id}">更多&gt;&gt;</a></div>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+         <tr>
+           <td width="130" rowspan="2" align="center" valign="middle"><a href="__APP__/news-{$news.hygc.h.id}"><img src="__PUBLIC__/Upload/news/thumb_{$news.hygc.h.pic_url}" width="115" height="70" border="0" title="{$news.hygc.h.title}" /></a></td>
+           <td height="30">&nbsp;</td>
+           <td width="190" height="30" align="center"><span class="red_s_a" title="{$news.hygc.h.title}"><strong><a href="__APP__/news-{$news.hygc.h.id}">{$news.hygc.h.title|mb_substr=###,0,13,'utf-8'}</a></strong></span></td>
+           <td height="30">&nbsp;</td>
+         </tr>
+         <tr>
+           <td height="50">&nbsp;</td>
+           <td width="190" height="50"><span class="height_22px_text">&nbsp;&nbsp;&nbsp;<span class="gray_12px_fs" title="{$news.hygc.h.remark}">{$news.hygc.h.remark|mb_substr=###,0,21,'utf-8'}...</span><span class="red_s_a"><a href="__APP__/news-{$news.hygc.h.id}">[详细]</a></span></td>
+           <td height="50">&nbsp;</td>
+         </tr>
+         <tr>
+           <td colspan="4">&nbsp;</td>
+          </tr>
+         <tr>
+           <td height="138" colspan="4" valign="top">
+          <volist name="news.hygc.titles" id="vo">
+            <div class="height_22px_text"><span class="black_a" title="{$vo.title}"><a href="__APP__/news-{$vo.id}">&nbsp;&middot;{$vo.title|mb_substr=###,0,26,'utf-8'}</a></span> </div>
+          </volist></td>
+          </tr>
+       </table>
+   

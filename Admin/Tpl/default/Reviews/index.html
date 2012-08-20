@@ -1,0 +1,45 @@
+<include file="Public:header" />
+
+<div class="bodyTitle">
+	<div class="bodyTitleLeft"></div>
+  <div class="bodyTitleText">点评管理</div>
+</div>
+<h3 class="marginbot"><!-- <a href="__URL__/add/info_id/{$Think.get.id}" class="sgbtn">＋添加编辑点评</a> -->
+<a href="{$go_back}" class="sgbtn">返回点评管理</a>
+</h3>
+
+				<table class="datalist fixwidth">
+				<form name="form1" method="post" action="__URL__/submit">
+					<tr>
+						<th><input type="checkbox" onClick="selAll(this,'id[]')" value="选择全部" class="checkbox">选择</th>
+						<th>点评类型</th>
+						<th>被评信息info_id</th>
+						<th>点评人</th>
+						<th>内容摘要</th>
+						<th>发布时间</th>
+						<th>操作</th>
+					</tr> <present name="list"><volist name="list" id="vo">
+						<tr>
+							<td class="option"><input name="id[]" type="checkbox" id="id[]" value="{$vo.id}" class="checkbox">{$vo.id}</td>
+							<td>{$vo.model_name}</td>
+							<td>{$vo.info_id}</td>
+							<td>{$vo.user_name}</td>
+							<td><span title="{$vo.content}">{$vo.content|mb_substr=###,0,40,'utf-8'}</span></td>
+							<td>{$vo.add_time|date="Y-m-d H:i",###}</td>
+							<td><!-- <a href="__URL__/edit_mx/id/{$vo.id}"><img src="../Public/Images/edit.gif" alt="编辑" align="absmiddle" /></a> -->
+								[<eq name="vo.is_hide" value="0"><a href="__URL__/hide_mx/id/{$vo.id}">隐藏</a><else/><a href="__URL__/show_mx/id/{$vo.id}"><span class="red">显示</span></a>
+								</eq>]
+							  　<a href="__URL__/del/id/{$vo.id}" onclick="return confirm('确定删除吗，此操作不可恢复');"><img src="../Public/Images/del.gif" alt="删除" align="absmiddle" /></a></td>
+					  </tr>  
+					  </volist>
+					<tr class="nobg">
+						<td colspan="7">{$page}</td>
+					</tr>
+			<else />
+			  <tr><td colspan="7" align="center">无内容</td>
+			  </tr>
+			</present>
+				</form></table>
+<p class="i">删除不可恢复,谨慎操作</p>
+<br>
+<include file="Public:footer" />

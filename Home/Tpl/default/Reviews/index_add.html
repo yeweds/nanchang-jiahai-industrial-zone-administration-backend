@@ -1,0 +1,170 @@
+<link href="../Public/Css/common.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/loupan.css" rel="stylesheet" type="text/css" />
+      <fieldset class="lpdp_all_inc" >
+          <p>
+            <legend class="green_12px_f">
+              <input name="checkbox3" type="checkbox" id="checkbox3" checked="checked" onclick="lpdp_del_gz(this.id,'{$type_id}')" />
+              <label for="checkbox3"></label>
+              <strong>{$typeName}</strong> </legend>
+        </p>
+ 
+        <!----liyou每个类包含一个类别-->
+        <div class="lpdp_xm_title">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="../Public/Images/house.png" width="25" height="25" border="0" align="absmiddle" />{$typeRemark}
+        <div style="clear:both"></div>
+        </div>
+        
+        <div  id='lpdp_gz{$type_id}_g'  class="lpdp_ly" >
+          <fieldset>
+            <p>
+              <legend class="blue_more_font_yahei">
+              <label for="checkbox3"></label>
+              <strong>支持</strong> 
+              </legend>
+            </p>
+            <ul  id='lpdp_gzul{$type_id}_g'>
+		
+		<volist name="listGood" id="vo">
+              <li class="xian_dian_bottom">
+			  <table width="100%" border="0" cellpadding="0" cellspacing="0" class="line_height_20px">
+					<tr>
+					  <td width="20" height="20" valign="top"><img src="../Public/Images/user_dp.gif" width="20" height="20" align="absmiddle" /></td>
+					  <td valign="top"><span class="blue_more_font_yahei">{$vo.user_name}：</span></td>
+					</tr>
+					<tr>
+					  <td height="40" valign="top">&nbsp;</td>
+					  <td valign="top"><span class="gray_12px_f_block">{$vo.content}</span></td>
+					</tr>
+              </table>
+					  
+              </li>
+		</volist>
+        
+
+				 <!--count检查是否要输出以下内容-->
+                    <?php
+                    $listGood_count=3-count($listGood);//获取要输出标签的个数
+                    while($listGood_count){
+                    ?>
+					<li class="xian_dian_bottom"><!-- 其它 -->
+                      <table width="100%" border="0" cellpadding="0" cellspacing="0" class="line_height_20px">
+                        <tr>
+                          <td width="20" valign="top">&nbsp;</td>
+                          <td height="40" align="center" valign="middle"><span class="gray_f_24pxdan" onclick="lpdp_fb('{$type_id}_g',true)">此处显示您发表的微评</span></td>
+                        </tr>
+                      </table>
+                    </li>  
+                    <?php
+                    $listGood_count--;
+                    	}        
+                    ?>                  
+					 <!--count检查是否要输出以下内容end-->   
+        
+            </ul>
+            <div class="height_120px_space" >
+              <div class="widthspace_10px"></div>
+              <div class="lpdp_user_name"><img src="../Public/Images/user_dp.gif" alt="" width="20" height="20" align="absmiddle" />{$userInfo.username}:</div>
+              <div class="lpdp_fb_inc">
+                <div class="heigth_25px">&nbsp;&nbsp;对{$lpname} <strong>{$typeName}</strong> 的点评：
+                  <input name="type_id" type="hidden" value="{$type_id}" />
+                </div>
+                <div class="height_20px_content"><span class="blue_more_font_yahei"> &nbsp;&nbsp;</span>
+                  <label> <span class="blue_12px_f"><strong>您的态度:</strong></span>
+                    <input name="" type="radio"  checked="checked" />
+                  <span class="blue_more_font_yahei">支持</span> </label>
+				  <input name="g_or_b" type="hidden" id="g_or_b[]" value="g" />
+                  <!--<label>
+                    <input name="g_or_b"  type="radio" value="b"  />
+                    <span class="blue_more_font_yahei">不支持</span></span> </label> -->
+                  <br />
+                </div>
+                <div class="widthspace_10px"></div>
+                <div class="lpdp_fb_content">
+                  <textarea name="content" cols="45" rows="5" class="textarea_100" id="content[]" onPaste="lpdp_pasteCheck($(this),'{$typeKey}_g')" onkeyup="lpdp_check($(this),'{$typeKey}_g')" onfocus="lpdp_check($(this),'{$typeKey}_g')"></textarea>
+                </div>
+                <div class="height_20px_content">&nbsp;<a href="javascript:submit_reviews_mx('{$type_id}_g',1);"><img src="../Public/Images/fb.png" width="50" height="25" border="0" align="absmiddle" /></a> <a href="javascript:lpdp_fb('{$type_id}_g',0);"><img src="../Public/Images/qx.png" alt="" width="50" height="25" border="0" align="absmiddle" /></a><span class="blue_12px_f">&nbsp;(还可以写</span><span class="orange_12px_f" id="lpdp_checkMax{$typeKey}_g">140</span><span class="blue_12px_f">字)</span></div>
+              </div>
+              <div  style="clear:both"></div>
+            </div>
+            <div class="height_30px_content_bg" >
+              <div class="height_30px_right_float"><span class="blue_a" >&nbsp;&nbsp;&nbsp;<a href="javascript:lpdp_fb('{$type_id}_g',true)">发表微评</a>&nbsp;| <a href="#" onclick="PopWindow('__APP__/Reviews/list_all/type_id/{$type_id}/info_id/{$info_id}',800,600); return false;" title="查看所有">更多</a></span><span class="orange_12px_f">(10)</span></div>
+            </div>
+          </fieldset>
+          <div style="clear:both"></div>
+        </div>
+        <div class="widthspace_10px">&nbsp;</div> 
+        <div  id='lpdp_gz{$type_id}_b' class="lpdp_ly">
+          <fieldset class="no_buy_fieldset">
+            <p>
+              <legend class="red_font_yahei">
+              <label for="checkbox5"></label>
+              <strong>不太支持</strong> 
+              </legend>
+            </p>
+            <ul id='lpdp_gzul{$type_id}_b'>
+			<volist name="listBad" id="vo">
+              <li class="xian_dian_bottom">
+			    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="line_height_20px">
+                  <tr>
+                    <td width="20" height="20" valign="top"><img src="../Public/Images/user_dp.gif" width="20" height="20" align="absmiddle" /></td>
+                    <td valign="top"><span class="blue_more_font_yahei">{$vo.user_name}：</span></td>
+                  </tr>
+                  <tr>
+                    <td height="40" valign="top">&nbsp;</td>
+                    <td valign="top"><span class="gray_12px_f_block">{$vo.content}</span></td>
+                  </tr>
+                </table>
+              </li>
+			</volist>
+
+				 <!--count检查是否要输出以下内容-->
+                    <?php
+                    $listBad_count=3-count($listBad);//获取要输出标签的个数
+                    while($listBad_count){
+                    ?>
+					<li class="xian_dian_bottom"><!-- 其它 -->
+                      <table width="100%" border="0" cellpadding="0" cellspacing="0" class="line_height_20px">
+                        <tr>
+                          <td width="20" valign="top">&nbsp;</td>
+                          <td height="40" align="center" valign="middle"><span class="gray_f_24pxdan" onclick="lpdp_fb('{$type_id}_g',true)">此处显示您发表的微评</span></td>
+                        </tr>
+                      </table>
+                    </li>  
+                    <?php
+                    $listBad_count--;
+                    	}        
+                    ?>                  
+					 <!--count检查是否要输出以下内容end-->   
+            </ul>
+            <div class="height_120px_space">
+              <div class="widthspace_10px"></div>
+              <div class="lpdp_user_name"><img src="../Public/Images/user_dp.gif" alt="" width="20" height="20" align="absmiddle" />{$userInfo.username}:</div>
+              <div class="lpdp_fb_inc">
+                <div class="heigth_25px">&nbsp;&nbsp;对{$lpname} <strong>{$typeName}</strong> 的点评：
+                  <input name="type_id" type="hidden" value="{$type_id}" id="type_id[]" />
+</div>
+                <div class="height_20px_content"><span class="blue_more_font_yahei"> &nbsp;&nbsp;</span>
+                  <!--<label> <span class="blue_12px_f"><strong>您的态度:</strong></span>
+                    <input name="g_or_b" type="radio" id="g_or_b[]" value="g"  />
+                    <span class="blue_more_font_yahei">支持</span> </label> -->
+                  <label>
+                    <input name="" type="radio"  checked="checked" />
+                  <span class="blue_more_font_yahei">不支持</span></span> </label>
+				  <input name="g_or_b" type="hidden" id="g_or_b[]" value="b" />
+                  <br />
+                </div>
+                <div class="widthspace_10px"></div>
+                <div class="lpdp_fb_content">
+                  <textarea name="content" cols="45" rows="5" class="textarea_100" id="content[]" onPaste="lpdp_pasteCheck($(this),'{$typeKey}_b')" onkeyup="lpdp_check($(this),'{$typeKey}_b')" onfocus="lpdp_check($(this),'{$typeKey}_b')"></textarea>
+                </div>
+                <div class="height_20px_content">&nbsp;<a href="javascript:submit_reviews_mx('{$type_id}_b',1);"><img src="../Public/Images/fb.png" width="50" height="25" border="0" align="absmiddle" /></a> <a href="javascript:lpdp_fb('{$type_id}_b',0);"><img src="../Public/Images/qx.png" alt="取消" width="50" height="25" border="0" align="absmiddle" /></a><span class="blue_12px_f">&nbsp;(还可以写</span><span class="orange_12px_f" id="lpdp_checkMax{$typeKey}_b">140</span><span class="blue_12px_f">字)</span></div>
+              </div>
+              <div  style="clear:both"></div>
+            </div>
+            <div class="height_30px_content_bg">
+              <div class="height_30px_right_float"><span class="blue_a"><a href="javascript:lpdp_fb('{$type_id}_b',true)">发表微评</a>&nbsp;| <a href="#" onclick="PopWindow('__APP__/Reviews/list_all/type_id/{$type_id}/info_id/{$info_id}',800,600); return false;" title="查看所有">更多</a></span><span class="orange_12px_f">(7)</span></div>
+            </div>
+          </fieldset>
+          <div style="clear:both"></div>
+        </div>
+        <div style="clear:both"></div>
+              </fieldset>

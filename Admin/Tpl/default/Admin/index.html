@@ -1,0 +1,74 @@
+<include file="Public:header" />
+
+<div class="bodyTitle">
+	<div class="bodyTitleLeft"></div>
+  <div class="bodyTitleText">管理员管理</div>
+</div>
+<script type="text/javascript">
+	function child(id){
+		location.href = URL+"/index/b_classid/"+id;
+	}
+</script>
+</head>
+<body>
+
+<table width="95%"  border="0" cellspacing="0" cellpadding="0"  align="center">
+  <tr>
+    <td width="21%" height="30"><input type="button" name="delete" value="删除选中" class="df_button_green" onClick="delAll()"> </td>
+  <td><div id="result" class="none result" style="font-family:微软雅黑,Tahoma;letter-spacing:2px"></div></td>
+  </tr>
+</table>
+
+<table width="95%" border="0" align="center" cellpadding="1" cellspacing="2">
+<form action="__URL__/insert" method="post" name="TypeForm">
+<tr>	<td width="15%" align="right" class="tright">管理用户名：</td>
+	<td width="12%">
+<input name="adminname" type="text" id="adminname" size="13">	</td>
+	<td width="7%" class="tright">密码：</td>
+	<td width="13%"><input name="pwd" type="password" id="pwd" 
+      size="13" /></td>
+    <td width="7%" class="tright"><!--类型：--></td>
+	<td width="14%"><!--<SELECT NAME="types" id="types" >
+	<option value="1">超级管理员</option>
+	<option value="2">普通管理员</option>
+	<option value="5">网站客服</option>
+	</SELECT>-->
+	 </td>
+	<td class="tright">	  <input type="submit" class="df_button" value="添加管理员"/></td>
+	</tr>
+</FORM>  
+</table>
+
+<table width="95%" class="datalist fixwidth">
+  <notpresent name="list">
+  <tr>
+    <td height="25" colspan="7" >暂无记录</td>
+  </tr>
+  </notpresent>
+  <present name="list">
+    <tr>
+    <td width="38" height="25" align="center">
+      <input name="chkAll" type="checkbox" id="check" value="checkbox"  onclick="selAll(this,'key[]')"></td>
+    <td width="63" align="center">ID</td>
+    <td width="152" align="center">管理员用户名</td>
+    <td width="165" align="center">类型</td>
+    <td width="189" align="center">最后登录时间</td>
+    <td width="112" align="center">最后登录IP</td>
+    <td width="192" height="25" align="center">操作</td>
+  </tr>
+<volist name="list" id="vo">
+  <tr>
+    <td height="25" align="center"><input name="key[]" type="checkbox" id="key[]" value="{$vo.id}" /></td>
+    <td align="center">{$vo.id}</td>
+    <td>{$vo.admin}</td>
+    <td>{$vo.role_id}</td>
+    <td align="center">{$vo.login_time|date='Y-m-d H',###}</td>
+    <td align="center">{$vo.ip}</td>
+    <td height="25" align="center">[<a href="__URL__/edit/id/{$vo.id}">编辑</a>] [<a href="javascript:del({$vo.id})">删除</a>] </td>
+  </tr>
+</volist>
+  </present>
+</table>
+<div class="page">{$page}</div>
+
+<include file="Public:footer" />

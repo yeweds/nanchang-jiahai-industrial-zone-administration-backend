@@ -1,0 +1,32 @@
+<include file="Public:header" />
+<style type="text/css" >
+	.cachelist td{ height:24px; line-height:24px; }
+</style>
+<div class="bodyTitle">
+	<div class="bodyTitleLeft"></div>
+  <div class="bodyTitleText">更新缓存</div>
+</div>
+<p class="i">修改系统设置后需更新系统缓存</p>
+<div style="width:90%; margin:0 auto;" > <input name="checkbox" type="checkbox" class="checkbox" onClick="selAll(this,'id[]')" title="选择全部">选择全部</div> 
+
+<table class="cachelist" width="90%" style="margin:0 auto;" >
+<form method="post" name="form1" action="__URL__/submit_cache">
+    <volist id="sub" name="cache">
+            <tr>
+              <td class="option">{$key}</td>
+            </tr>
+            <tr class="nobg">
+              <td>
+			  <volist id="dir" name="sub">
+<input type="checkbox" name="id[]" value="{$dir}" class="checkbox"> {$key}<br>
+			  </volist>
+			</td>
+            </tr> 
+	</volist>
+            <tr class="nobg">
+             <td><input type="submit"  value="提交更新" class="df_button" /></td>
+            </tr>
+</form>          
+</table>
+
+<include file="Public:footer" />

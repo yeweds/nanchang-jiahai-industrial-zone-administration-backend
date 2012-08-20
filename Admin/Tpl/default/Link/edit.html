@@ -1,0 +1,83 @@
+<include file="Public:header" />
+<div class="bodyTitle">
+	<div class="bodyTitleLeft"></div>
+  <div class="bodyTitleText">修改链接</div>
+</div>
+<br><h3 class="marginbot"><a href="__URL__" class="sgbtn">＋返回链接管理</a></h3>
+		     
+<table width="100%">
+<form method="POST" action="__URL__/update">
+<input type="hidden" id="id" name="id" value="{$listone.id}" />
+  <tr align="center">
+	<td colspan="2" ><strong>友情链接编辑</strong></td>
+  </tr>
+  <tr>
+    <td width="21%" align="right"><span class="tRight"><span class="red">*</span>网站名称：</span></td>
+    <td width="79%"><label>
+      <input name="webname" type="text" class="box" id="webname" value="{$listone.webname}" size="30"/>
+    </label></td>
+  </tr>
+  <tr >
+    <td width="21%" align="right"><span class="tRight"><span class="red">*</span>网站地址：</span></td>
+    <td><input name="url" type="text" class="box" id="url" value="{$listone.url}" size="50"/></td>
+  </tr>
+    <tr>
+      <td height="25" align="right"><span class="tRight">LOGO</span>路径：</td>
+      <td align="left" ><input name="urllogo" type="text" class="box" id="urllogo" size="50" value="{$listone.urllogo}"></td>
+    </tr>
+    <tr >
+      <td height="30" align="right" >友情链接分类：</td>
+      <td align="left"><select name="class_id" id="class_id">
+				<option value="0">-0 不限-</option>
+				<option value="1">1 地方网盟</option>
+				<option value="2">2 外省网媒</option>
+				<option value="3">3 新闻媒体</option>
+				<option value="4">4 友情链接</option>
+				<option value="5">5 合作网站</option>
+				</select>  （当前分类:{$listone.class_id}）
+	</td>
+    </tr>
+    <tr>
+      <td height="25" align="right" >申请人姓名：</td>
+      <td align="left"><input name="uname" type="text" class="box" id="uname" size="30" value="{$listone.uname}"></td>
+    </tr>
+    <tr >
+      <td height="25" align="right" >电话：</td>
+      <td align="left"><input name="tel" type="text" class="box" id="tel" size="30" value="{$listone.tel}"></td>
+    </tr>
+    <tr >
+      <td height="25" align="right" >QQ号：</td>
+      <td align="left"><input name="qq" type="text" class="box" id="qq" size="30" value="{$listone.qq}"></td>
+    </tr>
+    <tr >
+      <td height="25" align="right">Email：</td>
+      <td align="left" ><input name="email" type="text" class="box" id="email" size="30" value="{$listone.email}"></td>
+    </tr>
+    <tr >
+      <td align="right" valign="top"><span class="red">* </span>网站简介：</td>
+      <td align="left" valign="top"><textarea name="content" cols="50" rows="6" class="box" id="content">{$listone.content}</textarea>
+          <br>
+          <span class="brown">[ 建议尽量用记事本格式编辑后发表，首行请用两个中文全角空格(按&quot;Shift+空格&quot;后即为全角) ]</span><br>
+          <br></td>
+    </tr>
+  <tr>
+    <td width="21%" align="right"><span class="tRight">排序：</span></td>
+		<td><input name="sortrank" type="text" class="box" id="sortrank" size="10" value="{$listone.sortrank}"> 注：值越大越靠前</td>
+  </tr>
+  <tr>
+    <td width="21%" align="right"><span class="tRight">审核状态：</span></td>
+    <td><select id="passed" name="passed">
+						<option value="0" <?php if($listone['passed'] == 0) echo 'selected';?>>未审</option>
+						<option value="1" <?php if($listone['passed'] == 1) echo 'selected';?>>已审</option>
+					</select></td>
+  </tr>
+  <tr>
+    <td height="45" align="right">&nbsp;</td>
+    <td><label>
+      <input type="submit" value="编辑链接" class="df_button" onClick="return confirm('确定要提交修改吗？');"/>
+    </label></td>
+  </tr>
+</form>
+</table>
+</body>
+</html>

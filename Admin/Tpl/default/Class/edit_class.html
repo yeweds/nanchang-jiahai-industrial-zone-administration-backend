@@ -1,0 +1,89 @@
+<include file="Public:header" />
+<link href="../Public/Css/main.css" rel="stylesheet" type="text/css"/>
+<div class="bodyTitle">
+	<div class="bodyTitleLeft"></div>
+  <div class="bodyTitleText">编辑分类</div>
+</div>
+
+<form action="__URL__/update/id/{$listone.id}" method="post" name="TypeForm">
+<table cellSpacing=1 cellPadding=2  align="center" border=0>
+  <tr >
+    <td width="137" >所属分类：</td>
+    <td colspan="5" ><select name="class_id" class="dataInput" id="class_id">
+        <option value="">--请选择类别--</option>
+<!--循环显示树型 -->
+<volist name="list" id="vo">
+<option value="{$vo.id}" <?php if($listone['pid']==$vo['id'])
+				echo " selected"; ?>>{$vo.name}</option>
+<volist name="vo['_child']" id="child">
+<option value="{$child.id}" <?php if($listone['pid']==$child['id'])
+				echo " selected"; ?>>&nbsp;&nbsp;|-&nbsp;{$child.name}</option>
+<present name="child['_child']">
+	<volist name="child['_child']" id="sub">
+	<option value="{$sub.id}" <?php if($listone['pid']==$sub['id'])
+					echo " selected"; ?>>&nbsp;&nbsp;&nbsp;&nbsp;|-&nbsp;{$sub.name}</option>
+	</volist>
+</present>
+</volist>
+</volist>
+      </select>
+      [<span >{$level}级</span>]</td>
+	  </tr>
+  <tr>
+    <td>分类名称：</td>
+    <td colspan="5" ><input name="classname" type="text" class="txt redtxt" id="classname" value="{$listone.name}" style="width:250px;"></td>
+  </tr>
+  <tr>
+    <td>分类级别：</td>
+    <td colspan="5"><input name="level" type="text" id="level" value="{$listone.level}">
+      不推荐更改</td>
+  </tr>
+  <tr>
+    <td>状态：</td>
+    <td colspan="5"><select name="ishide" id="ishide" >
+      <option value="1" <?php if($listone['ishide']==1)
+				echo " selected"; ?>>启用</option>
+      <option value="0" <?php if($listone['ishide']==0)
+				echo " selected"; ?>>禁用</option>
+      </select></td>
+  </tr>
+  <tr>
+    <td>是否用于菜单导航：</td>
+    <td colspan="5">
+	<input name="isnav" TYPE="radio" id="isnav" value="0" <eq name="listone.isnav" value="0">checked</eq> >否
+	<input name="isnav" TYPE="radio" id="isnav" value="1" <eq name="listone.isnav" value="1">checked</eq> >是
+	</td>
+  </tr>
+ <tr>
+    <td>排序：</td>
+    <td colspan="5"><input name="sortrank" TYPE="text" id="sortrank" value="{$listone.sortrank}"></td>
+  </tr>
+<tr>
+	<td>附加表名：</td>
+	<td colspan="5"><input name="table_name" type="text" id="table_name" value="{$listone.table_name}"> 此处不建议非开发人员填写或修改</td>
+</tr>
+  <tr>
+    <td>栏目标题：</td>
+    <td colspan="5"><textarea name="title_content" cols="50" rows="4" class="txt redtxt" id="title_content" >{$listone.title_content}</textarea></td>
+  </tr>
+  <tr>
+    <td>栏目关键字：</td>
+    <td colspan="5"><textarea name="meta_keyword" cols="50" rows="4" id="meta_keyword" >{$listone.meta_keyword}</textarea></td>
+  <tr>
+    <td>栏目描述：</td>
+    <td colspan="5"><textarea name="description" cols="50" rows="4" id="description" >{$listone.description}</textarea></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td colspan="5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td colspan="5" class="center"><div style="width:85%; margin:5px">
+      <input type="submit" class="df_button" value="修 改" />
+      </div></td>
+  </tr>
+</table>
+</form>
+
+<include file="Public:footer" />

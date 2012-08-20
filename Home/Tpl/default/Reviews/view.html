@@ -1,0 +1,332 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$title_remark},{$vo_lp.name}点评,{$vo_lp.name}口碑 - 南昌婚庆网</title>
+<meta name="keywords" content="{$vo_lp.lpname}点评,{$vo_lp.name}口碑,{$vo_lp.name}论坛,{$vo_lp.name}评分,{$vo_lp.name}印象">
+<meta name="description" content="南昌婚庆网为您提供{$vo_lp.name}的口碑点评,{$title_remark}">
+
+<link href="../Public/Css/ct_reviews.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/view_lp.css" rel="stylesheet" type="text/css" />
+
+
+<link href="../Public/Css/news.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/base.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/class_com.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/select_box.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript">
+//指定当前组模块URL地址
+var URL = '__URL__';
+var APP	 =	 '__APP__';
+var PUBLIC = '__PUBLIC__';
+var SELF = '__SELF__';
+</script>
+<script type="text/javascript" src="../Public/Js/base.js"></script><!--前台公共JS函数-->
+<script type="text/javascript" src="__PUBLIC__/Js/jquery.min.js"></script>
+
+<script language="JavaScript" type="text/javascript">
+//提交验证
+function sub_reviews(){
+	var content = $("#lpdp_content");
+	if(content.val() == ''){
+		alert('请输入评论内容！');
+		//content.fouce();
+		return false;
+	}
+	return true;
+}
+//增加人气效果
+function voteShow(type, id, event){
+	//type='red'支持红方
+	//type='blue'支持蓝方
+	var reviews_mx_id = id.replace('vote_',''); //获取点评明细ID alert(reviews_mx_id + id);
+	addReviewsHits(reviews_mx_id); //入库
+	var color;
+	if(type=='red'){
+		color='#FF6600';
+	}else{
+		color='#0090B9';	
+	}
+	//3.根据上面获取的信息，定位弹出框的位置;
+	var scroll_h = $(window).scrollTop();
+	var left = event.x;
+	var top  = scroll_h + event.y;	
+
+
+	var html='<div id="'+id+'" style="position: absolute;top:'+top+'px;left:'+left+'px;width:100px;height:100px;color:'+color+';font-size: 100px;font-family:Arial, Helvetica, sans-serif;z-index:100;"><b>+1</b></div>';
+	//创建一个dom模型容器
+	$(html).appendTo('body');
+
+	//创建动画
+	$('#'+id).animate({top:top-200,fontSize:80,opacity:0},800,function(){
+		//增加票数
+		$('#'+id+'_piao').html(Number($('#'+id+'_piao').html())+1);
+		$('#'+id).remove();//移除div
+	});
+	
+}
+//增加人气入库
+function addReviewsHits(id){
+	$.get('__URL__/addReviewsHits/', {"id": id} );
+}
+</script>
+<!--导入编辑器-->
+<link rel="stylesheet" href="__PUBLIC__/Js/Kindeditor/themes/default/default.css" />
+<script charset="utf-8" src="__PUBLIC__/Js/Kindeditor/kindeditor.js"></script>
+<script charset="utf-8" src="__PUBLIC__/Js/Kindeditor/lang/zh_CN.js"></script>
+<script>
+        var editor;
+        KindEditor.ready(function(K) {
+                 editor = K.create('#reply', {
+											 themeType : 'default',//样式
+											 newlineTag:'br',//换行格式
+											 filterMode:true,//过滤代码
+											uploadJson : '__PUBLIC__/Js/Kindeditor/php/upload_json.php',
+											fileManagerJson : '__PUBLIC__/Js/Kindeditor/php/file_manager_json.php',
+											allowFileManager : true,											 
+											 items:[/*'source',// HTML代码 */
+														'undo',// 后退 
+														'redo',// 前进 
+														/*'preview',// 预览 	*/								
+														'fontname',// 字体 
+														'fontsize',// 文字大小 
+														'forecolor',// 文字颜色 
+														'hilitecolor',// 文字背景	
+														'bold',// 粗体 
+														'italic',// 斜体 
+														/*'underline',// 下划线 
+														'strikethrough',// 删除线 								
+														'justifyleft',// 左对齐 
+														'justifycenter',// 居中 
+														'justifyright',// 右对齐 
+														'justifyfull',// 两端对齐 
+														'insertorderedlist',// 编号 
+														'insertunorderedlist',// 项目符号 
+														'indent',// 增加缩进 
+														'outdent',//减少缩进*/
+														'image',//插入图片
+														'emoticons',//插入表情
+														'removeformat',//删除格式
+														'fullscreen'// 全屏显示 
+														] 
+	 
+
+                });
+          
+        });
+</script>
+<style type="text/css">
+.reply_inc {
+	float: left;
+	width: 100%;
+	min-height:100px;
+}
+.img_style {	padding: 2px;
+	float: left;
+	display: inline;
+	margin-top: 0px;
+	margin-right: 7px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+}
+</style>
+</head>
+
+<body>
+<include file="Public:news_header" /> <!--头部包含共用 -->
+
+<div id="content_bg">
+ 
+  <div id="content">
+    <!--<div class="ad_head"></div> -->
+	<!-- 通栏广告start -->
+	<!-- Ad:news_index_tl"   -->
+	<!-- 通栏广告end -->
+	
+    <div class="height_10px"></div>
+    <div class="height_30px"><img src="../Public/Images/dp_jian_left.gif" width="10" height="10" alt="荐"/>南昌婚庆网  &gt;&nbsp;<span class="blue_a"><a href="__APP__/Reviews/dp_list">商家点评</a></span><span class="blue_a"></span>&nbsp;&gt;<span class="green_a">&nbsp;<a href="__APP__/Reviews/ct_list/info_id/{$vo_lp.info_id}">{$vo_lp.lpname}</a>&nbsp;</span>微评 &gt; 回复评论</div>
+<div class="height_10px"></div>
+         <div class="con_left_center_nbg" >
+            <div class="ping_title">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td width="5%" height="35" align="right"><span class="height_lineheight_30px"><span class="blue_q_a"><a href="__APP__/shop-{$vo.info_id}"><span class="gray_a"><img src="../Public/Images/wp_ico.jpg" width="22" height="22" border="0" align="top" alt="楼盘" /></span></a></span></span></td>
+                  <td width="95%" height="35"><strong><span class="blue_14px_black">&nbsp;回复评论</span></strong></td>
+                </tr>
+              </table>
+            </div>
+            <div class="bian_4gray_qian1px">
+              <div class="margin_4bian_10px"> 
+                <div class="wp_content_class_2">
+                  <div class="user_head"><img src="__PUBLIC__/Upload/U/{$review.pic_url}" width="50" height="50" alt="头像"/></div>
+                  <div class="width_20px_space"></div>
+                  <div class="box_370w">
+                    <div class="box_100b_min45px black_a"><span  style="clear:left;display:block"><span class="blue_s">{$review.user_name}</span>: {$review.content}</span>
+                      <volist name="vo.pic" id="v2"> <a href="{$v}" target="_blank"><img src="{$v}" border="0" class="img_style" onload="ImgResize(this)" alt='标' /></a></volist>
+                      <div style="clear:both"></div>
+                      <!--box_100b_min45px促使图层高度随内容增加面增加-->
+                    </div>
+                    <div class="height_10px"></div>
+                    <img src="../Public/Images/dp_bg_rp.jpg" width="540" height="40" alt="回复背景" />
+                    <form id="form1" name="form1" method="post" action="__URL__/insert_reply">
+                      <div class="box_100b_min45px">
+                        <textarea name="reply" id="reply" cols="45" rows="5" style="width:100%;height:100px;visibility:hidden;"></textarea>
+                      </div>
+                      <div class="height_10px"></div>
+                      <div class="height_lineheight_30px">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <tr>
+                            <td width="15%" class="black_12px_f"><input type="image" src="../Public/Images/sub_ping.jpg" width="80" height="30" align="absmiddle" /></td>
+                            <!--<td width="11%" align="right">验证码:&nbsp;</td>
+                            <td width="12%"><input id="checkcode" name="checkcode" type="text" size="4" maxlength="4" /></td>
+                            <td width="11%"><img id="verify" onclick="javascript:fleshVerify()" src="__APP__/Public/verify" alt="验证码" align="absmiddle" title="看不清，点此换一张" /></td>-->
+                            <td width="30%">&nbsp;</td>
+                            <td width="21%"><input name="reviews_mx_id" type="hidden" id="reviews_mx_id" value="{$review.id} " />
+                              <input name="user_id" type="hidden" id="user_id" value="{$user_id} " />
+                              <input name="info_id" type="hidden" id="info_id" value="{$review.info_id} " /></td>
+                          </tr>
+                        </table>
+                      </div>
+                    </form>
+                    <div class="heigth_10px"></div>
+                    <div class="height_lineheight_20px">
+                      <div style="float:left;font-size:12px"><span class="gray_font">{$review.add_time|date='Y-m-d H:i',###}</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="gray_a"><img src="../Public/Images/loupna_ico.jpg" width="22" height="22" align="top" alt="楼盘" /></span><span class=" blue_q_a"><a href="__APP__/shop-{$review.info_id}" target="_blank">{$review.name}</a></span></div>
+                      <div style="float:right;font-size:12px" class="blue_q_a"><img src="../Public/Images/zhichi.jpg" width="22" height="22" border="0" align="top" onclick="voteShow('red','vote_{$review.id}',event); return false;"  style="cursor:pointer;" alt="支持"/><a href="__URL__/view/id/{$review.id}" onclick="voteShow('red','vote_{$review.id}',event); return false;"  style="cursor:pointer;" title="点此投一票">支持(<span  id="vote_{$review.id}_piao">{$review.hits}</span>)</a></div>
+                    </div>
+                    <div class="box_450w">
+                    <div class="ping_title">
+                      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                          <td width="4%" height="35" align="right">&nbsp;</td>
+                          <td width="96%" height="35" class="blue_14px_black">&nbsp;</td>
+                        </tr>
+                      </table>
+                      <div class="gray_height_s1px"></div>
+                    </div>
+                    <!--<div class="dp_head_tag">{$count_good}人支持</div>-->
+                      <!--start-一条评论-->
+                      <volist name="reply" id="vo" key="k">
+                        <div class="wp_content_class">
+                          <img src="__PUBLIC__/Upload/U/{$vo.pic_url}" width="40" height="40" class="user_head" alt="头像"/>
+                          <div class="width_20px_space"></div>
+                          <div class="box_370w_min">
+                            <div class="box_100b_min45px black_a"><span  style="clear:left;display:block"><span class="blue_s">{$vo.user_name}</span>: {$vo.content}</span>
+                              <volist name="vo.pic" id="v"> <a href="{$v}" target="_blank"><img src="{$v}" border="0" class="img_style" onload="ImgResize(this)" alt='标' /></a></volist>
+                              <div style="clear:both"></div>
+                              <!--box_100b_min45px促使图层高度随内容增加面增加-->
+                            </div>
+                            <div class="height_10px"></div>
+                            <div class="height_lineheight_20px">
+                              <div style="float:left;font-size:12px"><span class="gray_font">{$vo.add_time|date='Y-m-d H:i',###}</span>&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                              <div style="float:right;font-size:12px" class="blue_q_a">
+                                <!--<img src="../Public/Images/zhichi.jpg" width="22" height="22" border="0" align="top" onclick="voteShow('red','vote_{$vo.id}',event); return false;"  style="cursor:pointer;"/><a href="__URL__/view/id/{$vo.id}" onclick="voteShow('red','vote_{$vo.id}',event); return false;"  style="cursor:pointer;" title="点此投一票">支持(<span  id="vote_{$vo.id}_piao">{$vo.hits}</span>)&nbsp;&nbsp;|&nbsp;&nbsp;-->
+                                <?php echo count($reply)-$k+1;?>楼</a>&nbsp;</div>
+                            </div>
+                          </div>
+                          <!--<div class="dp_zc_tag" onclick="voteShow('red','vote_{$vo.id}',event); return false;"  style="cursor:pointer;"> <strong><span class="blue_12px_f" id="vote_{$vo.id}_piao">{$vo.hits}</span></strong><br />
+                     人支持</div>-->
+                          <div style="clear:both"></div>
+                          <!--wp_content_class促使图层高度随内容增加面增加-->
+                        </div>
+                      </volist>
+                      <!--end-一条评论-->
+                      <div class="height_15px"></div>
+                      <div style="clear:both"></div>
+                      <!--box_450w促使图层高度随内容增加面增加-->
+                    </div>
+                  </div>
+                  <!--<div class="dp_zc_tag" onclick="voteShow('red','vote_{$review.id}',event); return false;"  style="cursor:pointer;"> <strong><span class="blue_12px_f" id="vote_{$review.id}_piao">{$review.hits}</span></strong><br />
+                     人支持</div>-->
+                  <div style="clear:both"></div>
+                  <!--wp_content_class促使图层高度随内容增加面增加-->
+                </div>
+                <div class="heigth_10px"></div>
+                <!--<div class="gray_height_1px"></div>-->
+                <!--             <div class="box_470_bian1right">--><!--             </div>-->
+                <div style="clear:both"></div>
+                <!--margin_4bian_20px促使图层高度随内容增加面增加-->
+              </div>
+              <div style="clear:both"></div>
+              <!--bian_4gray_1px促使图层高度随内容增加面增加-->
+            </div>
+    </div>
+    <div class="width_20px_space"></div>
+    <div class="box_250w">
+           <div class="ping_title">
+             <table width="100%" border="0" cellspacing="0" cellpadding="0">
+               <tr>
+                 <td width="11%" height="35" align="right"><span class="height_lineheight_30px"><span class="blue_q_a"><a href="__APP__/shop-{$vo_lp.id}"><span class="gray_a"><img src="../Public/Images/lp_ico_s.jpg" width="22" height="22" border="0" align="top" alt="楼盘" /></span></a></span></span></td>
+                 <td width="89%" height="35" class="black_14px_f"><span class="blue_14px_yahei"><span class="blue_q_a"><a href="__APP__/shop-{$vo_lp.id}">&nbsp;<strong>{$vo_lp.name}</strong></a></span></span></td>
+               </tr>
+             </table>
+             <div class="gray_height_s1px"></div>
+           </div>
+           <div class="margin_right">
+             <div class="box_250w_img" onclick="location.href='__APP__/shop-{$vo_lp.id}'" style="cursor:pointer">{$default_pic}
+               <!--<img src="../Public/Images/dp_t_lp.jpg" width="246" height="200" /> -->
+             </div>
+             <table width="100%" border="0" cellpadding="0" cellspacing="0">
+               <tr>
+                 <td height="5" colspan="2">&nbsp;</td>
+               </tr>
+               <tr>
+                 <td width="40" height="25">电话：</td>
+                 <td height="25">{$vo_lp.tel}&nbsp;</td>
+               </tr>
+               <tr>
+                 <td width="40" height="25">地址：</td>
+                 <td height="25"><empty name="vo_lp.address">未知
+                   <else/>
+                   {$vo_lp.address}</empty>&nbsp;
+                   </td>
+               </tr>
+             </table>
+             <div style="clear:both"></div>
+           </div>
+           <div class="gray_height_1px"></div>
+           <div class="ping_title">
+             <table width="100%" border="0" cellspacing="0" cellpadding="0">
+               <tr>
+                 <td width="11%" height="35" align="right"><span class="height_lineheight_30px"><span class="blue_q_a"><span class="gray_a"><img src="../Public/Images/more_ico.jpg" width="22" height="22" border="0" align="top" alt="商家" /></span></span></span></td>
+                 <td width="89%" height="35" class="black_14px_f"><span class="height_lineheight_30px"><span class="blue_14px_black">&nbsp;<strong>热门点评商家</strong></span></span></td>
+               </tr>
+             </table>
+             <div class="gray_height_s1px"></div>
+           </div>
+           <div class="margin_right">
+             <volist name="lpdp_list" id="vo">
+               <div class="right_lplist">
+                 <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                   <tr>
+                     <td width="55" rowspan="2"><a href="__APP__/Reviews/ct_list/info_id/{$vo.info_id}"><img src="{$vo.pic}" width="50" height="50" border="0" alt="复"/></a>
+                       <!--<img src="__PUBLIC__/Upload/user/no2.jpg" width="50" height="50" />--></td>
+                     <td width="6" height="30">&nbsp;</td>
+                     <td height="30" colspan="2" class="black_a black_14px_f"><a href="__APP__/shop-{$vo.info_id}">{$vo.lp.name}</a> </td>
+                   </tr>
+                   <tr>
+                     <td width="6" height="30">&nbsp;</td>
+                     <td width="104" height="30">电话: {$vo.lp.tel}</td>
+                     <td width="90" align="right" class="blue_q_a"><a href="__APP__/Reviews/ct_list/info_id/{$vo.info_id}">网友评论({$vo.dp_num})</a></td>
+                   </tr>
+                 </table>
+               </div>
+               <div  class="height_10px"></div>
+               <div class="gray_height_1px"></div>
+               <div  class="height_10px"></div>
+             </volist>
+             <div style="clear:both"></div>
+           </div>
+           <!--<div class="margin_4bian_10px">-->
+           <div style="clear:both"></div>
+         </div>
+    <div style="clear:both"></div><!--content促使图层高度随内容增加面增加-->    
+  </div>
+  
+
+<include file="Public:footer" /> {//共用尾部}
+  
+	<div style="clear:both"></div><!--content_bg促使图层高度随内容增加面增加-->
+</div>
+</body>
+</html>

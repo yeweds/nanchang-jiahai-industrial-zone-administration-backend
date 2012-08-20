@@ -1,0 +1,121 @@
+<include file="Public:header" />
+<script language="javascript" src="__PUBLIC__/DatePicker/WdatePicker.js"></script>
+<!-- 日历插件 -->
+<div class="bodyTitle">
+	<div class="bodyTitleLeft"></div>
+  <div class="bodyTitleText">添加楼栋</div>
+</div>
+<form action="__URL__/insert/ACTION/{$Think.get.ACTION}" method="post">
+<table cellSpacing="1" cellPadding=2 width="95%" align="center" border="0">
+    <tr>
+      <td width="20%" height="25" scope="col">楼栋名称：<span class="red">* </span></td>
+      <td align="left" valign="middle" scope="col">
+          <input name="title" type="text" class="box" id="title" size="40">
+      </td>
+    </tr>
+    <tr>
+      <td height="25">摘要：</td>
+      <td align="left"><textarea name="remark" cols="60%" rows="5" id="remark"></textarea>
+        用于站内搜索 </td>
+    </tr>
+    <tr>
+      <td>所属楼盘：</td>
+      <td>名称：{$vo.title} &nbsp;&nbsp;&nbsp;INFO_ID：<input name="info_id" type="text" id="info_id" value="{$vo.id}" readOnly> 不得修改</td>
+    </tr>
+    <tr>
+      <td>楼盘ID：</td>
+      <td><input name="lpid" type="text" class="box" id="lpid" size="40"> 
+        对应房管局ID</td>
+    </tr>
+    <tr>
+      <td>楼栋ID：</td>
+      <td><input name="proid" type="text" class="box" id="proid" size="40">
+对应房管局楼栋ID</td>
+    </tr>
+    <tr>
+      <td>所在区域：<span class="red">* </span></td>
+      <td><select name="range_id" id="range_id"/>
+        
+          <option value="">请选择区域</option>
+          <present name="area_list" > <volist name="area_list" id="vo" >
+          <option value="{$vo.id}">{$vo.head_py|strtoupper} {$vo.name}</option>
+        </volist> </present> </td>
+    </tr>
+    <tr>
+      <td>单元数量：</td>
+      <td ><input type='text' name='prounitcount' id='prounitcount' style='width:250px'  />
+      </td>
+    </tr>
+    <tr>
+      <td>沙盘楼栋坐标：</td>
+      <td >经度(X)：
+          <input name="point_x" type='text'  id='point_x' size="12" />
+    纬度(Y)：
+    <input name="point_y" type='text'  id='point_y' size="12" />
+    <a href="__URL__/add" class="sgbtn">＋标注新坐标</a> </td>
+    </tr>
+    <tr>
+      <td>预售许可证号：</td>
+      <td ><input type='text' name='prolisence' id='prolisence' style='width:250px' />
+      </td>
+    </tr>
+    <tr>
+      <td>批准预售日期：</td>
+      <td ><input type='text' name='prosaletime' id='prosaletime' style='width:250px' /></td>
+    </tr>
+    <tr>
+      <td>开盘日期：</td>
+      <td ><input name="proopentime" value="2011-01-01" type="text" id="proopentime" onClick="WdatePicker()"/>      </td>
+    </tr>
+    <tr>
+      <td>工程规划许可证号：</td>
+      <td ><input type='text' name='proprolisence' id='proprolisence' /> </td>
+    </tr>
+    <tr>
+      <td>施工许可证号：</td>
+      <td ><input type='text' name='proconlisence' id='proconlisence' /></td>
+    </tr>
+    <tr>
+      <td>已售房屋面积：</td>
+      <td ><input type='text' name='prosalearea' id='prosalearea' /></td>
+    </tr>
+    <tr>
+      <td> 当前可售套数：</td>
+      <td ><input type='text' name='pronoaleanum' id='pronoaleanum' /></td>
+    </tr>
+    <tr>
+      <td> 当前可售面积：</td>
+      <td ><input type='text' name='pronosalearea' id='pronosalearea' /></td>
+    </tr>
+    <tr>
+      <td>已预定套数：</td>
+      <td><input type='text' name='proydnum' id='proydnum' /></td>
+    </tr>
+    <tr>
+      <td>住宅预售价：</td>
+      <td ><input type='text' name='proprice' id='proprice' /> 
+        </td>
+    </tr>
+    <tr>
+      <td>非住宅预售价：</td>
+      <td ><input type='text' name='pronoprice' id='pronoprice' /> 
+      </td>
+    </tr>
+    <tr>
+      <td>用途：</td>
+      <td><input type='text' name='protype' id='protype' style='width:250px' />
+      </td>
+    </tr>
+    <tr>
+      <td>建筑结构：</td>
+      <td><input type='text' name='promaketype' id='promaketype' style='width:250px' />
+      </td>
+    </tr>
+</table>
+<div align="center"><br>
+  <input type="submit" value=" 添 加 " class="df_button"/>  &nbsp;&nbsp;&nbsp;&nbsp;  <input type="reset" value=" 取 消 " class="df_button">
+<br>
+</P>
+</div>
+</form>
+<include file="Public:footer" />

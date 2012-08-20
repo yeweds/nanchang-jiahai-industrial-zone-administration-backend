@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>南昌婚庆网-模拟进店</title>
+<link href="../Public/Css/common.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/mimic_enter.css" rel="stylesheet" type="text/css" />
+</head>
+
+<style>
+input{
+	overflow:hidden;
+	margin:0px;
+	padding:0px
+}
+
+#vote_lists{
+	width:852px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#vote_lists h2{
+	line-height:30px;
+	font-size:18px;
+	font-weight:bold;
+	color:#F31B30;
+}
+#vote_lists ul{
+	padding-left:20px;
+}
+#vote_lists ul li{	
+	line-height:28px;
+	font-size:14px;
+	float:left;
+	width:auto;
+	height:30px;
+	margin-right:20px;
+}
+
+
+</style>
+<body>
+<include file="Public:header" /> <!--头部包含共用 -->
+
+<div id="jinru"><img alt="模拟进店" src="../Public/Images/enter2.jpg" width="120" height="33" /></div>
+<div class="clear"></div>
+<div id="wenzi">
+  <p>是否在为想去拍摄婚纱照却又因为有许多疑问而烦恼呢？<br/>
+  请咨询0791hunqing.com有专门针对中国顾客服务的负责人将通过电话或电子邮件针对性的为您详细、<br/>亲切的解答您的疑问。<br/>更加方便、更加经济、更加稳定的婚纱摄影！<br/>南昌最大的IT婚纱摄影服务公司0791hunqing.com将为您提供服务<br/>我们0791hunqing.com将通过可信的品牌竭诚为您提供有价值的满足、高档的舒适、无法比拟的自豪感。</p>
+</div>
+<div class="clear"></div>
+<form action="__APP__/Login/save_vote" method="post">
+<div id="vote_lists">
+
+<!--投票列表 -->
+<volist name="vote_list" id="vo">
+
+	<h2>{$vo.title}</h2>
+	<volist name="vo._child" id="sub">
+	<ul>
+	<li>
+    <div style="height:30px; width:auto; margin-left:0px; margin-right:20px; float:left">
+	<eq name="vo.types" value="2">
+    <label for="item_{$sub.id}"><input type="checkbox" name="vote_{$vo.id}[]" id="item_{$sub.id}" value="{$sub.id}" />{$sub.item_name}</label>
+	<else/>
+    <label for="item_{$sub.id}"><input type="radio" name="vote_{$vo.id}" id="item_{$sub.id}" value="{$sub.id}" />{$sub.item_name}</label>
+	</eq>
+    </div>
+	</li>
+	</ul>
+	</volist>
+	<div style="clear:both;"></div>
+
+</volist>
+</div>
+
+<div id="anniu"><input type="image" alt="下一步" src="../Public/Images/enter_next.jpg" width="78" height="30" /></div>
+</form>
+<div style="height:20px;">&nbsp;</div>
+
+<include file="Public:footer" /> {//共用尾部}
+</body>
+</html>

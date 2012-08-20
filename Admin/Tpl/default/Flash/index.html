@@ -1,0 +1,35 @@
+<include file="Public:header" />
+<div class="bodyTitle">
+	<div class="bodyTitleLeft"></div>
+  <div class="bodyTitleText">首页幻灯列表</div>
+</div>
+
+<h3 class="marginbot">
+<a href="__URL__/add" class="sgbtn"> +添加 </a>
+<!-- <a href="__APP__/Clear" class="sgbtn">－清理附件</a> -->
+</h3>
+
+<table width="95%" border="0"  align=center cellpadding="3" cellspacing="1" bgcolor="#F2F9E8" class="datalist fixwidth">
+    <tr bgcolor="#f1f3f5" style="font-weight:bold;">
+    <td width="5%" height="30" align="center" class="ButtonList">排序</td>
+    <td width="25%" align="center" class="ButtonList">幻灯标题</td>
+	<td width="30%" align="center" class="ButtonList">幻灯网址</td>
+	<td width="10%" align="center" class="ButtonList">幻灯状态</td>
+    <td width="30%" height="25" align="center" class="ButtonList">幻灯管理</td>    
+    </tr>
+	<volist name="list" id="vo"> 
+    <tr bgcolor="#ffffff" onMouseOver="this.style.backgroundColor='#EAFCD5';" onMouseOut="this.style.backgroundColor='';this.style.color=''">
+    <td height="25">{$vo.rank}</td>
+    <td height="25" align="center"><a href="__URL__/edit/id/{$vo.id}">{$vo.title}</a></td>
+    <td height="25" align="center">{$vo.url}</td>
+	 <td height="25" align="center"><a href="__URL__/status/id/{$vo.id}/status/{$vo.status}"><eq name= "vo.status" value= "1">正常<else/><font color="red">隐藏</font></eq></a></td>
+    <td align="center"><a href="__URL__/edit/id/{$vo.id}">编辑</a>|<a href="__URL__/del/id/{$vo.id}" onClick="JavaScript:return confirm('确定要删除?')">删除</a></td>
+    </tr>
+	</volist>
+</table>
+</form>
+
+<p class="i">幻灯删除后，不可恢复，请尽量使用修改功能，谨慎操作</p>
+
+
+<include file="Public:footer" />

@@ -1,0 +1,18 @@
+<!-- 公共顶部 -->
+<div id="tf_head">
+	<div class="th_center white_a">
+	  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+	    <tr>
+	      <td width="64%"><a href="__APP__/">0791婚庆网首页</a> | <a href="__APP__/News/">南昌婚庆资讯</a> | <a href="__APP__/Shop">商家大全</a> | <a href="__APP__/Check_error/" target="_blank">欢迎纠错</a></td>
+	      <td width="5%">&nbsp;</td>
+	      <td width="31%" align="right">
+          <php> if($userInfo){ </php> 
+您好， <strong>{$userInfo.username}</strong> <a href="__APP__/Account/logout/">退出</a>
+<php>} else{</php>
+          <a href="__APP__/Reg/">注册</a> | <a href="__APP__/Login/index/fromUrl/{$Think.const.__SELF__|base64_encode}">登录</a><php>} </php>	
+          
+           | <a href="#" onclick="bookmark()">加入收藏</a>&nbsp;</td>
+        </tr>
+      </table>
+	</div>
+</div>

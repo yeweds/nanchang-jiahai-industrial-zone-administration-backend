@@ -1,0 +1,14 @@
+          <div class="height_40px_text" align="center"><span class="green_20pxf_yahei green_a"><a href="{$news.jryw.h.id|get_arc_url=###, $news['jryw']['h']['redirecturl']}" title="{$news.jryw.h.title|mystr_replace=###}">{$news.jryw.h.title|mb_substr=###,0,17,'utf-8'}</a></span></div><!--今日要闻头条-->
+          <div class="height_20px_text" align="center"><span class="green_a">
+          
+          <volist name="news.jryw.t" id="vo">
+          	<a href="{$vo.id|get_arc_url=###, $vo['redirecturl']}" title="{$vo.title|mystr_replace=###}">[{$vo.title|mb_substr=###,0,12,'utf-8'}] </a>
+          </volist>
+          
+        </span></div>
+          <div class="height_5px"></div>
+          <!--循环输出-->
+          <volist name="news.jryw.titles" id="vo">
+          	<div class="height_22px_text font_14px"><span class="{$vo.title_color|title_style=###}"><strong>{$vo.tag|default='推荐'}</strong> | <a href="{$vo.id|get_arc_url=###, $vo['redirecturl']}" title="{$vo.title|mystr_replace=###}">{$vo.title|mb_substr=###,0,22,'utf-8'}</a></span></div>
+          </volist>
+          <!--循环-->

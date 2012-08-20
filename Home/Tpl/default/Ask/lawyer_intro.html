@@ -1,0 +1,276 @@
+<include file="Public:html_header" /> 
+
+<link href="../Public/Css/base.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/class_com.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/select_box.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/law.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/law_xiangqing.css" rel="stylesheet" type="text/css" />
+<body>
+<include file="Public:news_header" /> <!--头部包含共用 -->
+
+<script type="text/javascript" src="../Public/Js/law.js"></script> 
+<script type="text/javascript">
+function fleshVerify(){
+//重载验证码
+	var timenow = new Date().getTime();
+	document.getElementById('verifyImg').src= '__URL__/verify/'+timenow;
+}
+</script> 
+
+<!--law_head_s-->
+<div id="law_head"><include file="Ask:ad" /></div>
+<div class="height_30px_text blue_a" style="width:970px;margin:0 auto"><strong class="blue_14px_f">&gt;&gt;</strong><a href="__APP__/"> 0791首页</a> <span class="gray_14px_f">&gt;</span> <a href="__URL__/">婚庆在线</a></div>
+<!--law_head_e-->
+<div class="height_10px"></div>
+<!--law_master_s-->
+<div class="width_966px"> 
+  <!--右边s-->
+  <div id="law_right"> 
+    
+    <!--右下律师列表s-->
+    <div id="law_right_bottom" class="law_border_1px_green">
+      <div class="botton_intro"></div>
+      <div class="height_5px"></div>
+      <div class="width_5px_float"></div>
+      <!--律师列表s-->
+      <div id="law_right_law"> 
+        <!--律师-->
+        <div class="law_law_name1">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td width="5" rowspan="4">&nbsp;</td>
+              <td width="101" rowspan="4" align="center" valign="middle"><img src="__PUBLIC__/Upload/U/{$list.head|default='lawyer.jpg'}" width="101" height="118" /></td>
+              <td width="132" height="35" class="law_border_1px_bottom">姓名： {$list.name}</td>
+              <td width="5" rowspan="4">&nbsp;</td>
+            </tr>
+            <tr>
+              <td width="132" height="35">专长： {$list.profession}</td>
+            </tr>
+            <tr>
+              <td width="132" height="35">联系电话： {$list.telephone}</td>
+            </tr>
+            <tr>
+              <td width="132" height="20">&nbsp;</td>
+            </tr>
+            <tr>
+              <td height="35" colspan="4">&nbsp;&nbsp;&nbsp;&nbsp;执业证书编号： {$list.confirm}</td>
+            </tr>
+            <tr>
+              <td height="35" colspan="4">&nbsp;&nbsp;&nbsp;&nbsp;所在区域： {$list.diqu}</td>
+            </tr>
+            <tr>
+              <td  height="35" colspan="4">&nbsp;&nbsp;&nbsp;&nbsp;邮箱： {$list.mail}</td>
+            </tr>
+              </tr>
+            
+            <tr>
+              <td  height="35" colspan="4">&nbsp;&nbsp;&nbsp;&nbsp;联系地址： {$list.address}</td>
+            </tr>
+          </table>
+        </div>
+        <!--律师-->
+        <div class="height_5px"></div>
+        <div class="clear"></div>
+      </div>
+      <!--律师列表s-->
+      <div class="clear"></div>
+    </div>
+    <!--右下律师列表e-->
+    <div class="height_10px"></div>
+    
+    <!--右上快速查s-->
+    <div id="law_right_top">
+      <table width="298" border="0" cellspacing="0" cellpadding="0">
+        <form id="askForm" name="askForm" method="post" action="">
+          <tr>
+            <td width="9" height="330" rowspan="13">&nbsp;</td>
+            <td height="45" colspan="4">&nbsp;</td>
+            <td width="16" height="330" rowspan="13">&nbsp;</td>
+          </tr>
+          <tr>
+            <td height="1" colspan="4">&nbsp;</td>
+          </tr>
+          <tr>
+            <td width="45" height="28" align="center" valign="middle">标题:</td>
+            <td height="28" colspan="3"><input type="text" name="title" id="right_top_input_biaoti" /></td>
+          </tr>
+          <tr>
+            <td height="1" colspan="4">&nbsp;</td>
+          </tr>
+          <tr>
+            <td width="45" height="28" align="center" valign="middle">内容:</td>
+            <td colspan="3" rowspan="2"><textarea name="contents" id="right_top_input_neirong" cols="45" rows="5"></textarea></td>
+          </tr>
+          <tr>
+            <td width="45" height="50">&nbsp;</td>
+          </tr>
+          <tr>
+            <td height="1" colspan="4">&nbsp;</td>
+          </tr>
+          <tr>
+            <td width="45" height="28" align="center" valign="middle">姓名:</td>
+            <td width="70" height="28"><input type="text" name="name" id="right_top_input_name" /></td>
+            <td width="51" height="28" align="center" valign="middle">联系:</td>
+            <td width="107" height="28"><input name="link" type="text" id="right_top_input_lianxi" value="QQ/手机/Email" onClick="this.value=''" /></td>
+          </tr>
+          <tr>
+            <td height="1" colspan="4">&nbsp;</td>
+          </tr>
+          <tr>
+            <td width="45" height="28" align="center" valign="middle">验证:</td>
+            <td width="70" height="28"><input name="verify" type="text" id="right_top_input_yanzheng" maxlength="4" /></td>
+            <td width="51" height="28" align="center" valign="middle"><a href="javascript:fleshVerify()"><img src="__URL__/verify/" name="verifyImg" border="0" align="absmiddle" id="verifyImg" title="请点图片刷新验证码"></a></td>
+            <td width="107" height="28">&nbsp;</td>
+          </tr>
+          <tr>
+            <td height="1" colspan="4">&nbsp;</td>
+          </tr>
+          <tr>
+            <td height="36" colspan="3" align="center" valign="middle" ><span class="green_a"><a href="__URL__/add_pictures" class="gray_a">我想提交些图片</a></span></td>
+            <td width="107" height="36" class="law_orange_sumbit1"  onclick="subAsk()" onMouseOut="this.className='law_orange_sumbit1'">&nbsp;</td>
+          </tr>
+          <tr>
+            <td height="12" colspan="4">&nbsp;</td>
+          </tr>
+        </form>
+      </table>
+    </div>
+    <!--右上快速查e-->
+    <div class="height_10px"></div>
+  </div>
+  <!--右边e--> 
+  <!--左边s-->
+  <div class="width_13px_float"></div>
+  <div id="law_left"> 
+    <!--左边上部分s-->
+    <div id="law_left_top">
+      <table width="651" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="15" height="56" align="center" valign="middle" nowrap="nowrap">&nbsp;</td>
+          <td width="35" height="56" align="center" valign="middle" nowrap="nowrap"><img src="../Public/Images/law/law_small_10.png" width="30" height="22" /></td>
+          <td width="195" height="56" align="center" valign="middle" nowrap="nowrap"><span class="green_a"><a href="__URL__/">婚庆咨询首页</a> &gt;&gt;咨询师介绍</span></td>
+          <td width="135" height="56" align="right" valign="middle" nowrap="nowrap"><eq name="lawyerLogin" value="1"><img src="../Public/Images/law/lawyer.png" width="14" height="14" border="0" align="top"  />&nbsp;&nbsp;<span class="green_a"><a href="__URL__/lawyerMessage" >个人中心</a></span>&nbsp;&nbsp;&nbsp;&nbsp;<else /></eq></td>
+          <td width="16" height="56" align="center" valign="middle" nowrap="nowrap">&nbsp;</td>
+          <td width="40" height="56" align="center" valign="middle" nowrap="nowrap">&nbsp;</td>
+          <td width="16" height="56" align="center" valign="middle" nowrap="nowrap">&nbsp;</td>
+          <td width="25" height="56" align="center" valign="middle" nowrap="nowrap">&nbsp;</td>
+          <td width="18" height="56" align="center" valign="middle" nowrap="nowrap">&nbsp;</td>
+          <td width="11" height="56" align="center" valign="middle" nowrap="nowrap">&nbsp;</td>
+          <td width="16" height="56" align="center" valign="middle" nowrap="nowrap">&nbsp;</td>
+          <td width="46" height="56" align="center" valign="middle" nowrap="nowrap">&nbsp;</td>
+          <td width="16" height="56" align="center" valign="middle" nowrap="nowrap">&nbsp;</td>
+          <td width="41" height="56" align="center" valign="middle" nowrap="nowrap"><span class="green_a"><a href="javascript:history.go(-1)">返回</a></span></td>
+          <td width="26" height="56" align="center" valign="middle" nowrap="nowrap">&nbsp;</td>
+        </tr>
+      </table>
+    </div>
+    <!--左边上部分e--> 
+    <!--左边中间部分s--> 
+    
+    <!--问答2s-->
+    <div id="law_left_middle">
+      <div class="width_608px_auto">
+        <div class="height_15px"></div>
+        <!--问-->
+        <div class="law_wen1">
+          <table width="607" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td colspan="6"><span class="green_12px">&nbsp;&nbsp;详细介绍</span></td>
+            </tr>
+            <tr>
+              <td colspan="6" height="5px">&nbsp;</td>
+            </tr>
+            <tr>
+              <td width="24" height="25" align="center" valign="top">&nbsp;</td>
+              <td height="25" colspan="5" align="left" valign="middle" class="height_20px_text_black">{$list.intro}</td>
+            </tr>
+            <tr>
+              <td colspan="6" height="20">&nbsp;</td>
+            </tr>
+            <tr>
+              <td colspan="6" height="20"><span class="green_12px_fg">&nbsp;&nbsp;{$list.name} 最近回复网友的问题</span></td>
+            </tr>
+            <tr>
+              <td colspan="6" height="10">&nbsp;</td>
+            </tr>
+          </table>
+        </div>
+        <empty name="replyList">
+          <table width="607" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td height="25" colspan="6" valign="middle" class="green_14px" align="center">该咨询师暂时没有回复</td>
+            </tr>
+          </table>
+          <else />
+          <volist name="replyList" id="reply">
+            <div class="law_wen1">
+              <table width="607" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td width="25" height="25" align="center" valign="top"><img src="../Public/Images/law/law_small_05.png" width="21" height="21" /></td>
+                  <td height="25" colspan="5" valign="middle" class="green_14px">{$reply.ask.title}&nbsp;&nbsp;&nbsp;&nbsp;<eq name="lawyerId" value="1"> <span class="green_a"><a href="__URL__/delAsk/id/{$reply.ask.id}"> 删除 </a></span></eq></td>
+                </tr>
+                <tr>
+                  <td width="25" rowspan="4" align="center">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td height="50" colspan="5" class="height_20px_text_black">{$reply.ask.content}</td>
+                </tr>
+                <tr>
+                  <td width="177" height="18" class="green_12px"><span class="gray_12px_f">咨询时间{$reply.ask.time|date='Y-m-d H:i',###} </span></td>
+                  <td width="31" height="18"><img src="../Public/Images/law/law_small_07.png" width="14" height="14" /></td>
+                  <td width="157" height="18" class="gray_12px_f">咨询者:{$reply.ask.name} </td>
+                  <td width="57" height="18" align="center" >
+                  <td width="160"  height="18">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td colspan="5" height="15">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td width="25" height="37" align="center" valign="top"><img src="../Public/Images/law/law_small_06.png" width="12" height="12" /></td>
+                  <td height="37" colspan="5"  valign="middle" bgcolor="#FAFAFA" class="height_20px_text_gray"> {$reply.content}<eq name="lawyerId" value="1"><span class="green_a"><a href="__URL__/editReply/id/{$reply.id}"> 修改回答</a>&nbsp;&nbsp;&nbsp;<a href="__URL__/delReply/id/{$reply.id}"> 删除 </a></span></eq></td>
+                </tr>
+                <tr>
+                  <td width="25" height="28">&nbsp;</td>
+                  <td width="177" height="28" align="left" bgcolor="#FAFAFA" class="gray_12px_f"><img src="../Public/Images/law/law_small_08.png" width="10" height="10" />&nbsp;&nbsp;回复时间{$reply.time|date='Y-m-d H:i',###}</td>
+                  <td width="31" bgcolor="#FAFAFA" class="gray_12px_f"> <img src="../Public/Images/law/law_small_09.png" width="16" height="16" /></td>
+                  <td width="157" height="28" bgcolor="#FAFAFA"><span class="green_12px">{$list.name}律师</span></td>
+                  <td width="57" height="28" bgcolor="#FAFAFA">&nbsp;</td>
+                  <td bgcolor="#FAFAFA">&nbsp;</td>
+                </tr>
+              </table>
+              
+              <!--答-->
+              <div class="height_20px_bottom_1px"></div>
+            </div>
+          </volist>
+        </empty>
+        <!--问答2e--> 
+        <!--问答3s--><!--问答3e--> 
+        <!--问答4s--><!--问答4e--> 
+        <!--左边问答部分e-->
+        <div class="height_20px"></div>
+        <!--页码s-->
+        <div id="ye_ma" align="right"><span class="green_a">{$page}&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
+        <!--页码e--> 
+      </div>
+      <div class="clear"></div>
+    </div>
+    <!--左边中间部分e--> 
+    <!--左边底部分s-->
+    <div id="law_left_bottom"></div>
+    <!--左边底部分e--> 
+  </div>
+  <!--左边e-->
+  <div class="clear"></div>
+</div>
+<!--law_master_e--> 
+<include file="Public:footer" /> {//共用尾部}
+</body>
+</html>
+<script type="text/javascript">
+    function subAsk(){
+		var url=APP +'/Ask/ask';
+	      $('#askForm').attr('action',url);
+	      $('#askForm').submit();
+		}
+</script>

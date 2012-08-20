@@ -1,0 +1,101 @@
+<include file="Public:header" />
+<link href="../Public/Css/main.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
+//指定当前组模块URL地址
+	function child(id){
+		location.href = URL+"/index/b_classid/"+id;
+	}
+</script>
+
+<div class="bodyTitle">
+	<div class="bodyTitleLeft"></div>
+  <div class="bodyTitleText">类别管理</div>
+</div>
+<table >
+  <tr>
+    <td width="16%"><input type="button" name="delete" value="删除选中项" class="df_button_green" onClick="delAll()"></td>
+    <td><input type="button" id="" name="edit" value="重新排序" class="df_button_green" onClick="upsort()"></td>
+	<td><div id="result" class="none result" style="letter-spacing:2px"></div></td>
+    </tr>
+</table>
+
+<table class="datalist fixwidth">
+<form action="" method="post" id="list_form" name="list_form" enctype="multipart/form-data">
+  <tr>
+    <td  align="left" colspan="6" height="25"><present name="classname">[ {$classname} ]</present>[ {$classlevel}级 ]<B> 栏目分类管理</B><neq name="classlevel" value="1"> <a href="javascript:child('{$classid}')" class="sgbtn" >返回上级栏目</a></neq></td>
+    <td width="501" align="right"><neq name="classlevel" value="1"><a href="javascript:history.go(-1)">返回&gt;&gt;&nbsp;&nbsp;</a></neq></td>
+  </tr>
+  <notpresent name="list">
+  <tr>
+    <td height="25" colspan="6">暂无记录</td>
+        <td>&nbsp;</td>
+  </tr>
+  </notpresent>
+  <present name="list">
+    <tr>
+    <td width="35" align="center">
+      <input name="chkAll" type="checkbox" id="check" value="选择全部"  onClick="selAll(this,'id[]')">    </td>
+    <td width="52" align="center">ID</td>
+    <td width="189" align="center">分类名</td>
+    <td width="73" align="center">排序</td>
+    <td width="106" align="center">分类路径</td>
+	<td width="84" align="center">是否显示为导航</td>
+    <td height="25" align="center">操作</td>
+    </tr>
+  <php>
+	$i=1;
+	foreach($list as $vo){  </php>
+  <tr>
+    <td align="center"><input name="id[]" type="checkbox" id="id[]" value="{$vo.id}" /><input name="str[]" type="hidden" id="str[]" value="{$vo.id}" /></td>
+    <td align="center">{$vo.id}</td>
+    <td align="left" title="点击查看下一级栏目"><?php
+		for($k=1;$k<=$vo['level'];$k++)
+			echo "&nbsp;&nbsp;";
+		echo "├&nbsp;";
+		if($vo['level'] % 2!=0)
+			echo "<a href=\"javascript:child('$vo[id]')\">".$vo['name']."</a>";
+		else
+			echo "<a href=\"javascript:child('$vo[id]')\">".$vo['name']."</a>"
+	?>&nbsp;({$vo.count})</td>
+    <td align="center"><input name="sortrank[]" type="text" id="sortrank[]" value="{$vo.sortrank}" size="4"></td>
+    <td align="center">{$vo.curr_path}
+	</td>
+	<td align="center"><eq name="vo['isnav']" value="1">是<else/>否</eq>
+	</td>
+    <td height="25" align="center"><a href="javascript:child('{$vo[id]}')" class="sgbtn">查看下级栏目</a> [<a href="__URL__/add/classid/{$vo.id}/level/{$vo['level']}">添加子类</a>] 
+	[<a href="__URL__/edit/id/{$vo.id}/level/{$vo['level']}">编辑</a>] 
+	[<a href="javascript:del({$vo.id})">删除</a>] 
+    <!-- &nbsp;|&nbsp;&nbsp;[<a href="__APP__/Doc/add/classid/{$vo.id}/level/{$vo['level']}/type/{$vo['doc_class']}">添加
+<?php if($vo['doc_class']=='doc'){
+				echo '文档';
+                }else{
+                echo '相册';
+                }
+ ?>
+</a>] 
+    [<a href="__APP__/Doc/index/class_id/{$vo.id}/level/{$vo['level']}/type/{$vo['doc_class']}">查看
+<?php if($vo['doc_class']=='doc'){
+				echo '文档';
+                }else{
+                echo '相册';
+                }
+ ?>
+列表<span class="fontRed"><strong>({$vo.count})</strong></span></a>] --> </td>
+    </tr>
+  <php>
+	$i++;
+	}  </php>
+  </present>
+  </form>
+</table>
+<table width="100" >
+  <tr>
+    <td width="16%"><input type="button" name="delete2" value="删除选中项" class="df_button_green" onclick="delAll()" /></td>
+    <td><input type="button" id="edit" name="edit2" value="重新排序" class="df_button_green" onclick="upsort()" /></td>
+    <td><div id="result2" class="none result" style="letter-spacing:2px"></div></td>
+  </tr>
+</table>
+<div class="page">{$page}</div>
+<p class="i">删除不可恢复,谨慎操作</p>
+<br>
+<include file="Public:footer" />

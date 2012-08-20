@@ -1,0 +1,54 @@
+<div id="demoleft" style="OVERFLOW: hidden; WIDTH: 938px; COLOR: #ffffff;font-size:12px;"> 
+<TABLE border=0 cellPadding=0 cellSpacing=0 cellspace="0"> 
+<tr> 
+<td id=demo1left vAlign=top align=middle> 
+<TABLE cellSpacing=0 cellPadding=1 border=0> 
+<tr align="middle"> 
+<td><a href="http://topic.tengfang.net/cehuajigou/sunmega/" title="南昌房产 南昌房价 腾房网 尚美佳·中国" target="_blank"><img alt="尚美佳·中国" src="../Public/Images/Cehua/smj.jpg" width="220" height="38" border=0/></a></td> 
+<td><a href="http://topic.tengfang.net/cehuajigou/jiutian/" title="南昌房产 南昌房价 腾房网 九天机构" target="_blank"><img alt="九天机构" src="../Public/Images/Cehua/jtjg.jpg" width="220" height="38" border=0/></a></td> 
+<td><a href="http://topic.tengfang.net/cehuajigou/juren/" title="南昌房产 南昌房价 腾房网 聚仁机构" target="_blank"><img  alt="聚仁机构" src="../Public/Images/Cehua/jrjg.jpg" width="220" height="38" border=0/></a></td> 
+<td><a href="http://topic.tengfang.net/cehuajigou/gongdu/" title="南昌房产 南昌房价 腾房网 共读" target="_blank"><img alt="共读"  src="../Public/Images/Cehua/gd.jpg" width="220" height="38" border=0/></a></td> 
+<td><a href="http://topic.tengfang.net/cehuajigou/jutaiwenhua/" title="南昌房产 南昌房价 腾房网 钜太文化传播" target="_blank"><img alt="钜太文化传播" src="../Public/Images/Cehua/jutaiwenhua.jpg" width="220" height="38" border=0/></a></td> 
+<td><a href="http://topic.tengfang.net/cehuajigou/xindehang/" title="南昌房产 南昌房价 腾房网 信德行地产" target="_blank"><img alt="信德行地产"  src="../Public/Images/Cehua/xdh.jpg" width="220" height="38" border=0/></a></td> 
+<td><a href="http://topic.tengfang.net/cehuajigou/dingbang/" title="南昌房产 南昌房价 腾房网 定邦" target="_blank"><img alt="定邦" src="../Public/Images/Cehua/db.jpg" width="220" height="38" border=0/></a></td> 
+<td><a href="http://topic.tengfang.net/cehuajigou/landi/" title="南昌房产 南昌房价 腾房网 蓝地" target="_blank"><img alt="蓝地" src="../Public/Images/Cehua/ld.jpg" width="220" height="38" border=0/></a></td>
+<td><a href="http://topic.tengfang.net/cehuajigou/xinjingjie/" title="南昌房产 南昌房价 腾房网 新境界" target="_blank"><img alt="新境界" src="../Public/Images/Cehua/xjj.jpg" width="220" height="38" border=0/></a></td>
+<td><a href="http://topic.tengfang.net/cehuajigou/bainian/" title="南昌房产 南昌房价 腾房网 百年" target="_blank"><img alt="百年"  src="../Public/Images/Cehua/bn.jpg" width="220" height="38" border=0/></a></td> 
+ <td><a href="http://topic.tengfang.net/cehuajigou/yingke/" title="南昌房产 南昌房价 腾房网 盈科" target="_blank"><img alt="盈科"  src="../Public/Images/Cehua/yk.jpg" width="220" height="38" border=0/></a></td> 
+<td><a href="http://topic.tengfang.net/cehuajigou/tongzhi/" title="南昌房产 南昌房价 腾房网 同致" target="_blank"><img alt="同致"  src="../Public/Images/Cehua/tz.jpg" width="220" height="38" border=0/></a></td>  
+ <td><a href="http://topic.tengfang.net/cehuajigou/jinhua/" title="南昌房产 南昌房价 腾房网 jinhua" target="_blank"><img alt="jinhua"   src="../Public/Images/Cehua/jh.jpg" width="220" height="38" border=0/></a></td> 
+   
+</TABLE></td> 
+<td id='demo2left' vAlign='top'></td></TR></TABLE></DIV> 
+ 
+ 
+<br/> 
+
+<table style="width: 938px; margin:0 auto; font-size:12px; " >
+<tr> 
+  <td><a href="http://nc.tengfang.net/index.php/news-14123
+" target="_blank"><b><font color="red">【同致地产】</font></b><font color="#000000">2011年11月南昌市房地产市场研究报告</font></a>
+	</td>
+   <td><a href="http://nc.tengfang.net/news-14115" target="_blank"><b><font color="red">【腾房网】</font></b><font color="#000000">海域香廷首批别墅逆势热销 近百名名流已入席</font></a>&nbsp;</td> 
+  
+  <td align="center"><a href="http://nc.tengfang.net/news-13886" target="_blank"><b><font color="red">【腾房网】</font></b><font color="#000000">南昌恒大绿洲有奖问答活动启动 精美奖品等着你</font></a></td> 
+ </tr> 
+</table>
+
+<br /> 
+
+ 
+<SCRIPT> 
+var speed=40//速度数值越大速度越慢,demo2.offsetWidth=demo1.offsetWidth=固定值
+demo2left.innerHTML=demo1left.innerHTML
+function Marquee(){
+if(demo2left.offsetWidth-demoleft.scrollLeft<=0)//其实demo.scrollLeft是有 最大值的，和demo0.width,引用的图片的width有关系。demo过了一半（每半内容一样的），重新开始循环
+demoleft.scrollLeft-=demo1left.offsetWidth
+else{
+demoleft.scrollLeft++//不断的增加，相当于父容器的滚动条不断是缩小；但由于OVERFLOW: hidden; （滚动条不可见）
+}
+}
+var MyMarleft=setInterval(Marquee,speed)
+demoleft.onmouseover=function() {clearInterval(MyMarleft)}
+demoleft.onmouseout=function() {MyMarleft=setInterval(Marquee,speed)}
+</SCRIPT> 

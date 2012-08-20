@@ -1,0 +1,270 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>南昌新楼盘 - 腾房网</title>
+<meta name="keywords" content="楼盘,户型,开盘">
+<meta name="description" content="腾房网为您提供{$cityname}楼市一览,了解南昌楼盘开盘、在售、主力户型情况">
+<link href="../Public/Css/ct_lp_list.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/ct_lp_common.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+<div id="content_bg">
+  <include file="Public:header_ct" /> <!-- 传统页公共头部 -->
+  
+  <div id="content">
+	<!-- 通栏广告start -->
+	<!-- Ad:news_index_tl -->
+	<!-- 通栏广告end  -->
+    <div class="height_10px"></div>
+    <div class="height_30px"><img src="../Public/Images/dp_jian_left.gif" width="10" height="10" alt="箭头" />腾房网 > <strong><span class="green_12px_f">楼盘大全</span></strong></div>
+<div class="content_inc">
+          <div class="con_left_center_nbg" >
+<div id="lp_key_inc"><div class="height_bian_30px">
+          		  <div class="tj_bn">价格查询</div>
+          		  <div class="tj_text"><span class="black_a"><a href="__APP__/lp/str/p-1">4000以内</a> | <a href="__APP__/lp/str/p-2">4000-6000</a> | <a href="__APP__/lp/str/p-3">6000-8000</a> | <a href="__APP__/lp/str/p-4">8000-10000</a> | <a href="__APP__/lp/str/p-5">10000以上</a></span></div>
+          		</div>
+<div class="height_bian_30px">
+          		    <div class="tj_bn">热点区域</div>
+          		    <div class="tj_text"><span class="black_a">
+					<volist name="area_list" id="area_vo">
+					<a href="__APP__/lp/str/a-{$area_vo.id}">{$area_vo.name}</a>
+					<php> if( $i < count($area_list) ) echo "|&nbsp;"; </php>
+					</volist></span></div>
+       		      </div>
+<div class="height_bian_30px">
+          		    <div class="tj_bn">关注热盘</div>
+          		    <div class="tj_text"><span class="black_a">
+					<volist name="hot_list" id="hot_vo">
+					<a href="__APP__/lp-{$hot_vo.info_id}">{$hot_vo.lpname}</a>
+					<php> 
+					if( $i < count($hot_list) )
+					echo "|&nbsp;"; 
+					</php>
+					</volist>
+					</span>
+                    </div>      
+                       <div style="clear:both"></div><!--height_bian_30px促使图层高度随内容增加面增加-->           
+       		      </div>
+<div class="height_nobian_30px">
+          		    <div class="tj_bn">最新开盘</div>
+          		    <div class="tj_text"><span class="black_a"><volist name="kp_list" id="kp_vo">
+					<a href="__APP__/lp-{$kp_vo.info_id}">{$kp_vo.lpname}</a>
+					<php> 
+					if( $i < count($kp_list) )
+					echo "|&nbsp;"; 
+					</php>
+					</volist></span></div>
+       		      </div>
+                  <div style="clear:both"></div><!--lp_key_inc促使图层高度随内容增加面增加-->
+                  </div>
+       		<div class="height_10px"></div>
+          		<div id="lp_list_inc">
+
+                  <div class="block_title"><strong><span class="blue_14px_f">&nbsp;&nbsp;楼盘列表 </span></strong>
+                    <div class="abso_right">排序方式:
+                      <label for="select"></label>
+                      <select name="select" class="select" id="select">
+                        <option>默认排序</option>
+                      </select>
+                      <span class="bian_4grays_1px"> <span class="bian_1bgrays_1px">&nbsp;价格<img <eq name="Think.get.ord" value="p-desc">src="../Public/Images/lp_ico_up.gif"<else />src="../Public/Images/lp_ico_down.gif"</eq> alt="价" width="18" height="12" align="baseline" id="price" style="cursor:pointer" /></span>&nbsp;开盘时间<img <eq name="Think.get.ord" value="kp-desc">src="../Public/Images/lp_ico_up.gif"<else />src="../Public/Images/lp_ico_down.gif"</eq> alt="开盘" width="18" height="12" align="baseline" id="kaipan" style="cursor:pointer" /></span></div>
+                      <script type="text/javascript">
+					  //点击排序的效果
+					  $(document).ready(function(){
+						  var ord = '{$Think.get.ord}';
+						  var kaipan = $('#kaipan');
+						  kaipan.click(function(){
+						    	if(ord == 'kp-desc'){
+									ord = 'kp-asc';
+								}else{
+									ord = 'kp-desc';
+								}
+								location.href = URL + '/ct_list/ord/'+ord ;
+						  });
+						  
+						  var ord_price = $('#price');
+						  ord_price.click(function(){
+							  	if(ord == 'p-desc'){
+									ord = 'p-asc';
+								}else{
+									ord = 'p-desc';
+								}
+								location.href = URL + '/ct_list/ord/'+ord ;
+						  });
+					  });	  
+					  </script>
+                  </div>
+<volist name="list" id="vo">
+                  <!--START--循环楼盘列表-->
+                <div class="height_auto_dianbian">
+                  <div class="height_15px"></div>            
+                     <div class="height_100px">
+                       <div class="lp_photo"><a href="__APP__/lp-{$vo.info_id}"><img src="{$vo.default_pic}" alt="查看详细" width="140" height="100" border="0" /></a></div>
+                       <div class="width_10px_space"></div>
+                       <div class="width_360w_100h">
+                         <div class="height_lineheight_30px"><span class="black_14px_f"><span class="black_bian_a"><a href="__APP__/lp-{$vo.info_id}"><strong>{$vo.lpname}</strong><neq name="vo.lp_full_name" value="">({$vo.lp_full_name})</neq></a></span></span>&nbsp;&nbsp;<span class="orange_font_12pxyahei">&nbsp;&nbsp;<if condition="($vo.lp_state eq 1)">在售<elseif condition="$vo.lp_state eq 2" />待售<else />售完</if>{$vo.lpnosalecount|default="0"}套 <span class="blue_a"><a href="__APP__/General/can_sell_mx/info_id/{$vo.info_id}" target="_blank">[查看详细]</a></span></div>
+                         <div class="height_lineheight_30px">主力户型：{$vo.lp_zhutui}<!-- 地址：{//$vo.lpaddr} -->
+                         <div style="clear:both"></div>
+                         </div>
+                         <div class="height_lineheight_20px">开盘：{$vo.lptimeb}   &nbsp;&nbsp;&nbsp;&nbsp;<span class="gray_12px_f">物业类型：</span><span class="blue_font">{$vo.lpwuyetype}</span></div>
+                         <div class="height_lineheight_30px"><span class="green_a"><a href="__APP__/lp-{$vo.info_id}#loadFrame(3)">楼盘图片</a></span>({$vo.count_pic}) | <!--<span class="green_a"><a href="3">户型图</a></span>(12) | --><span class="green_a"><a href="__APP__/Reviews/ct_list/info_id/{$vo.info_id}">点评</a></span>({$vo.sum_reviews})&nbsp;&nbsp;&nbsp;&nbsp;<span class="green_a"><a href="__APP__/lp-{$vo.info_id}#loadFrame(2)">查看地图</a></span></div>
+                       </div>
+                       <div class="lp_list_price"><strong><span class="red_14px_f">{$vo.lpprice|default="待定 "}</span></strong>元/平方米</div>
+              <div style="clear:both"></div><!--lp_list_inc促使图层高度随内容增加面增加-->
+         </div>
+                     <div style="clear:both"></div><!--lp_list_inc促使图层高度随内容增加面增加-->
+                </div>
+                <!--END--循环楼盘列表-->
+</volist>
+		<notpresent name="list">
+			<div style="color:#FF0000; margin:10px; line-height:20px;">腾房提醒您：遵照您给定的条件未找到任何楼盘，请检查是否选错了区域，可尝试不限区域等放宽条件重新搜索！谢谢！</div>
+		</notpresent>
+                                                                       
+                <div class="height_10px"></div>
+                <div class="height_lineheight_20px">
+                  <div class="float_right"><span class="blue_a">{$page}</span><!--<span class="page_sytle">上一页</span><span class="page_current_style">1</span><span class="page_num_style">2</span><span class="page_num_style">3</span><span class="page_num_style">4</span><span class="page_num_style">5</span><span class="page_num_style">6</span><span class="page_num_style">7</span><span class="page_num_style">8</span><span class="page_num_style">9</span><span class="page_sytle">下一页</span>--></div>
+				  
+				  </div>
+                <div class="height_lineheight_20px"></div>
+<div style="clear:both"></div>
+          		  <!--lp_list_inc促使图层高度随内容增加面增加-->
+   		    </div>
+<div style="clear:both"></div><!--con_left_center_bg促使图层高度随内容增加面增加</div>-->
+      </div>       		       		
+          <div class="width_10px_space"></div>
+          <div class="con_right_bg3">
+            <div class="de_ad_270px">
+			 <include file="Ad:news_xi_right" /> <!-- 右侧广告 -->
+			<!-- <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" width="300" height="150">
+              <param name="movie" value="../Public/Flash/news-ad300-150.swf" />
+              <param name="quality" value="high" />
+              <embed src="../Public/Flash/news-ad300-150.swf" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="300" height="150"></embed>
+            </object> -->
+			</div>
+            <div class="heigth_10px"></div>
+            <div class="con_right_4bian268px">
+              <div class="height_30px">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td width="37%" height="30" align="center"  id="news_today" style="cursor:pointer"><strong class="blue_12px_f">今日最受关注</strong></td>
+                    <td width="63%" height="30" class="left_bottom_bian1px" id="news_week"><span class="blue_12px_f">&nbsp;&nbsp;一周新闻排行</span></td>
+                  </tr>
+                </table>
+              </div>
+              <div id="news_pai_ajax">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                  <present name="dump.news_gz" >
+                    <volist name="dump.news_gz" id="vo2" >
+                      <tr>
+                        <td width="14%" height="30" align="center"><switch name="vo.count">
+                          <case value="1">
+                          <div class="num_style1">
+                          </case>
+                          <case value="2">
+                          <div class="num_style1">
+                          </case>
+                          <case value="3">
+                          <div class="num_style1">
+                          </case>
+                          <default />
+                          <div class="num_style2">
+                            </switch>
+                            0{$vo.count}</div></td>
+                        <td width="86%" height="30" class="black_a"><a href="__URL__/view/id/{$vo.id}">{$vo.title}</a></td>
+                      </tr>
+                    </volist>
+                  </present>
+                </table>
+              </div>
+            </div>
+            <div class="heigth_10px"></div>
+<!-- 共用专题 -->
+	<include file="Html:zhuangti_inc" />
+<!-- 共用专题 -->
+            <div style="clear:both"></div>
+            <!--con_left1促使图层高度随内容增加面增加-->
+          </div>
+          <div style="clear:both"></div>
+          <!--con_inc促使图层高度随内容增加面增加-->
+        </div>
+	<div class="height_10px"></div>
+<!-- 共用 -->
+	<include file="Html:hot_lp_inc" />
+<!-- 共用 -->
+    <div class="height_10px"></div>
+    <div style="clear:both"></div><!--content促使图层高度随内容增加面增加-->    
+ </div>
+	<include file="Public:footer" /> {//共用尾部}
+	 
+<div style="clear:both"></div><!--content_bg促使图层高度随内容增加面增加-->
+</div>
+</body>
+</html>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	//今日一周
+	$('#news_week').mouseover(function(){
+		$('#news_week').removeClass().addClass('left_bottom_bian1pxm');	
+		$('#news_today').addClass('bottom_bian1pxm');	
+		domAjax('news_pai_ajax','__APP__/News/news_pai_ajax/type/0','get');
+		
+	});
+	$('#news_today').mouseover(function(){
+		$('#news_week').removeClass().addClass('left_bottom_bian1px');	
+		$('#news_today').removeClass();	
+		domAjax('news_pai_ajax','__APP__/News/news_pai_ajax/type/1','get');
+	});
+	domAjax('news_pai_ajax','__APP__/News/news_pai_ajax/type/1','get');
+	
+			//播放图片效果
+			var lMC = 2;
+			var rMC = 0;
+
+			jQuery("#photo_left").click(function(){
+				if(rMC>0){
+					scrollto("r");
+					rMC--;
+					lMC++;
+					jQuery("#photo_right").css("cursor","pointer");
+					if(rMC<=0){
+						jQuery("#photo_left").css("cursor","no-drop");
+					}
+				}
+
+			});
+
+			jQuery("#photo_right").click(function(){
+
+				if(lMC>0){
+					scrollto("l");
+					lMC--;
+					rMC++;
+					jQuery("#photo_left").css("cursor","pointer");
+					if(lMC<=0){
+						jQuery("#photo_right").css("cursor","no-drop");
+					}
+				}
+
+			});
+
+			jQuery("#star_item_list").css("width",(950*3)+"px");
+			jQuery("#photo_left").css("cursor","no-drop");
+
+			if(lMC>0){
+				jQuery("#photo_right").css("cursor","pointer");
+			}
+
+			function scrollto(way){
+				if(way=="l"){
+					jQuery("#star_item_list").animate({marginLeft:"-=950px"},2000);
+				}else{
+					jQuery("#star_item_list").animate({marginLeft:"+=950px"},2000);
+				}
+
+			}	
+
+});
+</script>

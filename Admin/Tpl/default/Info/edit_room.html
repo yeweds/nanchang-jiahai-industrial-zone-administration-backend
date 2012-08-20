@@ -1,0 +1,141 @@
+<include file="Public:header" />
+<script language="javascript" src="__PUBLIC__/DatePicker/WdatePicker.js"></script>
+<!-- 日历插件 -->
+<div class="bodyTitle">
+	<div class="bodyTitleLeft"></div>
+  <div class="bodyTitleText">编辑房间</div>
+</div>
+<form action="__URL__/update/ACTION/room" method="post">
+<table cellSpacing="1" cellPadding=2 width="95%" align="center" border="0">
+    <tr>
+      <td width="22%" height="25" scope="col">房间名称：<span class="red">* </span></td>
+      <td align="left" valign="middle" scope="col">
+          <input name="title" type="text" class="box" id="title" value="{$vo.title}" size="40">
+		  <input name="id" type="hidden" id="id" value="{$vo.id}">
+      </td>
+    </tr>
+    <tr>
+      <td height="25">摘要：</td>
+      <td align="left"><textarea name="remark" cols="60%" rows="5" id="remark">{$vo.remark}</textarea>
+        用于站内搜索 </td>
+    </tr>
+    <tr>
+      <td>所属楼栋INFO_ID：</td>
+      <td><input name="info_id" type="text" id="info_id" value="{$vo_add.info_id}" readOnly>
+    不得修改</td>
+    </tr>
+    <tr>
+      <td>楼盘ID：</td>
+      <td><input name="lpid" type="text" class="box" id="lpid" value="{$vo_add.lpid}" size="40"> 
+        对应房管局楼盘ID</td>
+    </tr>
+    <tr>
+      <td>楼栋ID：</td>
+      <td><input name="proid" type="text" class="box" id="proid" value="{$vo_add.proid}" size="40">
+    对应房管局楼栋ID</td>
+    </tr>
+    <tr>
+      <td>房间ID：</td>
+      <td><input name="roomid" type="text" class="box" id="roomid" value="{$vo_add.roomid}" size="40">
+    对应房管局房间ID</td>
+    </tr>
+    <tr>
+      <td>所在区域：<span class="red">* </span></td>
+      <td><select name="range_id" id="range_id"/>
+          <option value="">请选择区域</option>
+          <present name="area_list" > <volist name="area_list" id="vo" >
+          <option value="{$vo.id}" <eq name="vo_add.range_id" value="$vo.id">selected</eq> >{$vo.head_py|strtoupper} {$vo.name}</option>
+        </volist> </present> </td>
+    </tr>
+    <tr>
+      <td> 房间地址：</td>
+      <td ><input name='rroomaddr' type='text' id='rroomaddr' style='width:250px' value="{$vo_add.rroomaddr}"/></td>
+    </tr>
+    <tr>
+      <td>所在楼层：</td>
+      <td ><input name='rlayer' type='text' id='rlayer' style='width:250px' value="{$vo_add.rlayer}"  />
+      </td>
+    </tr>
+    <tr>
+      <td>所在单元：</td>
+      <td ><input name='runit' type='text' id='runit' style='width:250px' value="{$vo_add.runit}" />
+      </td>
+    </tr>
+    <tr>
+      <td> 单元编号：</td>
+      <td ><input name='runitid' type='text' id='runitid' style='width:250px' value="{$vo_add.runitid}" /></td>
+    </tr>
+    <tr>
+      <td> 房间号码 ：</td>
+      <td ><input name='rroomnum' type='text' id='rroomnum' value="{$vo_add.rroomnum}" /> </td>
+    </tr>
+    <tr>
+      <td>户型：</td>
+      <td ><input name='rroomtype' type='text' id='rroomtype' value="{$vo_add.rroomtype}" /></td>
+    </tr>
+    <tr>
+      <td> 建筑面积：</td>
+      <td ><input name='rarea' type='text' id='rarea' value="{$vo_add.rarea}" /></td>
+    </tr>
+    <tr>
+      <td> 套内面积：</td>
+      <td ><input name='rinarea' type='text' id='rinarea' value="{$vo_add.rinarea}" /></td>
+    </tr>
+    <tr>
+      <td> 分摊面积 ：</td>
+      <td ><input name='routarea' type='text' id='routarea' value="{$vo_add.routarea}" /></td>
+    </tr>
+    <tr>
+      <td>房间状态变更日期：</td>
+      <td ><input name="rstatustime" value="{$vo_add.rstatustime}" type="text" id="rstatustime" onClick="WdatePicker()"/></td>
+    </tr>
+    <tr>
+      <td>房间状态(可预售)：</td>
+      <td ><input name='rstatus' type='text' id='rstatus' value="{$vo_add.rstatus}" /> 
+      </td>
+    </tr>
+    <tr>
+      <td>售出价格(新建县)：</td>
+      <td ><input name='rsaleprice' type='text' id='rsaleprice' style='width:250px' value="{$vo_add.rsaleprice}" />
+      </td>
+    </tr>
+    <tr>
+      <td>朝向：</td>
+      <td ><input name='rposition' type='text' id='rposition' style='width:250px' value="{$vo_add.rposition}" />
+      </td>
+    </tr>
+    <tr>
+      <td>阳台面积：</td>
+      <td ><input name='rbalcony' type='text' id='rbalcony' style='width:250px' value="{$vo_add.rbalcony}" />
+      </td>
+    </tr>
+    <tr>
+      <td> 阳台封闭状态(新建县)：</td>
+      <td ><input name='hsbalconyout' type='text' id='hsbalconyout' style='width:250px' value="{$vo_add.hsbalconyout}" /></td>
+    </tr>
+    <tr>
+      <td> 建筑结构(钢筋混凝土结构)：</td>
+      <td ><input name='rmaketype' type='text' id='rmaketype' style='width:250px' value="{$vo_add.rmaketype}" />
+      </td>
+    </tr>
+    <tr>
+      <td> 房间类型(非住宅、住宅)： </td>
+      <td ><input name='rtype' type='text' id='rtype' style='width:250px' value="{$vo_add.rtype}" /></td>
+    </tr>
+    <tr>
+      <td>设计用途(写字楼，商业)：</td>
+      <td ><input name='rsheji' type='text' id='rsheji' style='width:250px' value="{$vo_add.rsheji}" /></td>
+    </tr>
+    <tr>
+      <td> 测绘状态：</td>
+      <td ><input name='rcehui' type='text' id='rcehui' style='width:250px' value="{$vo_add.rcehui}" /></td>
+    </tr>
+</table>
+<div align="center"><br>
+  <input type="submit" value=" 编 辑 " class="df_button"/>  
+  &nbsp;&nbsp;&nbsp;&nbsp;  <input type="reset" value=" 取 消 " class="df_button">
+<br>
+</P>
+</div>
+</form>
+<include file="Public:footer" />

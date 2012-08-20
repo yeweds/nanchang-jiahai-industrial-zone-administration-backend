@@ -1,0 +1,305 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$vo.title} 精彩图片-南昌婚庆网</title>
+<meta content="图片,相册" name="keywords">
+<meta name="description" content="{$curr.remark} 南昌婚庆网为您提供最新精彩图片">
+<link href="../Public/Css/news.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/base.css" rel="stylesheet" type="text/css" />
+
+<link href="../Public/Css/class_com.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/select_box.css" rel="stylesheet" type="text/css" />
+
+<script charset="utf-8" src="__PUBLIC__/Js/jquery.min.js" /></script>
+<script charset="utf-8" src="../Public/Js/jquery.rotate.js" /></script>
+<script type="text/javascript">
+//指定当前组模块URL地址
+var URL = '__URL__';
+var APP	 =	 '__APP__';
+var PUBLIC = '__PUBLIC__';
+var SELF = '__SELF__';
+
+</script>
+
+<link rel="stylesheet" type="text/css" href="../Public/Css/pic_dz.css" />
+
+<style id="diy_style">
+.mn{display:inline;margin-left:0px;width:760px!important;}
+.mt{margin:0;padding:0;}h1.mt{font-size:14px;}.bm{background:#FFF;zoom:1;}
+.sd{display:inline;margin-right:0px;min-height:0; }
+</style>
+
+</head>
+
+<body id="space" onkeydown="if(event.keyCode==27) return false;">
+
+<!--start南昌婚庆公共头部-->
+
+<!--头部s-->
+<include file="Public:news_header" />
+<!--头部e-->
+
+<!--栏目 begin-->
+
+<div style="width:960px; margin:0 auto;">
+	<div class="height_30px_text"><img src="../Public/Images/dp_jian_left.gif" width="10" height="10" alt="箭头" /><a href='__APP__/'>南昌婚庆网</a> > <a href="__APP__/Pic">南昌婚庆图片</a> >&nbsp;<strong><span class="green_12px_f">精彩瞬间</span></strong></div>
+<div> 
+
+
+
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+
+
+<div id="ct" class="ct2 wp cl">
+<div class="mn">
+<div class="bm">
+<div class="bm_h">
+<h1 class="mt">相册: <span class="xw0">{$vo.title}</span></h1>
+</div>
+<div class="bm_c">
+
+<div class="tbmu" id="pic_block">
+<div class="y">
+<a href="javascript:;" onclick="imageRotate('pic', 1)"><img class="vm" src="../Public/Images/rleft.gif" /></a>
+<a href="javascript:;" onclick="imageRotate('pic', 2)"><img class="vm" src="../Public/Images/rright.gif" /></a><span class="pipe">|</span>
+<a href="__APP__/pics-{$vo.id}?&cp={$curr_cp}&amp;goto=up#pic_block">上一张</a><span class="pipe">|</span>
+<a href="__APP__/pics-{$vo.id}?&cp={$curr_cp}&amp;goto=down#pic_block" id="nextlink">下一张</a><span class="pipe">|</span>
+<!-- <a href="javascript:;" id="playid" class="osld" onclick="playNextPic(true);">幻灯播放</a> -->
+<span id="displayNum"></span>
+</div>
+<a href="__APP__/Pic">&laquo; 返回图片列表</a>
+<span class="pipe">|</span>当前第 {$curr_cp} 张<span class="pipe">|</span>共 {$page_sum} 张图片&nbsp;
+</div>
+
+<div class="vw pic">
+<div id="photo_pic" class="c">
+<a href="__APP__/pics-{$vo.id}?&cp={$curr_cp}&amp;goto=down#pic_block"><img src="{$curr.big}" id="pic" alt="大图" /></a>
+<script type="text/javascript">
+function $TF(id) {
+	return !id ? null : document.getElementById(id);
+}
+
+function fetchOffset(obj, mode) {
+	var left_offset = 0, top_offset = 0, mode = !mode ? 0 : mode;
+
+	if(obj.getBoundingClientRect && !mode) {
+		var rect = obj.getBoundingClientRect();
+		var scrollTop = Math.max(document.documentElement.scrollTop, document.body.scrollTop);
+		var scrollLeft = Math.max(document.documentElement.scrollLeft, document.body.scrollLeft);
+		if(document.documentElement.dir == 'rtl') {
+			scrollLeft = scrollLeft + document.documentElement.clientWidth - document.documentElement.scrollWidth;
+		}
+		left_offset = rect.left + scrollLeft - document.documentElement.clientLeft;
+		top_offset = rect.top + scrollTop - document.documentElement.clientTop;
+	}
+	if(left_offset <= 0 || top_offset <= 0) {
+		left_offset = obj.offsetLeft;
+		top_offset = obj.offsetTop;
+		while((obj = obj.offsetParent) != null) {
+			position = getCurrentStyle(obj, 'position', 'position');
+			if(position == 'relative') {
+				continue;
+			}
+			left_offset += obj.offsetLeft;
+			top_offset += obj.offsetTop;
+		}
+	}
+	return {'left' : left_offset, 'top' : top_offset};
+}
+
+//图像加载重定尺寸
+function picResize(dom){
+	var img_width=arguments[1]?arguments[1]:650;//默认第二个参数为基本宽度，小于此宽度不重设
+	var height=$(dom).height();
+	var width=$(dom).width();
+	if(width>img_width){
+		var img_height=height/width*img_width;
+		$(dom).height(img_height);
+		$(dom).width(img_width);
+	}
+}
+
+//图片旋转
+function imageRotate(idName, rtype){
+
+	if(rtype==2){
+		$("#"+idName).rotateRight();
+	}else{
+		$("#"+idName).rotateLeft();
+	}
+	picResize("#pic");
+}
+
+function createElem(e){
+	var obj = document.createElement(e);
+	obj.style.position = 'absolute';
+	obj.style.zIndex = '1';
+	obj.style.cursor = 'pointer';
+	obj.onmouseout = function(){ this.style.background = 'none';}
+	return obj;
+}
+function viewPhoto(){
+	var pager = createElem('div');
+	var pre = createElem('div');
+	var next = createElem('div');
+	var cont = $TF('photo_pic');
+	var tar = $TF('pic');
+	var space = 0;
+	var w = tar.width/2;
+	if(!!window.ActiveXObject && !window.XMLHttpRequest){
+	space = -(cont.offsetWidth - tar.width)/2;
+	}
+	var objpos = fetchOffset(tar);
+
+	pager.style.position = 'absolute';
+	pager.style.top = '0';
+	pager.style.left = objpos['left'] + 'px';
+	pager.style.top = objpos['top'] + 'px';
+	pager.style.width = tar.width + 'px';
+	pager.style.height = tar.height + 'px';
+	pre.style.left = 0;
+	next.style.right = 0;
+	pre.style.width = next.style.width = w + 'px';
+	pre.style.height = next.style.height = tar.height + 'px';
+	pre.innerHTML = next.innerHTML = '<img src="../Public/Images/emp.gif" width="' + w + '" height="' + tar.height + '" />';
+
+	pre.onmouseover = function(){ this.style.background = 'url(../Public/Images/pic-prev.png) no-repeat 0 100px'; }
+	pre.onclick = function(){ window.location = '__APP__/pics-{$vo.id}?&cp={$curr_cp}&goto=up#pic_block'; }
+
+	next.onmouseover = function(){ this.style.background = 'url(../Public/Images/pic-next.png) no-repeat 100% 100px'; }
+	next.onclick = function(){ window.location = '__APP__/pics-{$vo.id}?&cp={$curr_cp}&goto=down#pic_block'; }
+
+	//cont.style.position = 'relative';
+	cont.appendChild(pager);
+	pager.appendChild(pre);
+	pager.appendChild(next);
+}
+$TF('pic').onload = function(){
+	picResize("#pic");
+	viewPhoto();
+}
+</script>
+</div>
+
+<div class="pns mlnv vm mtm cl">
+
+<a href="__APP__/pics-{$vo.id}?&cp={$curr_cp}&amp;goto=up#pic_block" class="btn" title="上一张"><img src="../Public/Images/see_jian_left.gif" alt="上一张"/></a>
+<volist name="pic_list" id="sub">
+<a href="__APP__/pics-{$sub.info_id}?&cp={$i}#pic_block"><img alt="{$sub.remark}" src='{$sub.savepath|trim="."}thumb_{$sub.savename}' /></a>
+</volist>
+<a href="__APP__/pics-{$vo.id}?&cp={$curr_cp}&amp;goto=down#pic_block" class="btn" title="下一张"><img src="../Public/Images/see_jian_right.gif" alt="下一张"/></a>
+</div>
+
+<div id="content_page" style="font-size:14px;text-align:center;margin:10px 0;">{$text_page}</div>
+
+<div class="d bbs">
+<p id="a_set_title" class="albim_pic_title">{$curr.remark}</p>
+<p class="xg1 xs1">
+上传于 {$curr.upload_time|date="Y-m-d H:i",###} ({$curr['size']/1024|round=###,2} KB)
+</p>
+<div class="o cl bw0 xs1 pbn">
+
+<span class="z">
+[<a href="{$curr.big}" target="_blank">查看原图</a>]
+<span class="pipe">|</span>人气：{$vo.hits}
+<span class="pipe">|</span>[<a href="__APP__/shop-{$vo.shop_id}">查看商家</a>]
+</span>
+</div>
+</div> 
+
+</div>
+<!--[diy=diyclicktop]--><div id="diyclicktop" class="area"></div><!--[/diy]-->
+<div id="click_div">
+<table cellpadding="0" cellspacing="0" width="100%">
+<tr><td>
+<!-- JiaThis Button BEGIN -->
+<div id="ckepop" >
+	<span class="jiathis_txt">分享到：</span>
+	<a class="jiathis_button_tsina">新浪微博</a>
+	<a class="jiathis_button_tqq">腾讯微博</a>
+	<a class="jiathis_button_t163">网易微博</a>
+	<a class="jiathis_button_qzone">QQ空间</a>
+	<!-- <a href="http://www.jiathis.com/share/" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a> 
+	<a class="jiathis_counter_style"></a>-->
+</div>
+<script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->  
+</td>
+</tr>
+</table>
+
+
+</div>
+<!--[diy=diycommenttop]--><div id="diycommenttop" class="area"></div><!--[/diy]-->
+<div id="pic_comment" class="bm bw0 mtm mbm">
+<h3 class="pbn bbs">
+评论
+</h3>
+<div id="comment">
+
+<div id="comment_ul" class="xld xlda"></div>
+</div>
+</div>
+<form id="quickcommentform_12823" name="quickcommentform_12823" action="__APP__/Reviews/insert" method="post" autocomplete="off" class="bm bw0" style="width: 600px;">
+<div class="tedt mtn mbn">
+<div class="area">
+<div class="pt hm">您需要登录后才可以评论 <a href="__APP__/Login" onclick="showWindow('login', this.href)" class="xi2">登录</a> | <a href="__APP__/Reg" class="xi2">注册</a></div>
+</div>
+
+</div>
+<p class="pns">
+<input type="hidden" name="refer" value="__APP__/pics-{$vo.id}?&cp={$curr_cp}" />
+
+<input name="model_name" type="hidden" value="pics"/>
+<input name="info_id" type="hidden"  value="{$vo.id}"/>
+
+<button type="submit" name="commentsubmit_btn" value="true" id="commentsubmit_btn" class="pn"><strong>评论</strong></button>
+<span id="__quickcommentform_12823"></span>
+</p>
+</form>
+</div>
+
+
+
+<!--end bm-->
+
+<!--[diy=diycontentbottom]--><div id="diycontentbottom" class="area"></div><!--[/diy]-->
+</div>
+
+
+</div>
+
+<div class="sd" style="margin-left:8px; width:192px; float:left;">
+        <!--楼盘微评-->
+	<div class="con_right_4bian268px" >
+		  <div class="height_30px_text">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td height="30" align="left" class="title_style1" ><span class="blue_12px_f"><strong>&nbsp;&nbsp;商家微评</strong></span></td>
+                </tr>
+              </table>
+          </div>
+          <div class="height_10px"></div>
+          
+          <volist name="dump.lp_reviews" id="vo" >
+            <div class="black_a height_25px_text">&nbsp;&nbsp;&middot;<a href="__APP__/Reviews/view/id/{$vo.id}" title="[{$vo.lpname}]-{$vo.content|mb_substr=###,0,50,'utf-8'}">{$vo.content|mb_substr=###,0,14,'utf-8'}..</a></div>
+          </volist>
+                    
+            <div class="height_10px"></div>
+        </div>        
+        
+     <!--end 楼盘微评-->
+	 <div class="height_10px"></div>
+<div>
+
+</div>
+</div>
+</div></div>
+
+
+<include file="Public:footer" /> {//共用尾部}
+
+</body>
+</html>

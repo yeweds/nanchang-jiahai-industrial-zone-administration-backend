@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$vo.title} 精彩图片-南昌婚庆网</title>
+<meta content="图片,相册" name="keywords">
+<meta name="description" content="{$curr.remark} 南昌婚庆网为您提供最新精彩图片">
+<link href="../Public/Css/news.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/base.css" rel="stylesheet" type="text/css" />
+
+<link href="../Public/Css/class_com.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/pic_list.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/select_box.css" rel="stylesheet" type="text/css" />
+
+<script charset="utf-8" src="__PUBLIC__/Js/jquery.min.js" /></script>
+<script charset="utf-8" src="../Public/Js/jquery.rotate.js" /></script>
+<script type="text/javascript">
+//指定当前组模块URL地址
+var URL = '__URL__';
+var APP	 =	 '__APP__';
+var PUBLIC = '__PUBLIC__';
+var SELF = '__SELF__';
+
+</script>
+
+<style id="diy_style">
+.mn{display:inline;margin-left:0px;width:760px!important;}
+.mt{margin:0;padding:0;}h1.mt{font-size:14px;}.bm{background:#FFF;zoom:1;}
+.sd{display:inline;margin-right:0px;min-height:0; }
+</style>
+
+</head>
+
+
+<body>
+
+<include file="Public:news_header" />
+
+<div id="SubColumn">
+
+	<div class="ListCenter">
+	<span id="listph"><font face="宋体" size="2"><a href="__APP__/">南昌婚庆网</a> > <a href="__APP__/Pic">{$dump.partname}</a> > <strong><span class="green_12px_f">列表</span></strong></font></span>
+    </div>
+	
+<!-- albumul -->
+	<div id="albumul">
+   <!-- ld -->  
+    <div id="ld" style="width:758px; float:left;">
+	<empty name="list">
+	<li><span class="gray_a_12px">  暂无该类相册</span></li> 
+	<else/>
+	<volist name="list" id="vo" mod="2">
+ 		<!--循环 -->		
+        <div class="album_listbox">
+            <!--  左边 -->
+            <div class="listbox_left">
+                <div class="listbox_photo"><a href="__APP__/pics-{$vo.id}">
+                <i><img src='{$vo.thumb_pic}' border='0' width="172" height='118' alt='{$vo.title}'></i></a></div>
+            </div>
+            <!--  左边 -->
+            <!--  右边 -->
+            <div class="listbox_right">
+            <table width="510" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td height="20">&nbsp;</td>
+              </tr>
+              <tr>
+                <td height="30" class="green_14px_a"><a href="__APP__/pics-{$vo.id}"><h3 title="{$vo.title}">{$vo.title}</h3></a></td>
+              </tr>
+              <tr>
+                <td height="80">创建于:{$vo.add_time|date="Y-m-d H:i:s",###}</td>
+              </tr>
+              <tr>
+                <td height="20">&nbsp;</td>
+              </tr>
+            </table>
+            </div>
+            <!--  右边 -->
+        <div style="clear:both;"></div><!-- 清除 -->
+        </div>
+        <!--循环 -->
+ 	</volist>
+	</empty>
+	     <div class="clear"></div><!-- 清除 -->
+		<div class="height_25px_text blue_a"><span class="float_right">{$page}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div><!-- 分页 -->
+    </div>
+    <!-- ld --> 
+    <!-- sd -->  
+ 	<div class="sd" style="width:192px; float:right;">
+    <!--楼盘微评-->
+	<div class="con_right_4bian268px" >
+		<div class="height_30px_text">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td height="30" align="left" class="title_style1" ><span class="blue_12px_f"><strong>&nbsp;&nbsp;商家微评</strong></span></td>
+                </tr>
+              </table>
+		</div>
+		<div class="height_10px"></div>
+
+          <volist name="dump.lp_reviews" id="vo" >
+            <div class="black_a height_25px_text">&nbsp;<a href="__APP__/Reviews/view/id/{$vo.id}" title="[{$vo.lpname}]-{$vo.content|mb_substr=###,0,50,'utf-8'}">{$vo.content|mb_substr=###,0,14,'utf-8'}..</a></div>
+          </volist>
+                    
+		<div class="height_10px"></div>
+		<div style="clear:both;"></div><!-- 清除 -->  
+	</div>        
+	<!--楼盘微评end -->
+	<div class="height_10px"></div>
+    <div style="clear:both;"></div><!-- 清除 --> 
+	</div>
+ 	<!-- sd --> 
+    
+<div style="clear:both;"></div><!-- 清除 -->
+</div>
+ <!-- albumul -->   
+  
+<div style="clear:both;"></div><!-- 清除 -->
+</div>
+
+<!--底部信息--> 
+<include file="Public:footer" /> {//共用尾部}
+</body>
+</html>

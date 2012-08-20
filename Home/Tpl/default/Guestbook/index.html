@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$Think.config.cfg_title}-留言簿</title>
+<meta name="Keywords" content="{$Think.config.cfg_metakeyword}" />
+<meta name="description" content="{$Think.config.cfg_metadescrip}" />
+<link href="../Public/Css/base.css" type="text/css" rel="stylesheet">
+<link href="../Public/Css/bms-styles.css" type="text/css" rel="stylesheet">
+<link href="../Public/Skin/{$cfg_df_style}/style.css" rel="stylesheet" type="text/css"/>
+<script language="javascript">
+  var CURRENT_ITEM  = "home"; 
+  var APP  = "__APP__";  
+</script>
+</head>
+<body>
+<include file="../Public/top" /> {//默认头部}
+<TABLE id="innercontainer">
+  <tr>
+    <td id="left" width="606"><hr class="separator-blue" />
+        <span class="Normal">
+        <p><span class="subheader-blue">查看留言</span></p>
+        </span>
+        <table width="98%" align="center" class="guest_box">
+          <tr>
+            <td vAlign=top ><img src="../Public/Img/guest/icon_write.gif" width="23" height="24"><a href="__URL__/add">[签写留言]</a></td>
+          </tr>
+      </table>
+        <table width="95%" height="6"  border="0" align="center" cellpadding="0" cellspacing="0">
+          <tr>
+            <td></td>
+          </tr>
+        </table>
+        <table width="98%" align="center" class="guest_box">
+          <tr height="25">
+            <td class="guest_bottom"><img class="imgicon" src="../Public/Img/guest/icon_bulletin.gif" border="0"> <font color="#ff0000"><b>留言公告：</b></font ></td>
+          </tr>
+          <tr>
+            <td valign="top" class="guest_bg"><img
+            src="../Public/Img/guest/15.gif">欢迎大家随时留言，给我们提出宝贵的意见！<img 
+            src="../Public/Img/guest/15.gif"> </td>
+          </tr>
+      </table>
+        <table width="98%" height="6"  border="0" align="center" cellpadding="0" cellspacing="0">
+          <tr>
+            <td></td>
+          </tr>
+      </table>
+        <present name="list" > <volist name="list" id="guestVo">
+        <table width="98%" align="center" class="guest_box">
+          <tr>
+            <td class="guest_right guest_left"><table width="100%"  border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td height="25" align="center">{$guestVo.uname}</td>
+                </tr>
+                <tr>
+                  <td align="center"><IMG src="../Public/Img/guest/face/<?php if (empty($guestVo['pic'])) echo "1.gif"; else echo $guestVo['pic']; ?>"></td>
+                </tr>
+                <tr>
+                  <td height="25" align="center" valign="bottom"><img alt="IP：{$guestVo.ip|hideIP}" src="../Public/Img/guest/icon_ip.gif" border=0>&nbsp;
+                      <?php if (!empty($guestVo['qq']))  echo "<img alt=\"QQ：".$guestVo['qq']."\" src=\"../Public/Img/guest/icon_qq.gif\" border=0>&nbsp;";?>
+                      <?php if (!empty($guestVo['email'])) echo "<img alt=\"Email：".$guestVo['email']."\" src=\"../Public/Img/guest/icon_mail.gif\" border=0>";?></td>
+                </tr>
+                <tr>
+                  <td height="25" align="center">{$guestVo.addtime|date='Y-m-d H:i:s',###}</td>
+                </tr>
+            </table></td>
+            <td vAlign=top class="guest_bg"><table style="border-collapse: collapse" cellSpacing=0 cellPadding=2 width="100%" border=0>
+                <tr>
+                  <td vAlign=top class="guest_bottom" height=25><DIV style="FONT-WEIGHT: bold; OVERFLOW: hidden; WIDTH: 100%; COLOR: #000000; HEIGHT: 100%"> {$guestVo.title}</DIV></td>
+                </tr>
+                <tr>
+                  <td class="guest_right1"> {$guestVo.content} </td>
+                </tr>
+                <tr>
+                  <td class="guest_right2"><?php if (!empty($guestVo['reply'])) { ?>
+                      <DIV class="guest_reply">
+                        <table cellSpacing=0 cellPadding=0>
+                          <tr>
+                            <td><SPAN style="FONT-WEIGHT: bold">管理员（<FONT 
+                        color=red>admin</FONT>）回复：</SPAN> ({$guestVo.replytime|date='Y-m-d H:i:s',###})&nbsp; <IMG alt='版主QQ：522017177' src="../Public/Img/guest/icon_qq.gif" 
+                        border=0> <a title="主页：http://www.qunfei.com"
+                        href="http://www.qunfei.com/" target=_blank><img
+                        class=imgicon src="../Public/Img/guest/icon_homepage.gif" 
+                        border=0></a>
+                                <hr class="hr">
+                    {$guestVo.reply}
+                    <DIV></DIV></td>
+                          </tr>
+                        </table>
+                      </DIV>
+                      <?php } ?></td>
+                </tr>
+            </table></td>
+          </tr>
+        </table>
+		<table width="98%" height="6"  border="0" align="center" cellpadding="0" cellspacing="0">
+          <tr>
+            <td></td>
+          </tr>
+        </table>
+        </volist> </present> <notpresent name="list" >
+        <p>&nbsp;</p>
+        <div align='center'><font color='blue'>暂无留言信息!</font></div>
+        </notpresent>
+        <div id="pager">{$page}</div>
+        <table width="98%" align="center" class="guest_box">
+          <tr align=middle height=25>
+            <td class="guest_bottom"><B>[留言搜索]</B></td>
+          </tr>
+          <tr>
+            <td align=middle class="guest_bg"><br>
+                <form name="form1" action="__URL__/" method="get">
+                  <table width="79%"  border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                      <td width="74%">搜索：
+                        <input name="key" class="guest_key" id="key">
+                            <select name="condition">
+                              <OPTION value="uname">按姓名搜索</OPTION>
+                              <OPTION value="title">按标题搜索</OPTION>
+                              <OPTION value="text" selected>按留言内容搜索</OPTION>
+                              <OPTION value="reply">按回复内容搜索</OPTION>
+                            </select>
+                      </td>
+                      <td width="26%">
+                        <input type="image" src="../Public/Img/guest/seach_ico01.gif" width="39" height="22">
+                      </td>
+                    </tr>
+                  </table>
+              </form></td>
+          </tr>
+      </table>
+    </TD>
+    <td id=spacer width=50></td>
+    <td id=right width="290"><include file="Public:right_index" />{//右侧} </td>
+  </TR>
+</TABLE>
+<include file="../Public/footer" /> {//尾部}
+</body>
+</html>

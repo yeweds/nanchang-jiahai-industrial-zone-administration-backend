@@ -1,0 +1,19 @@
+	<ul class="qh">
+		<li class="act_a" id="nav_lf_usr" onclick="location='__URL__/edit_user' "><span>我的资料</span></li>
+		<li class="act_a" id="nav_lf_pwd" onclick="location='__URL__/' "><span>修改密码</span></li>
+		<li class="act_a" id="nav_lf_act" onclick="location='__URL__/account' "><span>修改账号</span></li>
+		<li class="act_a" id="nav_lf_sec" onclick="location='__URL__/security' "><span>账号安全</span></li>
+		<li class="act_a" id="nav_lf_adv" onclick="location='__URL__/my_advice' "><span>我的咨询</span></li>
+		<li class="act_a" id="nav_lf_rev" onclick="location='__URL__/my_reviews' "><span>我的评论</span></li>
+		<li class="act_a" id="nav_lf_fav" onclick="location='__URL__/my_favorite' "><span>我的收藏</span></li>
+		<!-- <li><a href="__URL__/subscribe"><span>邮件提醒</span></a></li> -->
+	</ul>
+<script type="text/javascript">
+$(document).ready(function(){
+	var curr_on = $("#"+CURRENT_ITEM);
+	curr_on.removeClass("act_a");
+	//curr_on.addClass("act_b");
+	curr_on.addClass("act_b").hide(); //添加名为"active_3"的class的标签,使用淡出效果,先隐藏}
+ 	curr_on.fadeIn(260); //做按键淡出效果
+});
+</script>

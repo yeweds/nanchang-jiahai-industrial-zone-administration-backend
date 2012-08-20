@@ -1,0 +1,66 @@
+<link href="../Public/Css/ct_loupan.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/ct_lp_common.css" rel="stylesheet" type="text/css" />
+<div id="load">
+<div id="lpxc_include">
+  <div class="lpxc_title">&nbsp;&nbsp;全部图片(<span class="orange_12px_f">{$count_all}</span>)&nbsp;&nbsp;&nbsp;&nbsp;实景图(<span class="orange_12px_f">{$count[14]}</span>) &nbsp;&nbsp;&nbsp;效果图(<span class="orange_12px_f">{$count[15]}</span>)&nbsp;&nbsp;&nbsp;&nbsp;户型图(<span class="orange_12px_f">{$count[13]}</span>)&nbsp;&nbsp;&nbsp;&nbsp;位置图(<span class="orange_12px_f">{$count[17]}</span>)&nbsp;&nbsp;&nbsp;配套图(<span class="orange_12px_f">{$count[18]}</span>)</div>
+  
+ <volist name="list_class" id="class" key="j"> <!-- 循环图片分类 start -->
+  <!-- 存在图片才显示 -->
+  <present name="list[$class['id']]" > 
+  <div class="height_30px_content"><span class="height_30px_float_left">&nbsp;&nbsp;{$class.name}(<strong>{$count[$class['id']]}</strong>)</span><span class="height_30px_right_float"><span class="blue_a">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <neq name="$count[$class['id']]" value="0"><a href="#"  onclick="loadPhoto('__URL__/viewall/info_id/{$info_id}/cid/{$class.id}/rid/{$range_id}/num/',1,'{$lpname}{$class.name}',{$j-1}); return false;">查看所有&gt;&gt;</a></neq></span></span></div>
+  <div class="lpxc_inc">
+	<volist name="list[$class['id']]" id="vo_sj" >
+			  <div class="widthspace_13px"></div>
+			  <div class="lpxc_ev">
+			  <div class="lpxc_ev_xc">
+			  <eq name="vo_sj.class_id" value="16">
+			  <a href="http://nc.tengfang.net{$vo_sj.savepath|trim='.'}{$vo_sj.savename}" target="_blank" title="{$lpname}{$class.name}">
+			  <else/>
+			  <a href="#" onclick="loadPhoto('__URL__/viewall/info_id/{$info_id}/cid/{$class.id}/rid/{$range_id}/num/',{$i},'{$lpname}{$class.name}',{$j-1}); return false;">
+			  </eq>
+			  <img src="http://nc.tengfang.net{$vo_sj.savepath|trim='.'}thumb_{$vo_sj.savename}" width="110" height="80" border="0" title="{$vo_sj.remark}" /></a></div>
+			  <div class="heigth_20px_center"><span class="gray_12px_f">{$lpname}{$class.name}</span></div>
+			  <div class="heigth_20px_center">{$vo_sj.upload_time|date="Y-m-d",###}上传</div>
+			  </div>
+	</volist>    
+  </div>
+  </present> 
+</volist> <!-- 循环图片分类 end -->
+<div style="clear:both"></div>
+</div>
+<div style="clear:both"></div>
+</div>
+<script type="text/javascript" src="/Public/Js/jquery.min.js"></script>
+<script type="text/javascript" src="/Home/Tpl/default/Public/Js/base.js"></script><!--前台公共JS函数-->
+<script type="text/javascript" src="../Public/Js/photos.js"></script>
+<script type="text/javascript">
+var URL  = '__URL__';
+var APP	 =	 '__APP__';
+var PUBLIC = '__PUBLIC__';
+var WEBROOT='__ROOT__';
+//alert('__APP__/Attach/viewall/info_id/{$vo_add.info_id}/cid/13/rid/{$vo_add.range_id}/num');
+//定义一个对像专门接收相册参数;
+var currLpName = '{$vo_add.lpname}';
+var currLpInfoId='{$info_id}';
+var currLpRangeId='{$range_id}';
+var currLpCount0='{$count[13]}';
+var currLpCount1='{$count[14]}';
+var currLpCount2='{$count[15]}';
+var currLpCount3='{$count[16]}';
+var currLpCount4='{$count[17]}';
+var currLpCount5='{$count[18]}';
+var currLpCount6='{$count[33]}';
+var currLpCount7='{$count[35]}';
+//alert('__URL__/viewall/info_id/{$info_id}/cid/14/rid/{$range_id}/num/');
+var more_photo=[
+{"name":currLpName,"typename":"户型图","type":0,"url":APP+"/Attach/viewall/info_id/"+currLpInfoId+"/cid/13/rid/"+currLpRangeId+"/num/","total":currLpCount0},
+{"name":currLpName,"typename":"实景图","type":1,"url":APP+"/Attach/viewall/info_id/"+currLpInfoId+"/cid/14/rid/"+currLpRangeId+"/num/","total":currLpCount1},
+{"name":currLpName,"typename":"效果图","type":2,"url":APP+"/Attach/viewall/info_id/"+currLpInfoId+"/cid/15/rid/"+currLpRangeId+"/num/","total":currLpCount2},
+{"name":currLpName,"typename":"规划图","type":3,"url":APP+"/Attach/viewall/info_id/"+currLpInfoId+"/cid/16/rid/"+currLpRangeId+"/num/","total":currLpCount3},
+{"name":currLpName,"typename":"位置图","type":4,"url":APP+"/Attach/viewall/info_id/"+currLpInfoId+"/cid/17/rid/"+currLpRangeId+"/num/","total":currLpCount4},
+{"name":currLpName,"typename":"配套图","type":5,"url":APP+"/Attach/viewall/info_id/"+currLpInfoId+"/cid/18/rid/"+currLpRangeId+"/num/","total":currLpCount5},
+{"name":currLpName,"typename":"样板间","type":6,"url":APP+"/Attach/viewall/info_id/"+currLpInfoId+"/cid/33/rid/"+currLpRangeId+"/num/","total":currLpCount6},
+{"name":currLpName,"typename":"报广展示","type":7,"url":APP+"/Attach/viewall/info_id/"+currLpInfoId+"/cid/35/rid/"+currLpRangeId+"/num/","total":currLpCount7}
+];
+</script>

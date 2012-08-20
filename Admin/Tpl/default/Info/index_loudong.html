@@ -1,0 +1,76 @@
+<include file="Public:header" />
+<script language="JavaScript" type="text/JavaScript">
+	act = '{$Think.get.ACTION}';  //全局
+	function add_info(id){   //打开添加页面
+		if(act == "loupan"){
+			window.location.href= URL+"/add/ACTION/loudong/info_id/"+id;
+		}else if(act == "loudong"){
+			window.location.href= URL+"/add/ACTION/room/info_id/"+id;
+		}else{
+			alert("不能在房间下增加子类信息！");
+		}
+	}
+
+//提交搜索
+	function submitSearch(){
+		var s_key  = $("#s_key").val();
+		s_key = $.trim(s_key);    //去空格
+ 		var s_type = $("#s_type").val();
+		window.location.href= URL+"/index/ACTION/"+act+"/s_key/"+ s_key +"/s_type/" + s_type;
+	}
+
+//查看子类列表
+	function child(id){
+		if(act == "loupan"){
+			window.location.href= URL+"/index/ACTION/loudong/pid/"+id;
+		}else if(act == "loudong"){
+			window.location.href= URL+"/index/ACTION/room/pid/"+id;
+		}else{
+			alert("已翻到尽头！");
+		}
+	}
+</script>
+<div class="bodyTitle">
+	<div class="bodyTitleLeft"></div>
+  <div class="bodyTitleText">{$nav_title}管理</div>
+</div>
+<br>
+<h3 class="marginbot">
+<eq name="Think.get.ACTION" value="loupan"><a href="__URL__/add/ACTION/{$Think.get.ACTION}" class="sgbtn">＋添加{$nav_title}</a></eq>
+<a href="#" onClick="delAll()" class="sgbtn">－删除选中</a>&nbsp;  请输入关键字：<input name="s_key" id="s_key" />
+	<select name="s_type" id="s_type"/>
+          <option value="">--不限--</option>
+		  <option value="id">按ID</option>
+		  <option value="title">按名称</option>
+		  <option value="range_id">按区域</option>
+	</select>  <a href="#" onClick="submitSearch()" class="sgbtn">我要查询</a>
+<div id="result" class="none result" style="letter-spacing:2px"></div>
+</h3>
+
+<table id="articlelist"  class="datalist fixwidth">
+	  <tr align="center" >
+	    <td width="8%"><input type="checkbox" onClick="selAll(this,'id[]')" value="选择全部" class="checkbox">选择</th>
+	    <td width="6%">ID</th>
+		<td width="10%">楼栋名称</th>
+		<td width="34%">摘要</th>
+		<td width="10%">所属楼盘ID(info_id)</td>
+		<td width="8%">累计住宅均价</td>
+		<td width="8%">累计住宅均价</th>
+        <td>操作</th>
+	  </tr>
+      <iterate name="list" id="vo">
+	  <tr>	
+	     <td align="center"><input name="id[]" type="checkbox" id="id[]" value="{$vo.id}" /></td>
+		 <td height="22" align="center">{$vo.id}</td>
+		 <td align="center"><a href="javascript:child({$vo.proid})" title="查看更多">{$vo.proname}</a></td>
+		 <td align="left">预售许可证号:{$vo.prolisence} &nbsp;&nbsp;批准预售日期:{$vo.prosaletime|default="无"}</td>
+		 <td align="center">{$vo.info_id}</td>
+		 <td align="center">{$vo.avgprice}</td>
+		 <td align="center">{$vo.noavgprice}</td>
+		 <td align="center"><neq name="Think.get.ACTION" value="room">[<a href="javascript:add_info({$vo.id})" >添加</a>]&nbsp;</neq>[<a href="javascript:edit({$vo.id})" >编辑</a>]&nbsp;[<a href="javascript:del({$vo.id})">删除</a>]</td>
+	  </tr>    
+	  </iterate>
+</table>
+	  <div class="page">{$page}</div>
+
+<include file="Public:footer" />

@@ -1,0 +1,254 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$vo.kaifashang|trim},{$vo.bianhao|trim},{$vo.range_name}-土地成交-腾房网</title>
+<meta name="keywords" content="{$vo.kaifashang|trim},{$vo.bianhao|trim},{$vo.range_name},{$vo.title}-土地成交 - 腾房网">
+<meta name="description" content="{$vo.weizhi},{$vo.title}-{$vo.jiaoyishijian}-土地成交 - 腾房网">
+<link href="../Public/Css/ct_lp_list.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/ct_lp_common.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+       table.duanxin{margin:0px 10px; }
+	   .duanxin .title{font-weight:bold; }
+#area {
+	width: 120px;
+	height: 25px;
+	margin: 0px;
+	background-image: url(../Public/Images/input_bg.png);
+	background-repeat: repeat-x;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #690;
+	border-right-color: #EEE;
+	border-bottom-color: #690;
+	border-left-color: #690;
+	line-height: 25px;
+	padding-top: 0px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 5px;
+}
+#sub_area {
+	height: 25px;
+	width: 80px;
+	background-image: url(../Public/Images/block_title_bg.png);
+	background-repeat: repeat-x;
+	border: 1px solid #690;
+	cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div id="content_bg">
+  <include file="Public:header_ct" /> <!-- 传统页公共头部 -->
+  
+  <div id="content">
+    <!--<div class="ad_head"></div>-->
+    <div class="height_10px"></div>
+    <div class="height_30px"><img src="../Public/Images/dp_jian_left.gif" width="10" height="10" /><span class="black_14px_f">腾房网</span> ><strong class="black_14px_f">土地交易</strong></div>
+    <div class="content_inc">
+          <div class="con_left_center_nbg" >
+
+          		<div id="lp_list_inc">
+                  <div class="block_title"><strong><span class="blue_14px_f">&nbsp;&nbsp;{$vo.bianhao} &nbsp;{$vo.kaifashang}</span></strong>
+                      <div class="abso_right">
+						
+                      </div>
+                  </div>
+<div class="height_10px"></div>
+<!--START--循环楼盘列表-->
+<table width="100%" border="0" cellpadding="1" cellspacing="1"  bgcolor="#ebebeb">
+	<tr>
+	<td height="28" align="right"  bgcolor="#F7F7F7" class="orange_12px_f" style="line-height:2em"><span class="black_14px_f" style="line-height:2em">摘要说明：</span></td>
+	<td height="50"  bgcolor="#FFFFFF" class="black_12px_f">&nbsp;{$vo.title}<!-- 摘要说明 -->&nbsp;</td>
+	</tr>
+    <tr class="title">
+<td width="13%" height="30" align="right"  bgcolor="#F7F7F7"><span class="black_14px_f">宗地编号：</span></td><td width="87%" height="30"  bgcolor="#FFFFFF"><span class="black_bian_a" style="padding-left:5">&nbsp;{$vo.bianhao}</span></td>
+</tr>
+
+       <tr>
+		  <td height="28" align="right"  bgcolor="#F7F7F7" class="orange_12px_f" style="line-height:2em"><span class="black_14px_f" style="line-height:2em">宗地位置：</span></td>
+		  <td height="28"  bgcolor="#FFFFFF"><span class="black_12px_f" style="padding-left:5">&nbsp;{$vo.weizhi}</span></td>
+       </tr>
+
+       <tr>
+		  <td height="28" align="right" bgcolor="#F7F7F7" class="orange_12px_f" style="line-height:2em"><span class="black_14px_f" style="line-height:2em">交易方式：</span></td>
+		  <td height="28" bgcolor="#FFFFFF"><span class="black_12px_f" style="padding-left:5">&nbsp;{$vo.jiaoyifangshi}&nbsp;</span></td>
+       </tr>
+       <tr>
+         <td height="28" align="right"  bgcolor="#F7F7F7" class="orange_12px_f" style="line-height:2em"><span class="black_14px_f" style="line-height:2em">交易时间：</span></td>
+         <td height="28"  bgcolor="#FFFFFF"><span class="black_12px_f" style="padding-left:5">&nbsp;{$vo.jiaoyishijian}&nbsp;</span></td>
+       </tr>
+       <tr>
+         <td height="28" align="right"  bgcolor="#F7F7F7" class="orange_12px_f" style="line-height:2em"><span class="black_14px_f" style="line-height:2em">土地用途：</span></td>
+         <td height="28"   bgcolor="#FFFFFF"><span class="black_12px_f" style="padding-left:5">&nbsp;{$vo.yongtu}&nbsp;</span></td>
+       </tr>
+       <tr>
+         <td height="28" align="right"    bgcolor="#F7F7F7" class="orange_12px_f" style="line-height:2em"><span class="black_14px_f" style="line-height:2em">宗地面积：</span></td>
+         <td height="28"    bgcolor="#FFFFFF"><span class="black_12px_f" style="padding-left:5">&nbsp;{$vo.mianji}&nbsp;</span></td>
+       </tr>
+       <tr>
+         <td height="28" align="right"     bgcolor="#F7F7F7" class="orange_12px_f" style="line-height:2em"><span class="black_14px_f" style="line-height:2em">规划指标：</span></td>
+         <td height="28" bgcolor="#FFFFFF"><span class="black_12px_f" style="padding-left:5">&nbsp;{$vo.zhibiao}&nbsp;</span></td>
+       </tr>
+       <tr>
+         <td height="28" align="right"  bgcolor="#F7F7F7" class="orange_12px_f" style="line-height:2em"><span class="black_14px_f" style="line-height:2em">起始价：</span></td>
+         <td height="28"  bgcolor="#FFFFFF"><span class="black_12px_f" style="padding-left:5">&nbsp;{$vo.qishijia}&nbsp;</span></td>
+       </tr>
+       <tr>
+         <td height="28" align="right" bgcolor="#F7F7F7" class="orange_12px_f" style="line-height:2em"><span class="black_14px_f" style="line-height:2em">成交单价：</span></td>
+         <td height="28" bgcolor="#FFFFFF"><span class="black_12px_f" style="padding-left:5">&nbsp;{$vo.chengjiaojia}&nbsp;</span></td>
+       </tr>
+       <tr>
+         <td height="28" align="right"  bgcolor="#F7F7F7" class="orange_12px_f" style="line-height:2em"><span class="black_14px_f" style="line-height:2em">总地价：</span></td>
+         <td height="28"  bgcolor="#FFFFFF"><span class="black_12px_f" style="padding-left:5">&nbsp;{$vo.zongjia}&nbsp;</span></td>
+       </tr>
+       <tr>
+         <td height="28" align="right"  bgcolor="#F7F7F7" class="orange_12px_f" style="line-height:2em"><span class="black_14px_f" style="line-height:2em">竞得人：</span></td>
+         <td height="28"  bgcolor="#FFFFFF"><span class="black_12px_f" style="padding-left:5">&nbsp;{$vo.kaifashang}</span><span class="black_14px_f" style="padding-left:5">&nbsp;</span></td>
+       </tr>
+       <tr>
+         <td height="28" align="right"  bgcolor="#F7F7F7" class="orange_12px_f" style="line-height:2em"><span class="black_14px_f" style="line-height:2em">备注：</span></td>
+         <td height="80"  bgcolor="#FFFFFF" class="black_12px_f">&nbsp;{$vo.beizhu}&nbsp;</td>
+       </tr>
+
+</table>
+<notpresent name="list"></notpresent>
+ <!--END--循环楼盘列表-->
+            <div style="clear:both"></div>                                                   
+                <div class="height_10px"></div>
+                <div class="height_lineheight_20px"></div>
+<div style="clear:both"></div>
+          		  <!--lp_list_inc促使图层高度随内容增加面增加-->
+   		    </div>
+<div style="clear:both"></div><!--con_left_center_bg促使图层高度随内容增加面增加</div>-->
+      </div>       		       		
+          <div class="width_10px_space"></div>
+          <div class="con_right_bg3">
+            <div class="de_ad_270px"><a href="http://topic.tengfang.net/zhuanti/pxjx/" ><img src="../Public/Images/kaipan.jpg" width="300" height="150" border="0"/> </a> 
+			<!-- <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" width="300" height="150">
+              <param name="movie" value="../Public/Flash/news-ad300-150.swf" />
+              <param name="quality" value="high" />
+              <embed src="../Public/Flash/news-ad300-150.swf" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="300" height="150"></embed>
+            </object> -->
+			</div>
+            <div class="heigth_10px"></div>
+            <div class="con_right_4bian268px">
+              <div class="height_30px">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td width="37%" height="30" align="center"  id="news_today" style="cursor:pointer"><strong class="blue_12px_f">今日最受关注</strong></td>
+                    <td width="63%" height="30" class="left_bottom_bian1px" id="news_week"><span class="blue_12px_f">&nbsp;&nbsp;一周新闻排行</span></td>
+                  </tr>
+                </table>
+              </div>
+              <div id="news_pai_ajax">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                  <present name="dump.news_gz" >
+                    <volist name="dump.news_gz" id="vo" >
+                      <tr>
+                        <td width="14%" height="30" align="center">
+                        <lt name="vo.count" value="3"><div class="num_style1"><else/>
+                        <div class="num_style2"></lt>
+                        <lt name="i" value="9">0</lt>{$vo.count}</div></td>
+                        <td width="86%" height="30" class="black_a"><a href="__URL__/view/id/{$vo.id}">{$vo.title}</a></td>
+                      </tr>
+                    </volist>
+                  </present>
+                </table>
+              </div>
+            </div>
+            <div class="heigth_10px"></div>
+<!-- 共用专题 -->
+	<include file="Html:zhuangti_inc" />
+<!-- 共用专题 -->
+            <div style="clear:both"></div>
+            <!--con_left1促使图层高度随内容增加面增加-->
+          </div>
+          <div style="clear:both"></div>
+          <!--con_inc促使图层高度随内容增加面增加-->
+    </div>
+
+    <div class="height_10px"></div>
+    <div style="clear:both"></div><!--content促使图层高度随内容增加面增加-->    
+ </div>
+	<include file="Public:footer" /> {//共用尾部}
+	 
+<div style="clear:both"></div><!--content_bg促使图层高度随内容增加面增加-->
+</div>
+</body>
+</html>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	//今日一周
+	$('#news_week').mouseover(function(){
+		$('#news_week').removeClass().addClass('left_bottom_bian1pxm');	
+		$('#news_today').addClass('bottom_bian1pxm');	
+		domAjax('news_pai_ajax','__APP__/News/news_pai_ajax/type/0','get');
+		
+	});
+	$('#news_today').mouseover(function(){
+		$('#news_week').removeClass().addClass('left_bottom_bian1px');	
+		$('#news_today').removeClass();	
+		domAjax('news_pai_ajax','__APP__/News/news_pai_ajax/type/1','get');
+	});
+	domAjax('news_pai_ajax','__APP__/News/news_pai_ajax/type/1','get');
+	
+			//播放图片效果
+			var lMC = 2;
+			var rMC = 0;
+
+			jQuery("#photo_left").click(function(){
+				if(rMC>0){
+					scrollto("r");
+					rMC--;
+					lMC++;
+					jQuery("#photo_right").css("cursor","pointer");
+					if(rMC<=0){
+						jQuery("#photo_left").css("cursor","no-drop");
+					}
+				}
+
+			});
+
+			jQuery("#photo_right").click(function(){
+
+				if(lMC>0){
+					scrollto("l");
+					lMC--;
+					rMC++;
+					jQuery("#photo_left").css("cursor","pointer");
+					if(lMC<=0){
+						jQuery("#photo_right").css("cursor","no-drop");
+					}
+				}
+
+			});
+
+			jQuery("#star_item_list").css("width",(950*3)+"px");
+			jQuery("#photo_left").css("cursor","no-drop");
+
+			if(lMC>0){
+				jQuery("#photo_right").css("cursor","pointer");
+			}
+
+			function scrollto(way){
+				if(way=="l"){
+					jQuery("#star_item_list").animate({marginLeft:"-=950px"},2000);
+				}else{
+					jQuery("#star_item_list").animate({marginLeft:"+=950px"},2000);
+				}
+
+			}	
+
+});
+</script>

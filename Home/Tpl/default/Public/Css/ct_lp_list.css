@@ -1,0 +1,69 @@
+#lp_key_inc {
+	min-height: 200px!important;
+	height: auto;
+	width: 645px;
+	border: 1px solid #dbdbdb;
+}
+#lp_list_inc {
+	min-height: 200px!important;
+	height: auto;
+	width: 645px;
+	border: 1px solid #dbdbdb;
+}
+.tj_bn {
+	background-image: url(../Images/tj_bn.gif);
+	background-position: center center;
+	height: 40px;
+	width: 80px;
+	background-repeat: no-repeat;
+	text-align: center;
+	font-weight: bold;
+	float: left;
+}
+.tj_text {
+	height: auto;
+	width: 545px;
+	float: left;
+}
+.lp_photo {
+	height: 100px;
+	width: 140px;
+	border: 1px solid #dbdbdb;
+	float: left;
+}
+.lp_photo_see {
+	height: 110px;
+	width: 158px;
+	border: 1px solid #dbdbdb;
+}
+.width_360w_100h {
+	float: left;
+	min-height: 100px!important;
+	height:auto;
+	width: 330px;
+}
+.lp_list_price {
+	line-height: 100px;
+	float: left;
+	height: 100px;
+	width: 130px;
+	text-align: right;
+}
+.float_right {
+	float: right;
+	margin-right: 30px;
+	display: block;
+}
+#scroll_see_inc {
+	height: 200px;
+	width: 920px;
+	overflow: hidden;
+	margin-left: 20px;
+}
+.box_140w_200h {
+	float: left;
+	height: 200px;
+	width: 160px;
+	text-align: center;
+	overflow: visible;
+}

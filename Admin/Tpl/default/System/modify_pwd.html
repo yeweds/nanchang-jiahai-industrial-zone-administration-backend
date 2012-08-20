@@ -1,0 +1,39 @@
+<include file="Public:header" />
+
+<div class="bodyTitle">
+	<div class="bodyTitleLeft"></div>
+  <div class="bodyTitleText">修改密码</div>
+</div>
+
+<form method="post" action="__URL__/update_pwd">
+				<table width="100%" style="font-family: '宋体', Simsun;">
+				<input type="hidden" name="id" value="{$vo.id}" />
+				   <tr>
+					  <td height="20">用&nbsp;户&nbsp;名： {$vo.admin}  [ID:{$vo.id}]</td>
+				  </tr>
+					<tr>
+					  <td>原&nbsp;密&nbsp;码：
+					 <input name="old_pwd" type="text" id="old_pwd" class="txt"/></td>
+				  </tr>
+					<tr>
+					<tr>
+					  <td>新&nbsp;密&nbsp;码：
+    <input name="password" type="password" id="password" class="txt"/>
+    <input name="opassword" type="hidden" id="opassword" value="{$vo.pwd}" /></td>
+				  </tr>
+					<tr>
+					  <td>确认密码：
+					<input name="pwd2" type="password"  class="txt"/></td>
+				  </tr>
+					<tr>
+					  <td>&nbsp;</td>
+				  </tr>
+					<tr>
+					  <td><input type="submit"  value="确定修改" class="df_button" />
+                    <input type="reset" value="还原重填" class="df_button" /></td>
+				  </tr>
+				</table>
+</form>
+<p class="i">注意：新密码为空时不会修改原密码！</p>
+
+<include file="Public:footer" />

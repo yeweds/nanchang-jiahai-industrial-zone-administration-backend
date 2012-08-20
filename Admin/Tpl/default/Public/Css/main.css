@@ -1,0 +1,197 @@
+*{
+	font-family:"宋体", Verdana, Arial, Helvetica, sans-serif;
+	font-size:12px;
+	word-wrap:break-word; outline:none; 
+}
+body{
+	font-family:"宋体", Verdana, Arial, Helvetica, sans-serif;
+	font-size:12px;
+	color: #555;
+	line-height: 150%;
+}
+a{
+	color:#000;
+	text-decoration: none;
+}
+a img{ border:none; }
+th {
+	padding-top: 5px;
+	padding-right: 0pt;
+	padding-bottom: 5px;
+	padding-left: 0pt;
+	font-weight: 700;
+	text-align: left;
+}
+td {
+	line-height: 150%;
+}
+.red {color:#FF0000;}
+a:hover{
+	color:#FF0000;
+	text-decoration:none;
+}
+
+.bodyTitle{
+	width:100%;
+	height:33px;
+	background:url(../Images/body_title_bg.gif) top left repeat-x;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:5px;
+	clear:both;
+}
+.bodyTitleLeft{
+	width:30px;
+	height:33px;
+	float:left;
+	background:url(../Images/body_title_left.gif) right bottom no-repeat;
+}
+.bodyTitleText{
+	height:27px;
+	float:left;
+	margin-top:6px;
+	line-height:27px;
+	font-size:14px;
+	font-weight:bold;
+	letter-spacing:2px;
+	padding-left:8px;
+	padding-right:8px;
+	background:#FFF url(../Images/body_title_right.gif) right bottom no-repeat;
+}
+.bgFleet {
+	background-color: #E8F3FD;
+}
+.borderBottom {
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #369FD9;
+}
+.borderAll {
+	border: 1px solid #369FD9;
+}
+
+.fontRed {
+	color: #FF0000;
+}
+.fontBold {
+	font-weight: bold;
+}
+
+.df_button {
+	border: 1px solid #329AD7;
+	color: #FFFFFF;
+	background-image: url(../Images/menu_title_bg.jpg);
+	background-repeat: repeat-x;
+	height: 30px;
+	padding-right: 10px;
+	padding-left: 10px;
+}
+
+.df_button_green {
+	padding-left:3px;
+	padding-right:2px;
+	border:1px solid #bdbcbd;
+	background:#FFF url(../Images/inputbut_bg.gif) left center repeat-x;
+	font-size:12px;
+	height:24px;
+	padding-top:2px;
+	letter-spacing:2px;
+	vertical-align:middle;
+	margin-bottom:6px;
+}
+.paddingAll {
+	padding: 5px;
+}
+.bgFleet {
+	height: 30px;
+	background-color: #E8F3FD;
+	font-size: 14px;
+	font-weight: bold;
+}
+.borderBottom {
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #369FD9;
+}
+/**/
+
+body, td, input, textarea, select, button{ color:#666; font:12px "Lucida Grande", Verdana, Lucida, Helvetica, Arial, sans-serif; }
+textarea, input{ padding:2px; border:1px solid; border-color:#666 #eee #eee #666; }
+.opt .txt, .opt textarea{ vertical-align:middle; margin-right:10px; width:180px; }
+
+.opt{ clear:both; overflow:hidden; }
+	.opt th{ padding:5px 0; font-weight:700; text-align:left; }
+	.opt td{ padding-bottom:10px; }
+	.opt .txt, .opt textarea{ vertical-align:middle; margin-right:10px; width:280px; }
+	.opt .ox{ vertical-align:middle; margin-right:10px; width:500px; }
+	.opt select{ vertical-align:middle; margin-right:10px; }
+	.opt .area{ height:80px; }
+	.opt .bigarea { width: 500px; height: 80px; }
+	.opt label{ margin-right:20px; }
+	.opt p{ float:left; line-height:180%; }
+.redtxt{ border-color:#ff0000; background:#F5F9FD; }
+.radio{ margin-top:-1px; border:none; vertical-align:middle; }
+.checkbox{ height:14px; border:none; vertical-align:middle; }
+.datalist{ clear:both; width:100%; border-top:2px solid #B5CFD9; border-bottom:2px solid #B5CFD9; }
+	.datalist th{ line-height:250%; text-align:left; background:url(../Images/bg_repx.gif) repeat-x 0 bottom; color:#9EBECB; font-size:12px; }
+	.datalist td{
+	padding:5px 0;
+	background-image: url(../Images/bg_repx.gif);
+	background-repeat: repeat-x;
+	background-position: 0 bottom;
+}
+	.currenttr td{ background:#F2F9FD url(../Images/bg_repx.gif) repeat-x 0 bottom; }
+	.datalist a{ text-decoration:none; }
+		.datalist a:hover{ text-decoration:none; }
+	.datalist .txt{ width:90%; overflow:hidden; }
+	.datalist .txtnobd{ width:90%; border:1px solid #FFF; text-align:right; overflow:hidden; cursor:pointer;}
+	.datalist .bigarea { width: 500px; height: 80px; }
+	.tdinput{ padding:0 30px 5px 0; width:160px; }
+	.tdarrow{ width:20px; }
+	.option{ width:10%; }
+	.username{ width:20%; font-weight:700; }
+	.date{ width:25%; }
+	.ip{ width:15%; }
+.fixwidth{ width:100%; }
+	.fixwidthdec{ width:680px; }
+.tdpage{ text-align:right; }
+.tdpage a:link{ text-decoration:underline; }
+	.tdpage a:hover{ text-decoration:none; }
+
+/* title */
+h3{ font-size:14px; }
+	h3 .btn{ margin-left:10px; vertical-align:middle; }
+.sgbtn{ margin-left:20px; padding:3px 7px; *padding:4px 7px 2px; border:1px solid #62BD25; background:#BCE868; color:#4C1770; font-size:12px; font-weight:400; }
+	.sgbtn:hover{ text-decoration:none; }
+.i{
+	padding-left:32px;
+	line-height:25px;
+	background:url(../Images/sticky_unread_mine.gif) no-repeat;
+	color: #9A9A9A;
+}
+.clear{clear:both}
+
+	.i a{ text-decoration:underline; }
+	.i a:hover{ text-decoration:none; }
+.memlist{ list-style:none; margin:7px 0 25px; padding-top:2px; border-top:2px solid #B5CFD9; width:80%;}
+	.memlist li{ clear:both; overflow:hidden; zoom:1; padding:5px 0; *padding:1px 0 5px; line-height:150%; background:url(bg_repx.gif) repeat-x 0 bottom; }
+	.memlist em{ float:left; width:120px; font:12px "Lucida Grande", Verdana, Lucida, Helvetica, Arial, sans-serif; }
+	.memlist .memcont{ width:480px; }
+.ajax{ width:360px; border:1px solid #89B3C2; }
+	.ajaxbg{ margin:2px; padding:15px; background:url(../Images/bg_repx_hc.gif) repeat-x; }
+	.alert{ padding-left:40px; background:url(../Images/bg_repno.gif) no-repeat 0 -500px; }
+		.alert h4{ margin-bottom:3px; font-size:14px; }
+		.alert p{ margin-bottom:12px; color:#09C; }
+		.alert .btn{ vertical-align:middle; }
+		.alert a.abtn{ margin-left:20px; text-decoration:underline; }
+			.alert a.abtn:hover{ text-decoration:none; }
+.rtninfo{ margin:50px auto; width:500px; line-height:180%; }
+	.rtninfo h4{ margin-bottom:10px; padding-left:25px; background:url(../Images/bg_repno.gif) no-repeat -275px -98px; font-size:14px; }
+	.rtninfo p{ margin-left:25px; }
+
+div.result{border:1px solid #d4d4d4; background:#FFC; padding:8px 12px; margin:2px 15px; line-height:185%; color:#393939; font-weight:bold; float:auto; width:85%;}
+.none{display:none}
+.inline{display:inline}
+/* 用于分页导航 */
+div.page{ background:#FBFAF8; height:20px;  border:1px solid #d4d4d4; padding:5px 0px;
+	line-height:20px; width:95%; margin:5px auto; text-align:right;}

@@ -1,0 +1,36 @@
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>顶部导航</title>
+<link href="../Public/Css/top.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div class="topnav">
+	<div class="sitenav">
+		<div class="welcome">你好，<span class="username"><?php echo ($admin); ?></span>，欢迎使用0791婚庆网管理系统</div>
+		<div class="sitelink"> 
+			<a href="<?php echo ($http); ?>" target="_blank">网站主页</a> | 
+			<a href="__APP__/System/modify_pwd/id/<?php echo ($uid); ?>" target="MainFrame">修改密码</a> | 
+			<a href="__APP__/Public/logout" target="_top">安全退出</a>
+            <a target="MainFrame" title="点击刷新右侧窗口" href="javascript:location.reload()" class="reload">刷新右窗口页面</a>
+		</div>
+	</div>
+	<div class="leftnav">
+		<ul>
+			<li class="navleft"></li>
+			<li id='d1' style="margin-left:-1px"><a href="__APP__/Menu/leftmenu" target="leftFrame" class="tabon">首页</a></li>
+			<li id='d2'><a href="__APP__/Menu/leftmenu/action/Info" target="leftFrame">内容管理</a></li>
+			<li id='d3'><a href="__APP__/Menu/leftmenu/action/Pics" target="leftFrame">相册管理</a></li>
+			<!-- <li id='d2'><a href="__APP__/Menu/leftmenu/action/Order" target="leftFrame">团购管理</a></li>-->
+			<li id='d4'><a href="__APP__/Menu/leftmenu/action/Reviews" target="leftFrame">交互管理</a></li> 
+			<li id='d5'><a href="__APP__/Menu/leftmenu/action/Admin" target="leftFrame">用户管理</a></li>
+			<li id='d6'><a href="__APP__/Menu/leftmenu/action/Class" target="leftFrame">栏目管理</a></li>
+			<li id='d7'><a href="__APP__/Menu/leftmenu/action/Systemconfig" target="leftFrame">系统管理</a></li>
+			<li id='d8'><a href="__APP__/Menu/leftmenu/action/Other" target="leftFrame">其它管理</a></li>
+			<li class="navright"></li>
+		</ul>
+	</div>
+</div>
+</body>
+</html>

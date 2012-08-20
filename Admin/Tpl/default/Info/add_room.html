@@ -1,0 +1,135 @@
+<include file="Public:header" />
+<script language="javascript" src="__PUBLIC__/DatePicker/WdatePicker.js"></script>
+<!-- 日历插件 -->
+<div class="bodyTitle">
+	<div class="bodyTitleLeft"></div>
+  <div class="bodyTitleText">添加房间</div>
+</div>
+<form action="__URL__/insert/ACTION/{$Think.get.ACTION}" method="post">
+<table cellSpacing="1" cellPadding=2 width="95%" align="center" border="0">
+    <tr>
+      <td width="22%" height="25" scope="col">房间名称：<span class="red">* </span></td>
+      <td align="left" valign="middle" scope="col">
+          <input name="title" type="text" class="box" id="title" size="40">
+      </td>
+    </tr>
+    <tr>
+      <td height="25">摘要：</td>
+      <td align="left"><textarea name="remark" cols="60%" rows="5" id="remark"></textarea>
+        用于站内搜索 </td>
+    </tr>
+    <tr>
+      <td>楼盘ID：</td>
+      <td><input name="lpid" type="text" class="box" id="lpid" size="40"> 
+        对应房管局楼盘ID</td>
+    </tr>
+    <tr>
+      <td>楼栋ID：</td>
+      <td><input name="proid" type="text" class="box" id="proid" size="40">
+    对应房管局楼栋ID</td>
+    </tr>
+    <tr>
+      <td>房间ID：</td>
+      <td><input name="roomid" type="text" class="box" id="roomid" size="40">
+    对应房管局房间ID</td>
+    </tr>
+    <tr>
+      <td>所在区域：<span class="red">* </span></td>
+      <td><select name="range_id" id="range_id"/>
+        
+          <option value="">请选择区域</option>
+          <present name="area_list" > <volist name="area_list" id="vo" >
+          <option value="{$vo.id}">{$vo.head_py|strtoupper} {$vo.name}</option>
+        </volist> </present> </td>
+    </tr>
+    <tr>
+      <td> 房间地址：</td>
+      <td ><input type='text' name='rroomaddr' id='rroomaddr' style='width:250px'/></td>
+    </tr>
+    <tr>
+      <td>所在楼层：</td>
+      <td ><input type='text' name='rlayer' id='rlayer' style='width:250px'  />
+      </td>
+    </tr>
+    <tr>
+      <td>所在单元：</td>
+      <td ><input type='text' name='runit' id='runit' style='width:250px' />
+      </td>
+    </tr>
+    <tr>
+      <td> 单元编号：</td>
+      <td ><input type='text' name='runitid' id='runitid' style='width:250px' /></td>
+    </tr>
+    <tr>
+      <td> 房间号码 ：</td>
+      <td ><input type='text' name='rroomnum' id='rroomnum' /> </td>
+    </tr>
+    <tr>
+      <td>户型：</td>
+      <td ><input type='text' name='rroomtype' id='rroomtype' /></td>
+    </tr>
+    <tr>
+      <td> 建筑面积：</td>
+      <td ><input type='text' name='rarea' id='rarea' /></td>
+    </tr>
+    <tr>
+      <td> 套内面积：</td>
+      <td ><input type='text' name='rinarea' id='rinarea' /></td>
+    </tr>
+    <tr>
+      <td> 分摊面积 ：</td>
+      <td ><input type='text' name='routarea' id='routarea' /></td>
+    </tr>
+    <tr>
+      <td>房间状态变更日期：</td>
+      <td ><input name="rstatustime" value="2011-01-01" type="text" id="rstatustime" onClick="WdatePicker()"/></td>
+    </tr>
+    <tr>
+      <td>房间状态(可预售)：</td>
+      <td ><input type='text' name='rstatus' id='rstatus' /> 
+      </td>
+    </tr>
+    <tr>
+      <td>售出价格(新建县)：</td>
+      <td ><input type='text' name='rsaleprice' id='rsaleprice' style='width:250px' />
+      </td>
+    </tr>
+    <tr>
+      <td>朝向：</td>
+      <td ><input type='text' name='rposition' id='rposition' style='width:250px' />
+      </td>
+    </tr>
+    <tr>
+      <td>阳台面积：</td>
+      <td ><input type='text' name='rbalcony' id='rbalcony' style='width:250px' />
+      </td>
+    </tr>
+    <tr>
+      <td> 阳台封闭状态(新建县)：</td>
+      <td ><input name='hsbalconyout' type='text' id='hsbalconyout' style='width:250px' /></td>
+    </tr>
+    <tr>
+      <td> 建筑结构(钢筋混凝土结构)：</td>
+      <td ><input type='text' name='rmaketype' id='rmaketype' style='width:250px' />
+      </td>
+    </tr>
+    <tr>
+      <td> 房间类型(非住宅、住宅)： </td>
+      <td ><input type='text' name='rtype' id='rtype' style='width:250px' /></td>
+    </tr>
+    <tr>
+      <td>设计用途(写字楼，商业)：</td>
+      <td ><input type='text' name='rsheji' id='rsheji' style='width:250px' /></td>
+    </tr>
+    <tr>
+      <td> 测绘状态：</td>
+      <td ><input type='text' name='rcehui' id='rcehui' style='width:250px' /></td>
+    </tr>
+</table>
+<div align="center"><br>
+  <input type="submit" value=" 添 加 " class="df_button"/>  &nbsp;&nbsp;&nbsp;&nbsp;  <input type="reset" value=" 取 消 " class="df_button">
+<br>
+</P>
+</div>
+</form>
+<include file="Public:footer" />

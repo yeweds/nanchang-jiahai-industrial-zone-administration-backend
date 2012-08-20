@@ -1,0 +1,220 @@
+<include file="Public:header" />
+<script language="javascript" src="__PUBLIC__/DatePicker/WdatePicker.js"></script>
+<!-- 日历插件 -->
+<!--导入编辑器开始-->
+<link rel="stylesheet" href="__PUBLIC__/Js/Kindeditor/themes/default/default.css" />
+<script charset="utf-8" src="__PUBLIC__/Js/Kindeditor/kindeditor.js"></script>
+<script charset="utf-8" src="__PUBLIC__/Js/Kindeditor/lang/zh_CN.js"></script>
+<script type="text/javascript">
+//-- 自定义在线编辑器
+	var editor;
+	var mini_items = ['source','undo','redo','fontname','fontsize','forecolor',
+					  'hilitecolor','bold','italic','emoticons','removeformat',
+					  'fullscreen'];  //迷你元素
+	var full_items = ['source', '|', 'undo', 'redo', '|', 'preview', 'print', 'template', 'cut', 'copy', 'paste',
+        'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+        'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+        'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
+        'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+        'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image',
+        'flash', 'insertfile', 'table', 'hr', 'emoticons', 'pagebreak',
+        'link', 'unlink' ];  //完全元素
+	
+	KindEditor.ready(function(K) {
+		editor = K.create('#my_editor', {
+					 themeType : 'default',//样式
+					 newlineTag: 'br', //换行格式
+					 filterMode: true, //过滤代码
+					 uploadJson: '__PUBLIC__/Js/Kindeditor/php/upload_json.php',
+					 fileManagerJson : '__PUBLIC__/Js/Kindeditor/php/file_manager_json.php',
+					 allowFileManager : true,											 
+					 items: full_items  //当前自定义元素列表
+		});
+	});
+
+	//获取数据	
+	function checkForm(){
+		editor.sync('my_editor'); //同步编辑器内容
+		return true;
+	}
+</script>
+<!-- 编辑器调用结束 -->
+
+<script type="text/javascript">
+function checkUpload(){
+    if(document.getElementById('attach_arr').value==''){
+         alert("请选择图片类型");
+		 return false;
+	}
+	if(document.getElementById('savename').value==''){
+         alert("请填写保存名称");
+		 return false;
+	}
+	if(document.getElementById('file').value==''){
+         alert("请上传图片");
+		 return false;
+	}
+}
+var count= 2;   
+var maxfile =15;
+function addUpload(){  
+	if(count >= maxfile)    return;//限制最多maxfile个文件框
+	count++; 
+	//自增id不同的HTML对象，并附加到容器最后
+	var newDiv =  "<div id=divUpload" + count +">"
+		+ " <input id=file" + count + " type=file size=50 name=file[]>"
+		+ " <a href=javascript:delUpload('divUpload" + count + "');>删除</a>"
+		+ " </div>";   
+	  document.getElementById("uploadContent").insertAdjacentHTML("beforeEnd", newDiv);     
+}  //删除指定元素
+function delUpload(diva) {  
+	count--; 
+	document.getElementById(diva).parentNode.removeChild(document.getElementById(diva));   
+}   
+</script>
+
+<div class="bodyTitle">
+	<div class="bodyTitleLeft"></div>
+  <div class="bodyTitleText">添加商家</div>
+</div>
+ <form method="post" name="form1" action="__URL__/Insert" enctype ="multipart/form-data" onSubmit="return checkForm();">
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+              <td height="30"><span class="marginbot"><a href="__APP__/Shop/" class="sgbtn" >返回商家管理</a></span></td>
+              <td height="30" align="right"><strong><a href="javascript:history.go(-1)">返回&gt;&gt;</a></strong>&nbsp;&nbsp;&nbsp;</td>
+            </tr>
+            <tr>
+              <td width="15%" height="30">商家全称：</td>
+              <td width="85%" height="30">
+                <input name="title" type="text"  class="txt" id="title" size="60"/>
+				<font color="red">*</font></td>
+            </tr>
+<!--             <tr>
+              <td width="15%" height="30">公司类型：</td>
+              <td width="85%" height="30">
+                <input name="corp_type" type="text"  class="txt" id="title" size="30"/>
+				<font color="red">*</font></td>
+            </tr> -->
+		   <tr>
+		     <td height="30">商家简称：</td>
+		     <td height="30"><input name="sub_title" type="text"  class="txt" id="sub_title" size="50"/>
+		       (副标题)</td>
+    </tr>
+		   <tr>
+             <td height="30">摘要：</td>
+		     <td height="30"><textarea name="remark" cols="40" rows="5" id="remark"></textarea></td>
+    </tr>
+		   <tr>
+		     <td height="30">权重：</td>
+		     <td height="30">
+		     <input name="sortrank" type="text" id="weight" style="width:50px" value="0" />
+	         (越大越靠前,最大1000)</td>
+	        </tr>
+			<tr>
+			  <td height="30"><span class="tRight tTop">上传Logo：</span></td>
+			  <td height="30">
+			    <input name="logo_url" type="file" id="logo_url"  style="width:250px;" />
+			    <span class="tLeft">暂不上传可留空&nbsp;</span></td>
+    </tr>
+			<tr>
+			  <td height="30">上传其它图片方法：</td>
+			  <td height="30">先添加商家，然后在修改商家页上传附件。</td>
+		    </tr>
+			<tr>
+              <td width="15%" height="30">所属栏目：</td>
+              <td width="85%" height="30">
+                <select name="class_id" id="class_id" >
+                <option value="0">请选择</option>
+                <volist name="classT" id="vo">
+                <option value="{$vo.id}">{$vo.name}</option>
+				</volist>	
+				</select>(商家类型)
+			   </td>
+			</tr>
+            <tr>
+              <td height="30">商家介绍：</td>
+              <td height="30">    
+              <!-- 编辑器调用开始 -->
+			  <textarea id="my_editor" name="content" style="width:700px;height:300px;"></textarea> <!-- 编辑器调用结束 --> 
+              <font color="red">*</font></td>
+            </tr>
+            <tr>
+              <td height="30">信誉星级:</td>
+              <td>
+			  <select name="star" id="star">
+			  <option value="5">★★★★★</option>
+			  <option value="4">★★★★</option>
+			  <option value="3" selected="selected">★★★</option>
+			  <option value="2">★★</option>
+			  <option value="1">★</option>
+              </select> 
+			  默认为3级，越高越优秀              </td>
+            </tr>
+			<tr>
+				<td height="30">商家地址:</td>
+				<td><input type="text" name="address"  size="80"/></td>
+            </tr>
+			<tr>
+				<td height="30">营业时间:</td>
+				<td><input type="text" name="yingye_time"  size="60"/></td>
+            </tr>
+			 <tr>
+            <td height="30">是否备车:</td>
+            <td><input type="text" name="is_needcar"  size="10"/>1是，0否</td>
+            </tr>
+			 <tr>
+            <td height="30">交通线路:</td>
+            <td><input type="text" name="jiaotong"  size="80"/></td>
+            </tr>
+			 <tr>
+            <td height="30">包餐类别:</td>
+            <td><input type="text" name="baocan" size="30"/></td>
+            </tr>
+			<tr>
+            <td height="30">外景区域:</td>
+            <td><input class='np' type='checkbox' name='wj_range[]' id='flag1' value='1' >[1]南昌市区
+				<input class='np' type='checkbox' name='wj_range[]' id='flag2' value='2' >[2]南昌郊区
+				<input class='np' type='checkbox' name='wj_range[]' id='flag3' value='3' >[3]省内
+				<input class='np' type='checkbox' name='wj_range[]' id='flag4' value='4' >[4]省外
+				<input class='np' type='checkbox' name='wj_range[]' id='flag5' value='5' >[5]国际路线
+				</td>
+            </tr>
+			<tr>
+            <td height="30">消费预算范围:</td>
+            <td><input type="text" name="price_min" value="" size="10"/>到<input type="text" name="price_max" value="" size="10"/> 元</td>
+            </tr>
+            <tr>
+            <td height="30">网址:</td>
+            <td><input type="text" name="website" size="60"/>(可不填或填本站商家页)</td>
+            </tr>
+            <tr>
+            <td height="30">电子邮件:</td>
+            <td><input type="text" name="email" size="40"/> 未知则填：kefu@0791hunqing.com </td>
+            </tr>
+             <tr>
+            <td height="30">QQ号 码:</td>
+            <td><input type="text" name="qq"/></td>
+            </tr>
+            <tr> 
+            <td height="30">联系电话:</td>
+            <td><input type="text" name="tel"/></td>
+            </tr>
+           <tr>
+               <td height="30">商家人气:</td>
+           	   <td><input name="hits" type="text" id="hits" value="0" />  预设点击数</td>
+		   </tr>
+           	 <tr>
+			  <td>&nbsp;</td>
+			  <td>&nbsp;</td>
+              </tr>
+            <tr>
+              <td height="40">&nbsp;</td>
+              <td height="40">
+                <input type="submit"  value="确定新增" class="df_button" />
+                <input type="reset"  value="还原重填" class="df_button" /></td>
+            </tr>
+        </table>
+</form>
+       <p class="i">删除不可恢复,谨慎操作</p>
+   <br>
+<include file="Public:footer" />

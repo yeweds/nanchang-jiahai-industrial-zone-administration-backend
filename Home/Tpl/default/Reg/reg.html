@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$Think.config.cfg_sitename}-加入会员</title>
+<link href="../Public/Css/common.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/about.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/class_com.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+	.hq{width:1000px; margin:0px auto;margin-top:0px;}
+	.logo{width:295px;height:42px;margin-top:98px;margin-left:120px;}
+	.all{width:758px; height:926; margin:0px auto; border:1px solid #999; font-style:normal; margin-top:0px; }
+	.email,.nc,.mm,.csmm,.yzm,.hfff,.b1,.b2,.b3,.b4,.b5,.b6{ margin-top:30px;}
+	.email,.nc,.mm,.csmm,.yzm,.zsxm,.dhhm,.eml,.jhydrq,.hfff{ margin-left:70px; float:left; width:135px; text-align:right; font-family:“宋体”; font-weight:bold; font-size:16px;margin-top:34px;}
+	.b1,.b2{float:left; width:235px;height:27px;}
+	.b5,.b6{float:left; width:235px;height:27px;}
+	.clear{clear:left}
+	.b3,.b4{width:218px; float:left; size:"35";}
+	em{text-align:center; font-style:normal; font-size:12px;}
+	.zh{ width:650px; text-align:center; margin-top:30px; margin-bottom:30px; }
+	.zc{width:78px;height:30px;margin:0px auto; margin-top:15px;}
+	.wb{height:25px; size:"35"; border:1px solid #999}
+	.em{text-align:left;}
+</style>
+<script language="javascript" src="__PUBLIC__/DatePicker/WdatePicker.js"></script>
+<!-- 日历插件 -->
+<script type="text/javascript">
+function fleshVerify(){
+//重载验证码
+var timenow = new Date().getTime();
+document.getElementById('verifyImg').src= '__APP__/Public/verify/'+timenow;
+}
+
+//显示补充
+function show_more(){
+	$("#reg_more").css("display", "block");
+}
+</script>
+</head>
+
+<body>
+<include file="About:header_inc" /> <!--关于我们头部 -->
+
+    <div class="hq">
+ 
+	<div class="all">
+	<form action="__URL__/Insert" method="post">
+	<div class="email">您的E-mail地址:</div>
+    <div class="b1"><input name="email" type="text" class="wb" id="email" size="30"/>
+	<em class="em">用来登录0791hunqing.com,建议使用E-mail</em>
+    </div>
+    <div class="clear"></div>
+    <div class="nc">昵称：</div>
+    <div class="b2"><input name="username" type="text" class="wb" id="username" size="30"/>
+    <em class="em">昵称使用1-12个字符</em>
+    </div>
+    <div class="clear"></div>
+    <div class="mm">设置密码：</div>
+    <div class="b3"><input name="pwd" type="password" class="wb" id="pwd" size="30"/>
+    <em class="em">密码请使用6-16字符</em>
+    </div>
+    <div class="clear"></div>
+    <div class="csmm">重复密码：
+    </div>
+    <div class="b4"><input name="pwd2" type="password" class="wb" id="pwd2" size="30"/>
+    </div>
+    <div class="clear"></div>
+   
+    <div class="zsxm">注册目的：</div>
+    <div style="float:left;  width:480px;height:27px; margin-top:32px;">
+	<label for="gid1"><input name="groupid" type="radio" value="1" id="gid1"/>商家展示</label>&nbsp;
+	<label for="gid2"><input name="groupid" type="radio" value="2" id="gid2"/>名人入驻</label>&nbsp;
+	<label for="gid3"><input name="groupid" type="radio" value="3" id="gid3"/>故事分享</label>&nbsp;
+	<label for="gid4"><input name="groupid" type="radio" value="4" checked="checked" id="gid4"/>咨询预订</label>&nbsp;
+	<label for="gid9"><input type="radio" name="groupid" value="9" id="gid9"/>随便看看</label></div>
+    <div class="clear"></div>
+	
+    <div class="yzm">验证码：</div>
+    <div class="b5"><input name="checkcode" type="text" class="wb" id="checkcode" size="8"/>
+	<a href="javascript:fleshVerify()"><img src="__APP__/Public/verify/" name="verifyImg" border="0" align="absmiddle" id="verifyImg" title="请点图片刷新验证码"></a>
+	&nbsp;
+	<a href="javascript:show_more()">补充>></a>
+	</div>
+    <div class="clear"></div>
+<span id="reg_more" style="display:none"><!--隐藏层 -->
+    <div class="zsxm">真实姓名：</div>
+    <div class="b5"><input name="realname" type="text" class="wb" id="realname" size="30"/></div>
+    <div class="clear"></div>
+    <div class="dhhm">电话号码：</div>
+    <div class="b5"><input name="tel" type="text" class="wb" id="tel" size="30"/>
+    </div>
+    <div class="clear"></div>
+    <div class="eml">QQ号码：</div>
+    <div class="b5"><input name="qq" type="text" class="wb" id="qq" size="30"/>
+    </div>
+    <div class="clear"></div>
+    <div class="jhydrq">结婚预定日期：</div>
+    <div class="b5"><input name="order_date" type="text" class="wb" id="order_date" size="30" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})"/>
+    </div>
+    <div class="clear"></div>
+    <div class="hfff">回复方法：</div>
+    <div class="b6"> <label><input name="reply_type[]" type="checkbox" id="reply_type" value="在线回复" />  
+    <em>在线回复</em></label>
+    <label><input name="reply_type[]" type="checkbox" id="reply_type" value="E-mail" />
+    <em>E-MAIL</em></label>
+    <label><input name="reply_type[]" type="checkbox" id="reply_type" value="电话回复" />
+    <em>电话回复</em></label>
+    <div class="clear"></div>
+    
+    
+    </div> 
+    <div class="clear"></div>
+</span>
+	
+    <div class="zh">
+    <div class="zc"><input type="image" src="../Public/Images/zhuce.jpg" alt="注册" /></div>
+    </div>
+	</form>
+</div>
+</div>
+
+<div style="height:20px;">&nbsp;</div>
+
+<include file="Public:footer" /> {//共用尾部}
+</body>
+</html>

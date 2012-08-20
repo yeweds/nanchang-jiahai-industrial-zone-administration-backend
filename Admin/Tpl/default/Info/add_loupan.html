@@ -1,0 +1,222 @@
+<include file="Public:header" />
+<script language="javascript" src="__PUBLIC__/DatePicker/WdatePicker.js"></script>
+<!-- 日历插件 -->
+
+<div class="bodyTitle">
+	<div class="bodyTitleLeft"></div>
+  <div class="bodyTitleText">添加楼盘</div>
+</div>
+<form action="__URL__/insert/ACTION/{$Think.get.ACTION}" method="post">
+<table cellSpacing="1" cellPadding="2" width="95%" align="center" border="0">
+    <tr>
+      <td width="20%" height="25" scope="col">楼盘简称：<span class="red">* </span></td>
+      <td align="left" valign="middle" scope="col">
+          <input name="title" type="text" class="box" id="title" size="40"> 
+          用于本站显示,不多于6个汉字    &nbsp;&nbsp;( 销售状态：<span class="red">* </span> 
+          <select name="lp_state" id="lp_state"/>
+          <option value="1">在售</option>
+          <option value="2">待售</option>
+		</select>)</td>
+    </tr>
+    <tr>
+      <td height="25">楼盘别名：</td>
+      <td align="left">
+        <input name="lp_full_name" type="text" class="box" id="lp_full_name" size="40" />
+      </a> 多个可以用英文“，” 隔开 </td>
+    </tr>
+    <tr>
+      <td height="25">摘要：</td>
+      <td align="left"><textarea name="remark" cols="60%" rows="5" id="remark"></textarea>
+        用于站内搜索，填关键字 </td>
+    </tr>
+    <!--<tr>
+      <td>楼盘ID：</td>
+      <td><input name="lpid" type="text" class="box" id="lpid" size="40"> 
+        对应房管局ID</td>
+    </tr> -->
+    <tr>
+      <td>所在区域：<span class="red">* </span></td>
+      <td><select name="range_id" id="range_id"/>
+          <option value="">-请选择区域-</option>
+          <present name="area_list" > <volist name="area_list" id="vo" >
+          <option value="{$vo.id}">{$vo.head_py|strtoupper} {$vo.name}</option>
+        </volist> </present>
+		</select>		</td>
+    </tr>
+    <tr>
+      <td>楼盘地址：<span class="red">*</span></td>
+      <td ><input type='text' name='lpaddr' id='lpaddr' style='width:250px'  />      </td>
+    </tr>
+    <tr>
+      <td>地图坐标：<span class="red">*</span></td>
+      <td >经度(X)：<input name="point_x" type="text" id="point_x" size="20" />
+    &nbsp;&nbsp;纬度(Y)：<input name="point_y" type="text" id="point_y" size="20" />
+    <a href="#" onClick="PopWindow('__APP__/Public/mapMark',600,480);" class="sgbtn">＋标注新坐标</a> &nbsp;&nbsp;(标注地图时尽量放大点才标得准确) </td>
+    </tr>
+    <tr>
+      <td>物业类别：<span class="red">* </span></td>
+      <td>
+		 	<present name="wuyetype_list"> <volist name="wuyetype_list" id="vo_wy">
+          <label for="lpwuye{$key}"><input name="lpwuyetype[]" type="checkbox" id="lpwuye{$key}" value="{$vo_wy}" 
+		  <php> if(strstr($vo_add['lpwuyetype'], $vo_wy )) echo 'checked'; </php>
+		  value="{$vo_wy}"
+		  >{$vo_wy}</label>
+		  &nbsp;
+		</volist> </present>	  </td>
+    </tr>
+    <tr>
+      <td>主推户型：<span class="red">*</span></td>
+      <td ><input type='text' name='lp_zhutui' id='lp_zhutui' style='width:300px'  />如：多个用英文"，"隔开</td>
+    </tr>
+    <tr>
+      <td>楼盘特色：<span class="red">*</span></td>
+      <td><present name="lptese_list"> <volist name="lptese_list" id="vo_ts">
+          <label for="lp_tese{$key}"><input name="lp_tese[]" type="checkbox" id="lp_tese{$key}" value="{$key}">{$key}-{$vo_ts}</label>
+		  &nbsp;
+		</volist> </present>      </td>
+    </tr>
+    <tr>
+      <td>价格区间：<span class="red">*</span></td>
+      <td ><input name="lp_min_price" type="text" id="lp_min_price" style="width:90px" />
+        至
+        <input name="lp_max_price" type="text" id="lp_max_price" style="width:90px" />
+        元/平米</td>
+    </tr>
+    <tr>
+      <td>面积区间：<span class="red">*</span></td>
+      <td ><input name="lp_min_area" type="text" id="lp_min_area" style="width:90px" />
+        至
+        <input name="lp_max_area" type="text" id="lp_max_area" style="width:90px" />
+        平米 (该楼盘所有户型的最小面积及最大面积区间，用于首页搜索) </td>
+    </tr>
+    <tr>
+      <td> 近期住宅成交均价：<span class="red">*</span></td>
+      <td ><input type='text' name='lpprice' id='lpprice' style='width:100px' />
+      元/平米 ，0为待定</td>
+    </tr>
+    <tr>
+      <td> 建筑面积：<span class="red">*</span></td>
+      <td ><input type='text' name='lparea' id='lparea' style='width:250px' /></td>
+    </tr>
+    <tr>
+      <td>预售日期：</td>
+      <td >首次：
+        <input name="lptimeb" value="2011-01-01" type="text" id="lptimeb" onClick="WdatePicker()"/>
+      最近：
+      <input name="lptimee" value="2011-01-01" type="text" id="lptimee" onClick="WdatePicker()"/></td>
+    </tr>
+    <tr>
+      <td> 预售总栋数 ：</td>
+      <td ><input type='text' name='lpbuildcount' id='lpbuildcount' /> </td>
+    </tr>
+    <tr>
+      <td>累计成交套数：</td>
+      <td ><input type='text' name='lpsalecount' id='lpsalecount' /></td>
+    </tr>
+    <tr>
+      <td> 累计成交面积：</td>
+      <td ><input type='text' name='lpsalearea' id='lpsalearea' /></td>
+    </tr>
+    <tr>
+      <td> 当前可售套数：</td>
+      <td ><input type='text' name='lpnosalecount' id='lpnosalecount' /></td>
+    </tr>
+    <tr>
+      <td> 当前可售面积：</td>
+      <td ><input type='text' name='lpnosalearea' id='lpnosalearea' /></td>
+    </tr>
+    <tr>
+      <td> 不可售面积(新建县) ：</td>
+      <td ><input type='text' name='lpnoarea' id='lpnoarea' /></td>
+    </tr>
+    <tr>
+      <td>容积率：<span class="red">*</span></td>
+      <td ><input type='text' name='lprongjilv' id='lprongjilv' />
+      % （注：形如 450% ）   </td>
+    </tr>
+    <tr>
+      <td>绿化率：<span class="red">*</span></td>
+      <td ><input type='text' name='lplvdi' id='lplvdi' /> 
+      %      </td>
+    </tr>
+    <tr>
+      <td>物业费：<span class="red">*</span></td>
+      <td ><input type='text' name='lpwuyefei' id='lpwuyefei' style='width:250px' />      </td>
+    </tr>
+    <tr>
+      <td>车位：<span class="red">*</span></td>
+      <td ><input type='text' name='lpcar' id='lpcar' style='width:250px' />      </td>
+    </tr>
+    <tr>
+      <td>开发商：<span class="red">*</span></td>
+      <td ><input name='lpcom' type='text' id='lpcom' style='width:250px' />      </td>
+    </tr>
+    <tr>
+      <td>投资商：<span class="red">*</span></td>
+      <td ><input name='lptzcom' type='text' id='lptzcom' style='width:250px' />      </td>
+    </tr>
+    <tr>
+      <td>物业公司：<span class="red">*</span></td>
+      <td ><input name='lpwycom' type='text' id='lpwycom' style='width:250px' />      </td>
+    </tr>
+    
+    <tr>
+      <td>售楼电话：<span class="red">*</span></td>
+      <td ><input type='text' name='lptel' id='lptel' style='width:250px'  value='' /></td>
+    </tr>
+    <tr>
+      <td>建筑类别：</td>
+      <td ><input type='text' name='lp_jzlb' id='lp_jzlb' style='width:250px' />
+      如：多个用英文“，”隔开</td>
+    </tr>
+    <tr>
+      <td>装修情况：<span class="red">*</span></td>
+      <td ><input name='lp_zxqk' type='text' id='lp_zxqk' style='width:300px'  /></td>
+    </tr>
+    
+    <tr>
+      <td> 土地使用权证号：</td>
+      <td ><input type='text' name='lpland' id='lpland' style='width:250px' />      </td>
+    </tr>
+    <tr>
+      <td> 用地规划许可证号： </td>
+      <td ><input type='text' name='landlisence' id='landlisence' style='width:250px' /></td>
+    </tr>
+    
+    <tr>
+      <td> 周边配套设施 ：<span class="red">*</span></td>
+      <td ><textarea name="lpsheshi" cols="60%" rows="5" id="lpsheshi"></textarea></td>
+    </tr>
+    <tr>
+      <td> 小区交通状况 ：<span class="red">*</span></td>
+      <td ><textarea name="lpjiaotong" cols="60%" rows="5" id="lpjiaotong"></textarea></td>
+    </tr>
+    
+    <tr>
+      <td valign="top">楼盘介绍：<span class="red">* </span></td>
+      <td align="left" valign="top"><!--<textarea name="content" cols="70" rows="20" class="box" id="content"></textarea> -->
+ <!-- 编辑器调用开始 --><script type="text/javascript" src="__PUBLIC__/Js/FCKeditor/fckeditor.js"></script>
+	<textarea id="editor" name="lpabout"></textarea>
+	<script type="text/javascript"> var oFCKeditor = new FCKeditor( "editor","100%","320px" ) ; oFCKeditor.BasePath = "__PUBLIC__/Js/FCKeditor/" ; oFCKeditor.ReplaceTextarea() ;function resetEditor(){setContents("editor",document.getElementById("editor").value)}; function saveEditor(){document.getElementById("editor").value = getContents("editor");} function InsertHTML(html){ var oEditor = FCKeditorAPI.GetInstance("editor") ;if (oEditor.EditMode == FCK_EDITMODE_WYSIWYG ){oEditor.InsertHtml(html) ;}else	alert( "FCK必须处于WYSIWYG模式!" ) ;}</script> <!-- 编辑器调用结束 -->	</td>
+    </tr>
+    <tr>
+      <td valign="top">项目信息：<span class="red">* </span></td>
+      <td align="left" valign="top"><!-- 编辑器调用开始 -->
+          <script type="text/javascript" src="__PUBLIC__/Js/FCKeditor/fckeditor.js"></script>
+          <textarea id="editor2" name="lp_xmxx"></textarea>
+          <script type="text/javascript"> var oFCKeditor = new FCKeditor( "editor2","100%","280px" ) ; oFCKeditor.BasePath = "__PUBLIC__/Js/FCKeditor/" ; oFCKeditor.ReplaceTextarea() ;function resetEditor(){setContents("editor2",document.getElementById("editor2").value)}; function saveEditor(){document.getElementById("editor2").value = getContents("editor2");} function InsertHTML(html){ var oEditor = FCKeditorAPI.GetInstance("editor2") ;if (oEditor.EditMode == FCK_EDITMODE_WYSIWYG ){oEditor.InsertHtml(html) ;}else	alert( "FCK必须处于WYSIWYG模式!" ) ;}</script>
+          <!-- 编辑器调用结束 -->      </td>
+    </tr>
+    <tr>
+      <td valign="top"><span class="red">排名优先级：</span></td>
+      <td align="left" valign="top"><input type='text' name='lpyouxian' id='lpyouxian' />
+        默认为0 ，越大越靠前 </td>
+    </tr>
+</table>
+<div align="center"><br>
+  <input type="submit" value=" 添 加 " class="df_button"/>  &nbsp;&nbsp;&nbsp;&nbsp;  <input type="reset" value=" 取 消 " class="df_button">
+<br>
+</P>
+</div>
+</form>
+<include file="Public:footer" />

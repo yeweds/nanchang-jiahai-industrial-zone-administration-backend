@@ -1,0 +1,233 @@
+<link href="../Public/Css/class_com.css" rel="stylesheet" type="text/css" />
+
+<style type="text/css">
+<!--
+body{ margin:0; padding:0;}
+p.MsoNormal {
+margin:0px;
+margin-bottom:.0001pt;
+text-align:justify;
+text-justify:inter-ideograph;
+font-size:10.5pt;
+font-family:"Times New Roman";
+}
+* { margin:0; padding:0; }
+#gou_fang_xu_qiu table{ margin:0; padding:0; font-size:12px; color:#999;}
+#op_tion .mian_ji{ width:60px; border:#CCCCCC solid 1px; height:18px; }
+#op_tion select{ width:120px; border:#CCCCCC solid 1px; height:22px;}
+#op_tion .lianxi{ width:120px; border:#CCCCCC solid 1px; height:18px;}
+-->
+</style>
+<script src="__PUBLIC__/Scripts/swfobject_modified.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	//$("#rg_jianfang_flash").css("display", "none");  //先隐藏
+	$("#jf_sub_butt").click(function(){
+		$(this).removeClass().addClass('orange_button'); //变色
+		jf_submit();
+	});
+
+	$("#jf_sub_butt").mouseout(function(){
+		$(this).removeClass().addClass('green_button'); //变色
+	});
+ 
+});
+
+function hideFlash(){
+	$("#rg_jianfang_flash").css("display", "none");  //先隐藏
+	$("#gou_fang_xu_qiu").css("display", "inline");  //显示
+}
+
+function jf_submit(){
+	var jf_tel = $("#tel").val();
+	var uname = $("#uname").val();
+	if(jf_tel == '' || uname ==''){
+		alert('请留下您的联系方式，以便我们荐房人员经过专业分析后\n\n将最适合您的楼盘告知您！');
+		return false;
+	}
+	//$("#jf_submit").click();
+
+	var postData = $("#ct_rgjf_form").serialize();
+	$.post('__URL__/insert_rgjf', postData, function(msg){
+		 if(msg && msg["success"]){
+			//msgBox(msg["info"],status='1',title='操作成功',width='300');
+			alert(msg["info"]);
+			$("#rg_jianfang_flash").css("display", "inline");  //先隐藏
+			$("#gou_fang_xu_qiu").css("display", "none");  //显示
+		 }else{
+			alert(msg["info"]);
+			//msgBox(msg["info"],status='0',title='操作失败',width='300');
+		 }
+	}, 'json' );
+}
+</script>
+
+<div id="load">
+<div id="rg_jianfang_flash">
+<!--flash 展示-->
+<object id="FlashID" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="643" height="400">
+  <param name="movie" value="../Public/Flash/rg_jianfang.swf" />
+  <param name="quality" value="high" />
+  <param name="wmode" value="opaque" />
+  <param name="swfversion" value="6.0.65.0" />
+  <!-- 此 param 标签提示使用 Flash Player 6.0 r65 和更高版本的用户下载最新版本的 Flash Player。如果您不想让用户看到该提示，请将其删除。 -->
+  <param name="expressinstall" value="__PUBLIC__/Scripts/expressInstall.swf" />
+  <!-- 下一个对象标签用于非 IE 浏览器。所以使用 IECC 将其从 IE 隐藏。 -->
+  <!--[if !IE]>-->
+  <object type="application/x-shockwave-flash" data="../Public/Flash/rg_jianfang.swf" width="643" height="400">
+    <!--<![endif]-->
+    <param name="quality" value="high" />
+    <param name="wmode" value="opaque" />
+    <param name="swfversion" value="6.0.65.0" />
+    <param name="expressinstall" value="__PUBLIC__/Scripts/expressInstall.swf" />
+    <!-- 浏览器将以下替代内容显示给使用 Flash Player 6.0 和更低版本的用户。 -->
+    <div>
+      <h4>此页面上的内容需要较新版本的 Adobe Flash Player。</h4>
+      <p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="获取 Adobe Flash Player" width="643" height="33" /></a></p>
+    </div>
+    <!--[if !IE]>-->
+  </object>
+  <!--<![endif]-->
+</object>
+<script type="text/javascript">
+	swfobject.registerObject("FlashID");
+</script>
+
+</div>
+<div id="gou_fang_xu_qiu" style="display:none">
+<form action="__URL__/insert_rgjf" method="post" id="ct_rgjf_form">
+<!--大表格start-->
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td height="55" ><img src="../Public/Images/jianfang_title.jpg" alt="您的购房需求是？" width="643" height="55" /></td>
+  </tr>
+</table>
+<div id="op_tion" style="width:100%; height:224px; background-image:url(../Public/Images/jianfang_form.jpg)"><!--选择项start-->
+  <!--第一行s-->
+    <table width="100%" height="36" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td width="50" align="center" valign="middle" ></td>
+        <td width="149" align="center" ><select name="range_id" id="range_id" class="qu_yu"/>
+          <option value="">-请选择区域-</option>
+          <present name="area_list" > <volist name="area_list" id="vo" >
+            <option value="{$vo.id}">{$vo.head_py|strtoupper} {$vo.name}</option>
+        </volist> </present>
+		</select>
+            </td>
+        <td width="60" align="center" valign="middle" ></td>
+        <td width="140" >
+          <select name="lp_wuyetype" id="lp_wuyetype" class="qu_yu">
+		  <option value="">-选择物业类型-</option>
+          <present name="wuyetype" > <volist name="wuyetype" id="vo" >
+          <option value="{$vo}">{$vo}</option>
+        </volist> </present>
+          </select></td>
+        <td width="50" align="center" valign="middle" ></td>
+        <td width="149" >
+          <select name="room_hx" id="room_hx" class="qu_yu">
+            <option value=''>-不限户型-</option>
+            <option value='1'>一房</option>
+			<option value='2'>二房</option>
+			<option value='3'>三房</option>
+			<option value='4'>四房</option>
+			<option value='5'>五房</option>
+			<option value='6'>六房</option>
+			<option value='gt7'>六房以上</option>
+          </select></td>
+        <td valign="middle" ></td>
+        </tr>
+      </table>
+    <!--第一行e-->
+<!--<div id="butt" class="green_button" ></div> --><!-- 提交按钮 -->
+<!--选择项end-->
+
+    <!--第二行s-->
+    <table width="100%" height="36" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td width="50" align="center" valign="middle" ></td>
+        <td width="100" height="30" align="left" valign="middle" >
+          <input name="room_area" type="text" class="mian_ji" id="room_area" maxlength="4" />m<sup>2</sup></td>
+        <td width="50" align="center" valign="middle" ></td>
+        <td width="100" height="30" align="left" valign="middle" >
+          <input name="zong_price" type="text" class="mian_ji" id="zong_price" maxlength="4" />
+          万元</td>
+        <td width="50" align="center" valign="middle" ></td>
+        <td width="100" height="30" align="left" valign="middle" >
+          <input name="lp_price" type="text" class="mian_ji" id="lp_price" maxlength="5" />元/m<sup>2</sup></td>
+        <td width="50" valign="middle" ></td>
+        <td width="100" height="30" align="left" valign="middle" >
+          <input name="yuegong" type="text" class="mian_ji" id="yuegong" maxlength="5" />
+          元</td>
+        <td align="center" valign="middle"></td>
+        </tr>
+      </table>
+    <!--第二行e-->
+
+    <!--第3行s-->
+    <table width="100%" height="35" border="0" cellpadding="0" cellspacing="0">
+       <tr>
+        <td width="90" valign="middle"></td>
+	    <td align="left" valign="middle">
+	    <input name="yiyou_fcs" type="text" class="mian_ji" id="yiyou_fcs" maxlength="3" /> 
+	    套</td>
+        </tr>
+     </table>
+    <!--第3行e-->
+
+    <!--第4行s-->
+    <table width="100%" height="36" border="0" cellpadding="0" cellspacing="0">
+       <tr>
+        <td width="90" valign="middle"></td>
+	    <td width="80" align="left" valign="middle">
+	    <label for="join_kf1"><input type="radio" name="join_kf" id="join_kf1" value="愿意" /> 愿意</label>	    </td>
+        <td width="80" align="left" valign="middle">
+        <label for="join_kf2"> <input type="radio" name="join_kf" id="join_kf2" value="不愿意" /> 不愿意</label></td>
+        <td width="390" valign="middle"></td>
+        </tr>
+     </table>
+    <!--第4行e-->
+
+    <!--第5行s-->
+    <table width="100%" height="36" border="0" cellpadding="0" cellspacing="0">
+       <tr>
+          <td width="90" align="center" valign="middle"></td>
+          <td width="80" valign="middle"><label for="join_yf1"><input type="radio" name="join_yf" id="join_yf1" value="要"/> 要</label> </td>
+        <td width="60" valign="middle">
+		<label for="join_yf2"><input type="radio" name="join_yf" id="join_yf2" value="不要"/> 不要</label> </td>
+        <td width="410" valign="middle"></td>
+        </tr>
+     </table>
+    <!--第5行e-->
+
+    <!--第6行s-->
+    <table width="100%" height="42" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td width="90">&nbsp;</td>
+        <td width="60" valign="middle" class="yellow_12px_f">您的大名:</td>
+        <td width="100" align="center" valign="middle"><input name="uname" type="text" class="lianxi" id="uname" /></td>
+        <td width="30" valign="middle" class="yellow_12px_f">TEL:</td>
+        <td width="120" align="center" valign="middle"><input name="tel" type="text" class="lianxi" id="tel" /></td>
+        <td width="30" valign="middle" class="yellow_12px_f">QQ:</td>
+        <td valign="middle"><input name="qq" type="text" class="lianxi" id="qq" /></td>
+        </tr>
+  	</table>
+  <!--第6行e-->
+  	<div class="clear"></div>
+</div>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td height="50" align="center"><img src="../Public/Images/jianfang_submit.jpg" width="112" height="40" id="jf_sub_butt"  />  <!-- 隐藏提交s --><input type="submit" id="jf_submit" style="display:none" /><!-- 隐藏提交e --></td>
+  </tr>
+  <tr>
+    <td><img src="../Public/Images/jianfang_title_end.jpg" width="646" height="5" /></td>
+  </tr>
+  <tr>
+    <td height="80" bgcolor="#f9f9f9"><span class="gray_12px_f">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们网站是<span class="gray_a"><a href="http://nc.tengfang.net">www.tengfang.net</a></span>（腾房网），是南昌唯一一家可以按<span class="red_s_a">昨日成交均价、户型、面积</span>找寻在售新房（一手房）的专业房地产网站，还有360度3D实景看房系统，您在家里就能找到适合您的可售房源，看到现场实景和样板房，直接出击，让您免去奔波的烦恼，希望您喜欢<span style="font-family:宋体; font-size:9.0pt; ">。</span>我们也乐意为您提供一切您需要的人工帮助，谢谢您的使用！</span></td>
+  </tr>
+</table>
+</form>
+<!--大表格end-->
+</div>
+
+  <div class="clear"></div>
+</div>  <!--load end -->

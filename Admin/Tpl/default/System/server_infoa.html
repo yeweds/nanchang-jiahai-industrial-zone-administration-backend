@@ -1,0 +1,38 @@
+<include file="Public:header" /> <!-- 公共头部 -->
+<script language="javascript">
+  	var SELECT_NAV =  'system';  //选中系统维护
+</script>
+<link href="../Public/Css/system.css" rel="stylesheet" type="text/css"/>
+<body>
+ 
+	<div id="append"></div>
+	<div class="container">
+	<h3>统计信息</h3>
+	<ul class="memlist fixwidth">
+		<li><em>用户总数:</em>{$MemberC}</li>
+		<li><em>楼盘总数:</em>{$GoodsC}</li>
+		<li><em>房间总数:</em>{$GoodsC}</li>
+		<li><em>点评总数:</em>{$ClassC}</li>
+	</ul>
+	<h3>服务器环境</h3>
+	<ul class="memlist fixwidth">
+		<li><em>操作系统及PHP:</em>{$serverinfo}</li>
+		<li><em>MySql版本号:</em>{$dbversion}</li>
+		<li><em>上传许可:</em>{$fileupload}</li>
+		<li><em>当前数据库尺寸:</em>{$dbsize}</li>
+		<li><em>Magic_quote_gpc:</em>{$magic_quote_gpc}</li>
+	</ul>
+	<h3>开发者信息</h3>
+	<ul class="memlist fixwidth">
+		<li>
+			<em>产品开发:</em>
+			<em class="memcont">天波技术部</em></li>
+        <li>
+			<em>联系方法:</em>
+			<em class="memcont">
+				电话：0791-8888888 &nbsp;E-mail：admin@tengfang.Net<br />
+				网址：http://www.tengfang.net
+			</em>
+		</li>
+	</ul>
+</div>

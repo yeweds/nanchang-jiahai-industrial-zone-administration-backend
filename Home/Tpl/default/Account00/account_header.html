@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>腾房网 会员中心</title>
+<link href="../Public/Css/user.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+#head_nv_inc {
+	position:absolute;
+	width:410px;
+	height:35px;
+	z-index:1;
+	left: 150px;
+	top: 15px;
+	cursor: pointer;
+}
+#head_nv_inc a {
+	text-decoration: none;
+}
+</style>
+</head>
+<!--png图片在ie6下正常显示-->
+<!--[if IE 6]>
+<script type="text/javascript" src="__PUBLIC__/Js/png.js"></script>
+<script>
+  //DD_belatedPNG.fix('#secy');
+ // DD_belatedPNG.fix('#index_head');
+</script>
+<![endif]-->
+<script type="text/javascript" src="__PUBLIC__/Js/jquery.min.js"></script>
+<script type="text/javascript" src="../Public/Js/ScrollPic.js"></script><!--首页幻灯效果-->
+<script type="text/javascript" src="../Public/Js/base.js"></script><!--前台公共JS函数-->
+<script type="text/javascript">
+			
+function userLP(thisId,id){
+	if(!thisId.hasClass('height_110px_bg')){
+		//1.关闭上一个打开的dom
+		$('#show_lp').remove();
+		
+		//2.改变class
+		$("#user_lp .height_110px_bg").removeClass().addClass('lineheight30px');
+		thisId.removeClass().addClass('height_110px_bg');
+		thisId.append('<div  id="show_lp"></div>');
+		
+		//写入ajax
+		var url='__URL__/user_lp_ajax';
+		$.get(url, {"info_id":id }, function(html){
+			$('#show_lp').addClass("height_70px_fixed");
+			$('#show_lp').html(html);
+			
+		});
+		
+	}
+	
+}
+	
+</script>
+
+<body>
+<div id="head">
+  <div id="head_nv_inc">
+ 	<div class="head_nv_c"><a href="__URL__/">个人中心</a></div>
+    <div class="head_nv">&nbsp;&nbsp;消息&nbsp;&nbsp;</div>
+    <div class="head_nv">|&nbsp;&nbsp;公告&nbsp;&nbsp;</div>
+    <div class="head_nv">|&nbsp;&nbsp;<a href="__APP__/">回到首页</a></div>
+    <!--<div class="head_nv">我的展示</div> -->
+  </div>
+</div>
+<div class="height_10px"></div>
+<div id="banner"></div>
+<div class="height_10px"></div>

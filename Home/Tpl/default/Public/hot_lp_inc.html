@@ -1,0 +1,21 @@
+<div class="bian_4gray_1px">
+           <div class="block_title"><strong><span class="blue_14px_f">&nbsp;&nbsp;大家都在看</span></strong>
+             <div class="abso_right_15pxh"><img id="photo_left" alt="左" src="../Public/Images/see_jian_left.gif" width="25" height="15" /><img id="photo_right" alt="右" src="../Public/Images/see_jian_right.gif" width="25" height="15" /></div>
+           </div>
+           <div class="height_10px"></div>
+           <div id="scroll_see_inc">
+           <div id="star_item_list">
+		   
+           <volist name="hot_list" id="hot_vo">
+             <div class="box_140w_200h">
+               <div class="lp_photo_see"><a href="__APP__/lp-{$hot_vo.info_id}" title="主推：{$hot_vo.lp_zhutui}"><img src="{$hot_vo.default_pic}" width="158" height="110" border="0" alt="{$hot_vo.lpname}图片" /></a></div>
+               <div class="height_lineheight_30px"><span class="black_14px_f"><span class="black_bian_a"><a href="__APP__/lp-{$hot_vo.info_id}"><strong>{$hot_vo.lpname}</strong></a></span></span></div>
+               <div class="height_lineheight_30px"><strong><span class="red_14px_f">{$hot_vo.lpprice}</span></strong>元/平方米</div>
+             </div>
+             <div class="width_30px_space"></div>
+			</volist> 
+             
+             </div><!--end--star_item_list-->
+           </div>
+           <div style="clear:both"></div><!--bian_4gray_1px促使图层高度随内容增加面增加-->
+		</div>

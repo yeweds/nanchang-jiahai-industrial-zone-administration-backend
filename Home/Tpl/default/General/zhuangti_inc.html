@@ -1,0 +1,55 @@
+<style type="text/css">
+.height_18px_text {
+	min-height:16px!important;
+	height: auto;
+	width: 100%;
+	line-height: 16px;
+	word-wrap:break-word;
+	word-break:break-all;
+}
+.height_20px_text {
+	min-height:20px!important;
+	height: auto;
+	width: 100%;
+	line-height: 20px;
+	word-wrap:break-word;
+	word-break:break-all;
+}
+</style>
+<div class="con_right_4bian268px">
+              <div class="height_30px">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td height="30" align="left" class="bottom_bian1px" ><span class="blue_12px_f"><strong>&nbsp;&nbsp;热点专题</strong></span></td>
+                  </tr>
+                </table>
+              </div>
+              <div class="heigth_10px"></div>
+              <div class="height_90px_fixed">
+                <div class="width_10px_space"></div>
+                <div class="height_80px_100px">
+				  <!--第一条用图文形式-->
+				   <neq name='dump.lp_rdzt_index.id' value="">
+				  <img src="__PUBLIC__/Upload/news/thumb_{$dump.lp_rdzt_index.pic_url}" width="100" height="80" alt="热点"/><br />
+				  </neq>
+				</div>
+				<div class="width_10px_float"></div>
+				<div class="width_170_float">
+				  <div class="blue_h4"><span class="blue_a"> <a href="{$dump.lp_rdzt_index.id|get_arc_url=###, $dump['lp_rdzt_index']['redirecturl']}" title="{$dump.lp_rdzt_index.title|mystr_replace=###}">{$dump.lp_rdzt_index.title|mb_substr=###,0,13,'utf-8'}</a></span></div>
+				  <div class="height_20px_text"><span class="gray_12px_f">{$dump.lp_rdzt_index.remark|mb_substr=###,0,40}</span><span class="blue_a"><a href="{$dump.lp_rdzt_index.id|get_arc_url=###, $dump['lp_rdzt_index']['redirecturl']}">详细&gt;&gt;</a></span></div>
+				</div>
+
+			  <!--第一条用图文形式结束-->
+				
+				<div style="clear:both"></div>
+              </div>
+			  <br />
+              <ul class="list_12px">
+                <present name="dump.lp_rdzt" >
+                  <volist name="dump.lp_rdzt" id="vo" >
+                    <li class="black_a"><a href="{$vo.id|get_arc_url=###, $vo['redirecturl']}">{$vo.title}</a></li>
+                  </volist>
+                </present>
+              </ul>
+              <div class="heigth_10px"></div>
+</div>

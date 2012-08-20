@@ -1,0 +1,63 @@
+<include file="Public:header" />
+<script>
+function checkPost(){
+    //if(document.getElementById('g_or_b').checked==false){
+        // alert("请选择点评类型");
+		// return false;
+	//}
+	if(document.getElementById('content').value==''){
+         alert("请填写点评内容");
+		 return false;
+	}
+	return true;
+}
+// 换类型 
+function switch_type(type){
+	var text_b = "<present name="vo_b">{$vo_b.content}</present>";
+	var text_g = "<present name="vo_g">{$vo_g.content}</present>";
+	if(type == 'g'){
+		$("#content").html(text_g);
+	}else{
+		$("#content").html(text_b);
+	}
+}
+</script>
+<form action="__URL__/insert"  method="post" onsubmit='return checkPost();'>
+<table cellSpacing="1" cellPadding="2" width="95%" align="center" border="0">
+    <tr>
+        <th>
+		编辑点评
+        </th>
+    </tr>
+    <tr>
+      <td>
+	  <input name="info_id" type="hidden" id="info_id" size="40" value="{$info_id}">
+	  </td>
+    </tr>
+<!-- 	<tr>
+	  <td><label for="r_g"><input type="radio" name="type" value="1" id="type1">购买理由</label>
+	  
+      <label for="r_b"><input type="radio" name="type" value="2" id="type2">不购买理由</label></td>
+    </tr> -->
+	<tr>
+	  <td><label for="r_g"><input name="g_or_b" type="radio" id="r_g" 
+	  onclick="switch_type('g')" value="g" checked="checked" >
+	  支持(即购买理由)</label>
+	  
+      <label for="r_b"><input type="radio" name="g_or_b" value="b" id="r_b"
+	  onclick="switch_type('b')">不支持(不购买理由)</label></td>
+    </tr>
+	<tr>
+      <td>
+        评论内容：<br><textarea name='content' id="content" rows='6' cols='50'><present name="vo_g">{$vo_g.content}</present></textarea>
+	  </td>
+    </tr>
+	<tr>
+      <td>
+        <input name="submit" type="submit" size="40" value=" 提 交 " class="df_button">
+	  </td>
+    </tr>
+	</table>
+</form>
+<p class="i">可以点击 切换修改购买和不购买理由</p>
+<include file="Public:footer" />

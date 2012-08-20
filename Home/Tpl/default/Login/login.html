@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$Think.config.cfg_sitename}-会员登录</title>
+<link href="../Public/Css/common.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/about.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/class_com.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/login.css" rel="stylesheet" type="text/css" />
+<script language="javascript" src="__PUBLIC__/DatePicker/WdatePicker.js"></script>
+<!-- 日历插件 -->
+<script type="text/javascript">
+function fleshVerify(){
+//重载验证码
+var timenow = new Date().getTime();
+document.getElementById('verifyImg').src= '__APP__/Public/verify/'+timenow;
+}
+
+</script>
+</head>
+
+<body>
+<include file="About:header_inc" /> <!--关于我们头部 -->
+<!--登陆开始-->
+<div class="login">
+<ul>
+<form action="__URL__/checkLogin/<present name="fromUrl">fromUrl/{$Think.get.fromUrl}</present>" method="POST">
+<li>E-mail：<input id="email" name="email" type="text" class="logInput"  /></li>
+<li>密&nbsp;&nbsp;&nbsp;&nbsp;码：<input id="password" name="password" type="password" maxlength="32" class="logInput"/></li>
+<li>验证码：<input id="checkcode" name="checkcode" type="text" size="4" maxlength="4" />
+<img id="verifyImg" src="__APP__/Public/verify" alt="验证码" align="absmiddle" /> <a href="javascript:fleshVerify()">看不清？</a></li>
+<li><input  type="checkbox" name="hold" value="1" checked="checked"/>下次自动登录</li>
+<li>&nbsp;&nbsp;<input name="Submit" type="submit" class="logButton"  value=" 登 录 " />&nbsp;&nbsp;&nbsp;<a href="__URL__/forgetPassword" >密码忘了?</a></li>
+</form>
+</ul>
+</div>
+<div class="regimg">还没南昌婚庆网帐号？&nbsp;<a href="__APP__/Reg/">免费注册</a></div>
+<br />
+<br />
+<!--登陆结束-->
+<include file="Public:footer" /> {//共享登录尾部}
+
+</body>
+</html>

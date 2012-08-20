@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>纠错系统,谢谢您的建议和批评-南昌婚庆网</title>
+<meta name="keywords" content="纠错系统,南昌婚庆,南昌房价,南昌婚庆网"> 
+<meta name="description" content="南昌婚庆网是信息全面的南昌婚庆信息网站,南昌房价、南昌婚庆成交数据、土地、车位、配套，报广、3D实景看房。我们是个公平、信息对等的网络平台！"> 
+<script type="text/javascript" src="Home/Tpl/default/Public/Js/add_correction.js"></script>
+<script type="text/javascript">
+      function changeVerify(){
+	   var timenow = new Date().getTime();
+	   document.getElementById('verifyImg').src='__APP__/Public/verify/'+timenow; 
+	 }
+</script>
+<link href="http://img.tengfang.net/static/css/check_error.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/about.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/class_com.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<div id="mydiv0">
+<!--页头_s-->
+<include file="About:header_inc" /> <!--头部 -->
+<!--页头_e-->
+<div id="mainContent">
+<h1 style="text-align:center;">南昌婚庆网纠错系统</h1>
+<div id="fontHr">
+<hr style="color: #83c930" />
+</div>
+<form method="post" action="__URL__/add_corection" enctype="multipart/form-data">
+<div id="fontSize2" style="color:red; line-height:22px;">
+亲爱的访客朋友们，欢迎您对我站上发布的文字、图片、链接地址等错误进行批评和指正。<br />
+感谢您对南昌婚庆网一如既往的关注和支持！
+</div>
+<div id="fontInput">
+<div id="fontSize4">纠正地址:</div>
+<input type="text" name="error_url" size="58" id="error_url" value="http://"/><span style="font-size:12px"> 请输入可能有误的网页地址.</span></div>
+<div id="fontTextarea">
+<div id="fontSize4">错误内容:</div>
+<textarea cols="50" rows="4" name="content" id="content"></textarea></div>
+<div id="fontTextarea2">
+<div id="fontSize4">修正意见:</div>
+<textarea cols="50" rows="4" name="suggest" id="suggest"></textarea></div>
+<div id="fontInput2">
+<div id="fontSize4">上传图片:</div>
+<input type="file" name="photo" style="width:300px;" id="photo"/><span style="font-size:12px"> 希望您上传错误处的截图,更易理解您指正的位置.</span></div>
+<div id="fontInput2">
+<div id="fontSize4">验 证 码:</div>
+<div id="imp"><input type="text" name="testimg" size="4" maxlength="4" style="border:1px solid #ccc; height:22px;" /></div>
+<div id="yanzheng"><img style="cursor: pointer" alt="验证码" id="verifyImg" src="__APP__/Public/verify/" onClick="changeVerify()" title="点击刷新验证码" /></div>
+</div>
+
+<div id="fontInput4">
+<div id="fonButton"><input type="submit" value=" 提 交 " onfocus="getCorrection()"/></div>
+<div id="fonButton2"><input type="reset" value=" 重 置 " /></div>
+</div>
+</form>
+</div>
+
+<!--底部信息--> 
+<include file="Public:footer" /> {//共用尾部}
+</body>
+
+</html>

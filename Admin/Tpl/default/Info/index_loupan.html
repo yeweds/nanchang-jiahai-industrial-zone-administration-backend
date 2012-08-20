@@ -1,0 +1,76 @@
+<include file="Public:header" />
+<script language="JavaScript" type="text/JavaScript">
+	act = '{$Think.get.ACTION}';  //全局
+	function add_info(id){   //打开添加页面
+		if(act == "loupan"){
+			window.location.href= URL+"/add/ACTION/loudong/info_id/"+id;
+		}else if(act == "loudong"){
+			window.location.href= URL+"/add/ACTION/room/info_id/"+id;
+		}else{
+			alert("不能在房间下增加子类信息！");
+		}
+	}
+
+//提交搜索
+	function submitSearch(){
+		var s_key  = $("#s_key").val();
+		s_key = $.trim(s_key);    //去空格
+ 		var s_type = $("#s_type").val();
+		window.location.href= URL+"/index/ACTION/"+act+"/s_key/"+ s_key +"/s_type/" + s_type;
+	}
+	
+//查看子类列表
+	function child(id){
+		if(act == "loupan"){
+			window.location.href= URL+"/index/ACTION/loudong/pid/"+id;
+		}else if(act == "loudong"){
+			window.location.href= URL+"/index/ACTION/room/pid/"+id;
+		}else{
+			alert("已翻到尽头！");
+		}
+	}
+</script>
+<div class="bodyTitle">
+	<div class="bodyTitleLeft"></div>
+  <div class="bodyTitleText">{$nav_title}管理</div>
+</div>
+<br>
+<h3 class="marginbot">
+<eq name="Think.get.ACTION" value="loupan"><a href="__URL__/add/ACTION/{$Think.get.ACTION}" class="sgbtn">＋添加{$nav_title}</a></eq>
+<a href="#" onClick="delAll()" class="sgbtn">－删除选中</a>&nbsp;  请输入关键字：<input name="s_key" id="s_key" />
+	<select name="s_type" id="s_type"/>
+		  <option value="title">按名称</option>
+		  <option value="info_id">按Info_ID</option>
+		  <option value="range_id">按区域</option>
+		  <option value="lp_state">按销售状态ID</option>
+	</select>  <a href="#" onClick="submitSearch()" class="sgbtn">我要查询</a>
+<div id="result" class="none result" style="letter-spacing:2px"></div>
+</h3>
+
+<table id="articlelist"  class="datalist fixwidth">
+	  <tr align="center" >
+	    <td width="8%"><input type="checkbox" onClick="selAll(this,'id[]')" value="选择全部" class="checkbox">选择</td>
+	    <td width="6%">INFO_ID</td>
+		<td width="10%">分类名称</td>
+		<td width="20%">标题</td>
+		<td width="10%">区域ID</td>
+		<td width="10%">可售数量</td>
+		<td width="19%">发布时间</td>
+        <td>操作</th>
+	  </tr>
+      <iterate name="list" id="vo">
+	  <tr >
+	     <td align="center"><input name="id[]" type="checkbox" id="id[]" value="{$vo.id}" /></td>
+		 <td height="22" align="center">{$vo.info_id}</td>
+		 <td align="center">楼盘[{$vo.class_id}]</td>
+		 <td align="left"><a href="javascript:child({$vo.info_id})" title="查看更多">{$vo.title}</a>&nbsp;[<eq name="vo.lp_state" value="1">可售</eq><eq name="vo.lp_state" value="2">待售</eq><eq name="vo.lp_state" value="3">售完</eq>]</td>
+		 <td align="center">{$vo.range_id}</td>
+		 <td align="left">{$vo.lpnosalecount}</td>
+		 <td align="center">{$vo.add_time|date='Y-m-d H:i',###}</td>
+		 <td align="center"><neq name="Think.get.ACTION" value="room">[<a href="javascript:add_info({$vo.id})" >添加</a>]&nbsp;</neq>[<a href="javascript:edit({$vo.id})" >编辑</a>]&nbsp;[<a href="javascript:del({$vo.id})">删除</a>]</td>
+	  </tr>    
+	  </iterate>
+</table>
+	  <div class="page">{$page}</div>
+<p class="i">注:可售数量为0的楼盘已隐藏</p>
+<include file="Public:footer" />

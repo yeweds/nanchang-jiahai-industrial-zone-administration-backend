@@ -1,0 +1,52 @@
+<include file="Public:html_header" /> 
+
+<link href="../Public/Css/news.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/base.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/class_com.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/select_box.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+	#main_content{ margin:0 auto; width:900px; }
+	.more_{ float:right; width:80px; text-align:left; padding:5px; }
+</style>
+<body>
+<script type="text/javascript" src="../Public/Js/ScrollPic.js"></script><!--首页幻灯效果-->
+<script LANGUAGE="Javascript" SRC="__PUBLIC__/FusionCharts/FusionCharts.js"></script>
+
+<!--start腾房新闻公共头部-->
+<!--%%当前是否在首页嵌入-->
+	<include file="News:news_header" />
+
+<!--end腾房新闻公共头部-->
+
+<h1 align="center" style="font-size:16px;">南昌近期房产房价(单位：元/平方米)</h1>
+
+<div class="height_10px"></div>
+<div id="main_content">
+{$ncsCharts}
+<a href="__APP__/Price/price_month/range_id/1" target="_blank" class="more_">更多..</a>
+<div class="clear"></div>
+<br />
+{$gxqCharts}
+<a href="__APP__/Price/price_month/range_id/2" target="_blank" class="more_">更多..</a>
+<div class="clear"></div>
+<br />
+{$hgtCharts}
+<a href="__APP__/Price/price_month/range_id/3" target="_blank" class="more_">更多..</a>
+<div class="clear"></div>
+<br />
+{$wlqCharts}
+<a href="__APP__/Price/price_month/range_id/4" target="_blank" class="more_">更多..</a>
+<div class="clear"></div>
+<br />
+{$cyzCharts}
+<a href="__APP__/Price/price_month/range_id/5" target="_blank" class="more_">更多..</a>
+<div class="clear"></div>
+<br />
+{$ncxCharts}
+<a href="__APP__/Price/price_month/range_id/6" target="_blank" class="more_">更多..</a>
+<div class="clear"></div>
+</div>
+
+<include file="Public:com_footer" />  <!--公共尾页 -->
+</body>
+</html>

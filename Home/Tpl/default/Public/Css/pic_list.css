@@ -1,0 +1,42 @@
+.album_list{
+	width:760px; 
+	float:left;
+	height:600px;
+	border:1px solid gray;
+}
+.album_listbox{
+	width:758px;
+	height:160px;
+	border-bottom:1px dashed gray;
+	float: left;
+}
+.listbox_left{
+	width:220px;
+	height:160px;
+	float:left;
+	background-image: url(../Images/photo_bg.png);
+	background-repeat: no-repeat;
+	background-position: left top;
+}
+.listbox_photo{
+	width:172px;
+	height:118px;
+	background-repeat:no-repeat;
+	background-position:left top;
+	margin-left: 22px;
+	margin-top: 20px;
+	margin-right: 27px;
+	margin-bottom: 22px;
+}
+.listbox_right{
+	width:510px;
+	height:160px;
+	float:right;
+}#SubColumn {
+	width: 960px;
+	clear: both;
+	height: auto;
+	margin-left: auto;
+	margin-right: auto;
+	line-height: 25px;
+}

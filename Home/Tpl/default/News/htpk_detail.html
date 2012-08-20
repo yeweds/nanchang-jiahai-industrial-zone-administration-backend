@@ -1,0 +1,282 @@
+<include file="Public:html_header" /> 
+
+<link href="../Public/Css/news.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/base.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/class_com.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/select_box.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/news_detail.css" rel="stylesheet" type="text/css" />
+<!--png图片在ie6下正常显示-->
+<!--[if IE 6]>
+<script type="text/javascript" src="__PUBLIC__/Js/png.js"></script>
+<script>
+  DD_belatedPNG.fix('.tf_logo');
+</script>
+<![endif]-->
+<body>
+
+<style type="text/css">
+a:link {
+	color: #000;
+}
+a:visited {
+	color: #000;
+}
+a:hover {
+	color: #999;
+}
+a:active {
+	color: #999;
+}
+</style>
+<script type="text/javascript">
+
+$(document).ready(function(){
+	//今日一周
+	$('#news_week').mouseover(function(){
+		$('#news_week').removeClass().addClass('left_bottom_bian1pxm');	
+		$('#news_today').addClass('bottom_bian1pxm');	
+		domAjax('news_pai_ajax','__URL__/news_pai_ajax/type/0','get');
+		
+	})
+	$('#news_today').mouseover(function(){
+		$('#news_week').removeClass().addClass('left_bottom_bian1px');	
+		$('#news_today').removeClass();	
+		domAjax('news_pai_ajax','__URL__/news_pai_ajax/type/1','get');
+	})	
+	
+});
+
+function pkShow(type,event){
+
+	//type='red'支持红方
+	//type='blue'支持蓝方
+	var id='pk'+type;
+	var color;
+	if(type=='red'){
+		color='#FF6600';
+	}else{
+		color='#0090B9';	
+	}
+
+
+	//3.根据上面获取的信息，定位弹出框的位置;
+	var left=event.x;
+	var top=event.y+$('body').scrollTop();	
+
+
+	var html='<div id="'+id+'" style="position: absolute;top:'+top+'px;left:'+left+'px;width:100px;height:100px;color:'+color+';font-size: 100px;font-family:Arial, Helvetica, sans-serif;z-index:100;"><b>+1</b></div>';
+	//创建一个dom模型容器
+	$(html).appendTo('body');
+
+	//创建动画
+	$('#'+id).animate({top:top-200,fontSize:80,opacity:0},800,function(){
+		
+		//增加票数
+		$('#'+id+'_piao').html(Number($('#'+id+'_piao').html())+1);
+		//显示比例
+		var red_piao=Number($('#pkred_piao').html());
+		var blue_piao=Number($('#pkblue_piao').html());
+		var redBai=Math.round(red_piao/(red_piao+blue_piao)*100);
+		//显示文字比例
+		$('#pkred_num').html(redBai+'%');
+		$('#pkblue_num').html((100-redBai)+'%');
+		//显示图像比例
+		$('#pkred_pic').width=redBai;
+		$('#pkblue_pic').width=100-redBai;
+
+		$('#'+id).remove();//移除div
+	});	
+}
+</script>
+
+<include file="Public:news_header" /> <!--头部包含共用 -->
+
+    <!--start==所有正文内容在此处显示-->
+    <div class="content_inc">
+      <div class="ad_head">
+  <!--广告 --></div>
+      <div class="height_30px_text blue_a"><strong class="blue_14px_f">&gt;&gt;</strong><a href="__URL__/"> 新闻首页</a> <span class="gray_14px_f">&gt;</span> <a href="__APP__/news-list-{$news.partid}">{$news.partname}</a> <span class="gray_14px_f">&gt;</span> 正文详细</div>
+    <div class="height_10px"></div> 
+      
+      
+    <div class="content_inc">
+    <div class="con_left_all">
+    
+      <div class="con_left_center_bg">
+        <div class="de_con_inc">
+          <div class="heigth_20px"></div>
+          <div class="height_30px" align="center"><h1 class="blue_24px_heif">{$news.new_topic.title}</h1></div>
+          <div class="height_30px" align="center"> 时间：{$news.new_topic.add_time} </div>
+          <div class="de_con_summary_inc">
+            <div class="de_con_summary"><strong><span class="blue_12px_f">话题内容：</span></strong>{$news.new_topic.content}</div>
+            <div class="de_con_summary"><strong><span class="blue_12px_f">红方观点：</span></strong>{$news.new_topic.r_content}</div>
+            <div class="de_con_summary"><strong><span class="blue_12px_f">蓝方观点：</span></strong>{$news.new_topic.l_content}</div>
+            <div style="clear:both"></div>
+            <!--de_con_summary促使图层高度随内容增加面增加-->
+          </div>
+          <div class="heigth_20px"></div>
+          <div class="lineheight25px">
+            <div class="heigth_20px"></div>
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td width="5" height="30">&nbsp;</td>
+                <td width="110" height="30" align="center" class="red_14px_f"><strong>红方观点</strong></td>
+                <td width="50" rowspan="2" align="center" class="yellow_24px_fa">PK<br />
+                  <span class="yellow_12px_f">辩论</span></td>
+                <td width="110" height="30" align="center" class="blue_14px_f"><strong>蓝方观点</strong></td>
+                <td width="5" height="30">&nbsp;</td>
+              </tr>
+              <tr>
+                <td width="5" height="30">&nbsp;</td>
+                <td width="110" height="30" class="red_12px_f" align="center" ><span id="pkred_piao">{$news.new_topic.r_num}</span>票</td>
+                <td width="110" height="30" class="red_12px_f" align="center" ><span id="pkblue_piao">{$news.new_topic.l_num}</span>票</td>
+                <td width="5" height="30">&nbsp;</td>
+              </tr>
+              <tr>
+                <td width="5">&nbsp;</td>
+                <td width="110">&nbsp;</td>
+                <td width="50">&nbsp;</td>
+                <td width="110">&nbsp;</td>
+                <td width="5">&nbsp;</td>
+              </tr>
+              <tr>
+                <td width="5">&nbsp;</td>
+                <!--"__URL__/votetopic/id/{$news.new_topic.id}/tid/1"-->
+                <td width="110" align="center" ><a href="#" onClick="pkShow('red',event);$.get('__URL__/votetopic/id/{$news.new_topic.id}/tid/1',''); return false;">支持红方观点</a></td>
+                <td width="50">&nbsp;</td>
+                <!--__URL__/votetopic/id/{$news.new_topic.id}/tid/0-->
+                <td width="110" align="center" ><a href="#" onClick="pkShow('blue',event);$.get('__URL__/votetopic/id/{$news.new_topic.id}/tid/0',''); return false;">支持蓝方观点</a></td>
+                <td width="5">&nbsp;</td>
+              </tr>
+              <tr>
+                <td width="5">&nbsp;</td>
+                <td width="110">&nbsp;</td>
+                <td width="50">&nbsp;</td>
+                <td width="110">&nbsp;</td>
+                <td width="5">&nbsp;</td>
+              </tr>
+            </table>
+          </div>
+          <div class="height_35px" align="center"></div>
+          <div class="heigth_20px"></div>
+          <!--<div class="height_25px"><img src="../Public/Images/de_pi.gif" align="absmiddle"  />
+		  <span class="blue_bian_a"><a href="#pingrun">评论</a></span><span class="gray_12px_f">{$news.news.replynum}</span> | <img src="../Public/Images/de_msg_ico.gif" align="absmiddle"  /><span class="blue_bian_a"><a href="#">复制链接给我的朋友</a></span></div>-->
+          <div class="height_25px"><span class="gray_12px_f">声明：本稿件为{$news.news.source}原创稿件,版权所有,引用或转载必须注明出处,若有引用及转载行为视为已默认本条款</span></div>
+          <div style="clear:both"></div>
+          <!--de_con_inc促使图层高度随内容增加面增加-->
+        </div>
+        <div style="clear:both"></div><!--con_left_center_bg促使图层高度随内容增加面增加-->      
+      </div>
+      <div class="height_10px_float"></div>
+      <div style="clear:both"></div><!--con_left促使图层高度随内容增加面增加--> 
+      </div><!--con_left end-->
+      <div class="width_10px_float"></div>
+      <div class="con_right_bg3">
+          <div class="de_ad_270px">
+            <!--导入右边广告-->
+            <include file="$AD_right" />
+             <!--end导入右边广告-->
+          </div>
+        <div class="height_10px"></div>
+        <div class="con_right_4bian268px">
+          <div class="height_30px">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td width="37%" height="30" align="center"  id="news_today" style="cursor:pointer"><strong class="blue_12px_f">今日最受关注</strong></td>
+                <td width="63%" height="30" class="left_bottom_bian1px" id="news_week"><span class="blue_12px_f">&nbsp;&nbsp;一周新闻排行</span></td>
+              </tr>
+            </table>
+          </div>
+          <div id="news_pai_ajax">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <present name="news.news_gz" >
+                <volist name="news.news_gz" id="vo" key="k" >
+                  <tr>
+                    <td width="14%" height="30" align="center"><if condition= "$k lt 4" >
+                      <div class="num_style1">0{$k}</div>
+                      <elseif condition= "$k eq 10" />
+                      <div class="num_style2">{$k}</div>
+                      <else/>
+                      <div class="num_style2">0{$k}</div>
+                    </if></td>
+                    <td width="86%" height="30" class="black_a"><a href="__APP__/news-{$vo.id}" title="{$vo.title|mystr_replace=###}">{$vo.title|mb_substr=###,0,19,'utf-8'}</a></td>
+                  </tr>
+                </volist>
+              </present>
+            </table>
+          </div>
+        </div>
+        <div class="height_10px"></div>
+        <div class="con_right_4bian268px">
+          <div class="height_30px">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td height="30" align="left" class="title_style1" ><span class="blue_12px_f"><strong>&nbsp;&nbsp;热点专题</strong></span></td>
+              </tr>
+            </table>
+          </div>
+          <div class="height_10px"></div>
+          <div class="height_90px_fixed">
+            <div class="width_10px_float"></div>
+            <div class="height_80px_100px">
+              <!--第一条用图文形式-->
+              <img src="__PUBLIC__/Upload/News/thumb_{$news.rdzt.h.pic_url}" width="100" height="80" /><br />
+            </div>
+            <div class="width_10px_float"></div>
+            <div class="width_170_float">
+              <div class="blue_h4"><span class="blue_a"> <a href="__APP__/news-{$news.rdzt.h.id}" title="{$news.rdzt.h.title|mystr_replace=###}">{$news.rdzt.h.title|mb_substr=###,0,13,'utf-8'}</a></span></div>
+              <div class="height_20px_text"><span class="gray_12px_f">{$news.rdzt.h.remark|mb_substr=###,0,40}</span><span class="blue_a"><a href="__APP__/news-{$news.rdzt.h.id}">详细&gt;&gt;</a></span></div>
+            </div>
+          </div>
+          <!--第一条用图文形式结束-->
+          <div class="clear"></div>
+          <volist name="news.rdzt.titles" id="vo" >
+            <div class="black_a height_25px_text">&nbsp;&nbsp;&middot;<a href="__APP__/news-{$vo.id}" title="{$vo.title|mystr_replace=###}">{$vo.title|mb_substr=###,0,21,'utf-8'}</a></div>
+          </volist>
+          <div class="height_10px"></div>
+        </div>
+        <div class="height_10px"></div>
+        
+        
+
+        
+        
+        
+<div style="clear:both"></div>
+        <!--con_left1促使图层高度随内容增加面增加-->
+      </div>
+<div style="clear:both"></div><!--con_inc促使图层高度随内容增加面增加-->               
+    </div>
+    <div class="height_10px"></div>
+    <div class="width_960px_4bian">
+      <!--策划公司标题-->
+      <div class="title_style5">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="90" height="30" align="center" class="black_14px"><strong>推荐商家</strong></td>
+            <td width="826" height="30">&nbsp;</td>
+            <td width="44" class="black_a"><a href="__APP__/Shop">更多&gt;&gt;</a></td>
+          </tr>
+        </table>
+      </div>
+      <!--策划公司内容-->
+      <div class="height_10px_float"></div>
+      <div class="width_960px"> 
+      
+        <volist name="news.tj_shop" id="vo">
+		   <div class="width_240px_float">&nbsp;&nbsp;<a href="__APP__/shop-{$vo.id}" title="{$vo.name}">{$vo.name|trim|mb_substr=###,0,18,'utf-8'}</a></div>
+		</volist>
+        <!--公共策划公司 -->
+        <div class="clear"></div>
+        <!--自动拉伸width_960px-->
+      </div>
+      <div class="clear"></div>
+      <!--自动拉伸width_960px-->
+    </div>
+    <div class="height_10px"></div>
+	<include file="Public:footer" /> {//共用尾部}
+    <div style="clear:both"></div><!--促使图层高度随内容增加面增加==正文内容--> 
+   </div>
+
+</body>
+</html>

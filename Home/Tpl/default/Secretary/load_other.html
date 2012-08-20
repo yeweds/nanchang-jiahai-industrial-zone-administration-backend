@@ -1,0 +1,14 @@
+          <!--开始一个项目-->      
+          <div class="height_10px"></div>
+          <div class="secy_msg_title">&nbsp;&nbsp;{$title}</div>
+          <div class="secy_msg_con_bian">
+          <div class="height_5px"></div>
+          <!--start循环一个项目下的内容-->
+		  <volist name="list" id="vo">
+            <div class="secy_msg_con">&nbsp;<span class="gray_18px_fb">{$i}</span>&nbsp;&nbsp;&nbsp;<span class="green_a"><a href="#" onClick="loadDoc('loupan','__APP__/Loupan/view/id/{$vo.info_id}'); return false;">{$vo.lpname}</a></span></div>
+		  </volist>
+          <!--end循环一个项目下的内容-->
+            <div class="height_5px"></div>
+            <div style="clear:both"></div>
+          </div>
+          <!--结束一个项目--> 

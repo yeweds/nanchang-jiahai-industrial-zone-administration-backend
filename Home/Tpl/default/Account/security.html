@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>帐户安全-南昌婚庆网</title>
+<link href="../Public/Css/common.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/account.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/Js/jquery.min.js" /></script>
+
+<script type="text/javascript" src="../Public/Js/common.js" /></script>
+<script type="text/javascript">
+//指定当前组模块URL地址
+var URL = '__URL__';
+var APP	= '__APP__';
+var PUBLIC = '__PUBLIC__';
+
+var CURRENT_ITEM  = "nav_lf_sec";  //当前选中
+</script>
+
+</head>
+
+<body>
+<include file="Public:header" /><!--共享登录头部 -->
+<div class="clear"></div>
+<!--面包屑s -->
+  <div class="height_30px_text gray_14px_r_a" style="line-height:50px; height:50px;">
+  <a href="__APP__/">首页</a> <strong>&gt;&gt; </strong>  帐户安全
+  </div>
+<!--面包屑e -->
+
+<!--个人信息开始-->
+<div class="edit_user">
+
+	<!-- ///////////////////内容开始///////////////////////// -->
+    <div class="user_main">       
+    
+		<!-- title begin -->
+		<div class="user_title"> 
+            <h2>帐号管理</h2>
+		</div>
+        <!-- title end -->
+        <div class="clear"></div>
+        <div class="float_height_10px"></div>
+        <div class="clear"></div>
+        <!-- 左菜单 s __URL__/edit_user-->
+      <div class="user_menu">
+            <include file="Account:account_left" /><!--共享左侧 -->
+      </div>
+        <!-- 左菜单 e  -->
+        
+        <!-- /////////////////右 s   -->
+        <div id="user_content">
+        <!-- 右top s   -->
+      	<div class="user_content_t"></div>
+        <!-- 右top e   -->
+        <div class="clear"></div>
+        <!-- 右middle s   -->
+        <div class="user_content_m">
+        	<div class="float_height_30px"></div>
+          <div class="clear"></div>
+            <!-- 切换块1  -->
+            <div class="c_box" id="edit_u" style="display:block;">
+		  <!-- 修改资料 begin  -->
+          
+<div class="data" style="padding-left:80px;"><!-- 帐号安全 begin  -->
+  	<div>
+    <h2 class="lh35 f14px btmline"><strong>你上次的登录：</strong></h2>
+    	<ul>
+          <li>
+           	<div class="float_l alR" style="width:15%;">登录时间：</div>
+                <div class="float_l cGray2" style="width:85%;">{$lastLogin['login_time']|date="Y年m月d日 H:i:s",###}<br />
+                </div>
+                <div class="float_l cGray2"></div>
+          </li>
+            <li>
+           	  <div class="float_l alR" style="width:15%;">IP  地址：</div>
+                <div class="float_l" style="width: 85%;">{$lastLogin['login_ip']}</div>
+          </li>
+            <li>
+           	  <div class="float_l alR" style="width:15%">上网地点：</div>
+                <div class="float_l" style="width:85%;" id="lastLoginAddress"></div>
+          </li>
+                <li>
+           	  <div class="float_l alR" style="width:15%;">&nbsp;</div>
+                <div class="float_l" style="width: 85%;"></div>
+          </li>
+        </ul>
+        
+    <h2 class="lh35 f14px btmline"><strong>本次的登录：</strong></h2>
+      	<ul>
+          <li>
+           	<div class="float_l alR" style="width:15%;">登录时间：</div>
+                <div class="float_l cGray2" style="width:85%;">{$thisLoginInfo['login_time']|date="Y年m月d日 H:i:s",###}<br />
+                </div>
+                <div class="float_l cGray2"></div>
+          </li>
+          <li>
+           	<div class="float_l alR" style="width:15%;">IP  地址：</div>
+            <div class="float_l" style="width: 85%;">{$thisLoginInfo['login_ip']}</div>
+          </li>
+          <li>
+           	<div class="float_l alR" style="width:15%">上网地点：</div>
+            <div class="float_l" style="width:85%;" id="thisLoginAddress"></div>
+          </li>
+          <li>
+           	<div class="float_l alR" style="width:15%;">&nbsp;</div>
+			<div class="float_l" style="width: 85%;"></div>
+          </li>
+        </ul> 
+  
+      </div>
+
+  </div><!-- 帐号安全 end  -->
+
+     <div class="clear"></div> 
+    </div>
+    <!-- 切换块1  -->
+    <div class="clear"></div>
+    <div class="float_height_10px"></div>
+    <div class="clear"></div>
+    <!-- 修改资料 end  -->
+	</div>
+     <!-- 右middle e   -->
+     <div class="clear"></div>
+	 <!-- 右bottom s   -->
+     <div class="user_content_b"></div>
+     <!-- 右bottom e   -->
+    <div class="clear"></div>
+	</div>
+    <!-- /////////////////右 e   -->
+ 	<div class="clear"></div>
+	</div>
+	<!-- ///////////////////内容结束///////////////////////// -->
+
+<div class="clear"></div>
+</div>
+<!-- 个人信息结束 -->
+<div class="clear"></div>
+<div class="float_height_30px"></div>
+<div class="clear"></div>
+<!-- footer -->
+<include file="Public:footer" /> {//共用尾部}
+
+</body>
+</html>
+<!-- IP地址识别接口 -->
+<script type="text/javascript" src="http://whois.pconline.com.cn/jsLabel.jsp?id=lastLoginAddress&ip={$lastLogin['login_ip']}" charset="gb2312"></script>
+<script type="text/javascript" src="http://whois.pconline.com.cn/jsLabel.jsp?id=thisLoginAddress&ip={$thisLoginInfo['login_ip']}" charset="gb2312"></script>

@@ -1,0 +1,20 @@
+<div class="more black_a"><a href="__URL__/type/classid/{$news.tdcr.id}">更多&gt;&gt;</a></div>
+      <div class="height_10px"></div>
+      <eq name="name" value="tdcj"> 
+      <div class="height_5px"></div>
+      </eq>
+      <volist name="news.tdcr.titles" id="vo">
+        <div class="height_22px_text">
+        
+        <eq name="name" value="tdcj">      
+        &nbsp;&middot;<span style="font-family: Arial;line-height:20px;color: #F60;">{$vo.jiaoyishijian}</span>&nbsp;<span class="red_14px_f">{$vo.range_name}</span><span class="black_a"><a href="__APP__/gtcj-{$vo.id}" title="{$vo.weizhi|mystr_replace=###}" target="_blank"> 宗地{$vo.bianhao}</a></span>
+        
+        <else/>
+        	<span class="{$vo.title_color|title_style=###}" title="{$vo.title|mystr_replace=###}"><a href="__APP__/tdcr-{$vo.id}" target="_blank">&nbsp;&middot;{$vo.add_time|substr=###,5} {$vo.title|mb_substr=###,0,20,'utf-8'}</a></span>
+        </eq>
+        
+         </div>
+      </volist> 
+      <div class="height_10px"></div>
+      <div class="clear"></div>
+   

@@ -1,0 +1,76 @@
+<include file="Public:header" />
+<!--导入编辑器开始-->
+<link rel="stylesheet" href="__PUBLIC__/Js/Kindeditor/themes/default/default.css" />
+<script charset="utf-8" src="__PUBLIC__/Js/Kindeditor/kindeditor.js"></script>
+<script charset="utf-8" src="__PUBLIC__/Js/Kindeditor/lang/zh_CN.js"></script>
+<script type="text/javascript">
+//-- 自定义在线编辑器
+	var editor;
+	var mini_items = ['source','undo','redo','fontname','fontsize','forecolor',
+					  'hilitecolor','bold','italic','emoticons','removeformat',
+					  'fullscreen'];  //迷你元素
+	var full_items = ['source', '|', 'undo', 'redo', '|', 'preview', 'print', 'template', 'cut', 'copy', 'paste',
+        'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+        'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+        'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
+        'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+        'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image',
+        'flash', 'insertfile', 'table', 'hr', 'emoticons', 'pagebreak',
+        'link', 'unlink' ];  //完全元素
+	
+	KindEditor.ready(function(K) {
+		editor = K.create('#my_editor', {
+					 themeType : 'default',//样式
+					 newlineTag: 'br', //换行格式
+					 filterMode: true, //过滤代码
+					 uploadJson: '__PUBLIC__/Js/Kindeditor/php/upload_json.php',
+					 fileManagerJson : '__PUBLIC__/Js/Kindeditor/php/file_manager_json.php',
+					 allowFileManager : true,											 
+					 items: full_items  //当前自定义元素列表
+		});
+	});
+
+	//获取数据	
+	function checkForm(){
+		editor.sync('my_editor'); //同步编辑器内容
+		return true;
+	}
+</script>
+<!-- 编辑器调用结束 -->
+
+
+
+<div class="bodyTitle">
+	<div class="bodyTitleLeft"></div>
+  <div class="bodyTitleText">修改商家最新套系</div>
+</div>
+
+<h3 class="marginbot">
+<a href="__APP__/Shop/" class="sgbtn" >返回商家管理</a>
+<a href="javascript:PopWindow('__URL__/addAttach/info_id/'+{$shop.id},600,700);" class="sgbtn">＋添加附件</a>
+<a href="javascript:history.go(-1);" style="float:right;"><strong>返回&gt;&gt;</strong></a>
+</h3>
+<form method="post" name="form1" action="__URL__/save_series" enctype ="multipart/form-data" onSubmit="return checkForm();">
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+              <td width="15%" height="30">公司名称：</td>
+              <td width="85%" height="30">{$shop['name']}<font color="red">*</font>
+				<input type="hidden" name="id" value="{$shop['id']}"/>				</td>
+            </tr>
+
+            <tr>
+              <td height="30"> 最新套系:</td>
+              <td height="30"><!-- 编辑器调用开始 -->
+              <textarea id="my_editor" name="new_series" style="width:700px; height:300px; visibility:hidden;" >{$shop.new_series}</textarea><!-- 编辑器调用结束 -->  <font color="red">*</font></td>
+            </tr>
+            <tr>
+              <td height="40">&nbsp;</td>
+              <td height="40">
+                <input type="submit"  value="确定修改" class="df_button" />
+                <input type="reset"  value="还原重填" class="df_button" /></td>
+            </tr>
+        </table>
+</form>
+        
+        <br>
+<include file="Public:footer" />

@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>南昌婚庆点评，南昌婚纱论坛 - 南昌婚庆网</title>
+<meta name="keywords" content="南昌婚庆点评,南昌婚纱论坛">
+<meta name="description" content="南昌婚庆网为您提供婚庆商家的口碑点评,参考广大的南昌朋友对婚庆商家的口碑点评情况,南昌婚庆网商家微点评,点评的方方面面,极力呈现最真实的给您">
+<link href="../Public/Css/news.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/base.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/class_com.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/select_box.css" rel="stylesheet" type="text/css" />
+
+<link href="../Public/Css/ct_reviews.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/view_lp.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript">
+//指定当前组模块URL地址
+var URL = '__URL__';
+var APP	 =	 '__APP__';
+var PUBLIC = '__PUBLIC__';
+var SELF = '__SELF__';
+</script>
+<script type="text/javascript" src="../Public/Js/base.js"></script><!--前台公共JS函数-->
+<script type="text/javascript" src="__PUBLIC__/Js/jquery.min.js"></script>
+<script language="JavaScript" type="text/javascript">
+//提交验证
+function sub_reviews(){
+	var content = $("#lpdp_content");
+	if(content.val() == ''){
+		alert('请输入评论内容！');
+		//content.fouce();
+		return false;
+	}
+	return true;
+}
+//增加人气效果
+function voteShow(type, id, event){
+	//type='red'支持红方
+	//type='blue'支持蓝方
+	var reviews_mx_id = id.replace('vote_',''); //获取点评明细ID alert(reviews_mx_id + id);
+	addReviewsHits(reviews_mx_id); //入库
+	var color;
+	if(type=='red'){
+		color='#FF6600';
+	}else{
+		color='#0090B9';	
+	}
+	//3.根据上面获取的信息，定位弹出框的位置;
+	var scroll_h =$('body').scrollTop();
+	var left = event.x;
+	var top  = scroll_h + event.y;	
+
+
+	var html='<div id="'+id+'" style="position: absolute;top:'+top+'px;left:'+left+'px;width:100px;height:100px;color:'+color+';font-size: 100px;font-family:Arial, Helvetica, sans-serif;z-index:100;"><b>+1</b></div>';
+	//创建一个dom模型容器
+	$(html).appendTo('body');
+
+	//创建动画
+	$('#'+id).animate({top:top-200,fontSize:80,opacity:0},800,function(){
+		//增加票数
+		$('#'+id+'_piao').html(Number($('#'+id+'_piao').html())+1);
+		$('#'+id).remove();//移除div
+	});
+	
+}
+//增加人气入库
+function addReviewsHits(id){
+	$.get('__URL__/addReviewsHits/', {"id": id} );
+}
+
+
+</script>
+<script language="JavaScript" type="text/javascript" src="__PUBLIC__/Js/jquery.corner.js"></script> 
+<script type="text/javascript">
+$(function(){
+	$('.reply_bn').corner('3px');
+
+});
+</script>
+<style type="text/css">
+.img_style {
+	padding: 2px;
+	float: left;
+	border: 1px solid #e3e3e3;
+	display: inline;
+	margin-top: 0px;
+	margin-right: 7px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+}
+.reply_bn {
+	background-color: #5D9B00;
+	text-align: center;
+	color: #FFF;
+	cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+<include file="Public:news_header" /> <!--头部包含共用 -->
+<div id="content_bg">
+
+  <div id="content">
+    <!--<div class="ad_head"></div> -->
+	<!-- 通栏广告start -->
+	<!-- Ad:news_index_tl"   -->
+	<!-- 通栏广告end -->
+	
+    <div class="height_10px"></div>
+		<div class="height_30px"><img src="../Public/Images/dp_jian_left.gif" width="10" height="10" alt="标"/>南昌婚庆网  >&nbsp;<span class="blue_a"><a href="__APP__/Shop">商家大全</a>&nbsp;</span>>&nbsp;<strong><span class="green_12px_f">商家点评</span></strong></div>
+		
+
+          <div class="height_10px"></div>
+	<div class="con_left_center_nbg" >
+	  <div class="ping_title"><strong><span class="blue_14px_f">&nbsp;&nbsp;</span><span class="blue_14px_yahei">微评论</span></strong><span class="gray_font">(按受欢迎程度排序)</span></div>          
+         <div class="bian_4gray_qian1px">
+           <div class="margin_4bian_10px">
+  <!--             <div class="box_470_bian1right">-->
+           <div class="box_450w">
+                 <!--<div class="dp_head_tag">{$count_good}人支持</div>-->
+                 <!--start-一条评论-->
+		    <volist name="list" id="vo">
+			
+                 <div class="wp_content_class">
+                   <div class="user_head"><img src="__PUBLIC__/Upload/U/{$vo.pic_url}" width="50" height="50" alt="头像"/></div>
+                   <div class="width_20px_space"></div>
+                   <div class="box_370w">
+                     <div class="box_100b_min45px black_a"><span  style="clear:left;display:block"><span class="blue_s">{$vo.user_name}</span><a href="__URL__/view/id/{$vo.id}" class="black_14px_song">: {$vo.content}</a></span>
+                       <volist name="vo.pic" id="v"> <a href="{$v}"><img src="{$v}" border="0" class="img_style" onload="ImgResize(this)" alt='标' /></a> </volist>
+<div style="clear:both"></div><!--box_100b_min45px促使图层高度随内容增加面增加-->  
+                     </div>
+                     <div class="height_15px"></div>
+
+                     <div class="height_lineheight_20px">
+                       <div style="float:left;font-size:12px"><span class="gray_font">{$vo.add_time|date='m-d H:i:s',###}</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="gray_a">商家: </span><span class=" blue_q_a"><a href="__APP__/shop-{$vo.info_id}" target="_blank">{$vo.name}</a></span></div>
+                       <div style="float:right;font-size:12px" class="blue_q_a"><img src="../Public/Images/dp_ico.png" alt="ico" width="22" height="22" border="0" align="top" onclick="voteShow('red','vote_{$vo.id}',event); return false;"  style="cursor:pointer;"/><a href="__URL__/view/id/{$vo.id}" onclick="voteShow('red','vote_{$vo.id}',event); return false;"  style="cursor:pointer;">支持(<span  id="vote_{$vo.id}_piao">{$vo.hits}</span>)</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="__URL__/view/id/{$vo.id}" >评论({$vo.reply})</a></div>
+                     </div>
+                   </div>
+                   <!--<div class="dp_zc_tag" onclick="voteShow('red','vote_{$vo.id}',event); return false;"  style="cursor:pointer;"> <strong><span class="blue_12px_f" id="vote_{$vo.id}_piao">{$vo.hits}</span></strong><br />
+                     人支持</div>-->
+<div style="clear:both"></div><!--wp_content_class促使图层高度随内容增加面增加-->  
+              </div>
+	
+			</volist>
+                 <!--end-一条评论-->
+                 <div class="height_15px"></div>
+                 <div class="height_lineheight_30px_right blue_q_a">{$page}</div>
+                 <div style="clear:both"></div><!--box_450w促使图层高度随内容增加面增加-->
+               </div>
+<!--             </div>-->
+<div style="clear:both"></div>
+             <!--margin_4bian_20px促使图层高度随内容增加面增加-->
+         </div>
+           <div style="clear:both"></div>
+           <!--bian_4gray_1px促使图层高度随内容增加面增加-->
+         </div>
+
+	</div><!--<div class="con_left_center_nbg" >-->
+    <div style="clear:both"></div><!--content促使图层高度随内容增加面增加-->    
+  </div>
+  
+
+<include file="Public:footer" /> {//共用尾部}
+  
+	<div style="clear:both"></div><!--content_bg促使图层高度随内容增加面增加-->
+</div>
+</body>
+</html>

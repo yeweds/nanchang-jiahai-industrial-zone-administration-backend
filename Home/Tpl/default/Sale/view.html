@@ -1,0 +1,354 @@
+<include file="Public:html_header" /> 
+
+<link href="../Public/Css/news.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/base.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/class_com.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/sale.css" rel="stylesheet" type="text/css" />
+
+<body >
+
+<!--start腾房新闻公共头部-->
+<!--%%当前是否在首页嵌入为1在首页-->
+<include file="Sale:sale_header" />
+<!--end腾房新闻公共头部-->
+
+<div class="content_inc">   
+  <div class="height_30px_text"><img src="../Public/Images/dp_jian_left.gif" width="10" height="10" alt="箭头" />腾房网 > <a href="__APP__/lp">楼盘大全</a> > <a href="__APP__/lp-{$loupan.info_id}">{$loupan.lpname}</a><a href="__APP__/Sale/index/id/{$loupan.info_id}">&nbsp;<strong><span class="green_12px_f">销售中心</span></strong></a> > 房屋信息</div>
+  <div class="sale_left_content_inc">
+    <div class="width_690px">
+      <div class="width_7px_float"></div>
+      <div class="width_674px_float">
+        <div id="lp_title_left">
+            <div class="float_left">当前房屋详细信息</div>
+            <div class="float_right"><strong>{$loupan.lpname}&nbsp;&nbsp;</strong></div>
+        </div>
+        <volist name="loudong" id="vo" mod="5">
+          <eq name= "mod" value= "0" ><else/></eq>
+        </volist>
+        <volist name="unit" id="vo" mod="5">
+          <eq name= "mod" value= "0" ><else/></eq>
+        </volist>
+        <div class="clear"></div>
+      </div>
+      <div class="clear"></div>
+    </div>
+    <div class="title_style5">&nbsp;&nbsp;<strong>{$room['rroomaddr']}</strong> &nbsp;</div>
+    <table width="100%" border="0" cellpadding="0" cellspacing="0" id="room_list">
+             <tr>
+        <td height="10" bgcolor="#FFFFFF">&nbsp;</td>
+        <td height="10" bgcolor="#FFFFFF">&nbsp;</td>
+        <td height="10" bgcolor="#FFFFFF">&nbsp;</td>
+        <td height="10" bgcolor="#FFFFFF">&nbsp;</td>
+        <td height="10" bgcolor="#FFFFFF">&nbsp;</td>
+        <td height="10" bgcolor="#FFFFFF">&nbsp;</td>
+        <td height="10" bgcolor="#FFFFFF">&nbsp;</td>
+       </tr>
+      <tr>
+        <td width="2%" height="30" align="center" bgcolor="#FFFFFF">&nbsp;</td>
+        <td width="12%" height="35" align="left" bgcolor="#FFFFFF"><strong>销售状态：</strong></td>
+        <td width="23%" height="35" align="left" bgcolor="#FFFFFF"><span   <eq name="room.rstatus" value="可预售">class="red_text"</eq>     >{$room.rstatus}</span>
+        </td>
+        <td width="12%" height="35" align="left" bgcolor="#FFFFFF"><strong>户型：</strong></td>
+        <td width="19%" height="35" align="left" bgcolor="#FFFFFF">{$room.rroomtype|default="未知"}&nbsp;</td>
+        <td width="12%" height="35" align="left" bgcolor="#FFFFFF"><strong>朝向：</strong></td>
+        <td width="20%" height="35" align="left" bgcolor="#FFFFFF">{$room.rposition|default="未知"}&nbsp;</td>
+      </tr>
+
+        <tr>
+        <td height="10" bgcolor="#FFFFFF">&nbsp;</td>
+        <td height="10" align="left" bgcolor="#FFFFFF">&nbsp;</td>
+        <td height="10" align="left" bgcolor="#FFFFFF">&nbsp;</td>
+        <td height="10" align="left" bgcolor="#FFFFFF">&nbsp;</td>
+        <td height="10" align="left" bgcolor="#FFFFFF">&nbsp;</td>
+        <td height="10" align="left" bgcolor="#FFFFFF">&nbsp;</td>
+        <td height="10" align="left" bgcolor="#FFFFFF">&nbsp;</td>
+       </tr>
+       
+       <tr>
+        <td height="35" align="center" bgcolor="#FFFFFF">&nbsp;</td>
+        <td height="35" align="left" bgcolor="#FFFFFF"><strong>建筑面积：</strong></td>
+        <td height="35" align="left" bgcolor="#FFFFFF">{$room.rarea|default="未知"}㎡</td>
+        <td height="35" align="left" bgcolor="#FFFFFF"><strong>套内面积：</strong></td>
+        <td height="35" align="left" bgcolor="#FFFFFF">{$room.rinarea|default="未知"}㎡</td>
+        <td height="35" align="left" bgcolor="#FFFFFF"><strong>分摊面积：</strong></td>
+        <td height="35" align="left" bgcolor="#FFFFFF">{$room.routarea|default="未知"}㎡</td>
+       </tr>
+       
+        <tr>
+        <td height="10" bgcolor="#FFFFFF">&nbsp;</td>
+        <td height="10" align="left" bgcolor="#FFFFFF">&nbsp;</td>
+        <td height="10" align="left" bgcolor="#FFFFFF">&nbsp;</td>
+        <td height="10" align="left" bgcolor="#FFFFFF">&nbsp;</td>
+        <td height="10" align="left" bgcolor="#FFFFFF">&nbsp;</td>
+        <td height="10" align="left" bgcolor="#FFFFFF">&nbsp;</td>
+        <td height="10" align="left" bgcolor="#FFFFFF">&nbsp;</td>
+       </tr>
+       
+       <tr>
+        <td height="30" align="center" bgcolor="#FFFFFF">&nbsp;</td>
+        <td height="35" align="left" bgcolor="#FFFFFF"><strong>阳台面积：</strong></td>
+        <td height="35" align="left" bgcolor="#FFFFFF">{$room.rbalcony|default="未知"}㎡</td>
+        <td height="35" align="left" bgcolor="#FFFFFF"><strong>均价：</strong></td>
+        <td height="35" align="left" bgcolor="#FFFFFF"><?php if($room['money']){  echo round($room['money']/$room['rarea'],2).'元';  }else{ echo '待定'; }?></td>
+        <td height="35" align="left" bgcolor="#FFFFFF"><strong>总估算价：</strong></td>
+        <td height="35" align="left" bgcolor="#FFFFFF"><?php if($room['money']){ echo $room['money'].'元'; }else{ echo '暂无'; }?></td>
+       </tr>       
+
+        <tr>
+        <td height="10" bgcolor="#FFFFFF">&nbsp;</td>
+        <td height="10" align="left" bgcolor="#FFFFFF">&nbsp;</td>
+        <td height="10" align="left" bgcolor="#FFFFFF">&nbsp;</td>
+        <td height="10" align="left" bgcolor="#FFFFFF">&nbsp;</td>
+        <td height="10" align="left" bgcolor="#FFFFFF">&nbsp;</td>
+        <td height="10" align="left" bgcolor="#FFFFFF">&nbsp;</td>
+        <td height="10" align="left" bgcolor="#FFFFFF">&nbsp;</td>
+       </tr>
+       
+       <tr>
+        <td height="35" align="center" bgcolor="#FFFFFF">&nbsp;</td>
+        <td height="35" align="left" bgcolor="#FFFFFF"><strong>房号：</strong></td>
+        <td height="35" align="left" bgcolor="#FFFFFF">{$room.rroomnum}</td>
+        <td height="35" align="left" bgcolor="#FFFFFF"><strong>所在楼层：</strong></td>
+        <td height="35" align="left" bgcolor="#FFFFFF">{$room.rlayer} 楼</td>
+        <td height="35" align="left" bgcolor="#FFFFFF"><strong>得房率：</strong></td>
+        <td height="35" align="left" bgcolor="#FFFFFF">{$room['rinarea']/$room['rarea']*100|default="未知"} %</td>
+       </tr>
+       
+        <tr>
+        <td height="10" bgcolor="#FFFFFF">&nbsp;</td>
+        <td height="10" align="left" bgcolor="#FFFFFF">&nbsp;</td>
+        <td height="10" align="left" bgcolor="#FFFFFF">&nbsp;</td>
+        <td height="10" align="left" bgcolor="#FFFFFF">&nbsp;</td>
+        <td height="10" align="left" bgcolor="#FFFFFF">&nbsp;</td>
+        <td height="10" align="left" bgcolor="#FFFFFF">&nbsp;</td>
+        <td height="10" align="left" bgcolor="#FFFFFF">&nbsp;</td>
+       </tr>
+       
+       <tr>
+        <td height="35" align="center" bgcolor="#FFFFFF">&nbsp;</td>
+        <td height="35" align="left" bgcolor="#FFFFFF"><strong>设计用途：</strong></td>
+        <td height="35" align="left" bgcolor="#FFFFFF">{$room.rsheji}</td>
+        <td height="35" align="left" bgcolor="#FFFFFF"><strong>测绘状态：</strong></td>
+        <td height="35" align="left" bgcolor="#FFFFFF">{$room.rcehui}</td>
+        <td height="35" align="left" bgcolor="#FFFFFF"><strong>建筑状态：</strong></td>
+        <td height="35" align="left" bgcolor="#FFFFFF">{$room.rmaketype}</td>
+       </tr>
+    </table>
+    <div class="height_20px_text"></div>
+    <div class="loudong_title">&nbsp;&nbsp;<strong>同一单元下所有房间</strong></div>
+    
+    <table width="100%" border="0" cellpadding="0" cellspacing="0" id="room_list">
+      <tr>
+        <td height="30" align="center" bgcolor="#FFFFFF" class="room_column">房号</td>
+        <td height="30" align="center" bgcolor="#FFFFFF" class="room_column">面积</td>
+        <td height="30" align="center" bgcolor="#FFFFFF" class="room_column">户型</td>
+        <td height="30" align="center" bgcolor="#FFFFFF" class="room_column">公摊面积</td>
+        <td height="30" align="center" bgcolor="#FFFFFF" class="room_column">阳台面积</td>
+        <td height="30" align="center" bgcolor="#FFFFFF" class="room_column">状态</td>
+        <td height="30" align="center" bgcolor="#FFFFFF" class="room_column">详情</td>
+      </tr>
+      <volist name="rooms" id="vo">
+        <?php
+      	if($last_rlayer!=$vo['rlayer']){
+        ?>
+        <tr>
+          <td height="10" bgcolor="#E3EECA">&nbsp;</td>
+          <td height="10" bgcolor="#E3EECA">&nbsp;</td>
+          <td height="10" bgcolor="#E3EECA">&nbsp;</td>
+          <td height="10" bgcolor="#E3EECA">&nbsp;</td>
+          <td height="10" bgcolor="#E3EECA">&nbsp;</td>
+          <td height="10" bgcolor="#E3EECA">&nbsp;</td>
+          <td height="10" bgcolor="#E3EECA">&nbsp;</td>
+        </tr>
+        <tr>
+          <td height="30" align="center" bgcolor="#F0F7DF" class="layer_title"><strong>{$vo.rlayer}楼</strong></td>
+          <td height="30" bgcolor="#F0F7DF">&nbsp;</td>
+          <td height="30" bgcolor="#F0F7DF">&nbsp;</td>
+          <td height="30" bgcolor="#F0F7DF">&nbsp;</td>
+          <td height="30" bgcolor="#F0F7DF">&nbsp;</td>
+          <td height="30" bgcolor="#F0F7DF">&nbsp;</td>
+          <td height="30" bgcolor="#F0F7DF">&nbsp;</td>
+        </tr>
+        <?php
+     	}
+      	$last_rlayer=$vo['rlayer'];
+      ?>
+        <tr>
+          <td height="30" align="center" bgcolor="#FFFFFF">{$vo.rroomnum}室</td>
+          <td height="30" align="center" bgcolor="#FFFFFF">{$vo.rarea}</td>
+          <td height="30" align="center" bgcolor="#FFFFFF">{$vo.rroomtype}</td>
+          <td height="30" align="center" bgcolor="#FFFFFF">{$vo.routarea}㎡</td>
+          <td height="30" align="center" bgcolor="#FFFFFF">{$vo.rbalcony}㎡</td>
+            <td height="30" align="center" bgcolor="#FFFFFF" 
+          <eq name="vo.rstatus" value="可预售">class="red_text"</eq>
+          >{$vo.rstatus}
+            </td>
+          <td height="30" align="center" bgcolor="#FFFFFF"><a href="__APP__/Sale/view/id/{$vo.id}">查看详情</a></td>
+        </tr>
+      </volist>
+      <tr>
+        <td height="30" bgcolor="#FFFFFF">&nbsp;</td>
+        <td height="30" bgcolor="#FFFFFF">&nbsp;</td>
+        <td height="30" bgcolor="#FFFFFF">&nbsp;</td>
+        <td height="30" bgcolor="#FFFFFF">&nbsp;</td>
+        <td height="30" bgcolor="#FFFFFF">&nbsp;</td>
+        <td height="30" bgcolor="#FFFFFF">&nbsp;</td>
+        <td height="30" bgcolor="#FFFFFF">&nbsp;</td>
+      </tr>
+    </table>
+    <div class="clear"></div>
+  </div>
+  <div class="width_10px_float"></div>
+  <div class="sale_right_content_inc">
+          <div class="ping_title">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td width="11%" height="33" align="right"><span class="height_lineheight_30px"><span class="blue_q_a"><a href="__APP__/lp-{$vo.info_id}"><span class="gray_a"><img src="../Public/Images/lp_ico_s.jpg" width="22" height="22" border="0" align="top" alt="楼盘" /></span></a></span></span></td>
+                <td width="89%" height="33" class="black_14px_f"><span class="blue_14px_yahei"><span class="blue_q_a"><a href="__APP__/lp-{$vo.info_id}">&nbsp;<strong class="green_14pxf_yahei">{$loupan.lpname}</strong></a></span></span></td>
+              </tr>
+            </table>
+            <div class="gray_height_s1px"></div>
+            <div class="clear"></div>
+          </div>
+          
+<div class="margin_right">
+        <div class="box_250w_img" onClick="location.href='__APP__/lp-{$loupan.info_id}'" style="cursor:pointer">{$default_pic}
+              <!--<img src="../Public/Images/dp_t_lp.jpg" width="246" height="200" /> -->
+            </div>
+            <table width="100%" border="0" cellpadding="0" cellspacing="0">
+              <tr>
+                <td height="5" colspan="2">&nbsp;</td>
+              </tr>
+              <tr>
+                <td height="25"><strong><em><img src="../Public/Images/tel.png" alt="" width="30" height="30"></em></strong></td>
+                <td height="25" class="red_14px_f"><strong><em>{$loupan.lptel}</em></strong></td>
+              </tr>
+              <tr>
+                <td height="25">均价：</td>
+                <td height="25">{$loupan.lpprice}元 &nbsp;</td>
+              </tr>
+              <tr>
+                <td width="40" height="25">开盘：</td>
+                <td height="25"><empty name="loupan.lptimeb">时间待定
+                  <else/>
+                  {$loupan.lptimeb}</empty>&nbsp;&nbsp;
+                  <span class="blue_a"><a href="__APP__/lp-{$loupan.info_id}#loadFrame(2)" target="_blank">查看地图</a></span></td>
+              </tr>
+            </table>
+<div style="clear:both"></div>
+            </div>
+<div class="gray_height_1px"></div>
+<div class="ping_title">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="11%" height="35" align="right"><span class="height_lineheight_30px"><span class="blue_q_a"><a href="__APP__/lp-{$vo.info_id}"><span class="gray_a"><img src="../Public/Images/more_ico.jpg" width="22" height="22" border="0" align="top" alt="楼盘" /></span></a></span></span></td>
+      <td width="89%" height="35" class="black_14px_f"><span class="height_lineheight_30px"><span class="blue_14px_black">&nbsp;<strong class="black_14px">周边楼盘</strong></span></span></td>
+    </tr>
+  </table>
+  <div class="gray_height_s1px"></div>
+</div>
+
+<div class="margin_right">
+  <volist name="zb_loupan" id="vo">
+
+    <div class="right_lplist">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="50" rowspan="2"><a href="__APP__/Reviews/ct_list/info_id/{$vo.info_id}"><img src="http://nc.tengfang.net/{$vo.pic}" width="60" height="50" border="0" alt="{$vo.lpname}"/></a>
+            <!--<img src="__PUBLIC__/Upload/user/no2.jpg" width="50" height="50" />--></td>
+          <td width="6">&nbsp;</td>
+          <td height="25" colspan="2" class="black_a black_14px_f"><span class="float_left"><a href="__APP__/Sale/index/id/{$vo.info_id}" >{$vo.lpname}</a></span>
+          <span class="float_right">
+          <if condition= "$vo['lp_state'] eq 1" > <span class="red_text">在售</span>
+          <elseif condition= "$vo['lp_state'] eq 2" />
+          <span class="green_a">待售</span>
+          <elseif condition= "$vo['lp_state'] eq 3" />
+          <span class="blue_s_text">售完</span>
+          <elseif condition= "$vo['lp_state'] eq 5" />
+          <span class="blue_text">在租</span>
+          <else />
+          </if> 
+          </span>
+          </td>
+          </tr>
+        <tr>
+          <td width="6">&nbsp;</td>
+          <td width="120" height="25">均价:<?php if($vo['constant_price']!='0.00'){ ?> {$vo.constant_price} 元<?php }else{ echo " 待定";} ?></td>
+          <td width="90" height="25" align="right" class="blue_a"><a href="__APP__/Sale/index/id/{$vo.info_id}">销售中心</a></td>
+          </tr>
+        </table>
+    </div>
+    <div  class="height_10px"></div>
+    <div class="gray_height_1px"></div>
+    <div  class="height_10px"></div>    
+</volist>
+  <div style="clear:both"></div>
+</div>
+
+<div class="gray_height_1px"></div>
+<div class="ping_title">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="11%" height="35" align="right"><span class="height_lineheight_30px"><span class="blue_q_a"><a href="__APP__/lp-{$vo.info_id}"><span class="gray_a"><img src="../Public/Images/more_ico.jpg" width="22" height="22" border="0" align="top" alt="楼盘" /></span></a></span></span></td>
+      <td width="89%" height="35" class="black_14px_f"><span class="height_lineheight_30px"><span class="blue_14px_black">&nbsp;<strong class="black_14px">同价位楼盘</strong></span></span></td>
+    </tr>
+  </table>
+  <div class="gray_height_s1px"></div>
+</div>
+<div class="margin_right">
+  <volist name="price_loupan" id="vo">
+    <div class="right_lplist">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="55" rowspan="2"><a href="__APP__/Reviews/ct_list/info_id/{$vo.info_id}"><img src="http://nc.tengfang.net/{$vo.pic}" width="60" height="50" border="0" alt="{$vo.lpname}"/></a>
+            <!--<img src="__PUBLIC__/Upload/user/no2.jpg" width="50" height="50" />--></td>
+          <td width="6" height="30">&nbsp;</td>
+          <td height="30" colspan="2" class="black_a black_14px_f"><span class="float_left"><a href="__APP__/Sale/index/id/{$vo.info_id}" >{$vo.lpname}</a></span> <span class="float_right">
+            <if condition= "$vo['lp_state'] eq 1" > <span class="red_text">在售</span>
+              <elseif condition= "$vo['lp_state'] eq 2" />
+              <span class="green_a">待售</span>
+              <elseif condition= "$vo['lp_state'] eq 3" />
+              <span class="blue_s_text">售完</span>
+              <elseif condition= "$vo['lp_state'] eq 5" />
+              <span class="blue_text">在租</span>
+              <else />
+            </if>
+          </span></td>
+        </tr>
+        <tr>
+          <td width="6" height="30">&nbsp;</td>
+          <td width="120" height="30">均价:<?php if($vo['constant_price']!='0.00'){ ?> {$vo.constant_price} 元<?php }else{ echo " 待定";} ?></td>
+          <td width="90" height="25" align="right" class="blue_a"><a href="__APP__/Sale/index/id/{$vo.info_id}">销售中心</a></td>
+          </tr>
+      </table>
+    </div>
+    <div  class="height_10px"></div>
+    <div class="gray_height_1px"></div>
+    <div  class="height_10px"></div>
+  </volist>
+  <div style="clear:both"></div>
+</div>
+<!--<div class="margin_4bian_10px">-->
+    <div style="clear:both"></div>
+  </div>
+<div class="clear"></div>
+</div>
+<!--页脚start-->
+ <include file="Public:com_footer" />
+<!--页脚end-->
+</body>
+<script type="text/javascript">
+
+$(function(){
+	$('.loudong_num').mouseover(function(){
+		//alert('hello');
+		$(this).removeClass('loudong_num').addClass('loudong_num_m');
+	});
+	$('.loudong_num').mouseout(function(){
+			$(this).removeClass('loudong_num_m').addClass('loudong_num');
+	});
+	
+});
+
+</script>
+</html>

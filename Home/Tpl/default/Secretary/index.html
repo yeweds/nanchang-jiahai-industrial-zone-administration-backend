@@ -1,0 +1,87 @@
+<!--小秘书提示-->
+<!--<div id="secy_msg_inc">-->
+	<div class="secy_msg_1"><div class="secy_msg_close" onclick="secyMsgBoxClose()" title='关闭'></div></div>
+<div class="secy_msg_2">
+    	<div class="secy_msg_to"></div>
+        <div class="secy_msg_con_inc">
+		
+		<div class="height_10px"></div>
+        <div class="secy_welcome">
+        	 <div class="height_10px"></div>
+                {$welcome}<!--欢迎词 -->
+             <div class="height_10px"></div>
+			 <span class="gray_a"> 
+<php> if($noLogin != 1){ </php> 
+<!-- <a href="__APP__/Account" target="_blank"> --><a href="#"><strong>{$userInfo.username}</strong></a> <a href="__APP__/Account/logout/">退出</a>
+<php>} else{</php>
+			 <a href="#" onClick="loginTF(); return false;">登录</a>&nbsp;&nbsp;&nbsp;<a href="#" onClick="registerTF(); return false;">注册</a>
+<php>} </php>	 
+			 &nbsp;&nbsp;&nbsp;<a href="__APP__/Guestbook/add" target="_blank">建议留言</a></span>        </div>
+
+          <!--开始一个项目-->      
+          <div class="height_10px"></div>
+          <div class="secy_msg_title">&nbsp;&nbsp;你最近浏览过的楼盘</div>
+          <div class="secy_msg_con_bian">
+          <div class="height_5px"></div>
+          <!--start循环一个项目下的内容-->
+		  <volist name="bro_list" id="vo">
+            <div class="secy_msg_con">&nbsp;<span class="gray_18px_fb">{$i}</span>&nbsp;&nbsp;&nbsp;<span class="green_a"><a href="__APP__/lp-{$vo.info_id}" target="_blank">{$vo.lpname|mb_substr=###,0,11,'utf-8'}</a></span></div>
+		  </volist>
+          <!--end循环一个项目下的内容-->
+            <div class="height_5px"></div>
+            <div style="clear:both"></div>
+          </div>
+          <!--结束一个项目-->
+		  <div id="secy_load_other" class="gray_a">
+		  <neq name="noLogin" value="1"><div style="text-align:right;"><a href="#" onclick="secy_favorite(); return false;">我的收藏>></a>&nbsp;</div></neq>
+		  </div> <!-- 临时加载层 -->
+            <div class="height_10px"></div>          
+          <div style="clear:both"></div>
+        </div>
+        <div style="clear:both"></div>
+</div>
+	<div class="secy_msg_3"><span class="gray_a">
+	服务热线：0791-5216006
+	<!--<a href="#">帮助</a> | <a href="#">联系我们</a> | <a href="#">我要纠错</a> --></span></div>   
+    <div style="clear:both"></div>      
+ <!--</div>-->
+ <!--end秘书提示-->
+ <!--[if IE 6]>
+<script type="text/javascript">
+  DD_belatedPNG.fix('.secy_msg_to');
+  DD_belatedPNG.fix('.secy_msg_1');    
+  DD_belatedPNG.fix('.secy_msg_2');  
+  DD_belatedPNG.fix('.secy_msg_3');  
+</script>
+<![endif]-->
+<script language="JavaScript" type="text/javascript">
+	//查看收藏
+	function secy_favorite(){
+			         
+			 $.get("__APP__/Secretary/favorite_ajax", '' , function(msg){
+				 if(msg && msg["success"]){
+				 	var html = secy_getHtmlAdd(msg["info"], msg["title"], msg["data"] );
+					$("#secy_load_other").html( html );
+				 }else{
+					$("#secy_load_other").html( msg["info"] );
+				 }
+			 }, 'json');
+	}
+	
+	//获取格式化后的输出文本
+	function secy_getHtmlAdd(tip, title, list){
+	 	 
+		 var html_top = "<div class=\"height_10px\"></div>\n<div class=\"secy_msg_title\">&nbsp;&nbsp;"+ title +"</div>\n<div class=\"secy_msg_con_bian\">\n<div class=\"height_5px\"></div>\n<!--start循环一个项目下的内容-->";
+
+         var html_end = "<!--end循环一个项目下的内容-->\n<div class=\"height_5px\"></div>\n<div style=\"clear:both\"></div>\n</div>";
+		 
+		 var html_body = "";
+		 for(var i=0; i<list.length; i++){
+		 	var xh = i+1;
+		    html_body+= "<div class=\"secy_msg_con\">&nbsp;<span class=\"gray_18px_fb\">"+ xh +"</span>&nbsp;&nbsp;&nbsp;<span class=\"green_a\"><a href=\"__APP__/lp-"+ list[i]['info_id'] +"\" target=\"_blank\">"+ list[i]['lpname'] +"</a></span></div>\n";
+		 }
+
+		 return html_top + html_body + html_end;
+	
+	}
+</script>

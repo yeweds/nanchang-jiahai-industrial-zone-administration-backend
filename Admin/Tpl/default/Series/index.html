@@ -1,0 +1,64 @@
+<include file="Public:header" />
+<script language="JavaScript" type="text/JavaScript">
+	function gopart(){
+		var cid = document.getElementById("class_id").value;
+		window.location.href="__URL__/index/class_id/"+cid;
+	}
+//提交搜索
+	function submitSearch(){
+		var s_key  = $("#s_key").val();
+		s_key = $.trim(s_key);    //去空格
+ 		var s_type = $("#s_type").val();
+		window.location.href= URL+"/index/s_key/"+ s_key +"/s_type/" + s_type;
+	}
+</script>
+
+<div class="bodyTitle">
+	<div class="bodyTitleLeft"></div>
+  <div class="bodyTitleText">商家套系管理</div>
+</div>
+<!--<h3 class="marginbot"><a href="__URL__/add" class="sgbtn">＋添加套系</a></h3>-->
+<span>
+&nbsp;  请输入关键字：<input name="s_key" id="s_key">
+	<select name="s_type" id="s_type">
+		  <option value="title">按全称</option>
+		  <option value="sub_title">按简称</option>
+		  <option value="shop_id">按商家ID</option>
+	</select>  <a href="#" onclick="submitSearch()" class="sgbtn">我要查询</a>
+</span>
+
+				<table class="datalist fixwidth" ><form name="form1" method="post" action="__URL__/submit">
+					<tr>
+						<th><input type="checkbox" onClick="selAll(this,'id[]')" value="选择全部" class="checkbox">选择</th>
+						<th>排序</th>
+						<th>标题</th>
+						<th>商家id及名称</th>
+						<th>价格</th>
+						<th>添加时间</th>
+						<th>操作</th>
+					</tr> 
+                    
+                    <present name="list">
+                    <volist name="list" id="vo">
+						<tr>
+							<td class="option"><neq name="vo['id']" value="1"><input name="id[]" type="checkbox" id="id[]" value="{$vo.id}" class="checkbox"></neq>{$vo.id}</td>
+							<td><input type="text" value="{$vo.sortrank}" name="sortrank" size="5" /></td>
+							<td>{$vo.title}</td>
+							<td>{$vo.shop_id}:&nbsp;{$vo.shop_name}</td>
+							<td>{$vo.price} 元</td>
+							<td>{$vo.add_time|date="Y-m-d H:i:s",###}</td>
+							<td><a href="__URL__/edit/id/{$vo.id}"><img src="../Public/Images/edit.gif" alt="编辑" align="absmiddle" /></a>
+							  <neq name="vo['id']" value="1">　<a href="__URL__/del/id/{$vo.id}" onclick="return confirm('确定删除吗，此操作不可恢复');"><img src="../Public/Images/del.gif" alt="删除" align="absmiddle" /></a></neq></td>
+					  </tr>  
+					  </volist>
+					<tr class="nobg">
+						<td colspan="6">{$page}</td>
+					</tr>
+			<else />
+			  <tr><td colspan="6" align="center">无内容</td>
+			  </tr>
+			</present>
+				</form></table>
+<p class="i">删除不可恢复,谨慎操作</p>
+<br>
+<include file="Public:footer" />

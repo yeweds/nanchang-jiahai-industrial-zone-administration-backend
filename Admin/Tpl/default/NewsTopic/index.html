@@ -1,0 +1,42 @@
+<include file="Public:header" />
+
+<div class="bodyTitle">
+	<div class="bodyTitleLeft"></div>
+  <div class="bodyTitleText">话题PK管理</div>
+</div>
+
+<h3 class="marginbot">
+<a href="__URL__/add" class="sgbtn">＋添加新话题</a>
+<a href="#" onClick="delAll()" class="sgbtn">－删除选中</a>
+<div id="result" class="none result" style="letter-spacing:2px"></div>
+</h3>
+
+<table id="articlelist" class="datalist fixwidth">
+	  <tr align="center">
+	    <td width="6%"><input type="checkbox" onClick="selAll(this,'id[]')" value="选择全部" class="checkbox">选择ID</td>
+		<td width="25%">标题</td>
+		<td width="15%">红方观点</td>
+		<td width="15%">蓝方观点</td>
+		<td width="5%">红方票数</td>
+		<td width="5%">蓝方票数</td>
+		<td width="5%">是否本期</td>
+		<td width="">发布时间</td>
+        <td>操作</td>
+	  </tr>
+      <iterate name="list" id="vo">
+	  <tr >
+	     <td align="left"><input name="id[]" type="checkbox" id="id[]" value="{$vo.id}" />{$vo.id}</td>
+		 <td align="left"><a title="内容：{$vo.content}" >{$vo.title}</a></td>
+		 <td align="center">{$vo.r_content}</td>
+		 <td align="center">{$vo.l_content}</td>
+		 <td align="center">{$vo.r_num}</td>
+		 <td align="center">{$vo.l_num}</td>
+		 <td align="center">{$vo.isnew}</td>
+		 <td align="center">{$vo.add_time|date="Y-m-d",###}</td>
+		 <td align="center">[<a href="javascript:edit({$vo.id})" >编辑</a>]&nbsp;[<a href="javascript:del({$vo.id})">删除</a>]</td>
+	  </tr>    
+	  </iterate>
+</table>
+	  <div class="page">{$page}</div>
+
+<include file="Public:footer" />

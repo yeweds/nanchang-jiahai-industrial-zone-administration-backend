@@ -1,0 +1,185 @@
+<include file="Public:header_login" /> {//默认头部}
+<script language="javascript">
+function smilie(thesmilie) { //表情
+document.form2.content.value += thesmilie+" ";
+document.form2.content.focus();
+}
+
+function checkform1()
+{ 
+  var uanme= document.form2.uname.value;
+  if (form2.uname.value=="") {
+		alert("请输入您的尊姓大名！");
+		form2.uname.focus();		
+		    return (false);
+  }
+  var qq= document.form2.qq.value;
+   if (form2.qq.value=="") {
+    alert("请输入qq号！");
+    document.form2.qq.focus();
+             return (false);   
+  }
+  var title= document.form2.title.value;
+  if (form2.title.value=="") {
+		alert("请输入标题！");
+		form2.title.focus();		
+		    return (false);
+  }
+ var content = document.form2.content.value;
+  if (form2.content.value=="") {
+		alert("请输入留言内容！");
+		form2.content.focus();		
+		    return (false);
+  }
+ if (content.length > 200){ 
+  alert("留言内容不能超过200个字符!");
+  return false;
+  }
+  return true;
+}
+</script>
+<link href="../Public/Css/guestbook.css" rel="stylesheet" type="text/css" />
+<table width="680" align="center" id="innercontainer">
+  <tr>
+    <td id="left" >
+        <span class="Normal">
+        <p></p>
+          <table width="96%" height="315"  border="0" align="center" cellpadding="0" cellspacing="0">
+            <form action="__URL__/insert" method="post" name="form2" id="form2" onsubmit="return checkform1();">
+              <tr>
+                <td height="50" colspan="3"><table width="100%"  border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                      <td valign="top"><table width="100%"  border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                          <td width="100" height="35" align="left"><img src="../Public/Images/Guest/icon_name.gif" width="16" height="16" /> 姓名：<span class="red">*</span></td>
+                          <td><input name="uname" type="text" class="guest_key" id="uname" value="<php>if(Cookie::is_set('uname')) echo Cookie::get('uname');</php>" /></td>
+                        </tr>
+                        <tr>
+                          <td height="35" align="left"><img src="../Public/Images/Guest/icon_mail.gif" width="16" height="16" /> 邮件：</td>
+                          <td><input name="email" type="text" class="guest_key" id="email" /></td>
+                        </tr>
+                        <tr>
+                          <td height="35" align="left"><img src="../Public/Images/Guest/icon_qq.gif" width="16" height="16" /> QQ号：<span class="red">*</span></td>
+                          <td><input name="qq" type="text" class="guest_key" id="qq" /></td>
+                        </tr>
+                        <tr>
+                          <td height="35" align="left"><img src="../Public/Images/Guest/icon_mail.gif" width="16" height="16" /> MSN：</td>
+                          <td><input name="msn" type="text" class="guest_key" id="msn" /></td>
+                        </tr>
+                        <tr>
+                          <td height="35" align="left">开启悄悄话：</td>
+                          <td align="left"><input type="radio" name="hidden" value="1" />
+      是
+        <input name="hidden" type="radio" value="0" checked="checked" />
+      否</td>
+                        </tr>
+                      </table></td>
+                      <td><table width="100%"  border="0" cellspacing="0" cellpadding="0">
+                          <tr>
+                            <td width="80" height="30" align="left"> &nbsp;验证码：</td>
+                            <td align="left"><input name="CheckCode" type="text" class="guest_key" id="CheckCode" size="10" />
+&nbsp; <img id="verify" src="__APP__/Public/verify/" border="0" alt="验证码" align="absmiddle" /> <a href="javascript:fleshVerify()">看不清?</a> &nbsp; </td>
+                          </tr>
+                          <tr>
+                            <td height="30" align="left">&nbsp;标题：<span class="red">*</span></td>
+                            <td align="left"><input name="title" type="text" class="guest_key" id="title" size="30" /></td>
+                          </tr>
+                          <tr>
+                            <td align="left" valign="top">&nbsp;内容：<span class="red">*</span><br />
+                                <br />
+&nbsp;200字内</td>
+                            <td align="left" valign="top"><textarea name="content" cols="35" rows="6" class="guest_key" id="content" wrap="virtual"></textarea>                            </td>
+                          </tr>
+                          <tr>
+                            <td align="left" valign="top">&nbsp;表情：</td>
+                            <td align="left" valign="top"><table cellpadding="2" cellspacing="1" class="guest_key" width="96%">
+                                <tr align='center' bgcolor="#FFFFFF">
+                                  <td colspan="5"><table cellpadding="3" cellspacing="1" border="0" align="center" width="100%">
+                                      <tr align='center'>
+                                        <td><a href="javascript:smilie('[biggrin]')"><img src="../Public/Images/Guest/post/biggrin.gif" alt="大笑" border="0" width="20" height="20" /></a></td>
+                                        <td><a href="javascript:smilie('[blink]')"><img src="../Public/Images/Guest/post/blink.gif" width="19" height="19" alt="流口水" border="0" /></a></td>
+                                        <td><a href="javascript:smilie('[cool]')"><img src="../Public/Images/Guest/post/cool.gif" alt="Cool" border="0" width="20" height="20" /></a></td>
+                                        <td><a href="javascript:smilie('[dry]')"><img src="../Public/Images/Guest/post/dry.gif" alt="狂笑" border="0" width="20" height="20" /></a></td>
+                                        <td><a href="javascript:smilie('[tongue]')"><img src="../Public/Images/Guest/post/tongue.gif" width="20" height="20" border="0" alt="添舌头" /></a></td>
+                                        <td><a href="javascript:smilie('[wub]')"><img src="../Public/Images/Guest/post/wub.gif" width="19" height="19" border="0" alt="脸红" /></a></td>
+                                        <td><a href="javascript:smilie('[thumbs_up]')"><img src="../Public/Images/Guest/post/thumbs_up.gif" width="19" height="19" border="0" alt="高" /></a></td>
+                                        <td><a href="javascript:smilie('[thumbs_down]')"><img src="../Public/Images/Guest/post/thumbs_down.gif" width="19" height="19" border="0" alt="太差了" /></a></td>
+                                        <td><a href="javascript:smilie('[shudaizi]')"><img src="../Public/Images/Guest/post/shudaizi.gif" width="19" height="19" border="0" alt="书呆子" /></a></td>
+                                      </tr>
+                                      <tr align='center'>
+                                        <td><a href="javascript:smilie('[mad]')"><img src="../Public/Images/Guest/post/mad.gif" alt="气愤" border="0" width="20" height="20" /></a></td>
+                                        <td><a href="javascript:smilie('[ohmy]')"><img src="../Public/Images/Guest/post/ohmy.gif" alt="啊" border="0" width="20" height="20" /></a></td>
+                                        <td><a href="javascript:smilie('[rolleyes]')"><img src="../Public/Images/Guest/post/rolleyes.gif" alt="微笑" border="0" width="20" height="20" /></a></td>
+                                        <td><a href="javascript:smilie('[sad]')"><img src="../Public/Images/Guest/post/sad.gif" alt="没办法" border="0" width="20" height="20" /></a></td>
+                                        <td><a href="javascript:smilie('[wacko]')"><img src="../Public/Images/Guest/post/wacko.gif" width="20" height="20" alt="想问题" border="0" /></a></td>
+                                        <td><a href="javascript:smilie('[wink]')"><img src="../Public/Images/Guest/post/wink.gif" width="20" height="20" alt="眨眼" border="0" /></a></td>
+                                        <td><a href="javascript:smilie('[kun]')"><img src="../Public/Images/Guest/post/kun.gif" width="19" height="19" border="0" alt="我困了" /></a></td>
+                                        <td><a href="javascript:smilie('[cry_smile]')"><img src="../Public/Images/Guest/post/cry_smile.gif" width="19" height="19" border="0" alt="哭泣的脸" /></a></td>
+                                        <td><a href="javascript:smilie('[angry_smile]')"><img src="../Public/Images/Guest/post/angry_smile.gif" width="19" height="19" border="0" alt="生气" /></a></td>
+                                      </tr>
+                                  </table></td>
+                                </tr>
+                            </table></td>
+                          </tr>
+                      </table></td>
+                    </tr>
+                </table></td>
+              </tr>
+              
+              <tr>
+                <td height="40" colspan="3" valign="bottom"><div align="center">
+                    <input type="image" src="../Public/Images/Guest/botton_tj1.gif" width="58" height="20" />
+          　&nbsp;&nbsp;&nbsp;
+          <input type="image" onclick="form2.reset();return false" src="../Public/Images/Guest/botton_cx.gif" width="58" height="20" />
+                </div></td>
+              </tr>
+            </form>
+        </table>
+      </span> </td>
+  </TR>
+</TABLE>
+<include file="Public:footer_login" /> {//尾部}
+<!--<table style="BORDER-COLLAPSE: collapse" cellpadding="0" width="100%" border="0">
+  <tr>
+    <td><table width="98%" border="0" cellpadding="0" cellspacing="1" class="guest_write_bg">
+      <tr bgcolor="#FFFFFF" >
+        <td valign="bottom"><input type="radio" value="0" name="ihead" />
+          (无头像) </td>
+        <td><input name="ihead" type="radio" value="1" checked="checked" />
+              <img src="../Public/Images/Guest/face/1.gif" border="0" /> </td>
+        <td><input type="radio" value="2" name="ihead" />
+              <img src="../Public/Images/Guest/face/2.gif" border="0" /> </td>
+        <td><input type="radio" value="3" name="ihead" />
+              <img src="../Public/Images/Guest/face/3.gif" border="0" /> </td>
+        <td><input type="radio" value="4" name="ihead" />
+              <img src="../Public/Images/Guest/face/4.gif" border="0" /> </td>
+      </tr>
+      <tr bgcolor="#FFFFFF" >
+        <td><input type="radio" value="5" name="ihead" />
+              <img src="../Public/Images/Guest/face/5.gif" border="0" /> </td>
+        <td><input type="radio" value="6" name="ihead" />
+              <img src="../Public/Images/Guest/face/6.gif" border="0" /> </td>
+        <td><input type="radio" value="7" name="ihead" />
+              <img src="../Public/Images/Guest/face/7.gif" border="0" /> </td>
+        <td><input type="radio" value="8" name="ihead" />
+              <img src="../Public/Images/Guest/face/8.gif" border="0" /> </td>
+        <td><input type="radio" value="9" name="ihead" />
+              <img src="../Public/Images/Guest/face/9.gif" border="0" /> </td>
+      </tr>
+      <tr bgcolor="#FFFFFF" >
+        <td><input type="radio" value="10" name="ihead" />
+              <img src="../Public/Images/Guest/face/10.gif" border="0" /> </td>
+        <td><input type="radio" value="11" name="ihead" />
+              <img src="../Public/Images/Guest/face/11.gif" border="0" /> </td>
+        <td><input type="radio" value="12" name="ihead" />
+              <img src="../Public/Images/Guest/face/12.gif" border="0" /> </td>
+        <td><input type="radio" value="13" name="ihead" />
+              <img src="../Public/Images/Guest/face/13.gif" border="0" /> </td>
+        <td><input type="radio" value="14" name="ihead" />
+              <img  src="../Public/Images/Guest/face/14.gif" border="0" /> </td>
+      </tr>
+    </table></td>
+  </tr>
+</table> -->
+</body>
+</html>

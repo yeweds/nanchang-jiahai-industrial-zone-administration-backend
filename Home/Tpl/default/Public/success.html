@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html>
+<head>
+<title>{$Think.config.cfg_shortname}-页面提示</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Refresh" content="{$waitSecond}; URL={$jumpUrl}" />
+<style>
+body{ font-size:12px; font-family:Verdana;}
+.tishi{ border:1px solid #99bbdd; margin-top:80px; font-size:13px;}
+.tishi td{ padding-left:10px; padding-right:10px;}
+.tishi th{ background:#ddefff;font-size:14px; font-weight:bold; line-height:28px; border-bottom:1px solid #99bbdd;}
+.red{ color:#ff0000;}
+.blue{ color:blue;}
+</style>
+</head>
+<body>
+<table cellpadding="0" cellspacing="0" align="center" class="tishi">
+	<tr>
+		<th>{$Think.config.cfg_shortname}提示您：{$msgTitle}</th>
+	</tr>
+    <tr>
+	<td height="10"></td>
+	</tr>
+<present name="message" >
+		<eq name="status" value="0" >
+			<tr>
+			<td height="25"  class="red">{$message}</td>
+			</tr>
+		</eq>
+		<eq name="status" value="1">
+			<tr>
+				<td height="25"  class="blue">{$message}</td>
+			</tr>
+		</eq>
+</present>
+	<present name="closeWin" >
+		<tr>
+		<td height="25">系统将在{$waitSecond} 秒后自动关闭，如果不想等待,直接点击 <a href="{$jumpUrl}">这里</a> 关闭</td>
+	</tr>
+	</present>
+	<notpresent name="closeWin" >
+	<tr>
+		<td height="25">系统将在 {$waitSecond} 秒后自动跳转,如果不想等待,直接点击 <a href="{$jumpUrl}">这里</a> 跳转</td>
+	</tr>
+	</notpresent>
+<tr>
+<td height="10"></td>
+	</tr>
+</table>
+
+</body>
+</html>

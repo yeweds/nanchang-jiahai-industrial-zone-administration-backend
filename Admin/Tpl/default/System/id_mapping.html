@@ -1,0 +1,55 @@
+<include file="Public:header" />
+<script language="JavaScript" type="text/JavaScript">
+
+//提交搜索
+	function submitSearch(){
+		var s_key  = $("#s_key").val();
+		s_key = $.trim(s_key);    //去空格
+ 		var s_type = $("#s_type").val();
+		window.location.href= URL+"/id_mapping/s_key/"+ s_key +"/s_type/" + s_type;
+	}
+</script>
+<div class="bodyTitle">
+	<div class="bodyTitleLeft"></div>
+  <div class="bodyTitleText">ID映射管理</div>
+</div>
+<br>
+<h3 class="marginbot">
+<a href="#" onClick="delAll()" class="sgbtn">－删除选中</a>&nbsp;  请输入关键字：<input name="s_key" id="s_key" />
+	<select name="s_type" id="s_type"/>
+		  <option value="lpname">按楼盘名</option>
+		  <option value="info_id">按Info_ID</option>
+		  <option value="range_id">按区域ID</option>
+	</select>  <a href="#" onClick="submitSearch()" class="sgbtn">我要查询</a>
+<div id="result" class="none result" style="letter-spacing:2px"></div>
+</h3>
+
+<table id="articlelist" class="datalist fixwidth">
+	  <tr align="center">
+	    <td width="8%"><input type="checkbox" onClick="selAll(this,'id[]')" value="选择全部" class="checkbox">选择</td>
+	    <td width="6%">ID</th>
+		<td width="20%">楼盘名称</td>
+		<td width="6%">本站info_id</td>
+		<td width="10%">金渠道URL</td>
+		<td width="10%">新建县ID</td>
+		<td width="15%">南昌县ID</td>
+		<td width="5%">区域ID</td>
+        <td>操作</td>
+	  </tr>
+      <iterate name="list" id="vo">
+	  <tr >
+	     <td align="center"><input name="id[]" type="checkbox" id="id[]" value="{$vo.id}" /></td>
+		 <td align="center">{$vo.id}</td>
+		 <td align="left"><a href="#">{$vo.lpname}</a></td>
+		 <td align="center">{$vo.info_id}</td>
+		 <td align="left">{$vo.gold_url}</td>
+		 <td align="left">{$vo.xjx_url}</td>
+		 <td align="left">{$vo.ncx_url}</td>
+		 <td align="center">{$vo.range_id}</td>
+		 <td align="center">[<a href="__URL__/edit_id_mapping/id/{$vo.id}" >编辑</a>]&nbsp;[<a href="javascript:del({$vo.id})">删除</a>]</td>
+	  </tr>    
+	  </iterate>
+</table>
+	  <div class="page">{$page}</div>
+
+<include file="Public:footer" />

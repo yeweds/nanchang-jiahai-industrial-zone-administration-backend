@@ -1,0 +1,21 @@
+<div class="more black_a"><a href="__URL__/type/classid/{$news.rdtj.id}">更多&gt;&gt;</a></div>
+
+          <div class="height_5px"></div>
+
+<table width="98%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="51%" rowspan="2" align="center" valign="middle">
+    <div id="photo_94_124"><a href="{$news.rdtj.h.id|get_arc_url=###, $news['rdtj']['h']['redirecturl']}"><img src="__PUBLIC__/Upload/news/thumb_{$news.rdtj.h.pic_url}" width="120" height="90" vspace="2" border="0" /></a></div>
+    </td>
+    <td width="49%" class="red_a height_20px_text"><strong><a href="{$news.rdtj.h.id|get_arc_url=###, $news['rdtj']['h']['redirecturl']}" title="{$news.rdtj.h.title}">{$news.rdtj.h.title|mb_substr=###,0,18,'utf-8'}</a></strong></td>
+  </tr>
+  <tr>
+    <td><span class="height_18px_text"> &nbsp;&nbsp;&nbsp;<span class="gray_12px_fs">{$news.rdtj.h.remark|mb_substr=0,24,'utf-8'}...</span><span class="red_s_a"><a href="{$news.rdtj.h.id|get_arc_url=###, $news['rdtj']['h']['redirecturl']}">[详细]</a></span></span></td>
+  </tr>
+</table>
+          <!--循环输出-->
+          <volist name="news.rdtj.titles" id="vo">
+          	<div class="height_22px_text">&nbsp;·<span class="black_a"><a href="{$vo.id|get_arc_url=###, $vo['redirecturl']}" title="{$vo.title}">{$vo.title|mb_substr=###,0,20,'utf-8'}</a></span></div>
+          </volist>
+          <!--循环--> 
+   

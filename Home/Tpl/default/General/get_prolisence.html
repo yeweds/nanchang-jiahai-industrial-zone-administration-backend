@@ -1,0 +1,22 @@
+<!-- <link href="../Public/Css/index.css" rel="stylesheet" type="text/css" /> -->
+<div class="show_dom">
+  <div class="show_title"><strong>{$lpname}</strong> 近期拿到的预售许可证</div>
+
+   <table width="100%" border="0" cellspacing="1" cellpadding="0" bgcolor="#FFFFFF">
+     <tr>
+       <td width="8%" height="35" class="table_title">序号</td>
+       <td width="30%" height="35" class="table_title">楼栋名称</td>
+       <td width="35%" height="35" class="table_title">预售许可证号</td>
+       <td width="27%" height="35" class="table_title">批准预售日期</td>
+     </tr>
+	 <volist name="list" id="vo">
+     <tr>
+       <td height="30" align="center" bgcolor="#F9F9F9">{$i}</td>
+       <td height="30" align="center" bgcolor="#F9F9F9">{$vo.proname}</td>
+       <td height="30" align="center" bgcolor="#F9F9F9">{$vo.prolisence}</td>
+       <td height="30" align="center" bgcolor="#F9F9F9">{$vo.prosaletime}</td>
+     </tr>
+	 </volist>
+   </table>
+  <div style="clear:both"></div>
+</div>

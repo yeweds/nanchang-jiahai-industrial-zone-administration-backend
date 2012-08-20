@@ -1,0 +1,55 @@
+ <!--左边_s-->  
+ <div class="width_200px_float">
+  <div id="about1" class="about_button" >&nbsp;<span class="white_a_bubian"><a href="__APP__/About/about_us">&nbsp;&nbsp;&nbsp;&nbsp;关于我们</a></span></div>
+  <div id="about2" class="about_button" >&nbsp;<span class="white_a_bubian"><a href="__APP__/About/about_lianxi">&nbsp;&nbsp;&nbsp;&nbsp;联系我们</a></span></div>
+  <div id="about3" class="about_button" >&nbsp;<span class="white_a_bubian"><a href="__APP__/About/about_yijian">&nbsp;&nbsp;&nbsp;&nbsp;您的意见</a></span></div>
+  <div id="about4" class="about_button" >&nbsp;<span class="white_a_bubian"><a href="__APP__/About/about_guanggao">&nbsp;&nbsp;&nbsp;&nbsp;广告服务</a></span></div>
+    <div id="about5" class="about_button" >&nbsp;<span class="white_a_bubian"><a href="__APP__/About/link">&nbsp;&nbsp;&nbsp;&nbsp;友情链接</a></span></div>
+  <div id="about6" class="about_button" >&nbsp;<span class="white_a_bubian"><a href="__APP__/About/sitemap">&nbsp;&nbsp;&nbsp;&nbsp;站点地图</a></span></div>
+  <div id="about7" class="about_button" >&nbsp;<span class="white_a_bubian"><a href="__APP__/About/about_help">&nbsp;&nbsp;&nbsp;&nbsp;帮助中心</a></span></div>
+</div>
+<div class="width_10px_float"></div>
+<!--左边_e--> 
+<script type="text/javascript">
+$(function(){
+	
+	$('.about_button').mouseover(function(){
+
+		if(!$(this).hasClass('about_button2')){
+			$(this).removeClass().addClass('about_button1');
+		}
+		
+	});
+	
+	$('.about_button').mouseout(function(){
+		
+		if(!$(this).hasClass('about_button2')){
+			$(this).removeClass().addClass('about_button');
+		}
+		
+	});	
+	
+	
+	//获取不前路径
+	url=location.href;
+	if(/(about_us)$/.test(url)){
+		$('#about1').removeClass().addClass('about_button2');
+	}else if(/(about_lianxi)$/.test(url)){
+		$('#about2').removeClass().addClass('about_button2');
+	}else if(/(about_yijian)$/.test(url)){
+		$('#about3').removeClass().addClass('about_button2');
+	}else if(/(about_guanggao)$/.test(url)){
+		$('#about4').removeClass().addClass('about_button2');
+	}else if(/(link)$/.test(url)){
+		$('#about5').removeClass().addClass('about_button2');
+	}else if(/(sitemap)$/.test(url)){
+		$('#about6').removeClass().addClass('about_button2');
+	}else if(/(about_help)$/.test(url)){
+		$('#about7').removeClass().addClass('about_button2');
+	}
+	
+	
+	
+	
+});
+</script>

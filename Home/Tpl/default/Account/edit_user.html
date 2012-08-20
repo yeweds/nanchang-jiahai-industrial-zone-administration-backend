@@ -1,0 +1,221 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>修改资料-南昌婚庆网</title>
+<link href="../Public/Css/common.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/account.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/Js/jquery.min.js" /></script>
+<script type="text/javascript" src="__PUBLIC__/Js/jquery.validate.min.js" /></script>
+<script type="text/javascript" src="../Public/Js/common.js" /></script>
+<script type="text/javascript">
+//指定当前组模块URL地址
+var URL = '__URL__';
+var APP	= '__APP__';
+var PUBLIC = '__PUBLIC__';
+
+var CURRENT_ITEM  = "nav_lf_usr";  //当前选中
+
+function edit_pic(){
+	document.getElementById('load').style.display = 'inline';
+}
+</script>
+
+</head>
+
+<body>
+<include file="Public:header" /><!--共享登录头部 -->
+<div class="clear"></div>
+<!--面包屑s -->
+  <div class="height_30px_text gray_14px_r_a" style="line-height:50px; height:50px;">
+  <a href="__APP__/">首页</a> <strong>&gt;&gt; </strong>  修改资料
+  </div>
+<!--面包屑e -->
+
+<!--个人信息开始-->
+<div class="edit_user">
+
+	<!-- ///////////////////内容开始///////////////////////// -->
+    <div class="user_main">       
+    
+		<!-- title begin -->
+		<div class="user_title"> 
+            <h2>帐号管理</h2>
+		</div>
+        <!-- title end -->
+        <div class="clear"></div>
+        <div class="float_height_10px"></div>
+        <div class="clear"></div>
+        <!-- 左菜单 s __URL__/edit_user-->
+      <div class="user_menu">
+            <include file="Account:account_left" /><!--共享左侧 -->
+      </div>
+        <!-- 左菜单 e  -->
+        
+        <!-- /////////////////右 s   -->
+        <div id="user_content">
+        <!-- 右top s   -->
+      	<div class="user_content_t"></div>
+        <!-- 右top e   -->
+        <div class="clear"></div>
+        <!-- 右middle s   -->
+        <div class="user_content_m">
+        	<div class="float_height_30px"></div>
+          <div class="clear"></div>
+            <!-- 切换块1  -->
+            <div class="c_box" id="edit_u" style="display:block;">
+		  <!-- 修改资料 begin  -->
+          
+		  <div  class="c_date" >
+          
+                  <div  class="c_date_l" >
+                        <table width="164" border="0" cellspacing="2" cellpadding="0">
+                          <tr>
+                            <td width="164" height="188" align="center" valign="middle" class="border_1px_solid">
+                                <img  src="__PUBLIC__/Upload/{$UserVo.pic}" width="150" height="180">
+                            </td>
+                          </tr>
+                          <tr class="gray_14px_r_a">
+                            <td width="164" height="20" align="center" valign="middle" ><a href="javascript:edit_pic();">[修改头像]</a></td>
+                          </tr>
+                        </table>
+                  </div>
+                
+				<div class="c_date_r"  id="load"  style="display:none;">
+                	<div class="float_height_30px"></div>
+          			<div class="clear"></div>
+                	<!-- 修改头像隐藏表单  -->
+					<form action="__URL__/upload/" method="post" id="upload" enctype="multipart/form-data">
+					<input class="input_text" name="u_pic" type="file" id="u_pic" />
+					<input type="hidden" name="MAX_FILE_SIZE" value="1024000" />
+					<input class="input_sub" name="submit" type="submit" value=" 上传 "   /> 
+                    <br>
+                    <br>
+					<span class="file_msg">最佳大小为150*180,100k内,格式：jpg,gif,jpeg。</span>
+					</form>
+				</div>
+
+            <div class="clear"></div>   
+			</div>
+            
+            <div class="clear"></div>
+            <div class="float_height_10px"></div>
+            <div class="clear"></div>
+<table width="820" class="ziliao">
+<form action="__URL__/changeUser/" method="post" id="user_form" >
+        <tr>
+			<th width="130" height="30" align="center">电子邮件：</th>
+			<td width="678" height="30" >{$UserVo.email}   &nbsp;<eq name="UserVo.open_blog" value="1">
+				 [<a href="__APP__/blog-{$UserVo.id}"><span style="color:red">去我的婚礼晒台</span></a>]
+				 </eq>
+			</td>
+		</tr>
+		<tr>
+			<th width="130" height="30" align="center">用&nbsp;户&nbsp;名：</th>
+			<td height="30">{$UserVo.username}</td>
+		</tr>
+		<tr>
+			<th width="130" height="30" align="center">性&nbsp;&nbsp;&nbsp;&nbsp;别：</th>
+            <td height="30" >
+            <input name="sex" type="radio" value="1" id="radio1" <eq name="UserVo.sex" value="1">checked</eq> /><label for="radio1">先生</label>
+			<input name="sex" type="radio" value="2" id="radio0" <eq name="UserVo.sex" value="2">checked</eq> /><label for="radio0">小姐</label>
+			<input name="sex" type="radio" value="0" id="radio2" <eq name="UserVo.sex" value="0">checked</eq> /><label for="radio2">保密</label></td>
+		</tr>
+        <tr>
+			<th width="130" height="30" align="center">真实姓名：</th>
+			<td height="30"><input name="realname" type="text"  value="{$UserVo.realname}" class="input_text" /></td>
+		</tr>
+        <tr>
+			<th width="130" height="30" align="center">联系电话：</th>
+			<td height="30"><input name="tel" type="text" id="tel" value="{$UserVo.tel}" class="input_text" require="true" />
+		    &nbsp;如：13988888888</td>
+		</tr>
+        <tr>
+			<th width="130" height="30" align="center">QQ/MSN：</th>
+			<td height="30"><input name="qq" type="text"  value="{$UserVo.qq}" class="input_text"/></td>
+		</tr>
+		<tr>
+			<td height="30" align="center"><font color='red'>开通婚礼晒台：</font></td>
+			<td class="tLeft"><label for="open_0"><input name="open_blog" type="radio" id="open_0" value="0">否</label>
+				&nbsp;&nbsp;<label for="open_1"><input type="radio" name="open_blog" id="open_1" value="1">是</label></td>
+		</tr>
+		<tr>
+			<td height="30" align="center"><font color='red'>晒台是否公开：</font></td>
+      		<td class="tLeft"><label for="ispub_0"><input type="radio" name="ispublish" id="ispub_0" value="0">否</label>
+        &nbsp;&nbsp;<label for="ispub_1"><input type="radio" name="ispublish" id="ispub_1" value="1">是</label></td>
+		</tr>
+		<tr>
+		  	<th height="30" align="center">婚礼晒台标题：</th>
+		  	<td class="tLeft"><input name="blog_title" type="text" class="input_text" id="blog_title" value="{$UserVo.blog_title}"  style="width:350px;" /></td>
+		</tr>
+		<tr>
+		  	<th height="30" align="center">认领爱情故事：</th>
+		  	<td class="tLeft"><input name="story_id" type="text" class="input_text" id="story_id" value="{$UserVo.story_id}" />
+			请输入故事id</td>
+		</tr>
+		<tr>
+			<th width="130" height="100" align="center">简    介：</th>
+		  <td height="100"><textarea name="remark" cols="40" rows="8" class="input_textarea">{$UserVo.remark}</textarea></td>
+		</tr>
+		<tr>
+    <th width="130" height="30" align="center">&nbsp;</th>
+    <td height="30">
+	<input name="id" type="hidden" value="{$UserVo.id}" />
+	<input name="Submit" type="Submit" value="确认修改" class="input_button" />	</td>
+    </tr>
+</form>
+	</table>
+     <div class="clear"></div> 
+    </div>
+    <!-- 切换块1  -->
+    <div class="clear"></div>
+    <div class="float_height_10px"></div>
+    <div class="clear"></div>
+    <!-- 修改资料 end  -->
+	</div>
+     <!-- 右middle e   -->
+     <div class="clear"></div>
+	 <!-- 右bottom s   -->
+     <div class="user_content_b"></div>
+     <!-- 右bottom e   -->
+    <div class="clear"></div>
+	</div>
+    <!-- /////////////////右 e   -->
+ 	<div class="clear"></div>
+	</div>
+	<!-- ///////////////////内容结束///////////////////////// -->
+
+<div class="clear"></div>
+</div>
+<!-- 个人信息结束 -->
+<div class="clear"></div>
+<div class="float_height_30px"></div>
+<div class="clear"></div>
+<!-- footer -->
+<include file="Public:footer" /> {//共用尾部}
+</body>
+</html>
+<script type="text/javascript">
+	var open_num = '{$UserVo.open_blog}'; //是否开blog
+	var publ_num = '{$UserVo.ispublish}'; //是否公开
+	
+	$("#open_"+ open_num).attr("checked","checked"); 
+	$("#ispub_"+ publ_num).attr("checked","checked"); 
+//以上是选中是否开通婚礼晒台等
+	
+$(document).ready(function(){
+
+//以下验证表单 s
+	$("#user_form").validate({
+	  rules: {
+		   tel: "required",
+	  },
+	   messages: {
+		   tel: "请留下您的联系方式，便于持续为您服务",
+	  }
+    });
+//验证表单 end
+
+});
+
+</script>

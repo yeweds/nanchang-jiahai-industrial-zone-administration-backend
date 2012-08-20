@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>报广-{$vo.lpname} {$vo.baozhi_name} - 腾房网</title>
+<meta name="keywords" content="报广,报纸广告,南昌房地产报广信息">
+<meta name="description" content="{$vo.remark} 南昌房产信息网">
+<body>
+<center>
+<h1>{$vo.lpname}  &nbsp;[ {$vo.baozhi_name} &nbsp;{$vo.baozhi_bs} ] <br />{$vo.upload_time|date="Y-m-d",###}</h1>
+<!--报广展示－－start-->
+<!-- <img src="{$vo.savepath|trim=###,'.'}{$vo.savename}" />  -->
+<img src="{:U('__APP__Public/watermark?show='. base64_encode($vo['savepath'].$vo['savename']) )}" /> <!-- 加水印 -->
+<!--报广展示－－end--> 
+<h5><a href="http://nc.tengfang.net">腾房网</a> 版权所有</h5>
+</center>
+
+<div style="display:none">
+<!-- baidu统计 -->
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fb049da9c662da44fb60b7f2c0264ae52' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<!-- baidu统计 -->
+</div>
+</body>
+</html>

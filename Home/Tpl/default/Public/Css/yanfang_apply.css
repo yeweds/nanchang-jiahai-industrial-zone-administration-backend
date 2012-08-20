@@ -1,0 +1,206 @@
+@charset "utf-8";
+/* CSS Document */
+#ins_top{
+   height:63px;
+   clear:both;
+   background:url(../Images/blue/ins_top.png) no-repeat right top;
+}
+#ins_logo{
+   display:block;
+   width:280px;
+   height:63px;
+   background:url(../Images/blue/ins_logo.png) no-repeat left top;
+   text-indent:-1000px;
+   overflow:hidden;
+}
+#ins_menu_box{
+   height:42px;
+   background:url(../Images/blue/ins_menu_bg.png) repeat-x left top;
+}
+#ins_menu{
+   height:42px;
+   background:url(../Images/blue/ins_menu_start.png) no-repeat left top;
+   padding-left:8px;
+   width:793px;
+   float:left;
+}
+#ins_menu_tail{
+   height:42px;
+   width:159px;
+   float:right;
+   background:url(../Images/blue/ins_menu_end.png) no-repeat right top;
+}
+#ins_menu ul{
+   margin-left:20px;
+   height:42px;
+}
+#ins_menu ul li{   
+   height:42px;
+   line-height:42px;
+   float:left;
+   padding-left:10px;
+}
+#ins_menu ul li span{
+   display:block;
+   height:42px;
+   padding:0 25px 0 10px;
+   float:left;
+}
+#ins_menu ul li a{
+   color:#fff;
+   font-size:14px;   
+   font-weight:bold;
+}
+#ins_menu ul li.on{
+    background:url(../Images/blue/ins_menu_item_start.png) no-repeat left top;
+	margin-right:25px;
+}
+#ins_menu ul li.on span{
+    background:url(../Images/blue/ins_menu_item_end.png) no-repeat right top;
+}
+#ins_menu ul li.on a{
+   color:#ff0000;
+}
+#brand_area{
+   height:190px;
+   margin:5px auto;
+}
+#ins_banner{
+   height:190px;
+   width:630px;
+   overflow:hidden;
+   float:right;
+}
+#ins_result{
+   height:186px;
+   width:316px;
+   float:left;
+   background:#d4f8bb url(../Images/blue/ins_box_bg.png) repeat-x left top;
+   border:1px solid #8fbf4f;
+   padding:1px;
+}
+.ins_info{
+   padding:5px;
+   width:306px;
+   height:136px;
+   overflow:hidden;
+}
+#text_area{
+   border:1px solid #d3d9c7;
+   padding:9px;
+   width:940px;
+}
+#text_area h3{
+   background:url(../Images/blue/32pxmania_159.png) no-repeat left top;
+   height:32px;
+   line-height:32px;
+   padding-left:36px;
+}
+#text_area div.text_box{
+   width:466px;
+   float:left;
+}
+#text_area div.fr{
+   float:right;
+}
+#text_area table{
+   border-spacing: 0px;
+   border-collapse: collapse;
+   width:100%;
+   background-color:#eaf7d9;
+}
+#text_area table th{
+   width:70px;
+   font-weight:bold;
+   text-align:center;
+   vertical-align:center;
+   border:1px solid #cccccc;
+}
+#text_area table td{
+   line-height:20px;
+   border:1px solid #cccccc;
+   vertical-align:middle;
+   padding:2px 0 1px 5px;
+}
+#text_area ul{
+   display:block;
+   clear:both;
+   width:454px;
+   background-color:#eaf7d9;
+   border:1px solid #cccccc;
+   padding:1px 5px;
+}
+#text_area ul li{
+   line-height:18px;
+}
+#text_area a{
+   color:#ff0000;
+}
+#inspection_area{
+   /*border:1px solid #cccccc;
+   background:#f6f6f6;*/
+   margin-top:5px;
+   text-align:center;
+}
+#inspection_area table{
+   border-spacing:0px;
+   border-collapse:collapse;
+   width:100%;
+}
+#inspection_area table caption h2{
+   height:40px;
+   line-height:40px;
+   font-family:"微软雅黑", "黑体", "隶书";
+   font-size:30px;
+   text-align:center;
+}
+#inspection_area table caption p{
+   line-height:20px;
+}
+#inspection_area table th{
+   font-weight:normal;
+   text-align:center;
+   line-height:20px;
+   /*background:#f6f6f6;
+   border:1px solid #cccccc;*/
+   padding:8px 2px;
+}
+#inspection_area table th.noborder{
+   border-left-width:0;
+}
+#inspection_area table td.nobottomborder,
+#inspection_area table th.nobottomborder{
+   border-bottom-width:0;
+}
+#inspection_area table td{
+   line-height:20px;
+   /*background:#f6f6f6;
+   border:1px solid #cccccc;*/
+   padding:8px 2px;
+   text-align:left;
+}
+#inspection_area table td.noborder{
+   border-right-width:0;
+}
+#building_name{
+   width:450px;
+}
+.formelement{
+   width:300px;
+}
+.formselect{
+   width:150px;
+}
+#expect{
+   width:90%;
+   height:100px;
+   line-height:18px;
+}
+#submit_inspection_apply_button{
+   width:200px;
+   height:40px;
+   color:#4D8D08;
+   font-size:22px;
+   font-weight:bold;
+   cursor:pointer;
+}

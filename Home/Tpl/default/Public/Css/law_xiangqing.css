@@ -1,0 +1,174 @@
+body {
+	font-size: 12px;
+	color: #000;
+	font-family: "宋体";
+	margin: 0px;
+}
+.law_border_1px_green {
+	border: 1px solid #D5ECC8;
+}
+.law_border_1px_gary {
+	border: 1px solid #E3E3E3;
+}
+.width_966px {
+	min-height: 500px!important;
+	height:auto;
+	width: 966px;
+	margin-right: auto;
+	margin-left: auto;
+	clear: both;
+}
+.green_14px {
+	font-size: 14px;
+	color: #52BC11;
+	font-family: "微软雅黑";
+	font-weight: bold;
+}
+.green_12px {
+	font-size: 12px;
+	color: #52BC11;
+}
+.height_20px_text_gray {
+	min-height:20px!important;
+	height: auto;
+	line-height: 20px;
+	word-wrap:break-word;
+	word-break:break-all;
+	color: #666;
+}
+.height_20px_text_black {
+	min-height:20px!important;
+	height: auto;
+	line-height: 20px;
+	word-wrap:break-word;
+	word-break:break-all;
+	color: #000;
+}
+.height_20px {
+	height: 20px;
+	width: 100%;
+	overflow: hidden;
+}
+#law_xiangqing_head {
+	width: 966px;
+	height: 136px;
+	clear: both;
+	margin-right: auto;
+	margin-left: auto;
+}
+#law_xiangqing_master {
+	clear: both;
+	width: 966px;
+	height: 564px;
+	background-color: #F1FCEE;
+	margin-right: auto;
+	margin-left: auto;
+}
+#master_bg {
+	clear: both;
+	height: 544px;
+	width: 659px;
+	margin-right: auto;
+	margin-left: auto;
+	background-image: url(../Images/law_xiangqing/law_xiangqing_bg.png);
+	background-repeat: repeat;
+	background-position: center top;
+}
+#master_bg_reg {
+	clear: both;
+	height: 544px;
+	width: 659px;
+	margin-right: auto;
+	margin-left: auto;
+	background-image: url(../Images/law_xiangqing/law_xiangqing_registr.png);
+	background-repeat: repeat;
+	background-position: center top;
+}
+#master_bg_edit{
+	clear: both;
+	height: 544px;
+	width: 659px;
+	margin-right: auto;
+	margin-left: auto;
+	background-image: url(../Images/law_xiangqing/law_xiangqing_modify.png);
+	background-repeat: repeat;
+	background-position: center top;
+}
+.yan_zheng_ma {
+	background-color: #CDF3B8;
+	height: auto;
+	width: auto;
+	color: #F00;
+	font-family: "Comic Sans MS", cursive;
+	font-size: 16px;
+}
+#text_textarea {
+	background-image: url(../Images/law/law_left_input.png);
+	background-repeat: no-repeat;
+	background-position: center top;
+	height: 262px;
+	width: 550px;
+}
+.master_text {
+	height: 28px;
+	width: 130px;
+	border: 1px solid #57CD63;
+	line-height: 28px;
+	color: #999;
+}
+#text_yanzheng {
+	height: 28px;
+	width: 68px;
+	border: 1px solid #57CD63;
+	line-height: 28px;
+}
+.botton_green1 {
+	background-image: url(../Images/law_xiangqing/law_xiangqing_botton1.png);
+	background-repeat: no-repeat;
+	background-position: right center;
+	height: 40px;
+	width: 140px;
+}
+.botton_sub {
+	background-image: url(../Images/law_xiangqing/law_xiangqing_sumbit_button1.png);
+	background-repeat: no-repeat;
+	background-position: right center;
+	height: 40px;
+	width: 140px;
+}
+.botton_edit {
+	background-image: url(../Images/law_xiangqing/law_xiangqing_sumbit_button2.png);
+	background-repeat: no-repeat;
+	background-position: right center;
+	height: 40px;
+	width: 140px;
+}
+.botton_intro {
+	background-image: url(../Images/law_xiangqing/law_xiangqing_jieshao.png);
+	background-repeat: no-repeat;
+	background-position: right center;
+	height: 40px;
+	width: 295px;
+}
+.botton_green2 {
+	background-image: url(../Images/law_xiangqing/law_xiangqing_botton2.png);
+	background-repeat: no-repeat;
+	background-position: right center;
+	height: 40px;
+	width: 140px;
+}
+#text_biaoti {
+	height: 28px;
+	width: 548px;
+	border: 1px solid #57CD63;
+	line-height: 28px;
+	color: #999;
+}
+#textarea_input {
+	height: 246px;
+	width: 530px;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+}

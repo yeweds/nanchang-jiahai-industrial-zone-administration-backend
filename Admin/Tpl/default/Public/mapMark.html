@@ -1,0 +1,65 @@
+<html>  
+<head>  
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style>
+*{ margin:0; padding:0; }
+</style>
+<script type="text/javascript" src="__PUBLIC__/Js/jquery.min.js"></script>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>  
+<script type="text/javascript">
+//---标注并传入发布页坐标输入框
+//---初始化
+	function initialize() { 
+	var pointx = 115.89872741699219;  //经
+	var pointy = 28.682813363150824;  //纬
+	var latlng = new google.maps.LatLng( pointy, pointx); 
+	var myOptions = {        
+		zoom: 13,        
+		center: latlng,
+		mapTypeId: google.maps.MapTypeId.ROADMAP
+		};
+	var image = '__PUBLIC__/Images/Map/lan_0.png';
+	var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);    
+	var marker = new google.maps.Marker({        
+		 position: latlng,       
+		 map: map,
+		 title:"点击标注",
+		 icon: image,
+		 draggable: true    //允许拖动
+		});
+
+//---以下标注传参
+	    google.maps.event.addListener(marker, 'click', function(event) {   
+			var xy = event.latLng;
+			//alert(xy);
+			alert("Mark Success!");
+			var data_x = xy.lng(); //经度
+			var data_y = xy.lat(); //纬度
+			window.opener.get_return_val(data_x, idName='point_x'); 
+			window.opener.get_return_val(data_y, idName='point_y'); 
+			window.close(); //自动关闭
+		});   
+  }
+
+</script>
+	<title>tengFang.Net Map Mark</title>
+	</head>
+	<body onload="initialize()">
+	<div id="map_canvas" style="width:100%; height:100%"></div>
+	</body>
+</html>
+
+<script type="text/javascript">
+//---标注
+	//$(function(){
+		//获取当前地图的可视范围
+		//var mapLatLngBounds = map.getBounds();
+		//将地图的边界传递给后台
+		//var maxX = mapLatLngBounds.getNorthEast().lng();
+		//var maxY = mapLatLngBounds.getNorthEast().lat();
+		//var minX = mapLatLngBounds.getSouthWest().lng();
+		//var minY = mapLatLngBounds.getSouthWest().lat();
+		//alert(maxX + '--'+ maxY);
+	//});
+</script>

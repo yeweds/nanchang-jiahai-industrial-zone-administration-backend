@@ -1,0 +1,145 @@
+<include file="Public:html_header" /> 
+
+<link href="../Public/Css/base.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/class_com.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/select_box.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/law.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/law_xiangqing.css" rel="stylesheet" type="text/css" />
+<body>
+<include file="News:news_header" /> <!--头部包含共用 -->
+<script type="text/javascript" src="../Public/Js/law.js"></script> 
+<script type="text/javascript">
+function fleshVerify(){
+//重载验证码
+	var timenow = new Date().getTime();
+	document.getElementById('verifyImg').src= '__URL__/verify/'+timenow;
+}
+</script> 
+<!--顶图片s-->
+<div id="law_xiangqing_head"><include file="Law:ad" /></div>
+<div class="height_30px_text blue_a" style="width:970px;margin:0 auto"><strong class="blue_14px_f">&gt;&gt;</strong><a href="__URL__/"> 新闻首页</a> <span class="gray_14px_f">&gt;</span> <a href="__APP__/Law/">律师在线</a></div>
+<!--顶图片e-->
+<div class="height_10px"> </div>
+<!--主体s-->
+<div id="law_xiangqing_master">
+  <div class="height_10px"> </div>
+  <table width="752" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="156">&nbsp;</td>
+      <td width="251"><span class="green_a">
+      管理首页 <eq name="is_admin" value="1">: |<a href="__URL__/lawyerAdmin">律师管理</a> |<a href="__URL__/pageSet">页面设置</a></eq></span></td>
+      <td width="345" align="right"><span class="green_a"><a href="javascript:history.go(-1)">返回</a></span></td>
+    </tr>
+    <tr>
+      <td colspan="3"  height="10px"></td>
+    </tr>
+  </table>
+  <div id="master_bg_edit"> 
+    <!--大表格s-->
+    <table width="659" border="0" cellspacing="0" cellpadding="0">
+      <form id="form1" name="form1" method="post" action="" enctype="multipart/form-data">
+        <label for="text_yanzheng"></label>
+        <tr>
+          <td width="94" height="55">&nbsp;</td>
+          <td width="132" height="55">&nbsp;</td>
+          <td width="75" height="55">&nbsp;</td>
+          <td width="136" height="55">&nbsp;</td>
+          <td width="64" height="55">&nbsp;</td>
+          <td width="25" height="55">&nbsp;</td>
+          <td width="116" height="55"><in name="myId" value="$list.id"><span class="green_a"><a href="__URL__/editPwd"><font color="#FF0000">修改密码</font></a></span></in></td>
+          <td width="17" rowspan="11">&nbsp;</td>
+        </tr>
+        <tr>
+          <td width="95" height="57" align="center" valign="middle">姓名:</td>
+          <td width="134" height="57" valign="middle"><input type="hidden" name="id" value="{$list.id}" />
+            <input name="name" type="text" class="master_text" id="text_xingming" value="{$list.name}"/></td>
+          <td width="74" height="57" align="center" valign="middle">性别：</td>
+          <td width="135" height="57" valign="middle"><if condition="$list.sex eq '男'">
+            <input type="radio"  name="sex" value="男"  checked="checked"/>
+            男
+            <input type="radio" name="sex" value="女" />
+            女
+            <else />
+            <input type="radio"  name="sex" value="男"  />
+            男
+            <input type="radio" name="sex" value="女" checked="checked"/>
+            女</if></td>
+          <td width="60" height="57" align="center" valign="middle">头像：</td>
+          <td height="57" valign="middle" colspan="2"><img src="__PUBLIC__/user/{$list.head}" width="60" height="40" align="top" />&nbsp;&nbsp;<span class="green_a"><a href="__URL__/editHead">修改头像</a></span></td>
+        <tr>
+          <td width="94" height="35" align="center" valign="middle">现任职务:</td>
+          <td width="132" height="35" valign="middle"><input type="text" name="position" id="text_xingming" class="master_text" value="{$list.position}"/></td>
+          <td width="75" height="35" align="center" valign="middle">专长领域:</td>
+          <td width="136" height="35" valign="middle"><input name="profession" type="text" class="master_text" id="text_lianxi" value="{$list.profession}" /></td>
+          <td width="64" height="35" align="center" valign="middle">学历:</td>
+          <td height="35" valign="middle" colspan="2"><input type="text" name="educate" id="text_lianxi" class="master_text" value="{$list.educate}"/></td>
+        </tr>
+        <tr>
+          <td width="94" height="35" align="center" valign="middle">执业证书编号:</td>
+          <td width="132" height="35" valign="middle"><input type="text" name="confirm" id="text_xingming" class="master_text" value="{$list.confirm}" /></td>
+          <td width="75" height="35" align="center" valign="middle">所在律所:</td>
+          <td width="136" height="35" valign="middle"><input name="lvsuo" type="text" class="master_text" id="text_lianxi" value="{$list.lvsuo}"  /></td>
+          <td width="64" height="35" align="center" valign="middle">邮箱:</td>
+          <td height="35" valign="middle" colspan="2"><input type="text" name="mail" id="text_lianxi" class="master_text" value="{$list.mail}"/></td>
+        </tr>
+        <tr>
+          <td width="94" height="35" align="center" valign="middle">所在地区:</td>
+          <td width="132" height="35" valign="middle"><input type="text" name="diqu" id="text_xingming" class="master_text"  value="{$list.diqu}"/></td>
+          <td width="75" height="35" align="center" valign="middle">联系地址:</td>
+          <td width="136" height="35" valign="middle"><input name="address" type="text" class="master_text" id="text_lianxi" value="{$list.address}"  /></td>
+          <td width="64" height="35" align="center" valign="middle">电话:</td>
+          <td height="35" valign="middle" colspan="2"><input type="text" name="telephone" id="text_lianxi" class="master_text" value="{$list.telephone}"/></td>
+        </tr>
+        <tr>
+          <td width="94" height="15">&nbsp;</td>
+          <td width="132" height="15">&nbsp;</td>
+          <td width="75" height="15">&nbsp;</td>
+          <td width="136" height="15">&nbsp;</td>
+          <td width="64" height="15">&nbsp;</td>
+          <td width="25" height="15">&nbsp;</td>
+          <td width="116" height="15">&nbsp;</td>
+        </tr>
+        <tr>
+          <td width="94" height="55" align="center" valign="top">详细介绍:</td>
+          <td colspan="6" rowspan="2" align="center" valign="middle"><div id="text_textarea">
+              <table width="535" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td width="535" height="14">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td width="535" height="248" align="center" valign="top"><textarea name="content" id="textarea_input" cols="45" rows="5">{$list.intro}</textarea></td>
+                </tr>
+              </table>
+            </div></td>
+        </tr>
+        <tr>
+          <td width="94" height="215">&nbsp;</td>
+        </tr>
+        <tr>
+          <td width="94" height="40">&nbsp;</td>
+          <td width="132" height="40">&nbsp;</td>
+          <td width="75" height="40">&nbsp;</td>
+          <td width="136" height="40">&nbsp;</td>
+          <td width="64" height="40">&nbsp;</td>
+          <td height="40" colspan="2" ><div class="botton_edit" onClick="subUpdate()" ></div></td>
+        </tr>
+      </form>
+    </table>
+    
+    <!--大表格e--> 
+  </div>
+  <div class="height_10px"></div>
+</div>
+<!--主体e--> 
+<include file="Public:com_footer" /> {//共用尾部}
+</body>
+</html>
+<script type="text/javascript" src="__PUBLIC__/Js/FCKeditor/fckeditor.js"></script>
+<script type="text/javascript"> var oFCKeditor = new FCKeditor( "content","100%","184px" ) ; oFCKeditor.BasePath = "__PUBLIC__/Js/FCKeditor/" ; oFCKeditor.ReplaceTextarea() ;function resetEditor(){setContents("content",document.getElementById("content").value)}; function saveEditor(){document.getElementById("content").value = getContents("content");} function InsertHTML(html){ var oEditor = FCKeditorAPI.GetInstance("content") ;if (oEditor.EditMode == FCK_EDITMODE_WYSIWYG ){oEditor.InsertHtml(html) ;}else	alert( "FCK必须处于WYSIWYG模式!" ) ;}</script><!-- 编辑器调用结束 -->
+<script type="text/javascript">
+    function subUpdate(){
+	    var url=APP+'/Law/lawyer_update';
+	    $('#form1').attr('action',url);
+	    $('#form1').submit();
+	}
+</script>

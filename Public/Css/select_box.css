@@ -1,0 +1,193 @@
+#price {
+	height: 25px;
+	width: 100px;
+	line-height: 25px;
+	color: #093;
+	font-size: 14px;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #060;
+	border-right-color: #060;
+	border-bottom-color: #060;
+	border-left-color: #060;
+}
+#some {
+	height: 25px;
+	width: 400px;
+	line-height: 25px;
+	color: #093;
+	font-size: 14px;
+	border: 1px solid #BEDEB4;
+
+}
+#sc {
+	height: 25px;
+	width: 100px;
+	line-height: 25px;
+	color: #093;
+	font-size: 14px;
+	border: 1px solid #BEDEB4;
+	margin-top: 300px;
+}
+#select_click {
+	position:absolute;
+	width:20px;
+	height:20px;
+	z-index:1;
+	left: 78px;
+	top: 4px;
+	background-color: #333;
+}
+
+.select_default {
+	position: absolute;
+	z-index: auto;
+	left: 0px;
+	top: 0px;
+	height: 25px;
+	width: 80px;
+	color: #090;
+	cursor: default;
+}
+
+.select_box {
+	height: 25px;
+	width: 100px;
+	position: relative;
+}
+.select_box .selectbn {
+	width: 25px;
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	background-image: url(../Images/selectbn.gif);
+	background-repeat: no-repeat;
+	background-position: center center;
+	cursor:pointer;
+}
+.select_box .selectbn_m {
+	width: 25px;
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	background-image: url(../Images/selectbn_m.gif);
+	background-repeat: no-repeat;
+	background-position: center center;
+	cursor:pointer;	
+}
+.select_box .selectbn_c {
+	width: 25px;	
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	background-image: url(../Images/selectbn_c.gif);
+	background-repeat: no-repeat;
+	background-position: center center;
+	cursor:pointer;	
+}
+.select_box .option_box {
+	min-height:100px;
+	height: auto;
+	top: 24px;
+	position: absolute;
+	left: 0px;
+	background-color: #FFF;
+	border-top-width: 0px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #BBDBA8;
+	border-right-color: #BBDBA8;
+	border-bottom-color: #BBDBA8;
+	border-left-color: #BBDBA8;
+	visibility: hidden;
+}
+.select_box .option {
+	height:25px;
+	line-height:25px;	
+	color: #333;
+	background-image: url(../Images/select_option_bg.png);
+	background-repeat: repeat-x;
+	background-position: bottom;
+	cursor:pointer;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #EEE;
+	border-right-color: #FFF;
+	border-bottom-color: #FFF;
+	border-left-color: #FFF;
+}
+.select_box .option_m {
+	height:25px;
+	line-height:25px;
+	color: #333;
+	background-image: url(../Images/select_option_bg_m.png);
+	background-repeat: repeat-x;
+	background-position: bottom;
+	border: 1px solid #AAD5B9;
+	cursor:pointer;
+}
+.select_box .option_c {
+	height:25px;
+	line-height:25px;	
+	color: #333;
+	background-image: url(../Images/select_option_bg_c.png);
+	background-repeat: repeat-x;
+	background-position: bottom;
+	cursor:pointer;
+	border: 1px solid #090;
+}
+
+/*-----other---------*/
+.custum_price {
+	height: 25px;
+	width: 100%;
+	font-size: 12px;
+	color: #060;
+	padding-top: 2px;
+	padding-right: 0px;
+	padding-bottom: 2px;
+	padding-left: 0px;
+}
+.select_min_input {
+	height: 18px;
+	width: 50px;
+	border: 1px solid #80A956;
+}
+#range_id_inc {
+	height: 40px;
+	width: 107px;
+	float: left;
+}
+#lp_wuyetype_inc {
+	height: 40px;
+	width: 107px;
+}
+#lp_price_range_inc {
+	height: 40px;
+	width: 100px;
+}
+#room_hx_inc {
+	height: 40px;
+	width: 100px;
+}
+#room_area_inc {
+	height: 40px;
+	width: 100px;
+}

@@ -1,0 +1,66 @@
+<include file="Public:html_header" />
+<link href="../Public/Css/news_com.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/class_com.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/select_box.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/law.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/law_xiangqing.css" rel="stylesheet" type="text/css" />
+<body>
+<include file="News:news_header" /> <!--头部包含共用 --> 
+<script type="text/javascript" src="../Public/Js/law.js"></script> 
+<script type="text/javascript">
+function fleshVerify(){
+//重载验证码
+	var timenow = new Date().getTime();
+	document.getElementById('verifyImg').src= '__URL__/verify/'+timenow;
+}
+</script> 
+<!--顶图片s-->
+<div id="law_xiangqing_head"><include file="Law:ad" /></div>
+<div class="height_30px_text blue_a" style="width:970px;margin:0 auto"><strong class="blue_14px_f">&gt;&gt;</strong><a href="__URL__/"> 新闻首页</a> <span class="gray_14px_f">&gt;</span> <a href="__APP__/Law/">律师在线</a></div>
+<!--顶图片e-->
+<div class="height_10px"> </div>
+<!--主体s-->
+<div id="law_xiangqing_master">
+  <div class="height_10px"> </div>
+  <table width="752" border="0" cellspacing="0" cellpadding="0" align="center">
+    <tr>
+      <td width="124">&nbsp;</td>
+      <td width="283"><span class="green_a"><a href="__URL__/lawyer_edit">管理首页</a> <eq name="is_admin" value="1">: |<a href="__URL__/lawyerAdmin">律师管理</a> |<a href="__URL__/pageSet">页面设置</a></eq></span></td>
+      <td width="345" align="right"><span class="green_a"><a href="javascript:history.go(-1)">返回</a>&nbsp;&nbsp;&nbsp; &nbsp; </span></td>
+    </tr>
+    <tr>
+      <td colspan="3"  height="10px"></td>
+    </tr>
+  </table>
+  <table width="752" border="0" cellspacing="0" cellpadding="0" align="center">
+    <form action="__URL__/updatePwd" method="post">
+      <tr>
+        <td width="94" height="35" align="center" valign="middle">邮箱:</td>
+        <td width="132" height="35" valign="middle"><input type="hidden" name="id" value="{$list.id}"><input type="text" name="email" id="text_xingming" class="master_text" value="{$list.email}" readonly /></td>
+        <td width="75" height="35" align="center" valign="middle">旧密码:</td>
+        <td width="136" height="35" valign="middle"><input name="pwd" type="password" class="master_text" id="text_lianxi"/></td>
+      </tr>
+      <tr>
+        <td width="94" height="35" align="center" valign="middle">新密码:</td>
+        <td width="132" height="35" valign="middle"><input type="password" name="npwd" id="text_xingming" class="master_text"  /></td>
+        <td width="75" height="35" align="center" valign="middle">确认新密码:</td>
+        <td width="136" height="35" valign="middle"><input name="npwd2" type="password" class="master_text" id="text_lianxi" /></td>
+      </tr>
+      <tr>
+        <td height="35" colspan="4" align="center" valign="middle"><input type="submit" value="确认修改" /></td>
+      </tr>
+    </form>
+  </table>
+  <div class="height_10px"></div>
+</div>
+<!--主体e--> 
+<include file="Public:com_footer" /> {//共用尾部}
+</body>
+</html><script type="text/javascript">
+    function delLawyer(id){
+	      if(confirm('删除之后不可恢复，你确认要删除吗？')){
+			    var url =  URL+ '/delLawywer/id/' + id; 
+				window.location.href = URL+ '/delLawywer/id/' + id;  
+		  }
+	}
+</script>

@@ -1,0 +1,124 @@
+<link href="../Public/Css/ct_lp_common.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/ct_lp_list.css" rel="stylesheet" type="text/css" />
+
+<script language="javascript">
+//指定当前组模块URL地址
+var URL = '__URL__';
+var APP	 =	 '__APP__';
+var PUBLIC = '__PUBLIC__';
+</script>
+<script type="text/javascript" src="__PUBLIC__/Js/jquery.min.js"></script>
+<script type="text/javascript" src="../Public/Js/base.js"></script><!--前台公共JS函数-->
+<!-- 用于词联想导入库开始 -->
+	<link type="text/css" href="__PUBLIC__/Js/Util/jquery.autocomplete.css" rel="stylesheet" />
+	<script type="text/javascript" src="__PUBLIC__/Js/Util/jquery.autocomplete.js"></script>
+<!-- 用于词联想导入库结束 -->
+
+<script type="text/javascript">
+//提交搜索
+function submit_search(){
+	var key = $("#key").val();
+	var url = '__APP__/General/ct_list';
+	if(key == '按楼盘名称，关键字'){
+		key = '';
+	}
+	if(key == ''){
+		alert('请输入搜索条件');
+		return;
+	}else{
+		key = encodeURI(encodeURI(key));
+		url += '/key/'+ key;
+	}
+	var search_type = $("#searchForm #search_type").val();
+	if(search_type !='' && search_type !='undefined' ){
+		url += '/search_type/'+ search_type;
+	}
+	location.href = url ;
+}
+
+$(function(){
+	   $('#searchForm').keyup(function(event) {
+		  if(event.keyCode==13){    
+				submit_search();
+		  }
+       });
+//词联想-----------start 
+  //输入框事件
+	function format(msg) {
+		return " [" + msg.area + "]" + msg.label;
+	}
+	
+	$("#key").autocomplete('__APP__/Index/get_info_mnemonic/', {
+		multiple: false,
+		dataType: "json",
+		minChars: 1,
+		parse: function(data) {
+			return $.map(data, function(row) {
+				return {
+					data: row,
+					value: row.name,
+					result: row.label
+				}
+			});
+		},
+		formatItem: function(item) {
+			return format(item);
+		}
+	});
+	//.result(function(e, item) {
+	//	$("#head_search").append("<p>selected " + format(item) + "</p>");
+	//});
+
+//词联想-----------end 
+});
+</script>
+<div id="index_head">
+  <div id="head_logo"><a href="__APP__/" title="腾房网"><img src="../Public/Images/logo_cs.png" alt="腾房网-首页" width="100" height="60" border="0" /></a></div>
+    <div id="head_city">
+      <div class="height_lineheight_30px"><span class="blue_12px_f">购房,上腾房直通车</span></div>
+     <div class="height_30px"><strong>南昌</strong> <span class="gray_12px_f">[切换城市] </span></div>
+    </div>
+    <div id="head_log">
+<span class="black_a">
+<php> if($userInfo){ </php> 
+您好， <a href="__APP__/Account" target="_blank"><strong>{$userInfo.username}</strong></a> 欢迎来腾房网！<a href="__APP__/Account/logout/">退出</a>
+<php>} else{</php>
+	<a href="__APP__/Login/index/fromUrl/{$Think.const.__SELF__|base64_encode}">[登录]</a> <a href="__APP__/Reg">[注册]</a>
+<php>} </php>	
+	 &nbsp;| <a href="javascript:bookmark();">加入收藏</a></span>
+	</div>
+    <div id="head_nv">
+      <table width="100%" border="0" cellspacing="0">
+        <tr>
+          <td width="80" height="14" align="center"><strong class="white_a"><a href="__APP__/">首&nbsp;页</a></strong></td>
+          <td width="80" height="14" align="center" class="right_1bian_gray"><span class="black_a"><a href="__APP__/lp">楼盘大全</a></span></td>
+		  <td width="80" height="14" align="center" class="right_1bian_gray"><span class="black_a"><a href="__APP__/Pano">实景看房</a></span></td>
+          <td width="80" height="14" align="center" class="right_1bian_gray"><span class="black_a"><a href="__APP__/News">新闻</a></span></td>
+          <!-- <td width="80" height="14" align="center" class="right_1bian_gray">
+		  <span class="black_a"><a href="http://puzi.tengfang.net">商铺</a></span></td>		  
+		  <td width="80" height="14" align="center" class="right_1bian_gray">
+		  <span class="black_a"><a href="http://esf.tengfang.net">二手房</a></span></td> -->
+          <!--<td width="80" height="14" align="center" class="right_1bian_gray"><span class="black_a"><a href="__APP__/News/type/classid/28">活动</a></span></td> -->
+          <td width="80" height="14" align="center" class="right_1bian_gray"><span class="black_a"><a href="__APP__/News/type/classid/20">专题</a></span></td>
+          <td width="80" height="14" align="center"><span class="black_a"><a href="__APP__/Account">我的腾房</a></span></td>
+		  <td width="" align="center"></td>
+        </tr>
+      </table>
+    </div>
+    <div id="head_search">
+      <table width="100%" border="0" cellspacing="0">
+	  <form method="post" id="searchForm" onsubmit="submit_search();return false;">
+        <tr>
+          <td width="5%" height="30">新房<img src="../Public/Images/dp_jian_bottom.gif" width="10" height="10" alt="箭头" /></td>
+          <td width="38%" height="30"><label>
+            <input name="key" type="text" id="key" value="按楼盘名称，关键字" onclick="this.value='';" />
+          </label></td>
+          <td width="8%" height="30"><img src="../Public/Images/dp_search_bn.gif" alt="搜索" width="55" height="25" id="search_sub" onclick="submit_search();" /></td>
+          <td height="30"><!-- 热门搜索：<span class="green_bian_a"><a href="#">小户型</a> <a href="#">地铁房</a> <a href="#">国际名校</a> <a href="#">学区房</a> <a href="#">别墅</a></span> --></td>
+          <td width="12%" height="30">&nbsp;</td>
+        </tr>
+	 </form>
+      </table>
+    </div>
+  </div>
+  <div class="height_10px"></div>

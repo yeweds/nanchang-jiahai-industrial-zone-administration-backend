@@ -1,0 +1,53 @@
+<include file="Public:header" />
+
+<div class="bodyTitle">
+	<div class="bodyTitleLeft"></div>
+  <div class="bodyTitleText">我的账户</div>
+</div>
+<br><h3 class="marginbot"></h3>
+
+				<table width="100%"> <form method="post" name="form1" action="__URL__/modifys">
+				<input type="hidden" name="id" value="{$vo.id}" />
+					<tr>
+					  <td>用 户 名 {$vo.admin}</td>
+				  </tr>
+					<tr>
+					  <td>密　　码
+    <input name="password" type="password" id="password" class="txt"/>
+    <input name="opassword" type="hidden" id="opassword" value="{$vo.pwd}" /></td>
+				  </tr>
+					<tr>
+					  <td>类　　型
+					    <select NAME="groupid" id="groupid" >
+                          <option value="1" <?php if($vo['groupid']==1) echo " selected"; ?>>超级管理员</option>
+                          <option value="2" <?php if($vo['groupid']==2) echo " selected"; ?>>普通管理员</option>
+                          <option value="5" <?php if($vo['groupid']==5) echo " selected"; ?>>网站客服</option>
+                        </select>
+					  </td>
+					</tr>
+					<tr>
+					  <td><span class="tRight tTop">添加时间<span class="tRight">
+					    <input name="addtime" type="text" id="addtime" value="{$vo.addtime}" class="txt"/>
+					  </span></span></td>
+				  </tr>
+					<tr>
+					  <td><span class="tRight tTop">登录时间<span class="tRight">
+					    <input name="lasttime" type="text" id="lasttime" value="{$vo.lasttime}" class="txt"/>
+					  </span></span></td>
+				  </tr>
+					<tr>
+					  <td><span class="tRight tTop">最后登录IP<span class="tRight">
+					    <input name="ip" type="text" id="ip" value="{$vo.ip}" class="txt"/>
+					  </span></span></td>
+				  </tr>
+					<tr>
+					  <td>&nbsp;</td>
+				  </tr>
+					<tr>
+					  <td><input type="submit"  value="提交更新" class="inputButton" />
+                    <input type="reset" name="Reset" value="还原重填" class="inputButton" /></td>
+				  </tr>
+				</form></table>
+<p class="i">红色标记的内容必须填写</p>
+        <br>
+<include file="Public:footer" />

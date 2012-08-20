@@ -1,0 +1,46 @@
+<include file="Public:header" />
+
+<div class="bodyTitle">
+	<div class="bodyTitleLeft"></div>
+  <div class="bodyTitleText">编辑公告</div>
+</div>
+<br><h3 class="marginbot"><a href="__URL__" class="sgbtn">＋返回公告管理</a></h3>
+
+          <table width="100%">  
+		  <form method="post" name="form1" action="__URL__/save">
+          <input name="id" type="hidden" id="id" value="{$vo.id}" />
+            <tr>
+              <td width="13%">标题</td>
+              <td width="87%">
+                <input name="title" type="text"  class="txt" id="title" value="{$vo.title}" size="50"/></td>
+            </tr>
+            <tr>
+              <td>备注</td>
+              <td>
+                <textarea name="excerpt" cols="60" rows="4" id="excerpt">{$vo.excerpt}</textarea>
+              简单概要描述，可以留空</td>
+            </tr>
+            <tr>
+              <td>内容</td>
+              <td><!-- 编辑器调用开始 --><script type="text/javascript" src="__PUBLIC__/Js/FCKeditor/fckeditor.js"></script>
+	<textarea id="editor" name="content">{$vo.content}</textarea>
+	<script type="text/javascript"> var oFCKeditor = new FCKeditor( "editor","80%","320px" ) ; oFCKeditor.BasePath = "__PUBLIC__/Js/FCKeditor/" ; oFCKeditor.ReplaceTextarea() ;function resetEditor(){setContents("editor",document.getElementById("editor").value)}; function saveEditor(){document.getElementById("editor").value = getContents("editor");} function InsertHTML(html){ var oEditor = FCKeditorAPI.GetInstance("editor") ;if (oEditor.EditMode == FCK_EDITMODE_WYSIWYG ){oEditor.InsertHtml(html) ;}else	alert( "FCK必须处于WYSIWYG模式!" ) ;}</script> <!-- 编辑器调用结束 --></td>
+            </tr>
+            <tr>
+              <td>排序</td>
+              <td><input type="text" value="{$vo.sortrank}" name="sortrank" size="5" /></td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+              <td>
+                <input type="submit"  value="提交更新" class="df_button" />
+                <input type="reset" value="还原重填" class="df_button" /></td>
+            </tr>
+          </form></table>
+        <p class="i">删除不可恢复,谨慎操作</p>
+        <br>
+<include file="Public:footer" />

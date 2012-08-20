@@ -1,0 +1,416 @@
+#law_left_search {
+	clear: both;
+	height: 45px;
+	width: 608px;
+	background-color: #FCFCFC;
+	margin-right: auto;
+	margin-left: auto;
+}
+#search_search {
+	clear: both;
+	margin-right: auto;
+	margin-left: auto;
+	height: 33px;
+	width: 598px;
+}
+.law_border_1px_green {
+	border: 1px solid #D5ECC8;
+}
+#search_search_input {
+	height: 27px;
+	width: 414px;
+	line-height: 27px;
+	color: #52BC11;
+	border: 1px solid #FFF;
+}
+.law_border_1px_gary {
+	border: 1px solid #E3E3E3;
+	float: left;
+	padding: 1px;
+	margin-right: 5px;
+	display: block;
+}
+#law_head {
+	height: 100px;
+	width: 960px;
+	clear: both;
+	margin-right: auto;
+	margin-left: auto;
+}
+.width_42px_float {
+	height: 20px;
+	width: 42px;
+	float: left;
+}
+.width_13px_float {
+	height: 20px;
+	width: 13px;
+	float: left;
+}
+.width_608px_auto {
+	clear: both;
+	height: auto;
+	width: 608px;
+	min-height: 60px!important;
+	margin-right: auto;
+	margin-left: auto;
+}
+.width_608px {
+	height: auto;
+	width: 608px;
+	min-height: 60px!important;
+	margin-right: auto;
+	margin-left: auto;
+}
+#law_right_bottom {
+	clear: both;
+	height: auto;
+	width: 299px;
+	min-height: 50px;
+}
+
+#law_right_top {
+	height: 330px;
+	width: 300px;
+	background-image: url(../Images/law/law_right_top.png);
+	background-repeat: no-repeat;
+	background-position: center top;
+	clear: both;
+}
+#law_right_middle {
+	clear: both;
+	height: 52px;
+	width: 300px;
+}
+
+.height_15px {
+	height: 15px;
+	width: 100%;
+	overflow: hidden;
+}
+#ye_ma {
+	height: 20px;
+	width: 100%;
+	overflow: hidden;
+	clear: both;
+}
+
+.height_20px_bottom_1px {
+	clear: both;
+	height: 20px;
+	width: 608px;
+	margin-right: auto;
+	margin-left: auto;
+	border-bottom-width: 1px;
+	border-bottom-style: dashed;
+	border-bottom-color: #E3E3E3;
+}
+.width_966px {
+	min-height: 900px!important;
+	height:auto;
+	width: 966px;
+	margin-right: auto;
+	margin-left: auto;
+	clear: both;
+}#law_right_bottom_title {
+	background-image: url(../Images/law/law_right_bottom.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+	clear: both;
+	height: 33px;
+	width: 100%;
+}
+#law_right_law {
+	width: 292px;
+	height: auto;
+	float: left;
+	min-height: 50px;
+}
+#law_left {
+	float: left;
+	height: auto;
+	width: 652px;
+	min-height: 800px;
+}
+#law_left_top {
+	clear: both;
+	height: 56px;
+	width: 652px;
+	background-image: url(../Images/law/law_left_top.png);
+	background-repeat: no-repeat;
+	background-position: center bottom;
+}
+#law_left_middle {
+	clear: both;
+	height: auto;
+	width: 652px;
+	background-image: url(../Images/law/law_left_middle.png);
+	background-repeat: repeat-y;
+	background-position: center top;
+	min-height: 800px;
+}
+.law_reply {
+	background-repeat: no-repeat;
+	background-position: center 10px;
+	background-image: url(../Images/law/law_left_input.png);
+	float: left;
+	height: 281px;
+	width: 554px;
+	position: relative;
+	margin-bottom: 10px;
+}
+.law_law_name {
+	height: 126px;
+	width: 288px;
+	border: 1px solid #F7F7F7;
+}
+
+#text_area {
+	width: 530px;
+	height: 184px;
+	border: 1px solid #FFF;
+}
+
+
+.law_wen1 {
+	clear: both;
+	width: 608px;
+	height: auto;
+	min-height: 80px;
+}
+.law_wen2 {
+	clear: both;
+	width: 608px;
+	height: auto;
+	min-height: 80px;
+}
+.law_da {
+	clear: both;
+	height: auto;
+	width: 608px;
+	min-height: 50px;
+	margin-top: 5px;
+	line-height: 20px;
+}
+.yi_hui_fu {
+	background-image: url(../Images/law/law_button_green.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+	height: 20px;
+	line-height: 20px;
+	width: 60px;
+	color: #FFF;
+	float: left;
+}
+.wei_hui_fu {
+	background-image: url(../Images/law/law_button_red.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+	height: 20px;
+	width: 60px;
+	line-height: 20px;
+	float: left;
+	color: #FFF;
+}
+
+
+
+#law_left_bottom {
+	background-image: url(../Images/law/law_left_bottom.png);
+	background-repeat: no-repeat;
+	background-position: center top;
+	clear: both;
+	height: 32px;
+	width: 652px;
+}
+#law_right {
+	height: auto;
+	width: 300px;
+	float: left;
+	min-height: 800px;
+}
+.green_14px{
+	font-size: 14px;
+	color: #52BC11;
+	font-family: "微软雅黑";
+	font-weight: bold;
+}
+.green_12px{
+	font-size: 12px;
+	color: #52BC11;
+}
+.height_20px_text_gray {
+	min-height:20px!important;
+	height: auto;
+	line-height: 20px;
+	word-wrap:break-word;
+	word-break:break-all;
+	color: #666;
+}
+.height_20px_text_black {
+	min-height:20px!important;
+	height: auto;
+	line-height: 20px;
+	word-wrap:break-word;
+	word-break:break-all;
+	color: #000;
+}
+.height_20px {
+	height: 20px;
+	width: 100%;
+	overflow: hidden;
+}
+.blue_a_12px{	 
+	color: #006691;
+}
+.blue_a_12px a:link{	 
+	color: #006691;
+	text-decoration: none;
+}
+.blue_a_12px a:visited{
+	color: #006691;
+	text-decoration: none;
+}
+.blue_a_12px a:hover{
+	color: #39F;
+	text-decoration: underline;
+}
+.blue_a_12px a:active{	 
+	color: #39F;
+	text-decoration: underline
+}
+.blue_a_14px{
+	font-size:14px;	 
+	color: #006691;
+}
+.blue_a_14px a:link{	 
+	color: #006691;
+	text-decoration: none;
+}
+.blue_a_14px a:visited{
+	color: #006691;
+	text-decoration: none;
+}
+.blue_a_14px a:hover{
+	color: #39F;
+	text-decoration: underline;
+}
+.blue_a_14px a:active{	 
+	color: #39F;
+	text-decoration: underline
+}
+#law_button_sumbit {
+	height: 21px;
+	width: 70px;
+	position: absolute;
+	left: 466px;
+	top: 257px;
+}
+.law_button_sumbit1 {
+	background-image: url(../Images/law/law_button_sumbit1.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+.law_button_sumbit2 {
+	background-image: url(../Images/law/law_button_sumbit2.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+.law_button_search1 {
+	background-image: url(../Images/law/law_button_search1.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+.law_button_search2 {
+	background-image: url(../Images/law/law_button_search2.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+.you_xiu_lu_shi {
+	background-color: #F7FCF5;
+	color: #AEDC98;
+	font-size: 18px;
+	font-family: "微软雅黑";
+}
+.law_border_1px_bottom {
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #E3E3E3;
+}
+.yan_zheng_ma {
+	background-color: #CDF3B8;
+	height: auto;
+	width: auto;
+	color: #F00;
+	font-family: "Comic Sans MS", cursive;
+	font-size: 16px;
+}
+.law_orange_sumbit1 {
+	background-image: url(../Images/law/law_orange_sumbit1.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+.law_orange_sumbit2 {
+	background-image: url(../Images/law/law_orange_sumbit2.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+#title {
+	height: 24px;
+	width: 222px;
+	border: 1px solid #D5ECC8;
+	line-height: 24px;
+}
+#right_top_input_neirong {
+	height: 76px;
+	width: 222px;
+	border: 1px solid #D5ECC8;
+}
+#right_top_input_name {
+	height: 24px;
+	width: 64px;
+	border: 1px solid #D5ECC8;
+	line-height: 24px;
+}
+#right_top_input_email {
+	height: 24px;
+	width: 105px;
+	border: 1px solid #D5ECC8;
+	line-height: 24px;
+}
+#right_top_input_lianxi {
+	height: 24px;
+	width: 101px;
+	border: 1px solid #D5ECC8;
+	line-height: 24px;
+	color: #999;
+}
+
+#right_top_input_yanzheng {
+	height: 24px;
+	width: 64px;
+	border: 1px solid #D5ECC8;
+	line-height: 24px;
+}
+#search_select01 {
+	width: 99px;
+	font-size: 12px;
+	color: #52BC11;
+	border: 1px solid #FFF;
+	height: auto;
+}
+.f_reply {
+	width: 400px;
+	height: 25px;
+	border: 1px solid #F1F0F0;
+	line-height: 25px;
+	font-size: 12px;
+	color: #CCC;
+}
+.arrow_gray {
+	background-image: url(../Images/law/arrow_gray.gif);
+	background-repeat: no-repeat;
+	background-position: left bottom;
+	height: 10px;
+	width: auto;
+}

@@ -1,0 +1,83 @@
+<include file="Public:header" />
+<script language="JavaScript" type="text/JavaScript">
+//提交搜索
+	function submitSearch(){
+		var s_key  = $("#s_key").val();
+		s_key = $.trim(s_key);    //去空格
+		var class_id = $("#model_name").val();
+		var upload_time = $("#upload_time").val();
+		var arg_add = '';
+		var key_add = '';
+		var uptime = '';
+		if(class_id != ''){
+			arg_add =  '/model_name/'+ class_id;
+		}
+		if(upload_time != ''){
+			uptime =  '/upload_time/'+ upload_time;
+		}
+		if(s_key !=''){
+			key_add = "/s_key/"+ s_key +"/s_type/" + $("#s_type").val();
+		}
+		//alert( URL+"/index" + arg_add + key_add);
+		window.location.href= URL+"/index" + arg_add + key_add + uptime;
+		arg_add = '';
+		key_add = '';
+	}
+</script>
+<script language="javascript" src="__PUBLIC__/DatePicker/WdatePicker.js"></script>
+<!-- 日历插件 -->
+<div class="bodyTitle">
+	<div class="bodyTitleLeft"></div>
+  <div class="bodyTitleText">附件管理</div>
+</div>
+<h3 class="marginbot">
+<a href="#" onClick="delAll()" class="sgbtn">－删除选中</a>&nbsp; 
+ 请输入关键字：<input name="s_key" id="s_key" />
+	<select name="s_type" id="s_type"/>
+		  <option value="id">按附件ID</option>
+		  <option value="info_id">按Info_ID</option>
+		  <option value="name">按原名</option>
+		  <option value="savename">按保存名称</option> 
+	</select>  &nbsp;
+		<select name="model_name" id="model_name"/>
+		  <option value="">不限类型</option>
+		  <option value="pics">商家相册</option>
+		  <option value="story">故事</option>
+		  <!-- <option value="14">实景图</option>
+		  <option value="15">效果图</option>
+		  <option value="16">土地规划图</option> -->
+	</select>
+	时间：<input name="upload_time" type="text" id="upload_time"  onClick="WdatePicker()" >
+	<a href="#" onClick="submitSearch()" class="sgbtn">我要查询</a>
+<div id="result" class="none result" style="letter-spacing:2px"></div>
+</h3>
+
+<table id="articlelist" class="datalist fixwidth">
+	  <tr align="center">
+	    <td width="8%" align="left"><input type="checkbox" onClick="selAll(this,'id[]')" value="选择全部" class="checkbox">选择ID</td>
+	    <td width="6%">所属模块</th>
+		<td width="20%">原名</td>
+		<td width="12%">保存文件名</td>
+		<td width="12%">大小</td>
+		<td width="10%">所属内容ID</td>
+		<td width="12%">所属分类路径</td>
+		<td>时间</td>
+        <td>操作</td>
+	  </tr>
+      <iterate name="list" id="vo">
+	  <tr >
+	     <td align="left"><input name="id[]" type="checkbox" id="id[]" value="{$vo.id}" />{$vo.id}</td>
+		 <td height="22" align="left">{$vo.model_name}</td>
+		 <td align="left">{$vo.name}</td>
+		 <td align="center"><a title="{$vo.savepath}">{$vo.savename}</a></td>
+		 <td align="center">{$vo.size|realSize}</td>
+		 <td align="center">{$vo.info_id}</td>
+		 <td align="center">{$vo.curr_path}</td>
+		 <td align="center">{$vo.upload_time|date="Y-m-d",###}</td>
+		 <td align="center">[<a href="javascript:edit({$vo.id})" >编辑</a>]&nbsp;[<a href="javascript:del({$vo.id})">删除</a>]</td>
+	  </tr>    
+	  </iterate>
+</table>
+	  <div class="page">{$page}</div>
+
+<include file="Public:footer" />

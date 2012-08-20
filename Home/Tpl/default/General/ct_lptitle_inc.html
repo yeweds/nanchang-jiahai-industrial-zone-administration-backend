@@ -1,0 +1,45 @@
+	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td height="30" colspan="2"><!--腾房直通车:<span class="blue_16px_f"> {$vo_add.wantsee}</span>人想去现场看房，<span class="green_14px_f">{$vo_add.seecount}</span>人已去现场看过房-->
+
+              <div class="float_left"><strong class="blue_20px_f">{$vo_add.lpname}</strong></div>
+              <div id="lou_sale_tag">
+			  <if condition="($vo_add.lp_state eq 1)">在售
+				<elseif condition="$vo_add.lp_state eq 2" />待售
+				<else />售完</if>
+              </div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			  欢迎访问南昌最专业的房产网站，腾房网!</td>
+            <td width="3%" height="30"><label for="add_favorite" onclick="add_favorite({$vo.info_id})">
+              <input type="checkbox" name="add_favorite" id="add_favorite" />
+            </label></td>
+            <td width="15%" height="30" class="green_14px_f"><strong>收藏本楼盘</strong></td>
+          </tr>
+          <tr>
+            <td height="30" colspan="2">销售数据：已售 <span class="green_14px_f">{$vo_add.lpsalecount} </span>套，未售 <span class="green_14px_f">{$vo_add.lpnosalecount}</span> 套
+              <!--，当前均价：<span class="green_14px_f">{$vo_add.lpprice}</span>元/平方 &gt;&gt;详细--></td>
+            <td height="30" colspan="2"><div id="u27">
+              <div id="u27_rtf"><img src="../Public/Images/clock_ico.png" alt="" width="16" height="16" align="left" />{$vo_add.lp_update_time}更新</div>
+            </div></td>
+          </tr>
+        </table>
+<script language="JavaScript" type="text/javascript">
+	function add_favorite(infoid) //收藏楼盘
+	{
+		$.get( '__APP__/Interaction/in_favorite/info_id/' + infoid,'', function(msg) {
+				if(msg && msg['success']){
+					//msgBox(msg["info"],status='1',title='操作成功',width='300'); //提示
+					alert(msg["info"]);
+				}else{
+					if(msg['data'] == 'notLogin'){
+						//loginTF();   //让其先登录
+						location.href = '__APP__/Login/index/fromUrl/{$Think.const.__SELF__|base64_encode}';	
+						return;
+					}
+					//msgBox(msg["info"],status='0',title='操作失败',width='300'); //提示
+					alert(msg["info"]);
+				}
+			} 
+			, "json"
+		);	
+	}
+</script>

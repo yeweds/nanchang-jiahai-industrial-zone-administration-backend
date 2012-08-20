@@ -1,0 +1,56 @@
+<include file="Account:account_header" /> <!-- 用户中心头部 -->
+<link href="../Public/Css/user.css" rel="stylesheet" type="text/css" />
+<div id="content_inc">
+  <div class="width_10px"></div>
+  <include file="Account:account_left" /> <!-- 左侧导航 -->
+  <div class="width_20px"></div>
+  <div id="con_center_inc">
+    <div class="width_15px"></div>
+    <div id="con_center">
+
+<!-- 用户中心小秘书 -->
+<div class="lineheight25px"><strong>我浏览过的楼盘</strong></div>
+    	 <div class="lineheight25px"><img src="../Public/Images/user_lp_table_nv.png" width="550" height="25" /></div>
+    	 <div id="user_lp">
+		 <volist name="bro_list" id="vo">
+         <div class="lineheight30px"  onmouseover="userLP($(this),id)">
+    	   <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    	     <tr>
+    	       <td width="10">&nbsp;</td>
+    	       <td width="90">{$vo.lpname} </td>
+    	       <td width="90" align="center">{$vo.lpprice}元/㎡</td>
+    	       <td width="85" align="center"><span class="red_12px_fg"><strong><egt name="vo.up_span" value="0">↑+<else/>↓</egt></strong></span>{$vo.up_span}%</td>
+    	       <td width="103" align="center">{$vo.lp_min_price}元/㎡</td>
+    	       <td width="91" align="center">{$vo.lp_max_price}元/㎡</td>
+    	       <td width="81" align="center"><div class="lp_star_{$vo.score}"></div></td>
+  	       </tr>
+  	     </table>
+    	 </div>
+		 </volist>
+		
+       </div>
+   	  <div class="height_10px"></div>
+    	 <div style="clear:both"></div><!--con_center--clear-->
+    </div>
+
+<div style="clear:both"></div><!--con_center_inc--clear-->
+  </div>
+  <div class="width_10px"></div>
+  <div id="con_right_inc">
+    <div class="height_30px_b1px_bian"><strong><span class="blue_12px_f">&nbsp;&nbsp;我的活动计划</span></strong></div>
+    <div class="lineheight30px"><span class="blue_12px_f">&nbsp;&nbsp;[已报名]</span> 五一八一公园房展活动展</div>
+    <div class="height_60h_bg">
+      <div class="lineheight30px_center">还有<span class="green_18px_f">120</span>天</div>
+      <div class="lineheight_25px_center">已有<strong><span class="blue_12px_f">153</span></strong>人报名哦！</div>
+    </div>
+    <div class="height_10px"></div>
+    <div class="lineheight30px">&nbsp;&nbsp;&nbsp;&nbsp;邀请朋友来：<img style="cursor:pointer" src="../Public/Images/user_from.gif" width="120" height="25" align="absmiddle" /></div>
+    <div class="lineheight30px">&nbsp;&nbsp;&nbsp;&nbsp;提醒：未开启<span class="blue_a"> <a href="#">设置&gt;&gt;</a></span></div>
+    <div class="lineheight30px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;咨询：0791-8107817 8107819</div>
+    <div class="lineheight30px">&nbsp;&nbsp;&nbsp;&nbsp;活动地址：南昌市八一公园</div>
+    <div class="lineheight30px">&nbsp;&nbsp;&nbsp;&nbsp;乘车路线：2路，11路，旅游1线</div>
+<div style="clear:both"></div><!--con_right_inc--clear-->
+  </div>
+  <div style="clear:both"></div><!--content_inc--clear-->
+</div>
+<include file="Account:account_footer" /><!--用户中心底部 -->

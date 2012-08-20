@@ -1,0 +1,167 @@
+<include file="Public:header" />
+<script language="javascript" src="__PUBLIC__/DatePicker/WdatePicker.js"></script>
+<!-- 日历插件 -->
+<!--导入编辑器开始-->
+<link rel="stylesheet" href="__PUBLIC__/Js/Kindeditor/themes/default/default.css" />
+<script charset="utf-8" src="__PUBLIC__/Js/Kindeditor/kindeditor.js"></script>
+<script charset="utf-8" src="__PUBLIC__/Js/Kindeditor/lang/zh_CN.js"></script>
+<script type="text/javascript">
+//-- 自定义在线编辑器
+	var editor;
+	var editor2;
+	var mini_items = ['source','undo','redo','fontname','fontsize','forecolor',
+					  'hilitecolor','bold','italic','emoticons','removeformat',
+					  'fullscreen'];  //迷你元素
+	var full_items = ['source', '|', 'undo', 'redo', '|', 'preview', 'print', 'template', 'cut', 'copy', 'paste',
+        'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+        'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+        'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
+        'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+        'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image',
+        'flash', 'insertfile', 'table', 'hr', 'emoticons', 'pagebreak',
+        'link', 'unlink' ];  //完全元素
+	
+	KindEditor.ready(function(K) {
+		editor = K.create('#my_editor', {
+					 themeType : 'default',//样式
+					 newlineTag: 'br', //换行格式
+					 filterMode: true, //过滤代码
+					 uploadJson: '__PUBLIC__/Js/Kindeditor/php/upload_json.php',
+					 fileManagerJson : '__PUBLIC__/Js/Kindeditor/php/file_manager_json.php',
+					 allowFileManager : true,											 
+					 items: full_items  //当前自定义元素列表
+		});
+		editor2 = K.create('#my_editor2', {
+					 themeType : 'default',//样式
+					 newlineTag: 'br', //换行格式
+					 filterMode: true, //过滤代码
+					 uploadJson: '__PUBLIC__/Js/Kindeditor/php/upload_json.php',
+					 fileManagerJson : '__PUBLIC__/Js/Kindeditor/php/file_manager_json.php',
+					 allowFileManager : true,											 
+					 items: full_items  //当前自定义元素列表
+		});
+	});
+
+	//获取数据	
+	function checkForm(){
+		editor.sync('my_editor'); //同步编辑器内容
+		editor2.sync('my_editor2'); //同步编辑器内容
+		return true;
+	}
+</script>
+<!-- 编辑器调用结束 -->
+
+<div class="bodyTitle">
+	<div class="bodyTitleLeft"></div>
+  <div class="bodyTitleText">编辑故事</div>
+</div>
+<h3 class="marginbot"><a href="__URL__/" class="sgbtn">返回故事管理</a>
+<a href="javascript:PopWindow('__URL__/addAttach/info_id/'+{$vo.id},600,700);" class="sgbtn">+添加图片(附件)</a>
+<a href="javascript:history.go(-1);" style="float:right;"><strong>返回&gt;&gt;</strong></a>
+</h3>
+
+          <table width="100%">  
+		  <form method="post" name="form1" action="__URL__/save" enctype ="multipart/form-data" onSubmit="return checkForm();">
+          <input name="id" type="hidden" id="id" value="{$vo.id}" />
+            <tr>
+              <td width="13%">主标题</td>
+              <td width="87%">
+                <input name="title" type="text"  class="txt" id="title" size="60" value="{$vo.title}"/>
+                <font color="red">*</font></td>
+            </tr>
+            <tr>
+              <td>男主角姓名</td>
+              <td><input name="boy_name" type="text"  class="txt" id="boy_name" value="{$vo.boy_name}" size="30"/>
+                  <font color="red">*</font> </td>
+            </tr>
+            <tr>
+              <td>女主角姓名</td>
+              <td><input name="girl_name" type="text"  class="txt" id="girl_name" value="{$vo.girl_name}" size="30"/>
+                  <font color="red">*</font></td>
+            </tr>
+			
+		    <tr>
+              <td>相识时间</td>
+		      <td><input name="meet_time" type="text" id="meet_time"  onclick="WdatePicker()" value="{$vo.meet_time}"/></td>
+	        </tr>
+		    <tr>
+              <td>权重(排序)</td>
+		      <td><input name="sortrank" type="text" id="weight" style="width:50px" value="{$vo.sortrank}" />
+		        (越大越靠前,最大9000)</td>
+	        </tr>
+		    <tr>
+          <td width="13%">关键字</td>
+          <td width="87%"><input type='text' name="keywords" id="keywords" style="width:60%" value="{$vo.keywords}" />手动填写用","分开</td>
+        </tr>
+		   <tr>
+            <td width="13%">故事来源</td>
+            <td width="87%">
+            	<input name="source" type="text" id="source" style="width:160px" value="{$vo.source}" size="16"/> &nbsp;&nbsp;作者：
+				<input name="author" type="text" id="author" style="width:160px" value="{$vo.author}" size="16"/>            </td>
+          </tr>
+			<tr>
+              <td width="13%">上传图片1</td>
+              <td width="87%">
+                <input name="pic" type="file" class="txt" id="pic" size="50" value="{$vo.pic_url}"/>&nbsp;&nbsp;{$vo.pic_url}
+				<input name="pic_url" type="hidden" class="txt" id="pic_url" size="50" value="{$vo.pic_url}"/>				</td>
+            </tr>
+			<tr>
+              <td width="13%">上传图片2</td>
+              <td width="87%">
+			  <input name="pic2" type="file" class="txt" id="pic2" size="50" value="{$vo.pic_url2}"/>&nbsp;&nbsp;{$vo.pic_url2}
+			  <input name="pic_url2" type="hidden" class="txt" id="pic_url2" size="50" value="{$vo.pic_url2}" /></td>
+            </tr>
+            <tr>
+              <td>摘要</td>
+              <td>
+                <textarea name="remark" cols="60" rows="4" id="remark">{$vo.remark}</textarea>
+              简单概要描述，可以留空</td>
+            </tr>
+            <tr>
+              <td> 男方对女方的一句话 </td>
+              <td><input type='text' name="say_to_girl" id="say_to_girl" style="width:60%" value="{$vo.say_to_girl}" /></td>
+            </tr>
+            <tr>
+              <td>女方对男方的一句话</td>
+              <td><input type='text' name="say_to_boy" id="say_to_boy" style="width:60%" value="{$vo.say_to_boy}" /></td>
+            </tr>
+            
+            <tr>
+              <td>故事片段1</td>
+              <td><!-- 编辑器调用开始 --><textarea id="my_editor" name="content" style="width:700px;height:300px;">{$vo.content}</textarea>
+	<!-- 编辑器调用结束 -->
+	<font color="red">*</font></td>
+            </tr>
+            <tr>
+              <td>故事片段2</td>
+              <td><!-- 编辑器调用开始 --><textarea id="my_editor2" name="content2" style="width:700px;height:300px;">{$vo.content2}</textarea>
+	<!-- 编辑器调用结束 -->
+	<font color="red">*</font></td>
+            </tr>
+			<tr>
+              <td>发布时间</td>
+              <td><input type="text" name="add_time"  value="{$vo.add_time|date='Y-m-d H:i',###}" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})"/>(发布时间可修改)</td>
+            </tr>
+			<tr>
+              <td>点击量</td>
+              <td><input name="hits" type="text" id="hits" value="{$vo.hits}" size="5" /></td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+              <td>
+                <input type="submit"  value="提交更新" class="df_button" />
+                <input type="reset" value="还原重填" class="df_button" /></td>
+            </tr>
+          </form>
+		  <tr>
+              <td width="13%">编辑</td>
+              <td width="87%">{$vo.username}</td>
+            </tr>
+		  </table>
+        <p class="i">删除不可恢复,谨慎操作</p>
+        <br>
+<include file="Public:footer" />

@@ -1,0 +1,118 @@
+<include file="Public:header" />
+<script language="javascript" src="__PUBLIC__/DatePicker/WdatePicker.js"></script>
+<!-- 日历插件 -->
+<script>
+function checkUpload(){
+    if(document.getElementById('attach_arr').value==''){
+         alert("请选择图片类型");
+		 return false;
+	}
+	if(document.getElementById('savename').value==''){
+         alert("请填写保存名称");
+		 return false;
+	}
+	if(document.getElementById('file').value==''){
+         alert("请上传图片");
+		 return false;
+	}
+}
+
+var count= 2 ;   
+var maxfile = 5;
+function addUpload() {  
+	if(count >= maxfile)    return;//限制最多maxfile个文件框
+	count++; 
+	//自增id不同的HTML对象，并附加到容器最后
+	var newDiv =  "<div id=divUpload" + count +">"
+		+ " <input id=file" + count + " type=file size=50 name=file[]>"
+		+ " <a href=javascript:delUpload('divUpload" + count + "');>删除</a>"
+		+ " </div>";   
+	  document.getElementById("uploadContent").insertAdjacentHTML("beforeEnd", newDiv);     
+}   
+    //删除指定元素
+function delUpload(diva) {  
+	count--; 
+	document.getElementById(diva).parentNode.removeChild(document.getElementById(diva));   
+}   
+</script>
+<form action="__APP__/Attach/insert" enctype ="multipart/form-data" method="post" onsubmit='return checkUpload();'>
+<input type="hidden" name="model_name" value="shop" /><!-- 数据模型名 -->
+<table cellSpacing="1" cellPadding="2" width="95%" align="center" border="0">
+    <tr>
+        <th>
+		上传附件
+        </th>
+    </tr>
+    <tr>
+        <td>
+        <select name="attach_arr" id="attach_arr"/>*
+          <option value="">-请选择图片类型-</option>
+          <present name="attach_list" > 
+		  <volist name="attach_list" id="vo_attach" >
+              <option value="{$vo_attach.id}|{$vo_attach.curr_path}|{$vo_attach.name}">{$vo_attach.head_py|strtoupper} {$vo_attach.name}</option>
+          </volist> 
+		  </present> </td>
+    </tr>
+	<tr>
+      <td>
+	  上传图片：<a href="javascript:addUpload()">+增加附件框</a>
+	  <br><div id="uploadContent">
+       <div id='div1'><input id='file1' type='file' size=50 name='file[]'></div>
+        </div>
+	  </td>
+    </tr>
+    <tr>
+      <td>
+	  <input name="info_id" type="hidden" id="info_id" size="40" value="{$info_id}">
+	  <input name="user_id" type="hidden" id="user_id" size="40" value="{$user_id}"> 
+	  </td>
+    </tr>
+	<tr>
+      <td>
+		  <table>
+		  <tr>
+			<td>附件说明：<br></TD>
+			<td><textarea name='remark' rows='5' cols='40'></textarea></td>
+		  </tr>
+		  <tr>
+		    <td>指定时间：</TD>
+		    <td><input name="upload_time" type="text" id="upload_time"  onclick="WdatePicker()" value=""/></td>
+		    </tr>
+		  </table>
+        
+	  </td>
+    </tr>
+	<tr>
+      <td>
+        <input name="submit" type="submit" id="submit" size="40" value="上传" class="df_button">
+		<input name="reset" type="reset" id="reset" size="40" value="重置" class="df_button">
+	  </td>
+    </tr>
+  </table>
+</form>
+<table width="95%" border="0" align="center" cellpadding="0" cellspacing="1">
+  <tr>
+    <th>该商家已经上传</th>
+  </tr>
+  <tr>
+    <td><!-- 熊彦添加 -->
+		<div class="page">{$page} &nbsp; </div>
+		<volist name="list" id="vo" mod="5">
+			<div style=" width: 120px; height: 120px; float:left;">
+			<a href="{$vo.savepath|trim=###,'.'}{$vo.savename}" alt="查看大图" ><img src="{$vo.savepath|trim=###,'.'}thumb_{$vo.savename}" height="100" width="100" title="{$vo.remark}"></a><br/>
+			<center>
+				<eq name="vo.id"  value="$df_att_id">
+				<span style="color:red;">当前默认</span>
+				<else/>
+				<a href="__URL__/setDefaultPic/att_id/{$vo.id}/info_id/{$info_id}" >设为默认</a>
+				</eq>
+			</center>
+			</div>
+			<eq name="mod" value="5"><div style="clear:both;"></div><br/></eq>
+		</volist>
+		<notpresent name="list">暂无</notpresent>
+	</td>
+  </tr>
+</table>
+
+<include file="Public:footer" />

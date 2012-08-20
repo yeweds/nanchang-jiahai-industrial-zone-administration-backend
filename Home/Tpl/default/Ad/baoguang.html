@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>报广 - 腾房网</title> 
+<script type="text/javascript" src="__PUBLIC__/Js/jquery.min.js"></script>
+<!--1--> 
+<style type="text/css"> 
+*{outline:none; margin: 0; padding:0;}
+body{font-size:12px;}
+#star_wall_left_sp {
+    height:32px;
+
+    padding-top:67px;
+    text-align:left;
+    width:13px;
+    float: left;
+    display: inline;
+    margin-left: 5px;
+}
+
+#star_wall_right_sp {
+    height:32px;
+    padding-top:67px;
+    text-align:right;
+    width:13px;
+    float: left;
+    display: inline;
+    margin-right: 5px;
+}
+
+#star_list_space {
+    height:180px;
+    overflow:hidden;
+    width:884px;
+    float: left;
+    display: inline;
+    margin-top: 10px;
+    margin-bottom: 9px;
+}
+
+
+#star_item_list {
+    width:5000px;
+    float: left;
+    display: inline;
+}
+
+.star_item {
+    line-height:30px;
+    padding-left:13px;
+    padding-right:13px;
+    text-align:center;
+    width:128px;
+    float: left;
+    display: inline;
+}
+
+.star_item a {
+    color:#333333;
+}
+
+.star_item img {
+    border:2px solid #D9D9D9;
+    height:152px;
+    width:124px;
+}
+
+</style> 
+
+</head>
+
+<body>
+
+<center>
+
+<!--报广展示－－begin--> 
+
+<div class="mainbody" style="margin:0px auto; background:none; ">
+<!-- <h3 class="tit03"><a href="http://old.tengfang.net/plus/list.php?tid=276">报广展示</a></h3> -->
+<div class="picmod">
+
+ <div class="xiangce_dlp" style="height:175px;"> 
+
+<div id="star_wall_left_sp"> 
+<img id="photo_left" style="cursor:pointer;" src="../Public/Images/hot_lp_up.gif"/> 
+
+		</div> 
+
+		<div id="star_list_space"> 
+
+<div id="star_item_list"> 
+
+    <present name="list" > 
+	<volist name="list" id="vo">
+<!-- start -->
+ 	<div class="star_item"> 
+		<a href="__APP__/Ad/baoguang_view/id/{$vo.id}"  target="_blank"><img src="{$vo.savepath|trim=###,'.'}thumb_{$vo.savename}" title="{$vo.remark}" /></a> 
+		<a href="__APP__/Ad/baoguang_view/id/{$vo.id}"  target="_blank">{$vo.lpname} {$vo.upload_time|date="m-d",###}上传</a> 
+	</div>
+<!--end -->
+	</volist> 
+	</present> 
+	</div> 
+		</div> 
+		<div id="star_wall_right_sp"> 
+<img id="photo_right" style="cursor:pointer;" src="../Public/Images/hot_lp_down.gif"/> 
+		</div> 
+<script type="text/javascript"> 
+                    var lMC = 2;
+                    var rMC = 0;
+
+                    jQuery("#photo_left").click(function(){
+                        if(rMC>0){
+                            scrollto("r");
+                            rMC--;
+                            lMC++;
+                            jQuery("#photo_right").css("cursor","pointer");
+                            if(rMC<=0){
+                                jQuery("#photo_left").css("cursor","no-drop");
+                            }
+                        }
+
+                    });
+
+                    jQuery("#photo_right").click(function(){
+
+                        if(lMC>0){
+                            scrollto("l");
+                            lMC--;
+                            rMC++;
+                            jQuery("#photo_left").css("cursor","pointer");
+                            if(lMC<=0){
+                                jQuery("#photo_right").css("cursor","no-drop");
+                            }
+                        }
+
+                    });
+
+                    jQuery("#star_item_list").css("width","2482px");
+                    jQuery("#photo_left").css("cursor","no-drop");
+
+                    if(lMC>0){
+                        jQuery("#photo_right").css("cursor","pointer");
+                    }
+
+                    function scrollto(way){
+                        if(way=="l"){
+                            jQuery("#star_item_list").animate({marginLeft:"-=826px"},2000);
+                        }else{
+                            jQuery("#star_item_list").animate({marginLeft:"+=826px"},2000);
+                        }
+
+                    }
+                </script> 
+	<!--2--> 
+</div>
+
+	</div></div> 
+<!--报广展示－－end--> 
+</center>
+</body>
+</html>

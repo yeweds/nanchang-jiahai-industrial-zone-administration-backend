@@ -1,0 +1,104 @@
+/* 王一凡 2011-7-22 */
+#gou_fang_xu_qiu {
+	float: left;
+	height: 380px;
+	width: 678px;
+	background-image: url(../Images/rgjf_bg.jpg);
+	background-repeat: no-repeat;
+	background-position: center top;
+	position: relative;
+}
+.green_button {
+	background-image: url(../Images/button_green.png);
+	background-repeat: no-repeat;
+	background-position: center;
+}
+.orange_button {
+	background-image: url(../Images/button_orange.png);
+	background-repeat: no-repeat;
+	background-position: center;
+}
+#op_tion {
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+	min-height: 164px;
+}
+.qu_yu {
+	width: 150px;
+	height: 19px;
+	color: #999;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+}
+.mian_ji {
+	height: 16px;
+	width: 98px;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+	color: #999;
+}
+.mian_ji2 {
+	height: 16px;
+	width: 110px;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+	color: #999;
+}
+#butt {
+	clear: both;
+	height: 80px;
+	width: 76px;
+	margin-right: auto;
+	margin-left: auto;
+}
+.dan_wei_1 {
+	font-size: 12px;
+	color: #999;
+	height: 12px;
+	width: 30px;
+	position: absolute;
+	left: 173px;
+	top: 105px;
+}
+.dan_wei_2 {
+	font-size: 12px;
+	color: #999;
+	height: 12px;
+	width: 30px;
+	position: absolute;
+	left: 458px;
+	top: 104px;
+}
+.dan_wei_3 {
+	font-size: 12px;
+	color: #999;
+	height: 12px;
+	width: 12px;
+	position: absolute;
+	left: 220px;
+	top: 147px;
+}
+.dan_wei_4 {
+	font-size: 12px;
+	color: #999;
+	height: 12px;
+	width: 30px;
+	position: absolute;
+	left: 310px;
+	top: 108px;
+}.dan_wei_5 {
+	font-size: 12px;
+	color: #999;
+	height: 12px;
+	width: 12px;
+	position: absolute;
+	left: 625px;
+	top: 109px;
+}

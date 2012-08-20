@@ -1,0 +1,466 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$vo.name} - 南昌婚庆网</title>
+<meta name="keywords" content="{$vo.name},南昌{$vo.name},{$str_key_add}{$vo.name}电话:{$vo.tel}">
+<meta name="description" content="南昌婚庆网为您提供{$vo.name}的营业时间:{$vo.yingye_time|default='未知'},地址:{$vo.address},电话:{$vo.tel}">
+<link href="../Public/Css/news.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/base.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/class_com.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/select_box.css" rel="stylesheet" type="text/css" />
+
+<link href="../Public/Css/view_lp.css" rel="stylesheet" type="text/css" />
+
+<style type="text/css">
+	#wuye table td{ height: 30px;}
+	#demo1,#demo2{ height:auto; }
+	.tags {
+		background-color: #fcfff2;
+		height: 30px;
+		width: 100%;
+		font-family: "宋体";
+		font-size: 14px;
+		line-height: 30px;
+		font-weight: bold;
+		color: #000000;
+		border-bottom-width: 1px;
+		border-bottom-style: solid;
+		border-bottom-color: #d4eba7;
+	}
+	.tags li {
+	 float: left;  height: 23px;
+	}
+	.tags li a {
+	 font-family: "微软雅黑"; float:left; padding-bottom: 0px; color: #568616; line-height: 23px; padding-top: 0px; height: 23px; text-decoration: none;
+	}
+	.tag_content {
+		padding: 5px; min-height: 180px; height:auto; line-height: 20px; font-size:13px; 
+	}
+	.filmstrip li{ float:left; margin-left:16px;  }
+</style>
+<script type="text/javascript">
+//指定当前组模块URL地址
+var URL = '__URL__';
+var APP	 =	 '__APP__';
+var PUBLIC = '__PUBLIC__';
+var SELF = '__SELF__';
+</script>
+<script type="text/javascript" src="../Public/Js/base.js"></script><!--前台公共JS函数-->
+<script type="text/javascript" src="__PUBLIC__/Js/jquery.min.js"></script>
+<script language="JavaScript" type="text/javascript">
+//提交验证
+function sub_reviews(){
+	var content = $("#lpdp_content");
+	if(content.val() == ''){
+		alert('请输入评论内容！');
+		//content.fouce();
+		return false;
+	}
+	return true;
+}
+
+</script>
+
+</head>
+
+<body>
+<include file="Public:news_header" /> <!--头部包含共用 -->
+<div id="content_bg">
+   
+  <div id="content">
+    <div class="height_10px"></div>
+	<div class="height_30px"><img src="../Public/Images/dp_jian_left.gif" width="10" height="10" alt="箭头" />南昌婚庆网 >&nbsp;<a href="__APP__/Shop">商家大全</a>&nbsp;>&nbsp;<strong><span class="green_12px_f">{$vo.title} 商家信息</span></strong></div>
+    <div id="content_inc">
+      <div id="con_left">
+	    <div class="lp_info">
+		<!--楼盘资料左边S-->
+	      <div class="lp_info_left">
+		     <!--幻灯图-->
+		    <div class="film_ph">
+			   <div class="height_10px"></div>
+			   <div class="height_12px_space"></div>
+	           <div class="ph">{$default_pic}</div>
+		    </div>
+			<div class="lp_title"><h1><a href="__APP__/shop-{$vo.id}"><span class="lp_title">{$vo.name}<!-- <br /><neq name="vo.sub_title" value="">({//$vo.sub_title})</neq> --></span></a></h1>
+			  <!-- <div class="lp_tag"><if condition="($vo_add.lp_state eq 1)">在售<elseif condition="$vo_add.lp_state eq 2" />待售<elseif condition="$vo_add.lp_state eq 3" />售完<else />在租</if></div> -->
+			</div>
+			<!--今日可售房源-->
+			<div class="today_sale" style="border:0;">
+			  
+              <div class=""> &nbsp;<img src="../Public/Images/note_c_ico.gif" width="16" height="16" alt="星" /> 星级指数 <span class="red_16px_ge">{$vo.star} </span>
+			  </div>
+			  
+				<div style="clear:both;"></div>
+			</div>
+		  </div>
+		  <!--楼盘资料左边E-->
+		   
+		  <div class="width_10px_space"></div>
+		  	
+		  <!--楼盘资料右边-->  
+	      <div class="lp_info_right">
+	        <div class="info_right_top">
+			   <div id="tel">
+				  <table class="height_25px" border="0"><tr>
+				  <td width="56"><span class="gray_16px">&nbsp;<img alt="服务电话" src="../Public/Images/tel_green.png" width="42" /></span></td>
+				  <td>我从0791婚庆网看到信息，我想咨询...<br />
+				  <span class="red_16px" style="font-family: Arial Black,Gadget,sans-serif; font-weight:bold;">{$vo.tel}</span></td>
+				  </tr></table>
+			  </div>
+		    </div>
+<!--物业类型-->
+<div id="wuye">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="6">&nbsp;</td>
+    <td width="47%"><span class="black_blod"><strong>商家类型</strong>：</span>{$vo.shop_type}</td>
+    <td width="53%"><span class="black_blod"><strong>商家人气</strong>：</span>{$vo.hits}</td>
+    <td width="6">&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td width="47%"><span class="black_blod"><strong>外景区域</strong>：</span>{$vo.area_name}</td>
+    <td width="53%"><span class="black_blod"><strong>入驻时间</strong>：</span>{$vo.add_time|date="Y-m-d",###}</td>
+    <td width="6">&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+   <td width="47%"><span class="black_blod"><strong>营业时间</strong>：</span>{$vo.yingye_time|default="未知"}</td>
+    <td width="53%"><span class="black_blod"><strong>客服QQ</strong>：</span>{$vo.qq}</td>
+    <td width="6">&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+	<td width="47%"><span class="black_blod"><strong>是否备车</strong>：</span><eq name="vo.is_needcar" value="1">是<else/>否</eq></td>
+    <td width="53%"><span class="black_blod"><strong>包餐类别</strong>：</span>{$vo.baocan|default="未知"}</td>
+    <td width="6">&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td colspan="2"><span class="black_blod"><strong>商家地址</strong>：</span>{$vo.address}</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td colspan="2"><span class="black_blod"><strong>商家网站</strong>：</span>{$vo.website} </td>
+    <td width="6">&nbsp;</td>
+  </tr>
+  <tr>
+    <td >&nbsp;</td>
+    <td colspan="2" style="height:50px; line-height: 22px;"><span class="black_blod"><strong>交通线路</strong>：</span>{$vo.jiaotong|mb_substr=###,0,80,'utf-8'}.. &nbsp;<!-- <span class="gray_a_12pxu"><a href="#loadFrameBody" onclick="loadFrame(2)">[交通详细]</a>&nbsp;&nbsp;<a href="http://nc.tengfang.net/index.php/Bus/index/info_id/{$vo.info_id}" target="_blank"><img src="../Public/Images/bus_ico.png" alt="点此查看公交线路详细" width="16" height="16" border="0" align="absmiddle" />[公交路线]</a></span> --></td>
+    <td width="6">&nbsp;</td>
+  </tr>
+
+</table>
+		    </div>
+<!-- 分享 s-->
+<div>
+<div class="height_10px"></div>
+<!-- JiaThis Button BEGIN -->
+<div id="ckepop">
+	<span class="jiathis_txt">分享到：</span>
+	<a class="jiathis_button_tsina">新浪微博</a>
+	<a class="jiathis_button_tqq">腾讯微博</a>
+	<a class="jiathis_button_t163">网易微博</a>
+	<a class="jiathis_button_qzone">QQ空间</a>
+	<!-- <a href="http://www.jiathis.com/share/" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a> 
+	<a class="jiathis_counter_style"></a>-->
+</div>
+<script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+</div> 
+<!-- 分享 e -->
+			
+	      </div>
+		 <!--楼盘资料右边E--> 
+	    </div>
+	  <div style="clear:both"></div>
+	  <div class="height_10px"></div>
+
+<!-- 楼盘动态切换 -->	  
+<div id="lp_dongtai">
+	<!-- start -->
+	<div >
+		<div class="tags title_style5">&nbsp;&nbsp;商家简介（精品团队介绍）</div>
+		<div class="tag_content">{$vo.content}</div>
+	</div>
+	<!-- end -->
+
+     <div style="clear:both"></div>
+</div> 
+ 
+      </div>
+	  <div class="width_10px_space"></div>
+      <div id="con_right">
+
+		<!--小区印象-->
+        <div id="impression">
+		  <div class="title_style1">&nbsp;&nbsp;<span class="green_14pxf_yahei">其他阅读</span><span class="green_light_12px">&nbsp;|&nbsp;相关资讯等</span></div>
+		  <div id="im_con"> 
+		    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+              <td width="5%">&nbsp;</td>
+              <td width="93%">
+		  <volist name="news_list" id="sp_vo">
+			 <div title="{$sp_vo.title}"><a href="__APP__/news-{$sp_vo.id}">{$sp_vo.title|mb_substr=###,0,18,'utf-8'}</a></div>
+		  </volist>
+              </td>
+              <td width="2%">&nbsp;</td>
+            </tr>
+          </table>          
+          
+
+			 <div style="clear:both;"></div>
+		 </div> 
+		
+      </div>
+
+	  <div class="height_10px"></div>
+	  
+	  <!--楼盘点评Start-->
+	         <div id="discuss">
+		  <div class="title_style1">&nbsp;&nbsp;<span class="green_14pxf_yahei">商家点评</span><span class="green_light_12px">&nbsp;|&nbsp;{$vo.name}评论</span></div>
+		  <div id="dis_con">
+		  <div class="height_10px"></div>
+          <div id="dis_submit">
+<table width="270" border="0" cellspacing="0" cellpadding="0">
+  <form id="disuss_content" name="disuss_content" method="post" action="__APP__/Reviews/ct_insert" onsubmit="return sub_reviews();">
+  <tr>
+    <td width="14">&nbsp;<input name="info_id" type="hidden" value="{$vo.id}" /></td>
+    <td colspan="2" height="80">
+        <textarea id="lpdp_content" name="lpdp_content" class="border-gray"></textarea>	</td>
+    <td width="19">&nbsp;</td>
+  </tr>
+  <tr>
+    <td height="30">&nbsp;</td>
+    <td width="181" height="30">&nbsp;</td>
+    <td width="58" height="30"><a title="提交评论" ><input type="image" src="../Public/Images/sub_bt.gif" width="50" height="26" border="0" /></a></td>
+    <td height="30">&nbsp;</td>
+  </tr>
+  </form>
+  <tr>
+    <td colspan="4"><img src="../Public/Images/im_hr.gif" width="270" height="5" alt="分隔" /></td>
+  </tr>
+  <tr>
+    <td width="14">&nbsp;</td>
+    <td colspan="2" align="left">
+<br />
+
+    <div id="demo" style="overflow:hidden;height:350px;width:100%; word-break:break-all;">
+	<ul id="demo1">
+	<volist name="reviews_list" id="rvo">
+	<li><span class="gray_a_12px">·</span>{$rvo.content|strip_tags} <span class="gray_a_12pxu">({$rvo.user_name})</span></li>
+	</volist>
+	<li></li>
+	</ul>	
+ <div id="demo2"></div>
+</div>
+    <div class="dianping_more"><span class="blue_12px_a"><a href="__APP__/Reviews/ct_list/info_id/{$vo.id}" target="_blank">更多&gt;&gt;</a></span></div>
+<script type="text/javascript"> 
+var speed=40;
+var demo=document.getElementById("demo"); 
+var demo2=document.getElementById("demo2"); 
+var demo1=document.getElementById("demo1"); 
+demo2.innerHTML = demo1.innerHTML;
+function Marquee(){ 
+if(demo2.offsetTop-demo.scrollTop<=0) 
+  demo.scrollTop-=demo1.offsetHeight; 
+else{ 
+  demo.scrollTop++;
+} 
+} 
+var MyMar=setInterval(Marquee,speed); 
+
+demo.onmouseover=function() {clearInterval(MyMar)} 
+demo.onmouseout=function() {MyMar=setInterval(Marquee,speed)} 
+$(function(){
+	if($('#demo1').height()<350){
+		$('#demo').height($('#demo1').height());	
+	}
+
+		$('#hd_right .base').mouseover(function(){
+			if($(this).hasClass('base')&&!$(this).hasClass('hd_left_m')){
+			   $(this).removeClass('base').addClass('hd_left');
+			}
+		
+	});
+	
+	$('#hd_right .base').mouseout(function(){
+	if($(this).hasClass('hd_left')&&!$(this).hasClass('hd_left_m')){
+	   $(this).removeClass('hd_left').addClass('base');
+	}
+	
+	});
+		$('#hd_right .base').click(function(){
+			$('#hd_right .hd_left_m').removeClass('hd_left_m').addClass('base'); 
+			//if($(this).hasClass('hd_left')){
+			   $(this).removeClass('hd_left').addClass('hd_left_m');
+			//}
+	});
+		//$('#hd_right .base:eq(0)').removeClass('base').addClass('hd_left_m');
+
+});
+</script>     
+	</td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+
+          </div>
+		 </div> 
+		 
+		  <!--同价位楼盘-->
+<div style="clear:both"></div>
+      </div>
+ <!--楼盘点评End-->	 
+	<div style="clear:both"></div>	
+	</div>
+	<div style="clear:both"></div>
+	<div class="height_10px"></div>
+
+<!--商家最新活动S-->
+<div class="content_style2_inc">
+  <div class="width_100bf_4bian">
+    <div class="title_style5" id="tfxc_title3">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="125" height="30" align="center" class="green_a"><a href="__APP__/Pic/index/cid/16" class="green_14px_yahei">商家最新活动</a></td>
+          <td width="833" height="30" align="right" class="black_a"><a href="#" class="black_12px">&nbsp;</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="height_10px"></div>
+    <div class="width_940px_auto">
+<!--xc start-->
+
+	<ul class="filmstrip">
+<empty name="xc1_list">
+	<li><span class="gray_a_12px">暂无相册</span></li> 
+<else/>
+	<volist name="xc1_list" id="rvo" offset="0" length="12">
+		<li><a href="__APP__/pics-{$rvo.id}"><img src="{$rvo.thumb_pic}" alt="相册" title="{$rvo.title}" width="125" height="125" class="img_box" /></a>
+		<br /><span class="gray_a_12px">·</span><a href="__APP__/pics-{$rvo.id}">{$rvo.title|mb_substr=###,0,10,'utf-8'}</a> </li>    
+	</volist>
+</empty>
+	</ul>
+
+<!--xc end-->
+
+	<div class="width_5px_float"></div>
+    <div class="clear"></div>
+    <div class="height_10px"></div>
+    <div class="clear"></div>
+    </div>
+  </div>		
+   
+	<!--商家最新活动E-->
+<div class="height_10px"></div>	
+
+<!--商家推荐主题S-->
+<div class="content_style2_inc">
+  <div class="width_100bf_4bian">
+    <div class="title_style5" id="tfxc_title3">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="125" height="30" align="center" class="green_a"><a href="__APP__/Pic/index/cid/17" class="green_14px_yahei">商家推荐主题</a></td>
+          <td width="833" height="30" align="right" class="black_a"><a href="#" class="black_12px">&nbsp;</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="height_10px"></div>
+    <div class="width_940px_auto">
+
+<!--xc2 start-->
+
+	<ul class="filmstrip">
+<empty name="xc2_list">
+	<li><span class="gray_a_12px">暂无相册</span></li> 
+<else/>
+	<volist name="xc2_list" id="rvo" offset="0" length="12">
+		<li><a href="__APP__/pics-{$rvo.id}"><img src="{$rvo.thumb_pic}" alt="相册" title="{$rvo.title}" height="125" width="125" class="img_box" /></a>
+		<br /><span class="gray_a_12px">·</span><a href="__APP__/pics-{$rvo.id}">{$rvo.title|mb_substr=###,0,10,'utf-8'}</a> </li>    
+	</volist>
+</empty>
+	</ul>
+
+<!--xc2 end-->
+
+	<div class="width_5px_float"></div>
+    <div class="clear"></div>
+    <div class="height_10px"></div>
+    <div class="clear"></div>
+    </div>
+  </div>		
+   
+	<!--商家推荐主题E-->
+<div class="height_10px"></div>	
+	<!--商家点评S-->
+<div class="content_style2_inc">
+  <div class="width_100bf_4bian">
+    <div class="title_style5" id="tfxc_title3">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="125" height="30" align="center" class="green_a"><a href="__APP__/Reviews/ct_list/info_id/{$vo.id}" target="_blank" class="green_14px_yahei">商家点评</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+          <td width="833" height="30" align="right" class="black_a"><a href="#" class="black_12px">&nbsp;</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="height_10px"></div>
+    <div class="width_940px_auto">
+<!--lp3d-->
+ 
+<empty name="reviews_list">
+	<li><span class="gray_a_12px">暂无点评</span></li> 
+<else/>
+<volist name="reviews_list" id="rvo" offset="0" length="10">
+    <li><span class="gray_a_12px">·</span><a href="__APP__/Reviews/view/id/{$rvo.id}">{$rvo.content|strip_tags}</a> <span class="gray_a_12pxu">({$rvo.user_name})</span></li>    
+</volist>
+</empty>
+
+	<div class="width_5px_float"></div>
+    <div class="clear"></div>
+    <div class="height_10px"></div>
+    <div class="clear"></div>
+    </div>
+  </div>		
+
+	<!--商家点评E-->
+	<div class="height_10px"></div>
+	<div style="clear:both"></div>
+	
+
+	<include file="Public:footer" /> {//共用尾部}
+</div>
+</body>
+</html>
+<script type="text/javascript" src="../Public/Js/view_lp.js"></script>
+<script type="text/javascript">
+var infoid = "{$vo_add.info_id}"; 
+
+//收藏楼盘
+	function add_favorite() 
+	{
+		$.get( '__APP__/Interaction/in_favorite/info_id/' + infoid,'', function(msg) {
+				if(msg && msg['success']){
+					alert(msg["info"]);
+					//msgBox(msg["info"],status='1',title='操作成功',width='300'); //提示
+					return;
+				}else{
+					if(msg['data'] == 'notLogin'){
+						//alert('请先登录，才能收藏');
+						location.href= APP+"/Login";
+						//loginTF();   //让其先登录
+						return;
+					}
+					alert(msg["info"]);
+					//msgBox(msg["info"],status='0',title='操作失败',width='300'); //提示
+				}
+			} 
+			, "json"
+		);	
+	}
+
+ </script>
+ 

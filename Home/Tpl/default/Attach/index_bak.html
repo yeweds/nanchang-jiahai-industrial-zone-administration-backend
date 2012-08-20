@@ -1,0 +1,25 @@
+<link href="../Public/Css/common.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/loupan.css" rel="stylesheet" type="text/css" />
+
+<div id="lpxc_include">
+  <div class="lpxc_title">&nbsp;&nbsp;全部图片(<span class="orange_12px_f">{$count_all}</span>)&nbsp;&nbsp;&nbsp;&nbsp;实景图(<span class="orange_12px_f">{$count[14]}</span>) &nbsp;&nbsp;&nbsp;效果图(<span class="orange_12px_f">{$count[15]}</span>)&nbsp;&nbsp;&nbsp;&nbsp;户型图(<span class="orange_12px_f">{$count[13]}</span>)&nbsp;&nbsp;&nbsp;&nbsp;位置图(<span class="orange_12px_f">{$count[17]}</span>)&nbsp;&nbsp;&nbsp;配套图(<span class="orange_12px_f">{$count[18]}</span>)</div>
+  
+ <volist name="list_class" id="class"> <!-- 循环图片分类 start -->
+  <div class="height_30px_content"><span class="height_30px_float_left">&nbsp;&nbsp;{$class.name}(<strong>{$count[$class['id']]}</strong>)</span><span class="height_30px_right_float"><span class="blue_a">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <neq name="$count[$class['id']]" value="0"><a href="#"  onclick="loadPhoto('__URL__/viewall/info_id/{$info_id}/cid/{$class.id}/rid/{$range_id}/num/',1,'{$lpname}{$class.name}',0); return false;">查看所有&gt;&gt;</a></neq></span></span></div>
+  <div class="lpxc_inc">
+    <present name="list[$class['id']]" > 
+	<volist name="list[$class['id']]" id="vo_sj" >
+			  <div class="widthspace_13px"></div>
+			  <div class="lpxc_ev">
+			  <div class="lpxc_ev_xc"><a href="#" onclick="loadPhoto('__URL__/viewall/info_id/{$info_id}/cid/{$class.id}/rid/{$range_id}/num/',{$i},'{$lpname}{$class.name}',0); return false;"><img src="{$vo_sj.savepath}/thumb_{$vo_sj.savename}" width="110" height="80" border="0"/></a></div>
+			  <div class="heigth_20px_center"><span class="gray_12px_f">{$lpname}{$class.name}</span></div>
+			  <div class="heigth_20px_center">{$vo_sj.upload_time|date="Y-m-d",###}上传</div>
+			  </div>
+	</volist> 
+	</present>       
+  </div>
+</volist> <!-- 循环图片分类 end -->
+<div style="clear:both"></div>
+</div>
+<div style="clear:both"></div>

@@ -1,0 +1,111 @@
+<div id="lou_right">
+        <div id="lou_r_see_house"></div>
+        <div class="lou_r_guan"><span class="red_title_18px_font">{$vo.hits}</span>人关注 <span class="red_title_18px_font">{$vo_add.wantsee}</span>人意向购买</div>
+        <div class="lou_r_t">&nbsp;&nbsp;网友关注</div>
+        <div id="lou_r_ping"> &nbsp;&nbsp;&nbsp;<br />
+          &nbsp;&nbsp;&nbsp;
+          <!-- 好东西 -->
+          <div class="content tCenter">
+            <!-- img src="/product/images/sroce.gif" width="176" height="172" / -->
+            <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0" width="170" height="150" id="yukun_nianling" align="middle">
+              <param name="wmode" value="opaque" />
+              <param name="allowScriptAccess" value="sameDomain" />
+              <param name="allowFullScreen" value="false" />
+              <param name="movie" value="../Public/Flash/radar.swf?url=__PUBLIC__/Xml/{$flashXmlUrl}" />
+              <param name="quality" value="high" />
+              <param name="bgcolor" value="#ffffff" />
+              <embed src="../Public/Flash/radar.swf?url=__PUBLIC__/Xml/{$flashXmlUrl}" wmode="opaque" quality="high" bgcolor="#ffffff" width="170" height="150" name="yukun_nianling" align="middle" allowscriptaccess="sameDomain" allowfullscreen="false" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" /></embed>
+            </object>
+          </div>
+        </div>
+        <div class="lou_r_t"> &nbsp;&nbsp;小区印象</div>
+        <div id="lou_r_yin">
+          <!-- 小区印象列表及分页 -->
+        </div>
+        <div id="lou_yin_write">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td align="center"><input name="lp_xqyx_tag" type="text" class="input_min_120px" id="lp_xqyx_tag" value="我的印象,限埴5个字" onfocus="this.value='';"/>
+                <img  src="../Public/Images/yin_xiang_sub.png" align="top" onclick="add_xqyx_tag()" /></td>
+            </tr>
+          </table>
+          <br />
+          <div class="lou_r_t">&nbsp;&nbsp;本月楼盘销售排行 </div>
+          <div id="lou_r_pai">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr class="green_14px_f">
+                <td height="25" colspan="2" align="left" bgcolor="#FFFFFF" class="gray_14px_f">&nbsp;楼盘名</td>
+                <td height="25" bgcolor="#FFFFFF" class="gray_14px_f">套数</td>
+              </tr>
+              <volist name="sell_month_ph" id="vo">
+                <tr>
+                  <td width="35" height="25" align="center" class="green_14px_f"><strong>{$i}</strong></td>
+                  <td height="25" class="gray_12px_f"><span class="black_a"> <a href="__APP__/lp-{$vo.info_id}">{$vo.lpname}</a></span></td>
+                  <td height="25" class="orange_12px_f">{$vo.count}</td>
+                </tr>
+              </volist>
+            </table>
+          </div>
+          <!--<div class="lou_r_t">&nbsp;&nbsp;网友喜欢用它和谁比较</div>
+      <div id="lou_r_bi">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr class="gray_14px_f">
+            <td height="25" align="center" bgcolor="#FFFFFF"><strong>楼盘名</strong></td>
+            <td height="25" align="center" bgcolor="#FFFFFF"><strong>均价</strong></td>
+            <td height="25" align="center" bgcolor="#FFFFFF"><strong>对比</strong></td>
+          </tr>
+          <tr>
+            <td align="center" bgcolor="#FBF9F9" class="gray_12px_f">世纪风情</td>
+            <td align="center" bgcolor="#FBF9F9" class="orange_12px_f">256</td>
+            <td height="25" align="center" bgcolor="#FBF9F9" class="red_a"><a href="#">对比&gt;&gt;</a></td>
+          </tr>
+          <tr>
+            <td align="center" class="gray_12px_f">梦里水乡</td>
+            <td align="center" class="orange_12px_f">115</td>
+            <td height="25" align="center" bgcolor="#FFFFFF" class="red_a"><a href="#">对比&gt;&gt;</a></td>
+            </tr>
+          <tr>
+            <td align="center" bgcolor="#FBF9F9" class="gray_12px_f">水谢花都</td>
+            <td align="center" bgcolor="#FBF9F9" class="orange_12px_f">358</td>
+            <td height="25" align="center" bgcolor="#FBF9F9" class="red_a"><a href="#">对比&gt;&gt;</a></td>
+            </tr>
+          <tr>
+            <td align="center" class="gray_12px_f">金域名都</td>
+            <td align="center" class="orange_12px_f">65</td>
+            <td height="25" align="center" bgcolor="#FFFFFF" class="red_a"><a href="#">对比&gt;&gt;</a></td>
+            </tr>
+          <tr>
+            <td align="center" bgcolor="#FBF9F9" class="gray_12px_f">世纪风情</td>
+            <td align="center" bgcolor="#FBF9F9" class="orange_12px_f">256</td>
+            <td height="25" align="center" bgcolor="#FBF9F9" class="red_a"><a href="#">对比&gt;&gt;</a></td>
+            </tr>
+          <tr>
+            <td align="center" class="gray_12px_f">梦里水乡</td>
+            <td align="center" class="orange_12px_f">115</td>
+            <td height="25" align="center" bgcolor="#FFFFFF" class="red_a"><a href="#">对比&gt;&gt;</a></td>
+            </tr>
+          <tr>
+            <td align="center" bgcolor="#FBF9F9" class="gray_12px_f">水谢花都</td>
+            <td align="center" bgcolor="#FBF9F9" class="orange_12px_f">358</td>
+            <td height="25" align="center" bgcolor="#FBF9F9" class="red_a"><a href="#">对比&gt;&gt;</a></td>
+            </tr>
+          <tr>
+            <td align="center" class="gray_12px_f">金域名都</td>
+            <td align="center" class="orange_12px_f">65</td>
+            <td height="25" align="center" bgcolor="#FFFFFF" class="red_a"><a href="#">对比&gt;&gt;</a></td>
+            </tr>
+          <tr>
+            <td align="center" bgcolor="#FBF9F9" class="gray_12px_f">水谢花都</td>
+            <td align="center" bgcolor="#FBF9F9" class="orange_12px_f">358</td>
+            <td height="25" align="center" bgcolor="#FBF9F9" class="red_a"><a href="#">对比&gt;&gt;</a></td>
+            </tr>
+          <tr>
+            <td align="center" class="gray_12px_f">金域名都</td>
+            <td align="center" class="orange_12px_f">65</td>
+            <td height="25" align="center" bgcolor="#FFFFFF" class="red_a"><a href="#">对比&gt;&gt;</a></td>
+            </tr>
+        </table>
+      </div>-->
+        </div>
+        <div style="clear:both"></div>
+      </div>

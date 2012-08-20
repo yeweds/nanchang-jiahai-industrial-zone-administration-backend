@@ -1,0 +1,91 @@
+<link href="../Public/Css/select_box.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../Public/Js/select_box.js"></script><!--下拉框对象-->
+
+
+<script type="text/javascript">
+//下拉框新闻
+optionNewsTextA=['新闻','楼盘'];//room_hx
+optionNewsValueA=['news','loupan'];
+var optionNews={id:'search_type_inc',inputId:'search_type',defText:'新闻',defVal:'news',text:optionNewsTextA,value:optionNewsValueA,beforeHtml:'',afterHtml:'',width:'auto',height:
+'auto'};
+var optionRoomAreaObject;//房屋面积
+$(function(){
+	optionNewsObject=new selectBox(optionNews);
+});
+
+
+//提交搜索
+function submit_search(){
+	var key = $("#searchForm #key").val();
+	if(key == '请输入搜索条件'){
+		key = '';
+	}
+	key = encodeURI(encodeURI(key));
+	var search_type = $("#searchForm #search_type").val();
+	if(search_type == 'news'){
+		location.href = '__APP__/Search/index/search_type/'+ search_type +'/key/'+ key ;
+	}else{
+		location.href = '__APP__/General/ct_list/search_type/'+ search_type +'/key/'+ key ;
+	}
+	
+}
+$(function(){
+	   $('#searchForm').keyup(function(event) {
+		  if(event.keyCode==13){    
+				$("#search_sub").click();
+		  }
+   });
+});
+</script>
+<link href="../Public/Css/news.css" rel="stylesheet" type="text/css" />
+<div id="index_head" >
+<div id="head_logo"><a href="__APP__/"><img id="logo" src="../Public/Images/logo.png" alt="腾房网-首页" border="0" /></a></div>
+<form action="__APP__/Search" method="post" id="searchForm">
+  <div id="head_city">南昌 <span class="ding1_bian_a">[<a href="#">切换城市</a>]</span></div>
+  <div id="head_sea_bg">
+    <div id="sea_inc">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td height="30"><label for="key"></label>
+            <input name="key" type="text" class="input_min" id="key" value="购房,上腾房直通车" onclick="this.value='';" /></td>
+          <td><img src="../Public/Images/xian.png" width="1" height="26" /></td>
+          <td width="80" height="30">
+          <div id="search_type_inc"></div>
+<!--          <label for="house_type"></label>
+            <select name="search_type" class="input_select" id="search_type">
+			   <option value="news">新闻</option>
+               <option value="loupan">楼盘</option>
+            </select>--></td>
+          <td width="60" height="30"><img name="search_sub" id="search_sub" src="../Public/Images/news_sea.png" onclick="submit_search();"/></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+<div class="ding_a" id="head_hot_sea"><strong><a href="#">热门搜索：</a></strong><a href="#">小户型</a> <a href="#">地铁房 国际名校</a> <a href="#">学区房</a></div>
+</form>
+</div>
+
+<!--栏目列表-->
+<div id="nv" class="white_a">
+  <div class="width_30px_space"></div>
+  <div class="nv_title"><a href="__APP__/">返回主页</a></div>
+  <div class="nv_title"><a href="__APP__/News/">资讯首页</a></div>
+  <present name="dump.listtype" > 
+  <volist name="dump.listtype" id="vo_type" ><!-- nv_title_min -->
+         <div <eq name="vo_type['name']" value="$dump.endtype">class="nv_title"<else/>class="nv_title"</eq> ><span  class="white_a">
+		 <a href="__URL__/type/classid/{$vo_type.id}">{$vo_type.name}</a></span></div>
+  </volist> 
+  </present>
+
+</div>
+<!--栏目列表结束-->
+
+<!--png图片在ie6下正常显示-->
+<!--[if IE 6]>
+<script type="text/javascript" src="__PUBLIC__/Js/png.js"></script>
+<script>
+  //DD_belatedPNG.fix('#secy');
+  //DD_belatedPNG.fix('#index_head');
+  DD_belatedPNG.fix('#logo');
+</script>
+<![endif]-->

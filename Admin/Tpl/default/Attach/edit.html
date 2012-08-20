@@ -1,0 +1,58 @@
+<include file="Public:header" />
+<script language="javascript" src="__PUBLIC__/DatePicker/WdatePicker.js"></script>
+<!-- 日历插件 -->
+<div class="bodyTitle">
+	<div class="bodyTitleLeft"></div>
+  <div class="bodyTitleText">修改附件</div>
+</div>
+<br>
+
+<form action="__URL__/update" enctype ="multipart/form-data" method="post" >
+<table cellSpacing="1" cellPadding="2" width="95%" align="center" border="0">
+    <tr>
+        <td width="20%">附件原名称：</td>
+        <td width="80%">{$vo.name}
+      <input name="id" type="hidden" id="id" size="40" value="{$vo.id}" /></td>
+    </tr>
+	<tr>
+	  <td>附件保存名：</td>
+      <td>{$vo.savename}</td>
+	</tr>
+	<tr>
+      <td>所属信息：</td>
+      <td>{$vo.title} [{$vo.info_id}]</td>
+	</tr>
+    <tr>
+      <td>所属模块：</td>
+      <td><strong><font color="red">{$vo.model_name}</font></strong> 注：pics为相册的附件，story为爱情故事附件</td>
+    </tr>
+    <tr>
+      <td>所属分类：</td>
+      <td>{$vo.curr_path}</td>
+    </tr>
+    <tr>
+      <td>上传者ID：</td>
+      <td>{$vo.user_id}</td>
+    </tr>
+	<tr>
+	  <td>修改上传时间：</td>
+	  <td><input name="upload_time" type="text" id="upload_time"  onClick="WdatePicker()" value="{$vo.upload_time|date='Y-m-d',###}"/></td>
+    </tr>
+	<tr>
+      <td>
+        附件说明：<br></td>
+      <td><textarea name='remark' rows='5' cols='40'>{$vo.remark}</textarea></td>
+	</tr>
+	<tr>
+      <td>&nbsp;</td>
+      <td><input name="submit" type="submit" id="submit" value="修 改" class="df_button" />
+	  &nbsp;&nbsp;&nbsp;<input type="button" value="返 回" class="df_button" onclick="history.go(-1)" />
+	  </td>
+	</tr>
+	<tr>
+      <td>缩略图预览：</td>
+      <td><a href="{$vo.savepath|trim=###,'.'}{$vo.savename}" title="查看大图" target="_blank"><img src="{$vo.savepath|trim=###,'.'}thumb_{$vo.savename}" width="160"></a></td>
+	</tr>
+	</table>
+</form>
+<include file="Public:footer" />

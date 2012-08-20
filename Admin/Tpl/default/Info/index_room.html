@@ -1,0 +1,49 @@
+<include file="Public:header" />
+<script language="JavaScript" type="text/JavaScript">
+	function add_info(id){   //打开添加页面
+		var act = '{$Think.get.ACTION}';
+		if(act == "loupan"){
+			window.location.href= URL+"/add/ACTION/loudong/info_id/"+id;
+		}else if(act == "loudong"){
+			window.location.href= URL+"/add/ACTION/room/info_id/"+id;
+		}else{
+			alert("不能在房间下增加子类信息！");
+		}
+	}
+</script>
+<div class="bodyTitle">
+	<div class="bodyTitleLeft"></div>
+  <div class="bodyTitleText">{$nav_title}管理</div>
+</div>
+<br>
+<h3 class="marginbot">
+<eq name="Think.get.ACTION" value="loupan"><a href="__URL__/add/ACTION/{$Think.get.ACTION}" class="sgbtn">＋添加{$nav_title}</a></eq>
+<a href="#" onClick="delAll()" class="sgbtn">－删除选中</a>
+<div id="result" class="none result" style="letter-spacing:2px"></div>
+</h3>
+
+<table id="articlelist"  class="datalist fixwidth">
+	  <tr align="center" >
+	    <td width="8%"><input type="checkbox" onClick="selAll(this,'id[]')" value="选择全部" class="checkbox">选择</th>
+	    <td width="6%">ID</th>
+		<td width="10%">分类名称</th>
+		<td width="20%">标题</th>
+		<td width="20%">摘要</th>
+		<td width="19%">发布时间</th>
+        <td>操作</th>
+	  </tr>
+      <iterate name="list" id="vo">
+	  <tr >
+	     <td align="center"><input name="id[]" type="checkbox" id="id[]" value="{$vo.id}" /></td>
+		 <td height="22" align="center">{$vo.id}</td>
+		 <td align="center">{$vo.class_id|getClassName}</td>
+		 <td align="left"><a href="javascript:child({$vo.id})" title="查看更多">{$vo.title}</a></td>
+		 <td align="center">{$vo.remark}</td>
+		 <td align="center">{$vo.add_time|date='Y-m-d H:i',###}</td>
+		 <td align="center"><neq name="Think.get.ACTION" value="room">[<a href="javascript:add_info({$vo.id})" >添加</a>]&nbsp;</neq>[<a href="javascript:edit({$vo.id})" >编辑</a>]&nbsp;[<a href="javascript:del({$vo.id})">删除</a>]</td>
+	  </tr>    
+	  </iterate>
+</table>
+	  <div class="page">{$page}</div>
+
+<include file="Public:footer" />

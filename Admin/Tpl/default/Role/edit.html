@@ -1,0 +1,158 @@
+<include file="Public:header" />
+<div class="bodyTitle">
+  <div class="bodyTitleLeft"></div>
+  <div class="bodyTitleText">用户组编辑</div>
+</div>
+<h3 class="marginbot"><a href="__URL__/add" class="sgbtn">＋添加用户组</a><a href="__URL__/" class="sgbtn">返回用户组</a></h3>
+<fieldset id="fieldset_change_mode">
+  <legend style="color:gray;font-weight:bold;margin-left:5px;">修改角色基本信息</legend>
+  <table width="92%"  border="0" align="center" cellpadding="0" cellspacing="1" >
+    <form action="__URL__/Update/id/{$vo.id}" method="post" >
+      <tr>
+        <td width="103" height="25" align="right" >所属上级用户组：</td>
+        <td width="206" ><select name="pid" id="pid">
+            <volist name="groupList" id="voo">
+              <in name="voo.id" value="$vo.pid">
+                <option value="{$vo0.id}" selected="selected">{$voo.name}</option>
+                <else />
+                <option value="{$voo.id}">{$voo.name}</option>
+              </in>
+            </volist>
+          </select></td>
+        <td width="391" >&nbsp;</td>
+      </tr>
+      <tr>
+        <td height="25" align="right" >角色名称：</td>
+        <td ><input name="name" type="text" class="df_input" id="name" value="{$vo.name}" ></td>
+        <td ><input type="submit" onClick="return confirm('确定要修改角色吗?')" class="df_button" value="确定修改" />
+          <input name="id" type="hidden" id="id" value="{$vo.id}" /></td>
+      </tr>
+      <tr>
+        <td align="right" >角色组状态：</td>
+        <td class="tLeft"><select name="status" id="status">
+            <option value="1" 
+            <eq name="vo.status" value="1">selected</eq>
+            >正常
+            </option>
+            <option value="0" 
+            <eq name="vo.status" value="0">selected</eq>
+            >禁用
+            </option>
+          </select></td>
+        <td >&nbsp;</td>
+      </tr>
+    </form>
+  </table>
+</fieldset>
+<fieldset id="fieldset_change_mode">
+  <legend style="color:gray;font-weight:bold; margin-left:5px;">修改权限</legend>
+  <table width="80%" border="0" cellspacing="0" cellpadding="0">
+                          <form action="__URL__/updateAccess/gid/{$vo.id}" method="post" onSubmit="return subForm()">
+                            <tr>
+                              <td width="30%">&nbsp;</td>
+                              <td width="30%">&nbsp;</td>
+                              <td width="40%">&nbsp;</td>
+                            </tr>
+                            <tr>
+                              <td rowspan="4"><span style="float:left; width:250px; height:200px;">
+                                <select name="access_all" size="40" multiple class="textarea_bg" id="access_all" style="width:250px;height:300px;" >
+                                  <volist name="gnList" id="vo">
+                                    <option value="{$vo.id}" >&nbsp;{$vo.title} </option>
+                                  </volist>
+                                </select>
+                                </span></td>
+                              <td height="117">&nbsp;</td>
+                              <td rowspan="4"><span style="float:left; width:250px; height:200px;">
+                                <select name="access[]" size="40" multiple class="textarea_bg" id="access" style="width:250px;height:300px;" >
+                                  <volist name="clist" id="vo">
+                                    <option value="{$vo.id}" >&nbsp;{$vo.name} </option>
+                                  </volist>
+                                </select>
+                                </span></td>
+                            </tr>
+                            <tr>
+                              <td height="41" align="center"><input name="to" type="button" class="df_button" id="to" value=">>"></td>
+                            </tr>
+                            <tr>
+                              <td align="center"><input name="back" type="button" class="df_button" id="back" value="<<"></td>
+                            </tr>
+                            <tr>
+                              <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                              <td>&nbsp;</td>
+                              <td>&nbsp;</td>
+                              <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                              <td>&nbsp;</td>
+                              <td>&nbsp;</td>
+                              <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                              <td>&nbsp;</td>
+                              <td>&nbsp;</td>
+                              <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                              <td>&nbsp;</td>
+                              <td>&nbsp;</td>
+                              <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                              <td>&nbsp;</td>
+                              <td>&nbsp;</td>
+                              <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                              <td>&nbsp;</td>
+                              <td></td>
+                              <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                              <td>&nbsp;</td>
+                              <td><input type="submit" class="df_button" value="修改权限" /></td>
+                              <td>&nbsp;</td>
+                            </tr>
+                          </form>
+                        </table>
+</fieldset>
+<include file="Public:footer" />
+<script language="javascript">
+  	var SELECT_NAV =  'user';  //选中基本资料
+	$(function(){
+		
+			//将权限给用户
+			$('#to').click(function(){
+
+				$("#access_all option:selected").each(function(){
+					//先添加再删除
+					var html='<option value="'+$(this).val()+'">'+$(this).html()+'</option>';
+					
+					$("#access").append(html);
+					$(this).remove();
+					
+				});
+				
+			});
+			//将权限给用户
+			$('#back').click(function(){
+
+				$("#access option:selected").each(function(){
+					//先添加再删除
+					var html='<option value="'+$(this).val()+'">'+$(this).html()+'</option>';
+					
+					$("#access_all").append(html);
+					$(this).remove();
+					
+				});
+				
+			});			
+			
+	});
+	
+function subForm(){
+	$("#access option").attr({selected:true});
+	
+}	
+</script>

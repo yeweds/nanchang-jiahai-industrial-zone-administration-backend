@@ -1,0 +1,223 @@
+<include file="Public:html_header" /> 
+
+<link href="../Public/Css/news.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/base.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/class_com.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/select_box.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/news_detail.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+a:link {
+	color: #000;
+}
+a:visited {
+	color: #000;
+	text-decoration: none;
+}
+a:hover {
+	color: #999;
+}
+a:active {
+	color: #999;
+	text-decoration: none;
+}
+#news_txt a{
+	/*text-decoration:underline;*/
+	padding-bottom:1px;
+	border-bottom:dashed 1px #f00;
+} 
+</style>
+<!--png图片在ie6下正常显示-->
+<!--[if IE 6]>
+<script type="text/javascript" src="__PUBLIC__/Js/png.js"></script>
+<script>
+  DD_belatedPNG.fix('.tf_logo');
+</script>
+<![endif]-->
+<body>
+
+<script type="text/javascript">
+
+	if({$news.partid}==20 ){
+		window.location.href = '{$news.news.remark}';
+	}
+$(document).ready(function(){
+	//今日一周
+	$('#news_week').mouseover(function(){
+		$('#news_week').removeClass().addClass('left_bottom_bian1pxm');	
+		$('#news_today').addClass('bottom_bian1pxm');	
+		domAjax('news_pai_ajax','__URL__/news_pai_ajax/type/0','get');
+		
+	})
+	$('#news_today').mouseover(function(){
+		$('#news_week').removeClass().addClass('left_bottom_bian1px');	
+		$('#news_today').removeClass();	
+		domAjax('news_pai_ajax','__URL__/news_pai_ajax/type/1','get');
+	})	
+	
+});
+</script>
+
+<include file="News:news_header" /> <!--头部包含共用 -->
+
+    <!--start==所有正文内容在此处显示-->
+
+    <div class="content_inc">
+	 <!--喜盈门豪威公馆广告--> 
+      <div class="height_30px_text blue_a"><strong class="blue_14px_f">&gt;&gt;</strong><a href="__APP__/"> 腾房首页</a> <span class="gray_14px_f">&gt;</span> <a href="__APP__/Messages">推广短信</a> <span class="gray_14px_f">&gt;</span> 短信内容</div>
+    <div class="height_10px"></div> 
+      
+      
+    <div class="content_inc">
+
+    <div class="con_left_all">
+    
+      <div class="con_left_center_bg">
+      
+      	<div class="de_con_inc">
+        
+      		<div class="height_20px_text"></div>
+      		<div class="height_40px_text" align="center"><h1 class="blue_24px_heif">{$notes['lpname']}于{$notes['inserttime']}发布的推广短信</h1></div>
+      		<div class="height_30px_text" align="center">来源：腾房网&nbsp;&nbsp; &nbsp;&nbsp; 时间：{$notes['inserttime']}</div>
+
+          <div class="de_con_summary_inc">
+          	
+           	<div style="clear:both"></div><!--de_con_summary促使图层高度随内容增加面增加-->           
+          </div>
+          <div class="height_10px"></div>
+			<div class="de_con_summary_inc">
+            <!--导入中间广告-->
+             <!--start广告: news_xi_center.html-->
+
+<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" width="620" height="70">
+          <param name="movie" value="/Public/Ad/tf_620X70.swf" />
+          <param name="quality" value="high" />
+          <embed src="/Public/Ad/tf_620X70.swf" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="620" height="70"></embed>
+ </object>
+  <!--end广告: news_xi_center.html-->   
+            <!--end导入中间广告-->
+			</div>
+          <div class="height_20px_text"></div>
+          <div class="lineheight25px" id="news_txt">
+
+            <!---->
+			<p><span style="font-family: 宋体">&nbsp;&nbsp;&nbsp;[<a href="__APP__/lp-{$notes.info_id}" target="_blank">{$notes['lpname']}</a>] {$notes['content']} </span></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>          </div>
+          <div class="height_35px" align="center"><a href="/News"><img src="/Home/Tpl/default/Public/Images/de_to_news.gif" width="170" height="35" border="0" alt="返回"/></a></div>
+<div class="height_20px_text"></div>
+
+
+          <div class="height_25px_text"><span class="gray_12px_f">腾房声明：本信息为腾房网整理汇总,引用或转载必须注明出处,若有引用及转载行为视为已默认本条款。</span></div>
+          <div class="height_25px_text"><span class="black_14px_f">原文刊载：腾房网 | 选稿编辑：小编</span></div>
+<!-- JiaThis Button BEGIN -->
+<div id="ckepop">
+	<span class="jiathis_txt">分享到：</span>
+	<a class="jiathis_button_tsina">新浪微博</a>
+	<a class="jiathis_button_tqq">腾讯微博</a>
+
+	<a class="jiathis_button_t163">网易微博</a>
+	<a class="jiathis_button_qzone">QQ空间</a>
+	<!-- <a href="http://www.jiathis.com/share/" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a> 
+	<a class="jiathis_counter_style"></a>-->
+</div>
+<script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->          
+          <div class="height_10px"></div>
+          <div style="clear:both"></div><!--de_con_inc促使图层高度随内容增加面增加-->  
+        </div>
+      	<div style="clear:both"></div><!--con_left_center_bg促使图层高度随内容增加面增加-->      
+      </div>
+
+      <div class="height_10px_float"></div>
+
+<div style="clear:both"></div><!--con_left促使图层高度随内容增加面增加--> 
+      </div><!--con_left end-->
+      <div class="width_10px_float"></div>
+      <div class="con_right_bg3">
+          <div class="de_ad_270px">
+
+            <!--导入右边广告-->
+             <!--start广告: news_xi_right.html-->
+<!-- <a href="http://topic.tengfang.net/zhuanti/820/"><img src="/Home/Tpl/default/Public/Images/kaipan.jpg" width="300" height="150" border="0" alt="右侧广告" /></a> -->
+ <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" width="300" height="150">
+          <param name="movie" value="/Public/Ad/right_300_150.swf?1" />
+          <param name="quality" value="high" />
+		  <param name="wmode" value="transparent"> <!--这里代码可使Flash背景透明 -->
+          <embed src="/Public/Ad/right_300_150.swf?1" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="300" height="150" wmode="transparent"></embed> 
+</object>
+
+ <!--end广告: news_xi_right.html--> 
+             <!--end导入右边广告-->
+          </div>
+        <div class="height_10px"></div>
+        <div class="con_right_4bian268px">
+          <div class="height_30px">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td width="37%" height="30" align="center"  id="news_today" style="cursor:pointer"><strong class="blue_12px_f">今日最受关注</strong></td>
+
+                <td width="63%" height="30" class="left_bottom_bian1px" id="news_week"><span class="blue_12px_f">&nbsp;&nbsp;一周新闻排行</span></td>
+              </tr>
+            </table>
+          </div>
+          <div id="news_pai_ajax">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                    <td width="14%" height="30" align="center"><div class="num_style1">01</div>
+
+                      </td>
+                    <td width="86%" height="30" class="black_a"><a href="/news-18561" title="2012年3月6日南昌房产每日成交：南昌..">2012年3月6日南昌房产每日成交：南昌..</a></td>
+                  </tr><tr>
+                    <td width="14%" height="30" align="center"><div class="num_style1">02</div>
+                      </td>
+                    <td width="86%" height="30" class="black_a"><a href="/news-18556" title="南昌楼市房源放量优惠不断 楼市持续回暖">南昌楼市房源放量优惠不断 楼市持续回暖</a></td>
+                  </tr><tr>
+
+                    <td width="14%" height="30" align="center"><div class="num_style1">03</div>
+                      </td>
+                    <td width="86%" height="30" class="black_a"><a href="/news-18564" title="南昌房产每日成交量排行榜(03.06)">南昌房产每日成交量排行榜(03.06)</a></td>
+                  </tr><tr>
+                    <td width="14%" height="30" align="center">                      <div class="num_style2">04</div></td>
+                    <td width="86%" height="30" class="black_a"><a href="/news-18557" title="南昌楼市成交量持续稳步上涨 成交回升期将..">南昌楼市成交量持续稳步上涨 成交回升期将..</a></td>
+
+                  </tr><tr>
+                    <td width="14%" height="30" align="center">                      <div class="num_style2">05</div></td>
+                    <td width="86%" height="30" class="black_a"><a href="/news-18558" title="易宪容：警惕银行用房贷利率诱导购房者进入..">易宪容：警惕银行用房贷利率诱导购房者进入..</a></td>
+                  </tr><tr>
+                    <td width="14%" height="30" align="center">                      <div class="num_style2">06</div></td>
+                    <td width="86%" height="30" class="black_a"><a href="/news-18559" title="房地产市场“限购”政策加码 理由似乎不够..">房地产市场“限购”政策加码 理由似乎不够..</a></td>
+
+                  </tr><tr>
+                    <td width="14%" height="30" align="center">                      <div class="num_style2">07</div></td>
+                    <td width="86%" height="30" class="black_a"><a href="/news-18560" title="面对当前的高房价：购房者勿陷入优惠利率陷阱">面对当前的高房价：购房者勿陷入优惠利率陷阱</a></td>
+                  </tr><tr>
+                    <td width="14%" height="30" align="center">                      <div class="num_style2">08</div></td>
+                    <td width="86%" height="30" class="black_a"><a href="/news-18562" title="直击南昌地铁1号线安家行动 确保优惠落到..">直击南昌地铁1号线安家行动 确保优惠落到..</a></td>
+
+                  </tr><tr>
+                    <td width="14%" height="30" align="center">                      <div class="num_style2">09</div></td>
+                    <td width="86%" height="30" class="black_a"><a href="/news-18563" title="开发商纷纷以价换量 2月多家房企销售业绩..">开发商纷纷以价换量 2月多家房企销售业绩..</a></td>
+                  </tr><tr>
+                    <td width="14%" height="30" align="center">                      <div class="num_style2">10</div>
+                      </td>
+
+                    <td width="86%" height="30" class="black_a"><a href="/news-18566" title="南昌楼市楼市乱象丛生 购房者迷茫">南昌楼市楼市乱象丛生 购房者迷茫</a></td>
+                  </tr>            </table>
+          </div>
+        </div>
+        <div class="height_10px"></div>
+
+ 
+
+<div style="clear:both"></div><!--con_inc促使图层高度随内容增加面增加-->               
+    </div>
+      <div class="clear"></div>
+      <!--自动拉伸width_960px-->
+    </div>
+    <div class="height_10px"></div>
+	<include file="Public:com_footer" /> {//共用尾部}
+    <div style="clear:both"></div><!--促使图层高度随内容增加面增加==正文内容--> 
+   </div>
+
+</body>
+</html>

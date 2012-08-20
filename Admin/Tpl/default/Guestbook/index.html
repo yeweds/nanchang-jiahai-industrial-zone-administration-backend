@@ -1,0 +1,57 @@
+<include file="Public:header" />
+<script type="text/javascript" src="__PUBLIC__/Js/jquery.min.js"></script>
+
+<div class="bodyTitle">
+	<div class="bodyTitleLeft"></div>
+  <div class="bodyTitleText">留言管理</div>
+</div>
+
+   <table width="95%" border=0 align="center" cellPadding=2 cellspacing="1" >
+       <form name="form1" action="__URL__/" method="post">
+          <tr>
+            <td align="middle" bgColor="#EFF7FF">
+                    搜索：
+                      <input name="key" id="key">
+                      <input type="submit" value="搜 索" name="searchsubmit">
+                      <SELECT size=1 name="condition">
+                        <OPTION value="uname">按姓名搜索</OPTION>
+                        <OPTION value="title">按标题搜索</OPTION>
+                        <OPTION value="text" selected>按留言内容搜索</OPTION>
+                        <OPTION value="reply">按回复内容搜索</OPTION>
+                      </SELECT>
+            </td>
+          </tr>
+	 </form>
+</table>
+<h3 class="marginbot"><a href="javascript:DelAll();" class="sgbtn">删除选中</a>
+<a href="javascript:PassAll();" class="sgbtn">通过选中</a>
+</h3>
+<div id="result" class="none result" style="letter-spacing:2px"></div>
+<table id="articlelist" class="datalist fixwidth" cellSpacing=1 cellPadding=2 width="95%" align=center border=0>
+ <form method="post" id="formall">
+	  <tr align="center">
+	    <td width="4%"><input name="checkbox" type="checkbox" class="checkbox" onClick="selAll(this)" value="选择全部"></th>
+	    <td width="6%">ID</th>
+		<td width="12%">用户名</th>
+		<td width="34%">标题</th>
+		<td width="10%">Email</th>
+		<td width="17%">发布时间</th>
+        <td width="17%">操作</th>
+	  </tr>
+      <iterate name="info" id="vo">
+	  <tr class=tr_southidc>
+	     <td align="center"><input name="id[]" type="checkbox" id="id[]" value="{$vo.id}" /></td>
+		 <td height="22" align="center">{$vo.id}</td>
+		 <td align="center">{$vo.uname}</td>
+		 <td align="left"><a href="#" title="{$vo.content}">{$vo.title|mb_substr=###,0,40,'utf-8'}</a></td>
+		 <td align="center">{$vo.email}</td>
+		 <td align="center">{$vo.addtime|date='Y-m-d H:i:s',###}</td>
+		 <td align="center">[<eq name="vo.passed" value="1"><a href="__URL__/CancelPassed/ID/{$vo.id}" >取消</a></eq><eq name="vo.passed" value="0"><a href="__URL__/Passed/ID/{$vo.id}" >通过</a></eq>]&nbsp;[<a href="__URL__/reply/ID/{$vo.id}/msg/{$vo.title|urlencode}">回复</a>]&nbsp;[<a href="javascript:del({$vo.id})">删除</a>]</td>
+	  </tr>    
+	  </iterate>
+</form>
+</table>
+	  <div class="page">{$page}</div>
+<p class="i">删除不可恢复,谨慎操作</p>
+<br>
+<include file="Public:footer" />

@@ -1,0 +1,63 @@
+<include file="Public:header" />
+
+<div class="bodyTitle">
+	<div class="bodyTitleLeft"></div>
+  <div class="bodyTitleText">编辑话题</div>
+</div>
+<h3 class="marginbot"><a href="__URL__" class="sgbtn">＋返回话题管理</a></h3>
+
+          <table width="100%">  
+		  <form method="post" name="form1" action="__URL__/insert">
+            <tr>
+              <td width="13%">标题</td>
+              <td width="87%">
+                <input name="title" type="text"  class="txt" id="title" size="60"/>
+			  </td>
+            </tr>
+            <tr>
+              <td>内容</td>
+              <td>
+                <textarea name="content" cols="60" rows="4" id="content"></textarea>
+              </td>
+            </tr>
+			<tr>
+              <td>红方观点</td>
+              <td>
+                <textarea name="r_content" cols="60" rows="4" id="r_content"></textarea>
+              </td>
+            </tr>
+			<tr>
+              <td>蓝方观点</td>
+              <td>
+                <textarea name="l_content" cols="60" rows="4" id="l_content"></textarea>
+              </td>
+            </tr>
+            <tr>
+              <td>红方票数</td>
+              <td><input type="text" value="" name="r_num" size="5" /></td>
+            </tr>
+			<tr>
+              <td>蓝方票数</td>
+              <td><input type="text" value="" name="l_num" size="5" /></td>
+            </tr>
+			<tr>
+              <td>是否本期话题</td>
+              <td>
+			  <input type="radio" value="0" name="isnew" size="5" checked/>否
+			  <input type="radio" value="1" name="isnew" size="5"  />是
+			  &nbsp;(本期话题只能设置一个,若选为是,其他话题将全部变成否)</td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+              <td>
+                <input type="submit"  value="提交更新" class="df_button" />
+                <input type="reset" value="还原重填" class="df_button" /></td>
+            </tr>
+          </form></table>
+        <p class="i">删除不可恢复,谨慎操作</p>
+        <br>
+<include file="Public:footer" />

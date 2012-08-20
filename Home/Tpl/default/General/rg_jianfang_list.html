@@ -1,0 +1,189 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>南昌房产推荐,咨询 - 腾房网</title>
+<meta name="keywords" content="南昌房产推荐,南昌房产咨询">
+<meta name="description" content="腾房网为您提供人工荐房服务,为你免去到处奔波的辛苦">
+<link href="../Public/Css/ct_lp_list.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/ct_lp_common.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+       table.duanxin{margin:0px 10px; }
+	   .duanxin .title{font-weight:bold; }
+</style>
+</head>
+
+<body>
+
+<div id="content_bg">
+  <include file="Public:header_ct" /> <!-- 传统页公共头部 -->
+  
+  <div id="content">
+    <!--<div class="ad_head"></div>-->
+    <div class="height_10px"></div>
+    <div class="height_30px"><img src="../Public/Images/dp_jian_left.gif" width="10" height="10" />腾房网 > <strong><span class="green_12px_f">人工荐房</span></strong></div>
+<div class="content_inc">
+          <div class="con_left_center_nbg" >
+
+<!--  荐房表单    -->     		
+<!--<iframe id="load_frame" name=="load_frame" width="648" height="400" src='__URL__/rg_jianfang' scrolling="no" frameborder="0" style="background-color:#FFF;" ></iframe> -->
+<include file="General:rg_jianfang_index" />
+     
+<div class="height_10px"></div>
+<div id="lp_list_inc">
+<div class="block_title"></div>
+<!--START--循环验房列表-->
+
+<volist name="list" id="vo">
+<div style="height:25px; line-height:25px; background-image:url(../Public/Images/green_bg.jpg);">
+	 &nbsp;&nbsp;<strong style="color:#006600; font-size:14px;">{$vo.uname|mb_substr=###,0,1,'utf8'} * *</strong> &nbsp;&nbsp;&nbsp;&nbsp; {$vo.add_time|date="Y-m-d H:i:s",###}
+</div>
+<table width="97%" border="0" cellpadding="0" cellspacing="0" class="duanxin">
+       <tr>
+		  <td style="height:30px; border-bottom:#CCCCCC dashed 1px;" class="orange_12px_f">
+		  (条件)区域：{$vo.range_id|getAreaName} 类型：{$vo.lp_wuyetype} 户型：{$vo.room_hx}居 面积：约{$vo.room_area}平米 总价：{$vo.zong_price}万元
+月供：{$vo.yuegong} 已有房产数：{$vo.yiyou_fcs} 套 
+		  </td>
+       </tr>
+       <tr>
+		  <td style="height:40px; line-height:22px;" >回复： {$vo.reply_text|default="荐房专家正在选择合适您的房子，请耐心等待，24小时内必复。"}</td>
+       </tr>
+</table>
+<div class="height_10px"></div>
+</volist>
+
+<notpresent name="list"><div style="text-align:center;">暂无</div></notpresent>
+ <!--END--循环楼盘列表-->
+            <div style="clear:both"></div>                                                   
+                <div class="height_10px"></div>
+                <div class="height_lineheight_20px">
+                  <div class="float_right"><span class="blue_a">{$page}</span><!--<span class="page_sytle">上一页</span><span class="page_current_style">1</span><span class="page_num_style">2</span><span class="page_num_style">3</span><span class="page_num_style">4</span><span class="page_num_style">5</span><span class="page_num_style">6</span><span class="page_num_style">7</span><span class="page_num_style">8</span><span class="page_num_style">9</span><span class="page_sytle">下一页</span>--></div>
+				  
+				  </div>
+                <div class="height_lineheight_20px"></div>
+<div style="clear:both"></div>
+          		  <!--lp_list_inc促使图层高度随内容增加面增加-->
+   		    </div>
+<div style="clear:both"></div><!--con_left_center_bg促使图层高度随内容增加面增加</div>-->
+      </div>       		       		
+          <div class="width_10px_space"></div>
+          <div class="con_right_bg3">
+            <div class="de_ad_270px"><a href="http://topic.tengfang.net/zhuanti/pxjx/" ><img src="../Public/Images/kaipan.jpg" width="300" height="150" border="0"/> </a> 
+			<!-- <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" width="300" height="150">
+              <param name="movie" value="../Public/Flash/news-ad300-150.swf" />
+              <param name="quality" value="high" />
+              <embed src="../Public/Flash/news-ad300-150.swf" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="300" height="150"></embed>
+            </object> -->
+			</div>
+            <div class="heigth_10px"></div>
+            <div class="con_right_4bian268px">
+              <div class="height_30px">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td width="37%" height="30" align="center"  id="news_today" style="cursor:pointer"><strong class="blue_12px_f">今日最受关注</strong></td>
+                    <td width="63%" height="30" class="left_bottom_bian1px" id="news_week"><span class="blue_12px_f">&nbsp;&nbsp;一周新闻排行</span></td>
+                  </tr>
+                </table>
+              </div>
+              <div id="news_pai_ajax">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                  <present name="dump.news_gz" >
+                    <volist name="dump.news_gz" id="vo" >
+                      <tr>
+                        <td width="14%" height="30" align="center">
+                        <lt name="vo.count" value="3"><div class="num_style1"><else/>
+                        <div class="num_style2"></lt>
+                        <lt name="i" value="9">0</lt>{$vo.count}</div></td>
+                        <td width="86%" height="30" class="black_a"><a href="__URL__/view/id/{$vo.id}">{$vo.title}</a></td>
+                      </tr>
+                    </volist>
+                  </present>
+                </table>
+              </div>
+            </div>
+            <div class="heigth_10px"></div>
+<!-- 共用专题 -->
+	<include file="Html:zhuangti_inc" />
+<!-- 共用专题 -->
+            <div style="clear:both"></div>
+            <!--con_left1促使图层高度随内容增加面增加-->
+          </div>
+          <div style="clear:both"></div>
+          <!--con_inc促使图层高度随内容增加面增加-->
+        </div>
+
+    <div class="height_10px"></div>
+    <div style="clear:both"></div><!--content促使图层高度随内容增加面增加-->    
+ </div>
+	<include file="Public:footer" /> {//共用尾部}
+	 
+<div style="clear:both"></div><!--content_bg促使图层高度随内容增加面增加-->
+</div>
+</body>
+</html>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	//今日一周
+	$('#news_week').mouseover(function(){
+		$('#news_week').removeClass().addClass('left_bottom_bian1pxm');	
+		$('#news_today').addClass('bottom_bian1pxm');	
+		domAjax('news_pai_ajax','__APP__/News/news_pai_ajax/type/0','get');
+		
+	});
+	$('#news_today').mouseover(function(){
+		$('#news_week').removeClass().addClass('left_bottom_bian1px');	
+		$('#news_today').removeClass();	
+		domAjax('news_pai_ajax','__APP__/News/news_pai_ajax/type/1','get');
+	});
+	domAjax('news_pai_ajax','__APP__/News/news_pai_ajax/type/1','get');
+	
+			//播放图片效果
+			var lMC = 2;
+			var rMC = 0;
+
+			jQuery("#photo_left").click(function(){
+				if(rMC>0){
+					scrollto("r");
+					rMC--;
+					lMC++;
+					jQuery("#photo_right").css("cursor","pointer");
+					if(rMC<=0){
+						jQuery("#photo_left").css("cursor","no-drop");
+					}
+				}
+
+			});
+
+			jQuery("#photo_right").click(function(){
+
+				if(lMC>0){
+					scrollto("l");
+					lMC--;
+					rMC++;
+					jQuery("#photo_left").css("cursor","pointer");
+					if(lMC<=0){
+						jQuery("#photo_right").css("cursor","no-drop");
+					}
+				}
+
+			});
+
+			jQuery("#star_item_list").css("width",(950*3)+"px");
+			jQuery("#photo_left").css("cursor","no-drop");
+
+			if(lMC>0){
+				jQuery("#photo_right").css("cursor","pointer");
+			}
+
+			function scrollto(way){
+				if(way=="l"){
+					jQuery("#star_item_list").animate({marginLeft:"-=950px"},2000);
+				}else{
+					jQuery("#star_item_list").animate({marginLeft:"+=950px"},2000);
+				}
+
+			}	
+
+});
+</script>

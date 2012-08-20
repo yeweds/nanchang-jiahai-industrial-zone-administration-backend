@@ -1,0 +1,109 @@
+<include file="Account:account_header" /> <!-- 用户中心头部 -->
+
+<div id="content_inc">
+  <div class="width_10px"></div>
+  <include file="Account:account_left" /> <!-- 左侧导航 -->
+  <div class="width_20px"></div>
+  <div id="con_center_inc">
+    <div class="width_15px"></div>
+    <div id="con_center">
+    	 <div id="con_center_head">
+    	   <div class="height_40px_lineheight"><strong>晚上好，<span class="green_14px_f">{$userInfo.username}</span>，</strong>欢迎来到腾房后院！</div>
+    	   <div class="height_30px">
+    	     <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    	       <tr>
+    	         <td width="20" height="30" class="bian_b1px">&nbsp;</td>
+    	         <td height="30" class="con_center_nv_c"><strong>修改资料</strong></td>
+    	         <td height="30" class="con_center_nv"></td>
+    	         <td height="30" class="con_center_nv"></td>
+    	         <td height="30" class="bian_b1px">&nbsp;</td>
+  	         </tr>
+  	       </table>
+    	   </div>
+    	 </div>
+    	 <div class="height_10px"></div>
+    	 <div class="lineheight25px"></div>
+   	  <div style=" height:400px;" id='getquyu_price'>
+   	    <table border="0" cellpadding="0" cellspacing="1" class="ziliao">
+          <form action="__URL__/updateUser/" method="post" id="user_form" name="user_form">
+            <tr>
+              <td height="29">电子邮件：</td>
+              <td>{$UserVo.email}</td>
+            </tr>
+            <tr>
+              <td height="20">用&nbsp;户&nbsp;名：</td>
+              <td>{$UserVo.username}</td>
+            </tr>
+            <tr>
+              <td>性&nbsp;&nbsp;&nbsp;&nbsp;别：</td>
+              <td><input name="sex" type="radio" value="1" id="radio1" 
+                  <eq name="UserVo.sex" value="1">checked</eq>
+                />
+                <label for="radio1">先生</label>
+                <input name="sex" type="radio" value="2" id="radio0" 
+                <eq name="UserVo.sex" value="2">checked</eq>
+                />
+                <label for="radio0">女士</label>
+                <input name="sex" type="radio" value="0" id="radio2" 
+                <eq name="UserVo.sex" value="0">checked</eq>
+                />
+                <label for="radio2">保密</label></td>
+            </tr>
+            <tr>
+              <td>真实姓名：</td>
+              <td><input name="realname" type="text"  value="{$UserVo.realname}" class="TextH20" /></td>
+            </tr>
+            <tr>
+              <td>联系电话：</td>
+              <td><input name="tel" type="text" class="TextH20" id="tel"  value="{$UserVo.tel}" /></td>
+            </tr>
+            
+            <tr>
+              <td>常住地址：</td>
+              <td><input name="area_path" type="text"  value="{$UserVo.address}" class="TextH20" size="40" /></td>
+            </tr>
+            <tr>
+              <td>QQ号码：</td>
+              <td><input name="qq" type="text"  value="{$UserVo.qq}" class="TextH20"/></td>
+            </tr>
+            <tr>
+              <td>身份证号：</td>
+              <td><input name="id_number" type="text" class="TextH20" id="id_number"  value="{$UserVo.id_number}"/></td>
+            </tr>
+            <tr>
+              <td>个性签名：</td>
+              <td><textarea name="remark" cols="40" rows="5" class="Text" id="remark">{$UserVo.remark}</textarea></td>
+            </tr>
+            <tr>
+              <th>&nbsp;</th>
+              <td><input name="id" type="hidden" value="{$UserVo.id}" />
+                  <input type="Submit" value="确定修改" class="btn_b" />              </td>
+            </tr>
+          </form>
+        </table>
+   	  </div>
+      <div style="clear:both"></div><!--con_center--clear-->
+    </div>
+
+<div style="clear:both"></div><!--con_center_inc--clear-->
+  </div>
+  <div class="width_10px"></div>
+  <div id="con_right_inc">
+    <div class="height_30px_b1px_bian"><strong><span class="blue_12px_f">&nbsp;&nbsp;我的活动计划</span></strong></div>
+    <div class="lineheight30px"><span class="blue_12px_f">&nbsp;&nbsp;[已报名]</span> 五一八一公园房展活动展</div>
+    <div class="height_60h_bg">
+      <div class="lineheight30px_center">还有<span class="green_18px_f">120</span>天</div>
+      <div class="lineheight_25px_center">已有<strong><span class="blue_12px_f">153</span></strong>人报名哦！</div>
+    </div>
+    <div class="height_10px"></div>
+    <div class="lineheight30px">&nbsp;&nbsp;&nbsp;&nbsp;邀请朋友来：<img style="cursor:pointer" src="../Public/Images/user_from.gif" width="120" height="25" align="absmiddle" /></div>
+    <div class="lineheight30px">&nbsp;&nbsp;&nbsp;&nbsp;提醒：未开启<span class="blue_a"> <a href="#">设置&gt;&gt;</a></span></div>
+    <div class="lineheight30px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;咨询：0791-8107817 8107819</div>
+    <div class="lineheight30px">&nbsp;&nbsp;&nbsp;&nbsp;活动地址：南昌市八一公园</div>
+    <div class="lineheight30px">&nbsp;&nbsp;&nbsp;&nbsp;乘车路线：2路，11路，旅游1线</div>
+<div style="clear:both"></div><!--con_right_inc--clear-->
+  </div>
+  <div style="clear:both"></div><!--content_inc--clear-->
+</div>
+
+<include file="Account:account_footer" /><!--用户中心底部 -->

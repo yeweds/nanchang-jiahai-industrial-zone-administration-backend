@@ -1,0 +1,122 @@
+<include file="Public:header" />
+<script language="javascript" src="__PUBLIC__/DatePicker/WdatePicker.js"></script>
+<!-- 日历插件 -->
+<div class="bodyTitle">
+	<div class="bodyTitleLeft"></div>
+  <div class="bodyTitleText">编辑楼栋</div>
+</div>
+<form action="__URL__/update/ACTION/loudong" method="post">
+<table cellSpacing="1" cellPadding=2 width="95%" align="center" border="0">
+    <tr>
+      <td width="20%" scope="col">楼栋名称：<span class="red">* </span></td>
+      <td align="left" valign="middle" scope="col">
+          <input name="title" type="text" class="box" id="title" value="{$vo.title}" size="40">
+		  <input name="id" type="hidden" id="id" value="{$vo.id}">
+      </td>
+    </tr>
+    <tr>
+      <td>摘要：</td>
+      <td align="left"><textarea name="remark" cols="60%" rows="5" id="remark">{$vo.remark}</textarea>
+        用于站内搜索 </td>
+    </tr>
+    <tr>
+      <td>所属楼盘INFO_ID：</td>
+      <td><input name="info_id" type="text" id="info_id" value="{$vo_add.info_id}" readOnly> 不得修改</td>
+    </tr>
+    <tr>
+      <td>楼盘ID：</td>
+      <td><input name="lpid" type="text" class="box" id="lpid" value="{$vo_add.lpid}" size="40"> 
+        对应房管局ID</td>
+    </tr>
+    <tr>
+      <td>楼栋ID：</td>
+      <td><input name="proid" type="text" class="box" id="proid" value="{$vo_add.proid}" size="40">
+      对应房管局楼栋ID</td>
+    </tr>
+    <tr>
+      <td>所在区域：<span class="red">* </span></td>
+      <td><select name="range_id" id="range_id"/>
+          <option value="">-请选择区域-</option>
+          <present name="area_list" > <volist name="area_list" id="vo_area" >
+          <option value="{$vo_area.id}" <eq name="vo_add.range_id" value="$vo_area.id">selected</eq> >{$vo_area.head_py|strtoupper} {$vo_area.name}</option>
+        </volist> </present></td>
+    </tr>
+    <tr>
+      <td>单元数量：</td>
+      <td ><input name='prounitcount' type='text' id='prounitcount' style='width:250px' value="{$vo_add.prounitcount}"  />
+      </td>
+    </tr>
+    <tr>
+      <td>沙盘楼栋坐标：</td>
+      <td >经度(X)：
+        <input name="point_x" type="text" id="point_x" size="20" value="{$vo.point_x}"/>
+&nbsp;&nbsp;纬度(Y)：
+<input name="point_y" type="text" id="point_y" size="20" value="{$vo.point_y}"/>
+<a href="#" onClick="PopWindow('__APP__/Public/mapMark',600,480);" class="sgbtn">＋重新标注坐标</a> </td>
+    </tr>
+    <tr>
+      <td>预售许可证号：</td>
+      <td ><input name='prolisence' type='text' id='prolisence' style='width:250px' value="{$vo_add.prolisence}" />
+      </td>
+    </tr>
+    <tr>
+      <td>批准预售日期：</td>
+      <td ><input name='prosaletime' type="text" id='prosaletime' value="{$vo_add.prosaletime}" onClick="WdatePicker()"/></td>
+    </tr>
+    <tr>
+      <td>开盘日期：</td>
+      <td ><input name="proopentime" value="{$vo_add.proopentime}" type="text" id="proopentime" onClick="WdatePicker()"/>      </td>
+    </tr>
+    <tr>
+      <td>工程规划许可证号：</td>
+      <td ><input name='proprolisence' type='text' id='proprolisence' style='width:250px' value="{$vo_add.proprolisence}" /> </td>
+    </tr>
+    <tr>
+      <td>施工许可证号：</td>
+      <td ><input name='proconlisence' type='text' id='proconlisence' style='width:250px' value="{$vo_add.proconlisence}" /></td>
+    </tr>
+    <tr>
+      <td>已售房屋面积：</td>
+      <td ><input name='prosalearea' type='text' id='prosalearea' value="{$vo_add.prosalearea}" /></td>
+    </tr>
+    <tr>
+      <td> 当前可售套数：</td>
+      <td ><input name='pronoaleanum' type='text' id='pronoaleanum' value="{$vo_add.pronoaleanum}" /></td>
+    </tr>
+    <tr>
+      <td> 当前可售面积：</td>
+      <td ><input name='pronosalearea' type='text' id='pronosalearea' value="{$vo_add.ronosalearea}" /></td>
+    </tr>
+    <tr>
+      <td>已预定套数：</td>
+      <td><input name='proydnum' type='text' id='proydnum' value="{$vo_add.proydnum}" /></td>
+    </tr>
+    <tr>
+      <td>住宅预售价：</td>
+      <td ><input name='proprice' type='text' id='proprice' value="{$vo_add.proprice}" /> 
+        </td>
+    </tr>
+    <tr>
+      <td>非住宅预售价：</td>
+      <td ><input name='pronoprice' type='text' id='pronoprice' value="{$vo_add.pronoprice}" /> 
+      </td>
+    </tr>
+    <tr>
+      <td>用途：</td>
+      <td><input name='protype' type='text' id='protype' style='width:250px' value="{$vo_add.protype}" />
+      </td>
+    </tr>
+    <tr>
+      <td>建筑结构：</td>
+      <td><input name='promaketype' type='text' id='promaketype' style='width:250px' value="{$vo_add.promaketype}" />
+      </td>
+    </tr>
+</table>
+<div align="center"><br>
+  <input type="submit" value=" 编 辑 " class="df_button"/>  
+  &nbsp;&nbsp;&nbsp;&nbsp;  <input type="reset" value=" 取 消 " class="df_button">
+<br>
+</P>
+</div>
+</form>
+<include file="Public:footer" />

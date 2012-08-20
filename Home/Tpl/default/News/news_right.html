@@ -1,0 +1,37 @@
+		    <!--相关阅读-->
+			<div class="con_right_4bian268px">
+			<div class="title_style1 height_30px">
+					  <div class="blue_12px_f title_nv_style1" style="line-height:30px;">&nbsp;&nbsp;婚礼资讯</div>
+			</div>
+				  <div class="height_10px"></div>
+				  
+				  <volist name="news_hlzx" id="vo">
+				  	<eq name="i" value="1">
+					<div class="red_14px_a height_25px_text">&middot;<a href="__APP__/news-{$vo.id}" title="{$vo.title}">{$vo.title|mb_substr=###,0,17,'utf8'}</a></div>
+					<else/>
+					<div class="gray_14px_r_a height_25px_text">&middot;<a href="__APP__/news-{$vo.id}" title="{$vo.title}">{$vo.title|mb_substr=###,0,17,'utf8'}</a></div>
+					</eq>
+				  </volist>
+							
+				  <div class="height_10px"></div>
+			</div>        
+        	<!--end 相关阅读-->
+			
+		    <!--相关阅读-->
+			<div class="con_right_4bian268px">
+				  <div class="title_style1 height_30px">
+					  <div class="blue_12px_f title_nv_style1" style="line-height:30px;">&nbsp;&nbsp;商家活动</div>
+				  </div>
+				  <div class="height_10px"></div>
+				  
+				  <volist name="news_clhl" id="vo" >
+				  <ul style="margin:5px 5px;">
+				  <li class="gray_14px_r_a" style="margin:5px 0;"><strong><a href="__APP__/news-{$vo.id}" title="{$vo.title}">{$vo.title}</a></strong></li>
+				  <li class="gray_12px_r_a"><a href="__APP__/news-{$vo.id}">{$vo.remark|mb_substr=###,0,80,'utf-8'}..</a></li>
+				  <li style="height:10px;"></li>
+				  </ul>
+				  </volist>
+							
+				  <div class="height_10px"></div>
+			</div>        
+        	<!--end 相关阅读-->

@@ -1,0 +1,68 @@
+<div class="login">
+<form action="__URL__/checkLoginAjax" method="POST">
+
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="27%">&nbsp;</td>
+      <td width="27%">&nbsp;</td>
+      <td width="6%">&nbsp;</td>
+      <td width="40%">&nbsp;</td>
+      </tr>
+    <tr>
+      <td height="40" align="right" class="blue_14px_f">E-mail：</td>
+      <td height="40" colspan="3" align="left"><input id="ajax_email" name="ajax_email" type="text" class="input_login"  /></td>
+      </tr>
+    <tr>
+      <td height="40" align="right" class="blue_14px_f" style="font-family:宋体">密&nbsp;&nbsp;码：</td>
+      <td height="40" colspan="3" align="left"><input id="ajax_password" name="ajax_password" type="password" maxlength="32" class="input_login"/>
+        <div class="float_right_25pxlineheight"><span class="blue_a" ><!--<a href="#">&nbsp;&nbsp;忘记密码?</a> --></span></div></td>
+      </tr>
+    <tr>
+      <td height="40" align="right" class="blue_14px_f">验证码：</td>
+      <td height="40" class="blue_a"><input name="ajax_checkcode" type="text" class="input_yan" id="ajax_checkcode" size="4" maxlength="4" /> </td>
+      <td height="40"> <img id="verify" src="__APP__/Public/verify" alt="验证码" align="absmiddle" /></td>
+      <td height="40" align="left"><span class="blue_a"><a href="javascript:fleshVerify()" >&nbsp;&nbsp;看不清？</a></span></td>
+      </tr>
+    <tr>
+      <td height="30">&nbsp;</td>
+      <td height="30" colspan="3" align="left"><input  type="checkbox" name="hold" value="1" checked="checked"/>
+        <span class="blue_12px_f">下次自动登录</span></td>
+      </tr>
+    <tr>
+      <td height="30" colspan="4" align="center" ><img src="../Public/Images/log.png" width="80" height="30" onclick="submitLoginAjax()"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="../Public/Images/login.png" alt="" width="80" height="30" onclick="registerTF()"/></td>
+      </tr>
+  </table>
+</form>
+</div>
+<script language="JavaScript" type="text/javascript">
+//提交Ajax登录 -- xiongyan
+function submitLoginAjax(){
+		//var postData = $("#search_form").serialize();
+		var postData = {"email": $("#ajax_email").val(), "password": $("#ajax_password").val(), "checkcode": $("#ajax_checkcode").val() };
+		if(postData.email == ''){
+			//msgBox('请输入您注册时使用的邮箱!',status='0',title='操作失败',width='300'); //提示
+			alert('请输入您注册时使用的邮箱!');
+			return; 
+		}
+		$.post( '__APP__/Login/checkLoginAjax', postData, function(msg) {	
+				if(msg && msg['success']){
+					secyMsgBoxClose();                 //先关再开
+					secyMsgBox( '__APP__/Secretary/index' ); //刷新小秘书
+					
+					$("#index_login").html('');  //清空登录框
+					var login_html='<a href="__APP__/Account"><strong>'+msg['data']+'</strong></a> <a href="__APP__/Account/logout/">退出</a> | <a href="__APP__/">首页</a> | <a href="javascript:bookmark();">加入收藏</a>';
+					$("#index_head_right").html(login_html);  //写入登录头信息
+					
+					msgBox(msg["info"],status='1',title='操作成功',width='300'); //提示
+					setTimeOut("msgBoxClose()",1000);
+					//
+				}else{
+					alert(msg["info"]);	
+					//msgBox(msg["info"],status='0',title='操作失败',width='300'); //提示
+				}
+				
+		}, 
+		"json"
+		);
+}
+</script>

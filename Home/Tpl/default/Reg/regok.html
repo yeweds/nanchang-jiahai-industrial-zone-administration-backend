@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$Think.config.cfg_sitename}-注册成功</title>
+<link href="../Public/Css/common.css" rel="stylesheet" type="text/css" />
+
+<style>
+h1,ul,li{margin:0px;padding:0px; list-style-type:none; text-align:left;}
+/* regok */
+.regok{ margin:30px auto; text-align:center; width:500px; height:300px; color:#999;}
+.regok h1{ background:url(../Images/Result.jpg) no-repeat; height:40px; width:400px; font-weight:bold; font-size:23px; padding-top:70px; text-align:left; padding-left:60px;}
+.regok ul{ font-size:14px; padding-top:10px;}
+.regok ul li{ line-height:25px;}
+.regok ul li h5{ font-size:15px; color:#999999; font-weight:bold; margin-top:30px; margin-bottom:10px;}
+.regok ul li h6{}
+.regok ul li h6 a:link,.regok ul li h6 a:visited{ font-size:14px; margin-right:10px; border:1px solid #F2BD46; background:#FDF0B9; padding:4px 8px 4px 8px; color:#000000}
+.regok strong{ color:#FF0000}
+</style>
+</head>
+
+<body>
+<include file="Public:header" /> <!--头部包含共用 -->
+
+<div class="regok">
+<h1><?php echo $_SESSION['uname'] ?>，恭喜您注册成功!</h1>
+<ul>
+<li>您已成功注册为&nbsp;{$Think.config.cfg_domain}&nbsp;用户，并已登录网站:</li>
+<li>用户名:<strong><?php echo $_SESSION['uname'] ?></strong> &nbsp;&nbsp; 密  码:<strong><?php echo $_SESSION['pwd'] ?></strong></li>
+<li><strong>{$msg}</strong></li>
+<li><h5>您可以进行如下操作：</h5><h6><a href="__APP__/Account/">完善资料</a> <a href="__APP__/Login/mimic_enter/">模拟进店</a> <a href="__APP__/">返回首页</a></h6></li>
+</ul>
+</div>
+
+<include file="Public:footer" /> {//共享登录尾部}
+</body>
+</html>

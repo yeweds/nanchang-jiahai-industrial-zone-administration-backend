@@ -1,0 +1,66 @@
+<include file="Public:header" />
+<script>
+function checkUpload(){
+    if(document.getElementById('attach_arr').value==''){
+         alert("请选择图片类型");
+		 return false;
+	}
+	if(document.getElementById('savename').value==''){
+         alert("请填写保存名称");
+		 return false;
+	}
+	if(document.getElementById('file').value==''){
+         alert("请上传图片");
+		 return false;
+	}
+}
+
+var count= 2 ;   
+var maxfile =15;
+function addUpload() {  
+	if(count >= maxfile)    return;//限制最多maxfile个文件框
+	count++; 
+	//自增id不同的HTML对象，并附加到容器最后
+	var newDiv =  "<div id=divUpload" + count +">"
+		+ " <input id=file" + count + " type=file size=50 name=file[]>"
+		+ " <a href=javascript:delUpload('divUpload" + count + "');>删除</a>"
+		+ " </div>";   
+	  document.getElementById("uploadContent").insertAdjacentHTML("beforeEnd", newDiv);     
+}   
+    //删除指定元素
+function delUpload(diva) {  
+	count--; 
+	document.getElementById(diva).parentNode.removeChild(document.getElementById(diva));   
+}   
+</script>
+<link href="../Public/Css/main.css" rel="stylesheet" type="text/css"/>
+<div class="bodyTitle">
+	<div class="bodyTitleLeft"></div>
+  <div class="bodyTitleText">重新生成黑白图像</div>
+</div>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td height="90">&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td class="fontBold">已成功生成黑白图像!</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+<table width="100%" border="0" cellpadding="0" cellspacing="0"></table>
+<br>
+<include file="Public:footer" />
+<script language="javascript">
+//function FCKeditor_OnComplete( editorInstance )
+//{
+ //  editorInstance.SwitchEditMode();
+//}
+</script>

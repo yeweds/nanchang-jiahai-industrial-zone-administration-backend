@@ -1,0 +1,10 @@
+<div class="more black_a"><a href="__APP__/News/type/classid/{$news.dyj.id}">更多&gt;&gt;</a></div>
+
+          <div class="height_5px"></div>
+          <!--循环输出-->
+          <volist name="news.dyj.titles" id="vo">
+          	<div class="height_22px_text">&nbsp;·<span class="{$vo.title_color|title_style=###}"><a href="__APP__/news-{$vo.id}" title="{$vo.title|mystr_replace=###}">{$vo.title|mb_substr=###,0,24,'utf-8'}</a></span></div>
+          </volist>
+          <!--循环-->            
+            <div class="height_5px"></div>
+   

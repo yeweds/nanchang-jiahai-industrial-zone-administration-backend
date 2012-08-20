@@ -1,0 +1,51 @@
+<include file="Public:header" />
+
+<div class="bodyTitle">
+	<div class="bodyTitleLeft"></div>
+  <div class="bodyTitleText">修改ID映射关系</div>
+</div>
+
+<form method="post" action="__URL__/edit_id_mapping">
+		<table width="95%" style="font-family: '宋体', Simsun;">
+		  <tr>
+			  <td>ID：</td>
+		  <td>
+		  <input type="hidden" name="act" value="update"/>
+		  <input type="text" name="id" value="{$vo.id}" readOnly/></td>
+		  </tr>
+		  <tr>
+			  <td>楼盘名称： </td>
+	        <td>{$vo.lpname}</td>
+		  </tr>
+		  <tr>
+			  <td>本站info_id：</td>
+		  <td>{$vo.info_id}</td>
+		  </tr>
+		  
+		  <tr>
+			  <td>区域ID：</td>
+		    <td><input name="range_id" type='text'  id='range_id' size="22" value="{$vo.range_id}" /></td>
+		  </tr>
+		  <tr>
+			 <td>金渠道URL：</td>
+			 <td><input name="gold_url" type='text'  id='gold_url' size="50" value="{$vo.gold_url}" /></td>
+		  </tr> 
+		  <tr>
+			 <td>搜房网URL：</td>
+			 <td><input name="soufun_url" type='text'  id='soufun_url' size="50" value="{$vo.soufun_url}" /></td>
+		  </tr> 
+		  <tr>
+			 <td>新建县URL：</td>
+			 <td><input name="xjx_url" type='text'  id='xjx_url' size="50" value="{$vo.xjx_url}" /></td>
+		  </tr>
+		  <tr>
+			 <td>南昌县URL：</td>
+			 <td><input name="ncx_url" type='text'  id='ncx_url' size="50" value="{$vo.ncx_url}" /></td>
+		  </tr>
+		</table>
+		<div style="margin:12px;"><input type="submit"  value="确定修改" class="df_button" />&nbsp;&nbsp;
+			<input type="reset" value="还原重填" class="df_button" /></div>
+</form>
+<p class="i">注意：非系统管理员，请勿随意修改，以免影响网站数据！</p>
+
+<include file="Public:footer" />

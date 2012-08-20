@@ -1,0 +1,325 @@
+<!--start腾房公共头部-->
+<div id="tf_head">
+	<div class="th_center white_a">
+	  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+	    <tr>
+	      <td width="64%"><a href="__APP__/">0791婚庆网首页</a> | <a href="__APP__/News/">南昌婚庆资讯</a> | <a href="__APP__/Shop">商家大全</a> | <a href="__APP__/Check_error/" target="_blank">欢迎纠错</a></td>
+	      <td width="5%">&nbsp;</td>
+	      <td width="31%" align="right">
+          <php> if($userInfo){ </php> 
+您好， <strong>{$userInfo.username}</strong> <a href="__APP__/Account/logout/">退出</a>
+<php>} else{</php>
+          <a href="__APP__/Reg/">注册</a> | <a href="__APP__/Login/index/fromUrl/{$Think.const.__SELF__|base64_encode}">登录</a><php>} </php>	
+          
+           | <a href="#" onclick="bookmark()">加入收藏</a>&nbsp;</td>
+        </tr>
+      </table>
+	</div>
+</div>
+<!--end腾房公共头部-->
+
+<div id="head_nv">
+  <div id="head_photo1">
+    <div class="height_5px"></div>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr class="green_nv_a">
+        <td width="50" height="20" align="center" class="green_nv_a">&nbsp;</td>
+        <td height="20" align="center" class="green_nv_a"><a href="__APP__/news-list-21">每日焦点</a></td>
+        <td align="center" class="green_nv_a"><a href="__APP__/news-list-26">婚礼资讯</a></td>
+        <td width="100" align="center" class="green_nv_a">&nbsp;</td>
+        <td align="center" class="green_nv_a"><a href="__APP__/news-list-19">商家活动</a></td>
+        <td align="center" class="green_nv_a"><a href="__APP__/news-list-13">婚礼百货</a></td>
+        <td width="100" align="center">&nbsp;</td>
+        <td align="center" class="green_nv_a"><a href="__APP__/news-list-29">蜜月旅行</a></td>
+        <td align="center" class="green_nv_a"><a href="__APP__/news-list-htpk">话题 P K</a></td>
+      </tr>
+      <tr class="green_nv_a">
+        <td height="20" align="center" class="green_nv_a">&nbsp;</td>
+        <td align="center" class="green_nv_a"><a href="__APP__/news-list-27">时尚婚礼</a></td>
+        <td align="center" class="green_nv_a"><a href="__APP__/news-list-28">婚俗礼仪</a></td>
+        <td width="56" align="center" class="green_nv_a">&nbsp;</td>
+        <td align="center" class="green_nv_a"><a href="__APP__/news-list-12">0791独家</a></td>
+        <td height="20" align="center" class="green_nv_a"><a href="__APP__/news-list-rdtj">热点推荐</a></td>
+        <td width="65" align="center">&nbsp;</td>
+        <td align="center" class="green_nv_a"><a href="__APP__/Reviews/">商家点评</a></td>
+        <td align="center" class="green_nv_a"><a href="__APP__/Ask">解答疑问</a></td>
+      </tr>
+    </table>
+  </div>
+</div>
+<!--<div class="height_10px"></div> -->
+<!-- 全屏广告 S -->
+
+<!-- 全屏广告 E -->
+<div class="height_10px"></div>
+
+ <!--start 浮动图层-->
+<div id="head_search_inc">
+  <table width="960" border="0" cellpadding="0" cellspacing="0" id="head_search_bg">
+   <form method="get" action="__APP__/Shop" id="search_form" target="_blank">{__NOTOKEN__}
+    <tr>
+      <td width="269" height="100"><a href="__APP__/" title="南昌婚庆网"><img src="../Public/Images/logo.png" alt="南昌婚庆网LOGO" width="269" height="100" border="0" /></a></td>
+      <td width="620" height="100" align="left" valign="middle" ><table width="600" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td height="35"><table width="100%" border="0" cellpadding="0" cellspacing="0" >
+            <tr>
+              <td width="140" height="35" align="left" bgcolor="#FFFFFF"><div id="shop_cls_id"></div></td>
+              <td height="35" bgcolor="#FFFFFF"><input name="key" type="text" class="input_max" id="key" autocomplete="off" value="请输入搜索条件" /></td>
+              <td width="" height="35" bgcolor="#FFFFFF">
+                <input type="submit" width="80" height="40" class="sub" id="sub" onMouseDown="this.className='sub sub_d'" onMouseOut="this.className='sub'"   onmousemove="this.className='sub sub_h'" value="" />
+             </td>
+            </tr>
+          </table>
+            <div class="height_10px"></div>
+          <table width="100%" border="0" cellpadding="0" cellspacing="0" >
+            <tr>
+              <td width="140" height="35" align="left" bgcolor="#FFFFFF"><div id="range_id_inc"></div></td>
+              <td width="140" height="35" align="left" bgcolor="#FFFFFF"><div id="lp_price_range_inc"></div></td>
+              <td width="">&nbsp;</td>
+              <!-- <td width="23" height="35"><input type="radio" name="lp_state" id="lp_state1" value="1" /></td>
+              <td width="33" height="35"><label for="lp_state1">在售</label></td>
+              <td width="20" height="35"><input type="radio" name="lp_state" id="lp_state2" value="2" /></td>
+              <td width="37" height="35"><label for="lp_state2">待售</label></td>
+              <td width="20" height="35"><input name="lp_state" type="radio" id="lp_state3" value="" checked="checked" /></td>
+              <td width="36" height="35"><label for="lp_state3">全部</label></td> -->
+              <td width="" height="35"><!--<div id="sea_more">&nbsp;&nbsp;更多搜索条件</div> --></td>
+            </tr>
+        </table></td>
+        </tr>
+      </table></td>
+    </tr>
+    </form>
+  </table>
+</div>
+<div class="height_8px"></div>
+
+<!--<div class="height_10px"></div> -->
+<script type="text/javascript" src="../Public/Js/select_box.js"></script><!--下拉框对象-->
+<script type="text/javascript">
+//============配置区=====================
+var WEBROOT='__ROOT__';
+var loadImage= '../Public/Images/load.gif'; //-----ajax加载时显示的图片
+var loadImageF= '../Public/Images/load_f.png'; //-----ajax加载时显示的图片
+var mapLoadURL="__URL__/map";  //加载地图所在的网页路径
+var op=1;
+var loadAdTime=3000;  //加载广告图片的时间
+var isMoveSea=0;           //检查鼠标是否在搜索图层上
+var isMoveSea1=0;        //兼容控件
+var isUseHelpOnce='1';  //是否关闭新手上路2011-5-24
+//============end==配置=======================
+</script>
+
+<script type="text/javascript" src="__PUBLIC__/Data/search_data.js"></script><!--搜索列表数据缓存-->
+<!-- 用于词联想导入库开始 -->
+	<link type="text/css" href="__PUBLIC__/Js/Util/jquery.autocomplete.css" rel="stylesheet" />
+	<script type="text/javascript" src="__PUBLIC__/Js/Util/jquery.autocomplete.js"></script>
+<!-- 用于词联想导入库结束 -->
+<literal>
+<script type="text/javascript">
+var priceHtml='<div class="custum_price">  <table width="220" border="0" cellpadding="0" cellspacing="0">    <tr>      <td width="63" height="25" align="right"><label for="min_price"></label>      <input name="min_price" type="text" class="select_min_input" id="min_price" /></td>      <td width="10" height="25" align="center">-</td>      <td width="53" height="25"><label for="max_price"></label>      <input name="max_price" type="text" class="select_min_input" id="max_price" /></td>      <td width="42">元</td>      <td width="82" height="25"><img src="../Public/Images/select_ok.gif" width="60" height="25" style="cursor:pointer" onclick="sendPrice()" /></td>    </tr>  </table></div>';
+
+//要创建的全局下拉框对象列表相关值
+
+var optionRangeId={id:'range_id_inc',inputId:'range_id',defText:'-不限外景地-',defVal:'',text:optionRangeIdTextA,value:optionRangeIdValueA,beforeHtml:'',afterHtml:'',width:'138',height:'auto'};
+//商家类型
+var optionLpWuyetype={id:'shop_cls_id',inputId:'shop_cls_id',defText:'-商家类型-',defVal:'',text:optionLpWuyetypeTextA,value:optionLpWuyetypeValueA,beforeHtml:'',afterHtml:'',width:'138',height:'auto'};
+//价格
+var  optionLpPriceRange={id:'lp_price_range_inc',inputId:'lp_price_range',defText:'-预算价格-',defVal:'',text:optionLpPriceRangeTextA,value:optionLpPriceRangeValueA,beforeHtml:'',afterHtml:priceHtml,width:'220',height:'auto'};
+
+
+//要创建的全局下拉框对象
+var optionRangeIdObject;//区域
+var optionLpWuyetypeObject;//物业类型
+var  optionLpPriceRangeObject;//均价
+$(function(){
+	optionRangeIdObject=new selectBox(optionRangeId);
+	optionLpWuyetypeObject=new selectBox(optionLpWuyetype);
+	optionLpPriceRangeObject=new selectBox(optionLpPriceRange);
+});
+
+//价格范围自定义传入值;
+function sendPrice(){
+	var minPrice=$('#min_price').val().replace(/[ ]+/g,'');
+	var maxPrice=$('#max_price').val().replace(/[ ]+/g,'');
+	if(minPrice==''||maxPrice==''){
+		alert('请输入数字');
+		return;
+	}
+	
+	if(/[^0-9]+/.test(minPrice)||/[^0-9]+/.test(minPrice)){
+		alert('请输入有效数字');
+		return;	
+	}
+	if(Number(minPrice)>Number(maxPrice)){
+		alert('您的输入不符合要求');
+		return;		
+		
+	}
+
+	var price = minPrice+'-'+maxPrice;
+	optionLpPriceRangeObject.sendValue(text=price,value=price)		
+}
+</script>
+</literal>
+<script type="text/javascript">
+$(function(){
+
+	/*------------输入框效果---------------*/
+	$("input").focus(function(){
+		var val=$(this).val();
+		switch(val){
+			case '请输入搜索条件':	$(this).val('');		
+			break;
+		}
+	});
+	$("#key").blur(function(){
+		if($(this).val()==''){
+			$(this).val('请输入搜索条件');
+		}
+	});	
+	/*------------end----输入框效果---------------*/
+	
+		//增加搜索键盘支持
+	   $('#search').keyup(function(event) {
+			  if(event.keyCode==13){    
+					$("#sub").click();
+			  }	   
+	   });
+	
+ //词联想-----------start 
+  //输入框事件
+	function format(msg) {
+		return " [" + msg.area + "]" + msg.label;
+	}
+	
+	$("#key").autocomplete('__APP__/index.php/Index/get_info_mnemonic/', {
+		multiple: false,
+		dataType: "json",
+		minChars: 1,
+		parse: function(data) {
+			return $.map(data, function(row) {
+				return {
+					data: row,
+					value: row.name,
+					result: row.label
+				}
+			});
+		},
+		formatItem: function(item) {
+			return format(item);
+		}
+	});
+
+//词联想-----------end 	
+
+
+//提交普通搜索 -- xiongy
+$("#search_form").submit(function(){
+		var wd = $("#key").val();
+		if(wd == '请输入搜索条件') wd ='' ;
+
+		$("#key").val(wd);
+		var lp_state=$('#lp_state').val();
+		if(!lp_state){ lp_state='';}
+		var url='__APP__/Shop?key='+encodeURI($('#key').val())+'&range_id='+encodeURI($('#range_id').val())+'&shop_cls_id='+encodeURI($('#shop_cls_id').val())+'&price_range='+encodeURI($('#lp_price_range').val());
+		//alert($('#lp_price_range').val());
+		window.open(url,'_blank');
+		return false;
+});
+
+});
+</script>
+<style type="text/css" >
+#head_nv_inc {
+	background-image: url(../Public/Images/header_nv_bg.png);
+	background-repeat: repeat-x;
+	height: 50px;
+	width: 960px;
+	background-color: #FFF;
+	margin-right: auto;
+	margin-left: auto;
+	text-align: left;
+}
+.head_nv_left {
+	background-image: url(../Public/Images/header_nv_bgleft.png);
+	background-repeat: no-repeat;
+	background-position: left top;
+}
+.head_nv_right {
+	background-image: url(../Public/Images/header_nv_bgright.png);
+	background-repeat: no-repeat;
+	background-position: right top;
+}
+.head_nv_c {
+	background-image: url(../Public/Images/header_nv_c.png);
+	background-repeat: no-repeat;
+	height: 50px;
+	width: 100px;
+	color: #FFF;
+	font-size: 14px;
+	font-family: "微软雅黑";
+	text-align: center;
+	line-height: 35px;
+	cursor:pointer;
+}
+.head_nv_m {
+	background-image: url(../Public/Images/head_nv_m.png);
+	background-repeat: no-repeat;
+	height: 50px;
+	width: 100px;
+	font-size: 14px;
+	text-align: center;
+	line-height: 35px;
+	cursor:pointer;	
+}
+.head_nv {
+	height: 50px;
+	width: 100px;
+	font-size: 14px;
+	text-align: center;
+	line-height: 35px;
+	cursor:pointer;
+}
+#head_search_inc {
+	height: 110px;
+	width: 960px;
+	margin-right: auto;
+	margin-left: auto;
+	background-color: #FFF;
+}
+
+#range_id_inc {
+	height: 35px;
+	width: 140px;
+	float: left;
+}
+#shop_cls_id {
+	height: 35px;
+	width: 140px;
+}
+#lp_price_range_inc {
+	height: 35px;
+	width: 140px;
+}
+.input_max {
+	line-height: 33px;
+	height: 33px;
+	width: 398px;
+	color: #F20018;
+	border: 0px solid #FFF;
+	float: left;
+	padding-top: 0px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 10px;
+}
+#head_search_bg {
+	background-image: url(../Public/Images/head_search_bg.png);
+	background-color: #FFF;
+	background-repeat: no-repeat; font-weight:normal;
+}
+
+.sub{width:80px;height:40px;padding:0;border:0; background:#fff url(../Public/Images/sea_button.png) 0 0px;cursor:pointer;}
+.sub_h{background:#fff url(../Public/Images/sea_button_m.png) 0 0px;}
+.sub_d{background:#fff url(../Public/Images/sea_button_c.png) 0 0px;}
+</style>

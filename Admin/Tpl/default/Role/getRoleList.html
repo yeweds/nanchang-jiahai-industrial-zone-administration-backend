@@ -1,0 +1,27 @@
+<include file="Public:header" />
+
+<div class="bodyTitle">
+	<div class="bodyTitleLeft"></div>
+  <div class="bodyTitleText">角色管理</div>
+</div>
+<h3 class="marginbot"><a href="__URL__/add" class="sgbtn">＋添加用户组</a><a href="__URL__/" class="sgbtn">返回用户组</a></h3>
+		
+        
+         <table class="datalist fixwidth">
+              <tr >
+                <th width="13%" bgcolor="#FFFFFF">用户组组ID</th>
+                <th width="20%"  bgcolor="#FFFFFF">用户组名称</th>
+                <th width="15%" height="10%" bgcolor="#FFFFFF">权限名称</th>
+                <th bgcolor="#FFFFFF">功能说明</th>
+              </tr>
+              <volist name="list" id="vo">
+                <tr>
+                  <td height="20" bgcolor="#FFFFFF">{$role.id}</td>
+                  <td bgcolor="#FFFFFF" >{$role.name}</td>
+                  <td bgcolor="#FFFFFF" >{$vo.name}</td>
+                  <td bgcolor="#FFFFFF" >{$vo.description}</td>
+                </tr>
+              </volist>
+               <empty name="list"><tr><td colspan="4" bgcolor="#FFFFFF" align="center">无内容</td></tr></empty>
+            </table>
+<include file="Public:footer" />

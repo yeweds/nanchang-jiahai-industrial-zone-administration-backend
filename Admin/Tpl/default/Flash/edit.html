@@ -1,0 +1,69 @@
+<include file="Public:header" />
+<div class="bodyTitle">
+	<div class="bodyTitleLeft"></div>
+  <div class="bodyTitleText">修改幻灯</div>
+</div>
+
+<table width="95%" border="0"  align=center cellpadding="3" cellspacing="2" bgcolor="#FFFFFF" class="admintable">
+<form action="__URL__/doedit"  name="myform" method="post" enctype ="multipart/form-data">
+<tr> 
+<td width="20%" class="b1_1">标题</td>
+<td class="b1_1"><input name="title" value="{$list.title}" type="text" id="Title" size="40" maxlength="50" onBlur="CheckName();" onChange="CheckName();"><span class="note">注：最多50个字符</span></td>
+</tr>
+<tr>
+  <td class="b1_1">文章地址</td>
+  <td class="b1_1"><input name="url" type="text" size="50" value="{$list.url}"></td>
+</tr>
+<tr>
+  <td class="b1_1">图片上传</td>
+  <td class="b1_1">
+  <span id="input_up"><input name="pic" type="text" id="pic" value="{$list.pic}" size="40" readonly /> 
+    <a href="#" onclick="show_input_reup()"><font color="red">重传</font></a></span>
+	<span id="input_reup" style="display:none"><input name="pic_reup" type="file" id="pic_reup" size="40" /> 
+    <a href="#" onclick="show_input_up()"><font color="red">返回</font></a></span>
+	&nbsp;&nbsp;&nbsp;&nbsp;首页幻灯图片尺寸：770 * 310
+  </td>
+</tr>
+<tr>
+  <td class="b1_1">幻灯是否显示</td>
+  <td colspan=4 class="b1_1"><input name="status" onClick="if(this.checked){
+			  wk.style.display = '';
+		  }" type="radio" class="noborder" value="1" <eq name="list.status" value= "1">checked</eq>>
+是
+  <input name="status" onClick="if(this.checked){
+			  wk.style.display = 'none';
+		  }" type="radio" class="noborder" value="0" <eq name="list.status" value= "0">checked</eq>>
+否</td>
+</tr>
+<tr id="wk">
+  <td class="b1_1">幻灯排序</td>
+  <td colspan=4 class=b1_1><input name="rank" type="text" id="rank" value="{$list.rank}" size="4" maxlength="2"></td>
+</tr>
+
+<td width="20%" class="b1_1"></td>
+<td class="b1_1"><input name="submit" type="submit" class="df_button" value="修 改">&nbsp;&nbsp;<input type="button" class="df_button" onClick="history.go(-1)" value="返 回"></td>
+<input type="hidden" name="id" value="{$list.id}"/>
+</tr>
+</form>
+</table>
+<div style="text-align:center;margin:10px;">
+<hr>
+	<neq name="list.pic" value=""><img src="__PUBLIC__/Upload/hd/thumb_{$list.pic}" width="250" /></neq>
+</div>
+
+<p class="i">上传图片不能太大，请先用图片处理软件处理成web格式的图片，分辩率为:72。分辩率太高将使网页变慢或打不开！</p>
+
+<include file="Public:footer" />
+
+<script type="text/javascript">
+function show_input_reup(){
+//重传图片
+	$("#input_up").css("display","none");
+	$("#input_reup").css("display","inline");
+}
+function show_input_up(){
+//显示文本框
+	$("#input_reup").css("display","none");
+	$("#input_up").css("display","inline");
+}
+</script>

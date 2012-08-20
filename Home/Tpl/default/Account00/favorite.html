@@ -1,0 +1,159 @@
+<include file="Account:account_header" /> <!-- 用户中心头部 -->
+<link href="../Public/Css/user.css" rel="stylesheet" type="text/css" />
+<div id="content_inc">
+  <div class="width_10px"></div>
+  <include file="Account:account_left" /> <!-- 左侧导航 -->
+  <div class="width_20px"></div>
+  <div id="con_center_inc">
+    <div class="width_15px"></div>
+    <div id="con_center">
+    	 <div id="con_center_head">
+    	   <div class="height_40px_lineheight"><strong>晚上好，<span class="green_14px_f">{$userInfo.username}</span>，</strong>欢迎来到腾房后院！</div>
+    	   <div class="height_30px">
+    	     <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    	       <tr>
+    	         <td width="20" height="30" class="bian_b1px">&nbsp;</td>
+    	         <td height="30" class="con_center_nv_c"><strong>购房聚焦</strong></td>
+    	         <td height="30" class="con_center_nv"><span class="gray_a"><a href="#">&nbsp;&nbsp;找邻居</a></span>&nbsp;|</td>
+    	         <td height="30" class="con_center_nv"><span class="gray_a"><a href="#">邻居近况</a></span></td>
+    	         <td height="30" class="bian_b1px">&nbsp;</td>
+  	         </tr>
+  	       </table>
+    	   </div>
+    	 </div>
+    	 <div class="height_10px"></div>
+    	 <div class="lineheight30px"><img src="../Public/Images/note_c_ico.gif" width="16" height="16" align="baseline" />腾房小秘书提醒您：</div>
+    	 <div class="lineheight25px">您所寻找的：上海市 &gt; 金山区 &gt; 别墅 &gt; 7000-10000元</div>
+   	  <div class="lineheight25px">新消息<strong><span class="green_14px_f">1</span></strong>封，符合找房条件楼盘更新<strong><span class="green_14px_f">2</span></strong>个，动态新增<strong><span class="green_14px_f">1</span></strong>条，资讯新增<strong><span class="green_14px_f">2</span></strong>条，收藏<strong><span class="green_14px_f">4</span></strong>个，备选<strong><span class="green_14px_f">1</span></strong>个</div>
+    	 <div class="lineheight25px"><span class="blue_bian_a"><a href="#">我的找房条件</a> | <a href="#">提交购房需求单</a> | <a href="#">领取今日狙房小报</a></span></div>
+    	 <div class="height_10px"></div>
+    	 <div class="dian_bian_b1px"></div>
+    	 <div class="height_10px"></div>
+<div class="lineheight25px"><strong>我收藏过的楼盘</strong></div>
+    	 <div class="lineheight25px"><img src="../Public/Images/user_lp_table_nv.png" width="550" height="25" /></div>
+    	 <div id="user_lp">
+		 <volist name="fav_list" id="vo">
+         <div class="lineheight30px"  onmouseover="userLP($(this),id)">
+    	   <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    	     <tr>
+    	       <td width="10">&nbsp;</td>
+    	       <td width="90">{$vo.lpname} </td>
+    	       <td width="90" align="center">{$vo.lpprice}元/㎡</td>
+    	       <td width="85" align="center"><span class="red_12px_fg"><strong><egt name="vo.up_span" value="0">↑+<else/>↓</egt></strong></span>{$vo.up_span}%</td>
+    	       <td width="103" align="center">{$vo.lp_min_price}元/㎡</td>
+    	       <td width="91" align="center">{$vo.lp_max_price}元/㎡</td>
+    	       <td width="81" align="center"><div class="lp_star_{$vo.score}"></div></td>
+  	       </tr>
+  	     </table>
+    	 </div>
+		 </volist>
+		
+    	<!-- <div class="height_110px_bg"  onmouseover="userLP($(this),id)" >
+    	   <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    	     <tr>
+    	       <td width="10">&nbsp;</td>
+    	       <td width="90" height="30">世纪中央城 </td>
+    	       <td width="90" height="30" align="center">5700元/㎡</td>
+    	       <td width="85" height="30" align="center"><span class="red_12px_fg">↑</span>0.89%</td>
+    	       <td width="103" height="30" align="center">5700元/㎡</td>
+    	       <td width="91" height="30" align="center">8600元/㎡</td>
+    	       <td width="81" height="30" align="center"><div class="lp_star_3"></div></td>
+  	       </tr>
+  	     </table>
+  	       <div class="height_70px_fixed" id="show_lp">
+  	         <div class="width_10px"></div>
+  	         <div class="box_100w_70h_fixed"><img src="../Public/Images/user_lp_pic.png" width="100" height="70" /></div>
+  	         <div class="width_10px"></div>
+             <div class="width_420px">
+               <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                 <tr>
+                   <td width="47%" height="20"><strong>这是我的备选楼盘</strong></td>
+                   <td width="53%" rowspan="2" valign="top" class="black_12px_f">最新消息：世纪中央城二期13# 15#，共 计47套房源火热销售中，均价8600元</td>
+                 </tr>
+                 <tr>
+                   <td height="30"><div class="lp_bn_60w_20h">我想买</div>
+                   <div class="lp_bn_60w_20h">我想看</div>
+                   <div class="lp_bn_60w_20h">我想问</div></td>
+                 </tr>
+                 <tr>
+                   <td height="20" class="black_12px_f">共有<strong><span class="blue_12px_f">128</span></strong>人咨询&nbsp;|&nbsp;&nbsp;房源<strong><span class="blue_12px_f">47</span></strong>套</td>
+                   <td height="20"><span class="lineheight30px"><img src="../Public/Images/user_lp_mobile.gif" width="16" height="16" align="baseline" />&nbsp;新消息短信通知&nbsp;<img src="../Public/Images/email_c_ico.gif" width="16" height="16" align="baseline" />&nbsp;新消息邮件通知</span></td>
+                 </tr>
+               </table>
+             </div>
+  	       </div>
+   	   </div>
+   <div class="lineheight30px" onmouseover="userLP($(this),id)" >
+    	   <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    	     <tr>
+    	       <td width="10">&nbsp;</td>
+    	       <td width="90">世纪中央城 </td>
+    	       <td width="90" align="center">5700元/㎡</td>
+    	       <td width="85" align="center"><span class="red_12px_fg">↑</span>0.89%</td>
+    	       <td width="103" align="center">5700元/㎡</td>
+    	       <td width="91" align="center">8600元/㎡</td>
+    	       <td width="81" align="center"><div class="lp_star_2"></div></td>
+  	       </tr>
+  	     </table>
+  	   </div> -->
+       </div>
+   	  <div class="height_10px"></div>
+    	 <div class="small_nv"><strong>&nbsp;&nbsp;我关注的区域 </strong>
+    	   <div class="other_title_right_float">
+    	     <div class="small_nv_left_jian" id="price2_slide_left"></div>
+    	     <div class="box_460px_widthf" id="price2_slide">
+    	       <div class="box_114px_nv_move" onclick="domAjax('getquyu_price','__URL__/lp_quyu_ajax/range_id/3','get')">东湖区</div>
+    	       <div class="box_114px_nv" onclick="domAjax('getquyu_price','__URL__/lp_quyu_ajax/range_id/4','get')">西湖区</div>
+    	       <div class="box_114px_nv" onclick="domAjax('getquyu_price','__URL__/lp_quyu_ajax/range_id/5','get')">青山湖区</div>
+    	       <div class="box_114px_nv" onclick="domAjax('getquyu_price','__URL__/lp_quyu_ajax/range_id/6','get')">青云谱区</div>
+    	       <div class="box_114px_nv" onclick="domAjax('getquyu_price','__URL__/lp_quyu_ajax/range_id/7','get')">红谷滩区</div>
+    	       <div class="box_114px_nv" onclick="domAjax('getquyu_price','__URL__/lp_quyu_ajax/range_id/8','get')">湾里区</div>
+    	       <div class="box_114px_nv" onclick="domAjax('getquyu_price','__URL__/lp_quyu_ajax/range_id/9','get')">经济区</div>
+    	       <div class="box_114px_nv" onclick="domAjax('getquyu_price','__URL__/lp_quyu_ajax/range_id/10','get')">高新开发区</div>
+    	       <div class="box_114px_nv" onclick="domAjax('getquyu_price','__URL__/lp_quyu_ajax/range_id/11','get')">桑海区</div>
+    	       <div class="box_114px_nv" onclick="domAjax('getquyu_price','__URL__/lp_quyu_ajax/range_id/12','get')">英雄区</div>
+  	       </div>
+    	     <div class="small_nv_right_jian" id="price2_slide_right"></div>
+    	     &nbsp;&nbsp;&nbsp;</div>
+  	   </div>
+   	  <div class="height_10px"></div>
+      <div class="height_220h_fixed" id='getquyu_price'>
+        <div class="box_300w_220h"><span class="box_350_210px_bian"><img src="../Public/Images/tubiao2.png" width="300" height="220" /></span></div>
+        <div class="width_10px"></div>
+        <div class="box_230w_220h">
+          <div class="lp_title_bg"><strong><span class="blue_12px_f">&nbsp;&nbsp;区域最新资讯</span></strong></div>
+          <ul class="lp_zx_list">
+            <li>浦东十二五规划出炉周边楼盘划出炉</li>
+               <li>  告别裸婚划周边地铁沿线小户型14000起</li>
+              <li>90平小户型成过半购房者置业目标</li>
+              <li>高档房成交火热划出炉周边在售新房 </li>
+             <li> 环迪士尼将建成浦东市级商业中心 </li>
+             <li> 告别裸婚地铁沿线划周边小户型14000起 </li>
+              <li>90平小户型成过半购房者置业目  </li>
+          </ul>
+        </div>
+      </div>
+      <div style="clear:both"></div><!--con_center--clear-->
+    </div>
+
+<div style="clear:both"></div><!--con_center_inc--clear-->
+  </div>
+  <div class="width_10px"></div>
+  <div id="con_right_inc">
+    <div class="height_30px_b1px_bian"><strong><span class="blue_12px_f">&nbsp;&nbsp;我的活动计划</span></strong></div>
+    <div class="lineheight30px"><span class="blue_12px_f">&nbsp;&nbsp;[已报名]</span> 五一八一公园房展活动展</div>
+    <div class="height_60h_bg">
+      <div class="lineheight30px_center">还有<span class="green_18px_f">120</span>天</div>
+      <div class="lineheight_25px_center">已有<strong><span class="blue_12px_f">153</span></strong>人报名哦！</div>
+    </div>
+    <div class="height_10px"></div>
+    <div class="lineheight30px">&nbsp;&nbsp;&nbsp;&nbsp;邀请朋友来：<img style="cursor:pointer" src="../Public/Images/user_from.gif" width="120" height="25" align="absmiddle" /></div>
+    <div class="lineheight30px">&nbsp;&nbsp;&nbsp;&nbsp;提醒：未开启<span class="blue_a"> <a href="#">设置&gt;&gt;</a></span></div>
+    <div class="lineheight30px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;咨询：0791-8107817 8107819</div>
+    <div class="lineheight30px">&nbsp;&nbsp;&nbsp;&nbsp;活动地址：南昌市八一公园</div>
+    <div class="lineheight30px">&nbsp;&nbsp;&nbsp;&nbsp;乘车路线：2路，11路，旅游1线</div>
+<div style="clear:both"></div><!--con_right_inc--clear-->
+  </div>
+  <div style="clear:both"></div><!--content_inc--clear-->
+</div>
+<include file="Account:account_footer" /><!--用户中心底部 -->

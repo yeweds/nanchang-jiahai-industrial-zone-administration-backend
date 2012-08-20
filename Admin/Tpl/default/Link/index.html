@@ -1,0 +1,74 @@
+<include file="Public:header" />
+<div class="bodyTitle">
+	<div class="bodyTitleLeft"></div>
+  <div class="bodyTitleText">链接管理</div>
+</div>
+<form method="post" action="__URL__/" id="search" >
+<h3 class="marginbot"><a href="__URL__/add" class="sgbtn">＋增加链接</a>
+<a href="#" onClick="PassAll()" class="sgbtn">全部通过</a><!-- href="__URL__/passAll" -->
+<a href="#" onClick="upPassAll()" class="sgbtn">全部未审</a>&nbsp;  请输入关键字：
+	
+	 <input type="text" name="message" title="站名查询" /> 
+		 <select name="field" class="datainput" id="field">
+			<option value="webname">--请选择查询类型--</option>
+			<option value="webname">按站点名称</option>
+			<option value="url">按网址</option>
+			<option value="id">按链接ID</option>
+		 </select> 
+	<input type="submit" class="df_button_green" value="查 询" >
+<div id="result" class="none result" style="letter-spacing:2px"></div><!-- ajax回显 -->
+</h3>
+</form>
+
+<table class="datalist fixwidth">
+ <form method="post" id="formall">
+	  <tr align="center" >
+	    <td width="6%" height="22"><input type="checkbox" onClick="selAll(this,'id[]')" value="选择全部" class="checkbox">ID</td>
+		<td width="17%"><div align="center">网站名称</div></td>
+		<td width="22%">网址</td>
+		<td width="15%">Logo</td>
+		<td width="5%">所属分类</td>
+		<td width="10%">顺序</td>        
+		<td width="10%">状态</td>        
+		<td width="15%">操作</td>
+	  </tr>
+      <iterate name="linkList" id="vo">
+	  <tr >
+	     <td height="22" align="left"><input name="id[]" type="checkbox" id="id[]" value="{$vo.id}" />{$vo.id}</td>
+		 <td>{$vo.webname}<?php if(!empty($vo['urllogo'])){echo "<font color=\"#FF0000\"> (图)</font>";} ?></td>
+		 <td align="left">{$vo.url}</td>
+		 <td align="left"><img <eq name="vo.urllogo" value="">src="../Public/Images/noLink.gif"</eq>
+		 <neq name="vo.urllogo" value="">src="{$vo.urllogo}"</neq>
+		 width="88" height="31" /></td>
+		 <td align="center">{$vo.class_id}</td>
+		 <td align="center">{$vo.sortrank}</td>
+		 <td align="center"><eq name="vo.passed" value="1">已审核</eq><neq name="vo.passed" value="1"><span class="red">未审核</span></neq></td>
+		 <td align="center">[<eq name="vo.passed" value="1"><a href="__URL__/CancelPassed/ID/{$vo.id}" >取消</a></eq><eq name="vo.passed" value="0"><a href="__URL__/Passed/ID/{$vo.id}" >通过</a></eq>]&nbsp;[<a href="__URL__/edit/id/{$vo.id}" >编辑</a>]&nbsp;[<a href="javascript:del({$vo.id})">删除</a>]</td>
+	  </tr>    
+	  </iterate>
+</form>
+</table>
+
+<div class="page">{$page}</div>
+
+<p class="i">链接LOGO尺为88px*31px [<font color=red>未审核</font>表示该链接当前状态为隐藏，前台不显示]</p>
+<br>
+<include file="Public:footer" />
+
+<script>
+   //全选取消审核
+	function upPassAll(){
+		if (window.confirm('确实要取消审核选中项吗？'))
+		{
+		  var str="";
+			 $("input:[name*='id']:checked").each(function(){
+				 str+=$(this).val()+",";
+			 });
+			str = str.substring(0 , str.length-1); //去掉最后的','
+			 $.get( URL + '/PassAll/' , { "str":str, "action":"0" }, function(msg){
+				var msgObj=eval("("+msg+")");   //转换为json对象 
+				complete(msgObj.info,msgObj.status); // 调用成功处理方法
+			});
+		}
+	}
+</script>

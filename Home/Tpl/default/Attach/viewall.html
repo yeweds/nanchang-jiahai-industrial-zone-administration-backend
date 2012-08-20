@@ -1,0 +1,11 @@
+
+
+<div>
+<present name="list" > 
+<volist name="list" id="vo" >
+          <li><a href="#" onclick="loadPhoto('__URL__/viewall/info_id/{$info_id}/cid/15/rid/{$range_id}/num/',{$i},'{$lpname}效果图'); return false;">
+		  <img src='__APP__/../{$vo.savepath}/thumb_{$vo.savename}' alt='{$lpname}{$type_name}' title='{$lpname}{$type_name}' border="0"></a></li>
+</volist> 
+</present>
+</div><br>
+<a href='javascript:history.back(-1);'>返回</a>

@@ -1,0 +1,1433 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>南昌婚庆网 - 打造属于我自己的创意婚礼 - 南昌婚纱摄影</title>
+<meta name="keywords" content="南昌婚庆,南昌婚纱,南昌婚庆公司,南昌婚纱摄影">
+<meta name="description" content="提供南昌婚庆公司_南昌婚纱摄影 南昌新娘跟妆 婚宴酒店 鲜花婚车 摄像摄影 新娘化妆跟妆 结婚婚礼优惠打折价格套餐信息">
+<base target="_blank" />
+
+</head>
+<script type="text/javascript">
+//指定当前组模块URL地址
+var URL = '__URL__';
+var APP	 =	 '__APP__';
+var PUBLIC = '__PUBLIC__';
+var SELF = '__SELF__';
+</script>
+<script type="text/javascript" src="../Public/Js/base.js"></script><!--前台公共JS函数-->
+<script type="text/javascript" src="__PUBLIC__/Js/jquery.min.js"></script>
+
+<link href="../Public/Css/news.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/base.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/class_com.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/select_box.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="../Public/Js/pic_scroll.js"></script><!--楼盘展示效果-->
+
+<body>
+
+<!--start0791新闻公共头部-->
+<!--%%当前是否在首页嵌入为1在首页-->
+<eq name="hide" value="0">
+	<include file="News:news_header" />
+<else/>
+
+	<include file="Index:index_header" />
+    <div id="head_ad">
+    <!-- 通栏广告start -->
+		<!-- include file="Ad:index_search_end"   -->
+	<!-- 通栏广告end -->
+		<div class="clear"></div>
+    </div>
+     <!--end 浮动图层-->    
+</eq>
+<!--end0791新闻公共头部-->
+
+<div class="content_inc">
+  <div class="width_300px_float">
+   <!--start幻灯片--><!--end幻灯片-->
+  <script type="text/javascript">
+    var t = n = 0, count;
+    $(document).ready(function(){    
+        count=$("#banner_list a").length;
+        $("#banner_list a:not(:first-child)").hide();
+        $("#banner_info").html($("#banner_list a:first-child").find("img").attr('alt'));
+        $("#banner_info").click(function(){window.open($("#banner_list a:first-child").attr('href'), "_blank")});
+        $("#banner li").click(function() {
+            var i = $(this).text() - 1;//获取Li元素内的值，即1，2，3，4
+            n = i;
+            if (i >= count) return;
+            $("#banner_info").html($("#banner_list a").eq(i).find("img").attr('alt'));
+            $("#banner_info").unbind().click(function(){window.open($("#banner_list a").eq(i).attr('href'), "_blank")})
+            $("#banner_list a").filter(":visible").fadeOut(500).parent().children().eq(i).fadeIn(1000);
+            document.getElementById("banner").style.background="";
+            $(this).toggleClass("on");
+            $(this).siblings().removeAttr("class");
+        });
+        t = setInterval("showAuto()", 4000);
+        $("#banner").hover(function(){clearInterval(t)}, function(){t = setInterval("showAuto()", 4000);});
+    })
+    
+    function showAuto()
+    {
+        n = n >=(count - 1) ? 0 : ++n;
+        $("#banner li").eq(n).trigger('click');
+    }
+</script>   
+<div class="hdp_inc">
+<!--幻灯片开始-->  
+<div id="banner" class="slide_pic">    
+        <!--<div id="banner_bg"></div>  标题背景-->
+        <!--<div id="banner_info"></div> 标题-->
+        <ul>
+            <li class="on">1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>                        
+        </ul>
+       <div id="banner_list">
+		  <volist name="news.lp_hdp.titles" id="vo" >
+			 <a href="{$vo.id|get_arc_url=###, $vo['redirecturl']}" target="_blank">
+			 <img src="__PUBLIC__/Upload/News/{$vo.pic_url}" width="292" height="230" class="padding_2px" title="{$vo.title|mystr_replace=###}" alt="幻灯" />
+			 </a> 
+		  </volist>
+        </div>
+    </div>
+<!--幻灯片结束-->  
+
+   <div class="height_30px_text" style="width:90%;margin-left:5%;text-align:center"><a href="{$news.lp_hdp.h.id|get_arc_url=###, $news['lp_hdp']['h']['redirecturl']}"><span class="green_14pxf_yahei">{$news.lp_hdp.h.title|mb_substr=###,0,17,'utf-8'}</span></a></div>
+   <div class="height_22px_text" style="width:90%;margin-left:5%;">&nbsp;&nbsp;&nbsp;&nbsp;{$news.lp_hdp.h.remark|mb_substr=###,0,38,'utf-8'}<a href="{$news.lp_hdp.h.id|get_arc_url=###, $news['lp_hdp']['h']['redirecturl']}"><span class="red_s_a">[详细]</span></a></div>
+</div>
+    <div class="clear"></div><!--自动拉伸width_300px_float-->
+  </div>
+  <div class="width_15px_float"></div>
+  <div class="width_360px_float">  
+    
+    
+    <!--今日要闻标题-->
+      <div id="yaoweng_title">
+        <div class="yaoweng_title_nv_nor" id="jryw">今日焦点</div>
+        <!-- <div class="yaoweng_title_nv_nor" id="qgls">全国楼市</div> -->
+      </div>
+      <div class="height_5px"></div>
+      <!--今日要闻内容-->
+<div id="jryw_inc">
+          <div class="height_40px_text" align="center"><span class="green_20pxf_yahei green_a"><a href="{$news.jryw.h.id|get_arc_url=###, $news['jryw']['h']['redirecturl']}" title="{$news.jryw.h.title|mystr_replace=###}">{$news.jryw.h.title|mb_substr=###,0,17,'utf-8'}</a></span></div><!--今日要闻头条-->
+          <div class="height_20px_text" align="center"><span class="green_a">
+          
+          <volist name="news.jryw.t" id="vo">
+          	<a href="{$vo.id|get_arc_url=###, $vo['redirecturl']}" title="{$vo.title|mystr_replace=###}">[{$vo.title|mb_substr=###,0,12,'utf-8'}] </a>
+          </volist>
+          
+        </span></div>
+          <div class="height_5px"></div>
+          <!--循环输出-->
+          <volist name="news.jryw.titles" id="vo">
+          	<div class="height_22px_text font_14px"><span class="{$vo.title_color|title_style=###}"><strong>{$vo.tag|default='推荐'}</strong> | <a href="{$vo.id|get_arc_url=###, $vo['redirecturl']}" title="{$vo.title|mystr_replace=###}">{$vo.title|mb_substr=###,0,22,'utf-8'}</a></span></div>
+          </volist>
+          <!--循环-->
+          
+</div>
+ <!--end今日要闻-->
+
+ <div class="clear"></div><!--自动拉伸width_360px_float-->
+  </div>
+  <div class="width_15px_float"></div>
+  
+  <div class="width_270px_float">
+    <div class="width_270_4bian">
+        <div class="title_style1" id="tfxc_title">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td width="85" height="30" class="title_nv_style1">0791独家</td>
+              <td width="85" height="30">&nbsp;</td>
+              <td height="30">&nbsp;</td>
+              <td width="44" height="30" class="black_a"><a href="__APP__/news-list-{$news.tfdj.id}">更多&gt;&gt;</a></td>
+            </tr>
+          </table>
+        </div>
+          
+        <div id="tfxc_inc">
+          <div class="height_5px"></div>
+          <!--循环输出-->
+          <volist name="news.tfdj.titles" id="vo">
+          	<div class="height_22px_text">&nbsp;·<span class="{$vo.title_color|title_style=###}"><a href="{$vo.id|get_arc_url=###, $vo['redirecturl']}" title="{$vo.title|mystr_replace=###}">{$vo.title|mb_substr=###,0,20,'utf-8'}</a></span></div>
+          </volist>
+          <!--循环-->            
+            <div class="height_5px"></div>                             
+        </div>
+        <div class="clear"></div><!--自动拉伸width_270_4bian-->
+      </div>
+    <div class="clear"></div><!--自动拉伸width_270px_float-->
+  </div>
+	<div class="clear"></div>
+</div>
+
+<!--start---此入插入通栏广告二-->
+<center>
+<eq name="hide" value="1">
+<include file="Ad:index_tonglan_2" />
+</eq>
+</center>
+<!--end---此入插入通栏广告二-->
+
+<div class="height_10px"></div>
+<div class="content_inc">
+  <div class="width_300px_float"><!--start活动提醒--><!--end活动提醒--><!--0791活动-->
+    <div id="tfhd">
+      <div class="title_style5" id="tfxc_title2">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="94" height="30" align="center" class="green_a"><a href="__APP__/news-list-{$news.sjhd.id}" class="green_14px_yahei">商家活动</a></td>
+	        <td width="202" height="30" align="right" class="black_a"><a href="http://weibo.com/tengfangwang" target="_blank" class="black_12px" rel="nofollow">关注0791婚庆网微博</a>&nbsp;&nbsp;</td>
+          </tr>
+        </table>
+      </div>
+      <div class="height_5px"></div>
+      <div class="tfhd_inc">
+      		<div class="width_90px_float">
+      		  <div class="height_5px"></div>
+      		  <a href="__APP__/news-list-{$news.sjhd.id}"><img src="../Public/Images/show_tfhd.jpg" width="90" height="100" border="0"  alt="0791活动"/></a>
+      		  <div class="height_5px"></div>
+</div>
+            
+            <div class="width_190px_float">
+                <!--循环输出-->
+              <volist name="news.sjhd.titles" id="vo">
+                <div class="height_22px_text">&nbsp;·<span class="{$vo.title_color|title_style=###}"><a href="{$vo.id|get_arc_url=###, $vo['redirecturl']}" title="{$vo.title|mystr_replace=###}">{$vo.title|mb_substr=###,0,14,'utf-8'}</a></span></div>
+              </volist>
+              <!--循环--> 
+              <div class="clear"></div>
+          </div>
+      		<div class="clear"></div>
+      </div>
+      <div class="height_5px"></div>
+      <div class="tfhd_inc hide" id="zxlp_inc">
+		<div class="clear"></div>
+      </div>      
+      <div class="clear"></div>
+    </div>
+    <!--end活动-->
+    <div class="clear"></div><!--自动拉伸width_300px_float-->
+  </div>
+  <div class="width_15px_float"></div>
+  <div class="width_645px_float">
+    <div class="width_360px_float"><!--楼盘导购标题-->
+<div id="daogou_title" class="heigh_30px_white">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="100" height="30" class="title_nv" id="tfkx">婚礼百货</td>
+      <td width="190" height="30">&nbsp;</td>
+      <td width="63" class="black_a"></td>
+    </tr>
+  </table>
+</div>
+<!--楼盘导购内容-->
+<div id="tfkx_inc" class="relative" >
+<div class="more black_a"><a href="__APP__/news-list-{$news.hlbh.id}">更多&gt;&gt;</a></div>
+  <div class="height_5px"></div>
+          <!--循环输出-->
+		<volist name="news.hlbh.titles" id="vo">
+          	<div class="height_22px_text font_14px">·<span class="{$vo.title_color|title_style=###}"><a href="__APP__/news-{$vo.id}" title="{$vo.title|mystr_replace=###}">{$vo.title|mb_substr=###,0,24,'utf-8'}</a></span></div>
+        </volist>
+          <!--循环-->  
+</div>
+<div class="height_10px"></div>
+<div class="clear"></div><!--自动拉伸width_360px_float-->
+    </div>
+    <div class="width_15px_float"></div>
+    <div class="width_270px_float">
+      <div class="width_270_4bian">
+
+        <div class="title_style1" id="rdtj_title">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td width="85" height="30" class="title_nv_style1" id="rdtj">热点推荐</td>
+              <td height="30">&nbsp;</td>
+              <td width="44" height="30" ></td>
+            </tr>
+          </table>
+          <div class="clear"></div><!--自动拉伸width_270_4bian-->
+        </div>
+        <div id="rdtj_inc" class="relative">
+        
+        <div class="more black_a"><a href="__APP__/news-list-{$news.rdtj.id}">更多&gt;&gt;</a></div>
+        
+                  <div class="height_5px"></div>
+        
+        <table width="98%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="51%" rowspan="2" align="center" valign="middle">
+            <div id="photo_94_124"><a href="__APP__/news-{$news.rdtj.h.id}"><img src="__PUBLIC__/Upload/News/thumb_{$news.rdtj.h.pic_url}" width="120" height="90" vspace="2" border="0" alt="热点" /></a></div>
+            </td>
+            <td width="49%" class="red_a height_20px_text"><strong><a href="__APP__/news-{$news.rdtj.h.id}" title="{$news.rdtj.h.title|mystr_replace=###}">{$news.rdtj.h.title|mb_substr=###,0,18,'utf-8'}</a></strong></td>
+          </tr>
+          <tr>
+            <td><span class="height_18px_text"> &nbsp;&nbsp;&nbsp;<span class="gray_12px_fs">{$news.rdtj.h.remark|mb_substr=0,24,'utf-8'}...</span><span class="red_s_a"><a href="__APP__/news-{$news.rdtj.h.id}">[详细]</a></span></span></td>
+          </tr>
+        </table>
+          <!--循环输出-->
+          <volist name="news.rdtj.titles" id="vo">
+          	<div class="height_22px_text">&nbsp;·<span class="{$vo.title_color|title_style=###}"><a href="__APP__/news-{$vo.id}" title="{$vo.title|mystr_replace=###}">{$vo.title|mb_substr=###,0,20,'utf-8'}</a></span></div>
+          </volist>
+          <!--循环--> 
+                                           
+        </div>
+        <div class="clear"></div><!--自动拉伸width_270_4bian-->
+      </div>
+      
+      <div class="clear"></div><!--自动拉伸width_270px_float-->
+    </div>
+    <div class="clear"></div><!--自动拉伸width_645px_float-->
+  </div>
+<div class="clear"></div><!--自动拉伸content_inc-->
+<!-- 广告位3开始 -->
+
+<!-- 广告位3结束 -->
+</div>
+
+<div class="height_10px"></div>
+
+<div class="content_style2_inc">
+
+  <div class="width_100bf_4bian">
+    <div class="title_style5" id="tfxc_title3">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="150" height="30" align="center" class="green_a"><a href="__APP__/Pic/index/cid/18" class="green_14px_yahei">婚纱摄影套系展示</a></td>
+          <td width="808" height="30" align="right" class="black_a"><a href="__APP__/Pic/index/cid/18" class="black_12px">更多..</a>&nbsp;</td>
+        </tr>
+      </table>
+    </div>
+    <div class="height_10px"></div>
+    <div class="width_940px_auto">
+    <!--lp3d-->
+    <volist name="pic_list[18]" id="vo" offset="0" length="10">
+      <a href="__APP__/pics-{$vo.id}"><img src="{$vo.thumb_pic}" alt="{$vo.title}" width="125" height="125" border="0" class="img_box float_left" title="{$vo.title|mystr_replace=###}" /></a>
+      <div class="width_10px_float"></div>
+    </volist>
+	<div class="width_5px_float"></div>
+    <div class="clear"></div>
+    <div class="height_10px"></div>
+    <div class="clear"></div>
+    </div>
+  </div> <!--end width_100bf_4bian-->
+
+
+  <div class="width_100bf_4bian">
+    <div class="title_style5" id="tfxc_title3">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="125" height="30" align="center" class="green_a"><a href="__APP__/Pic/index/cid/35" class="green_14px_yahei">流行婚纱礼服</a></td>
+          <td width="833" height="30" align="right" class="black_a"><a href="__APP__/Pic/index/cid/35" class="black_12px">更多..</a>&nbsp;</td>
+        </tr>
+      </table>
+    </div>
+    <div class="height_10px"></div>
+    <div class="width_940px_auto">
+    <!--lp3d-->
+    <foreach name="pic_list[35]" item="vo">
+      <h1><a href="__APP__/pics-{$vo.id}"><img src="{$vo.thumb_pic}" alt="{$vo.title}" width="125" height="125" border="0" class="img_box float_left" title="{$vo.title|mystr_replace=###}" /></a>
+      </h1>
+      <div class="width_10px_float"></div>
+    </foreach>
+    <div class="width_5px_float"></div>
+    <div class="clear"></div>
+    <div class="height_10px"></div>
+    <div class="clear"></div>
+    </div>
+  </div> <!--end width_100bf_4bian-->
+
+
+  <div class="width_100bf_4bian">
+    <div class="title_style5" id="tfxc_title3">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="150" height="30" align="center" class="green_a"><a href="__APP__/news-list-37" class="green_14px_yahei">婚庆现场视频鉴赏</a></td>
+          <td width="808" height="30" align="right" class="black_a"><a href="__APP__/news-list-37" class="black_12px">更多..</a>&nbsp;</td>
+        </tr>
+      </table>
+    </div>
+    <div class="height_10px"></div>
+    <div class="width_940px_auto">
+    <!--lp3d-->
+    <volist name="tv_list" id="vo" offset="0" length="10">
+      <a href="__APP__/news-{$vo.id}"><img src="__PUBLIC__/Upload/News/{$vo.pic_url}" alt="{$vo.title}" width="140" height="125" border="0" class="img_box float_left" title="{$vo.title|mystr_replace=###}" /></a>
+	  <!-- <br />{$vo.title} -->
+      <div class="width_10px_float"></div>
+    </volist>
+    <div class="width_5px_float"></div>
+    <div class="clear"></div>
+    <div class="height_10px"></div>
+    <div class="clear"></div>
+    </div>
+  </div> <!--end width_100bf_4bian-->
+
+
+  
+  <div class="height_10px"></div>
+  <div class="width_315px_g4b">
+    <div class="heigh_30px_white">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="82" height="30" class="title_nv">奇闻轶事</td>
+          <td width="193" height="30" class="title_nv_nor">&nbsp;</td>
+          <td width="44" height="30"><span class="black_a"><a href="__APP__/news-list-{$news.qwys.id}">更多&gt;&gt;</a></span>    
+        </tr>
+      </table>
+    </div>
+          <div class="height_5px"></div>
+          <!--循环输出-->
+          <volist name="news.qwys.titles" id="vo">
+          	<div class="height_22px_text">&nbsp;·<span class="{$vo.title_color|title_style=###}"><a href="__APP__/news-{$vo.id}" title="{$vo.title|mystr_replace=###}">{$vo.title|mb_substr=###,0,24,'utf-8'}</a></span></div>
+          </volist>
+          <!--循环-->            
+            <div class="height_5px"></div> 
+          <div class="clear"></div>
+  </div>
+  <div class="width_5px_float"></div>
+  <div class="width_315px_g4b">
+    <div class="heigh_30px_white" id="dazui_title">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+      	  <td width="80" height="30" class="title_nv_nor" id="hlbh">爱情故事</td>
+          <!-- <td width="80" class="title_nv_nor" id="xbcp">小编踩盘</td> -->
+          <td height="30" >&nbsp;</td>
+          <td width="45" height="30"></td>          
+        </tr>
+      </table>
+</div>
+	<div id="dazui_inc" class="relative">
+    	  <div class="more black_a"><a href="__APP__/news-list-{$news.love.id}">更多&gt;&gt;</a></div>
+          <div class="height_5px"></div>
+          <!--循环输出-->
+          <volist name="news.love.titles" id="vo">
+          	<div class="height_22px_text">&nbsp;·<span class="{$vo.title_color|title_style=###}"><a href="__APP__/news-{$vo.id}" title="{$vo.title|mystr_replace=###}">{$vo.title|mb_substr=###,0,24,'utf-8'}</a></span></div>
+          </volist>
+          <!--循环-->            
+            <div class="height_5px"></div>
+        </div>
+             
+    <div class="clear"></div>
+  </div>
+  <div class="width_5px_float"></div>
+  <div class="width_315px_g4b">
+    <div class="heigh_30px_white">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="82" height="30" class="title_nv">婚庆专题</td>
+          <td width="193" height="30" class="title_nv_nor">&nbsp;</td>
+          <td width="44" height="30"><span class="black_a"><a href="__APP__/news-list-14">更多&gt;&gt;</a></span>          
+        </tr>
+      </table>
+    </div>
+                  <div class="height_5px"></div>
+        
+<table width="98%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="51%" rowspan="2" align="center" valign="middle">
+            <div id="photo_94_124"><a href="{$news.hqzt.h.id|get_arc_url=###,$news['hqzt']['h']['redirecturl']}"><img src="__PUBLIC__/Upload/News/thumb_{$news.hqzt.h.pic_url}" width="120" height="90" vspace="2" border="0" alt="热点" /></a></div>
+            </td>
+            <td width="49%" class="red_a height_20px_text"><strong><a href="{$news.hqzt.h.id|get_arc_url=###, $news['hqzt']['h']['redirecturl']}" title="{$news.hqzt.h.title|mystr_replace=###}" target="_blank">{$news.hqzt.h.title|mb_substr=###,0,18,'utf-8'}</a></strong></td>
+          </tr>
+          <tr>
+            <td><span class="height_18px_text"> &nbsp;&nbsp;&nbsp;<span class="gray_12px_fs">{$news.hqzt.h.remark|mb_substr=0,24,'utf-8'}...</span><span class="red_s_a"><a href="{$news.hqzt.h.id|get_arc_url=###, $news['hqzt']['h']['redirecturl']}" target="_blank">[详细]</a></span></span></td>
+          </tr>
+        </table>
+        <div class="height_10px"></div>
+          <!--循环输出-->
+          <volist name="news.hqzt.titles" id="vo">
+          	<div class="height_22px_text">&nbsp;·<span class="{$vo.title_color|title_style=###}"><a href="{$vo.id|get_arc_url=###, $vo['redirecturl']}" title="{$vo.title|mystr_replace=###}" target="_blank">{$vo.title|mb_substr=###,0,24,'utf-8'}</a></span></div>
+          </volist>
+          <div class="height_9px"></div>
+          <!--循环--> 
+
+    <div class="clear"></div>
+  </div>
+  <div class="clear"></div>
+</div>
+
+ <!--<div class="height_10px"></div>
+<div class="ad_width_960px">
+    -- 通栏广告start 
+	-- 通栏广告end 
+  <div class="clear"></div>
+</div> -->
+<div class="height_10px"></div>
+<!--中部第一大块start-->
+<div class="content_style2_inc">
+<!--左边start--->
+  <img src="../Public/Images/tfhd_bg.png" width="960" height="40" alt="0791互动">
+  <div class="height_5px"></div>
+ <div class="width_680px_float_noborder">
+  <div class="width_680px_float">
+    <div class="title_style5" id="tfxc_title4">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="125" height="30" align="center" class="green_a"><a href="__APP__/Reviews/" class="green_14px_yahei">商家点评</a></td>
+          <td width="833" height="30" align="right" class="black_a"><a href="__APP__/news-list-{$news.cjxw.id}" class="black_12px">&nbsp;</a><a href="__APP__/Reviews/" class="black_12px">更多&gt;&gt;&nbsp;</a></td>
+        </tr>
+      </table>
+    </div><div class="height_40px_text" align="center"><strong><span class="green_14px_yahei green_a">
+    <volist name="news.zxdp" id="vo" offset="0" length="1">
+    	<a href="__APP__/Reviews/view/id/{$vo.id}" title="[{$vo.lpname}] {$vo.content|mystr_replace=###}">{$vo.content|mb_substr=###,0,30,'utf-8'}</a>
+    </volist>
+    </span></strong></div>
+    <div class="width_5px_float"></div>
+    <div class="width_340px_float">
+        <volist name="news.zxdp" id="vo" offset="1" length="9">
+            <div class="height_22px_text"><span >&nbsp;·<a href="__APP__/Reviews/view/id/{$vo.id}" title="[{$vo.lpname}] {$vo.content|mystr_replace=###}">{$vo.content|mb_substr=###,0,25,'utf-8'}</a></span> </div>
+    </volist>
+          <div class="height_10px"></div>
+    </div>
+
+    <div class="width_340px_float">
+        <volist name="news.zxdp" id="vo" offset="10" length="9">
+            <div class="height_22px_text"><span >&nbsp;·<a href="__APP__/Reviews/view/id/{$vo.id}" title="[{$vo.lpname}] {$vo.content|mystr_replace=###}">{$vo.content|mb_substr=###,0,25,'utf-8'}</a></span> </div>
+    </volist>
+          <div class="height_10px"></div>
+    </div>
+      <!--新房价格标题--><!--新房价格内容-->
+   <div class="height_10px_float"></div>
+   <!--区域价格标题--><!--区域价格内容-->
+   <div class="clear"></div><!--自动拉伸width_210px_float-->
+</div>
+  <div class="height_5px_float"></div>
+  <div class="width_335px_float_4b">
+    <div class="title_style5" id="tfxc_title6">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="81" height="30" align="center" class="green_a"><a href="__APP__/Reviews/dp_list" class="green_14px_yahei">高人气排行</a></td>
+          <td width="187" height="30" align="right" class="black_a">&nbsp;</td>
+        </tr>
+      </table>
+    </div>
+    <div class="height_5px"></div>
+<div class="width_320px_float">
+    <div class="height_5px"></div>
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+          <td width="42" height="23" align="center" valign="middle" ></td>
+          <td height="23" valign="middle">商家名称</td>
+          <td height="23" valign="middle">人气</td>
+          <td height="23" valign="middle">点击</td>
+        </tr>
+	  <volist name="news.rqdp" id="vo" key="k" offset="0" length="4">
+      <lt name="k" value="4">
+        <tr>
+          <td width="42" height="23" align="center" valign="middle" class="buttom_green" >{$k}</td>
+          <td height="23" valign="middle" title="{$vo.name}"><a href="__APP__/Reviews/ct_list/info_id/{$vo.id}"><span class="green_a">{$vo.name|mb_substr=###,0,8,'utf-8'}点评</span></a></td>
+          <td height="23" valign="middle">{$vo.dp_hits}</td>
+          <td height="23" valign="middle"><span class="orange_12px_f">{$vo.dp_count}</span></td>
+        </tr>
+        <else/>
+        <tr>
+          <td width="42" height="23" align="center" valign="middle" class="buttom_gray" >{$k}</td>
+          <td height="23" valign="middle" title="{$vo.name}"><a href="__APP__/Reviews/ct_list/info_id/{$vo.id}"><span class="green_a">{$vo.name|mb_substr=###,0,8,'utf-8'}点评</span></a></td>
+          <td height="23" valign="middle">{$vo.dp_hits}</td>
+          <td height="23" valign="middle"><span class="orange_12px_f">{$vo.dp_count}</span></td>
+        </tr>
+        </lt>
+  		</volist>
+      </table>
+    </div>
+<div class="height_5px_float"></div>
+ <div class="clear"></div>
+  </div>
+  <div class="width_5px_float"></div>
+<div class="width_335px_float_4b">
+    <div class="title_style5" id="tfxc_title6">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="81" height="30" align="center" class="green_a"><a href="__APP__/Reviews/dp_list" class="green_14px_yahei">高参与排行</a></td>
+          <td width="187" height="30" align="right" class="black_a">&nbsp;</td>
+        </tr>
+      </table>
+    </div>
+    <div class="height_5px"></div>
+<div class="width_320px_float">
+    <div class="height_5px"></div>
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+          <td width="42" height="23" align="center" valign="middle" ></td>
+          <td height="23" valign="middle">商家名称</td>
+          <td height="23" valign="middle">人气</td>
+          <td height="23" valign="middle">评论</td>
+        </tr>
+	  <volist name="news.prdp" id="vo" key="k" offset="0" length="4">
+      <lt name="k" value="4">
+        <tr>
+          <td width="42" height="23" align="center" valign="middle" class="buttom_green" >{$k}</td>
+          <td height="23" valign="middle" title="{$vo.name}"><a href="__APP__/Reviews/ct_list/info_id/{$vo.id}"><span class="green_a">{$vo.name|mb_substr=###,0,8,'utf-8'}点评</span></a></td>
+          <td height="23" valign="middle">{$vo.dp_hits}</td>
+          <td height="23" valign="middle"><span class="orange_12px_f">{$vo.dp_count}</span></td>
+        </tr>
+        <else/>
+        <tr>
+          <td width="42" height="23" align="center" valign="middle" class="buttom_gray" >{$k}</td>
+          <td height="23" valign="middle" title="{$vo.name}"><a href="__APP__/Reviews/ct_list/info_id/{$vo.id}"><span class="green_a">{$vo.name|mb_substr=###,0,8,'utf-8'}点评</span></a></td>
+          <td height="23" valign="middle">{$vo.dp_hits}</td>
+          <td height="23" valign="middle"><span class="orange_12px_f">{$vo.dp_count}</span></td>
+        </tr>
+        </lt>
+  		</volist>
+      </table>
+    </div>
+<div class="height_5px_float"></div>
+ <div class="clear"></div>
+  </div>  
+<div class="clear"></div>
+</div>
+<!--左边end--->
+  <div class="width_10px_float"></div>
+    <div class="width_270px_auto">
+      <div class="title_style5" id="tfxc_title5">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="81" height="30" align="center" class="green_a">婚庆问题咨询</td>
+            <td width="187" height="30" align="right" class="black_a"><a href="__APP__/Ask" class="black_12px">更多&gt;&gt;</a>&nbsp;</td>
+          </tr>
+        </table>
+      </div>
+      <div class="height_10px"></div>
+      <div class="lszx_gs" id="xsph2">
+        <div class="width_90px_float">
+          <div class="height_5px"></div>
+          <a href="__APP__/Law/"><img src="../Public/Images/show_fcwd.jpg" width="80" height="90" border="0"  alt="婚庆问答"/></a></div>
+        <div class="width_160px_float">
+          <!--循环输出-->
+          <div class="height_22px_text">&nbsp;&nbsp;&nbsp;是否在为想去拍摄婚纱照却又因为有许多疑问而烦恼呢？请咨询0791hunqing.com有专人将为您详细、亲切的释疑
+            <div class="clear"></div></div>
+          <!--循环-->
+          <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+      </div>
+          <!--start律师在线-->
+      <div class="height_10px"></div>
+      <div class="width_10px_float"></div>
+      <div id="lawer">
+          <div id="lawer1">
+          
+          <volist name="news.law" id="vo">
+              <div class="height_30px_text"><span class="list_style2_qpic"><strong>{$vo.ask|mb_substr=###,0,16,'utf-8'}</strong></span></div>
+              <div class="height_20px_text bg_g4b" style="width:238px"><span class="black_a">&nbsp;&nbsp;&nbsp;&nbsp;{$vo.reply|strip_tags|mb_substr=0,31,'utf-8'}...<span class="red_s_a"><a href="__APP__/Law/detail/id/{$vo.id}">[详细]</a></span></span></div>
+          </volist>
+          
+          </div>
+          <div id="lawer2"></div>
+          
+      </div>
+      <div class="height_10px_float"></div>
+<script type="text/javascript"> 
+var speedLawer;
+var lawer; 
+var lawer2; 
+var lawer1; 
+var Mylawer;
+$(function(){
+speedLawer=40;
+lawer=document.getElementById("lawer"); 
+lawer2=document.getElementById("lawer2"); 
+lawer1=document.getElementById("lawer1"); 
+lawer2.innerHTML = lawer1.innerHTML;
+Mylawer=setInterval(MarqueeLawer,(speedLawer)); 
+
+lawer.onmouseover=function() {clearInterval(Mylawer)} 
+lawer.onmouseout=function() {Mylawer=setInterval(MarqueeLawer,speedLawer)} 
+});
+
+function MarqueeLawer(){ 
+	if(lawer2.offsetTop-lawer.scrollTop<=0) {
+	  lawer.scrollTop-=lawer1.offsetHeight; 
+	}else{ 
+	  lawer.scrollTop++;
+	} 
+} 
+
+</script>         
+
+    <!--end律师在线-->
+    <div class="clear"></div>
+    </div>
+<!--20120791网招聘s -->
+
+<!--20120791网招聘e -->
+    
+<!--右边start--><!--右边end---> 
+  <div class="clear"></div><!--自动拉伸width_270px_float--> 
+</div>
+<!--中部第一大块结束-->
+<div class="clear"></div><!--自动拉伸width_960px-->
+<div class="height_10px"></div>
+<!--中部第二大块开始-->
+<!--热门推荐start-->
+<div class="width_960px" id="lptj_inc">
+<!--楼盘推荐标题--><!--楼盘推荐内容-->
+ <div class="height_10px"></div>
+<!--滑动start-->
+<div class="lptj_outside">
+<div class="height_10px"></div>
+
+<div class="hot_lp" >
+
+     	
+      <div class="infiniteCarousel">
+      <div class="wrapper">
+       <ul id='imgscroll'>
+       
+		<volist name="news.shop_rdtj" id="vo" >
+<li><!-- 此URL转到楼盘的传统页--><a href="__APP__/shop-{$vo.id}" title="全称：{$vo.name} &#10;电话：{$vo.tel}"><img src="{$vo.pic_url}" width="145" height="100" border="0" alt="{$vo.lpname}" /></a><div class="black_h5" title="{$vo.lpname}">{$vo.lpname|mb_substr=###,0,10,'utf-8'}</div>
+					   <!--<div class="black_h5"><span class="gray_12px_f">主推:</span></div>-->
+       <div class="black_h5">
+	   <span class="green_12px_f" title="{$vo.tel}">电话：<eq name="vo.tel" value="待定">未知<else/><strong>{$vo.tel|substr=###,0,14}</strong></eq></span>
+       </div></li>
+       </volist> 
+
+       </ul>
+      </div>
+     </div> 
+        
+        
+        
+   </div>
+<div class="clear"></div><!--自动拉伸width_960px-->
+</div>
+<!--滑动end-->
+  <div class="clear"></div><!--自动拉伸width_960px-->
+</div>
+<!--热门推荐end-->
+ <div class="clear"></div><!--自动拉伸width_960px-->
+<!--中部第二大块结束-->
+<div class="height_10px"></div>
+<!--中部第三大块开始-->
+<div class="content_style2_inc">
+
+<img src="../Public/Images/dczx_bg.png" width="960" height="40" alt="地产资讯">
+<div class="height_5px"></div>
+<div class="width_315px_g4b">
+    <div class="heigh_30px_white">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="82" height="30" class="title_nv">婚礼资讯</td>
+          <td width="193" height="30" class="title_nv_nor">&nbsp;</td>
+          <td width="44" height="30"><span class="black_a"><a href="__APP__/news-list-{$news.hlzx.id}">更多&gt;&gt;</a></span>          
+        </tr>
+      </table>
+    </div>
+    <div class="height_10px"></div>
+    
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+         <tr>
+           <td width="130" rowspan="2" align="center" valign="middle"><a href="__APP__/news-{$news.hlzx.h.id}"><img src="__PUBLIC__/Upload/News/thumb_{$news.hlzx.h.pic_url}" width="115" height="90" border="0" title="{$news.hlzx.h.title|mystr_replace=###}" alt="图片:婚礼资讯" /></a></td>
+           <td height="30">&nbsp;</td>
+           <td width="190" height="30" align="center"><span class="red_s_a" title="{$news.hlzx.h.title|mystr_replace=###}"><strong><a href="__APP__/news-{$news.hlzx.h.id}">{$news.hlzx.h.title|mb_substr=###,0,13,'utf-8'}</a></strong></span></td>
+           <td height="30">&nbsp;</td>
+         </tr>
+         <tr>
+           <td height="50">&nbsp;</td>
+           <td width="190" height="50">&nbsp;&nbsp;&nbsp;<span class="gray_12px_fs" title="{$news.hlzx.h.remark|mystr_replace=###}">{$news.hlzx.h.remark|mb_substr=###,0,21,'utf-8'}...</span><span class="red_s_a"><a href="__APP__/news-{$news.hlzx.h.id}">[详细]</a></span></td>
+           <td height="50">&nbsp;</td>
+         </tr>
+         <tr>
+           <td colspan="4">&nbsp;</td>
+         </tr>
+         <tr>
+           <td height="138" colspan="4" valign="top"><volist name="news.hlzx.titles" id="vo">
+             <div class="height_22px_text">&nbsp;<span class="{$vo.title_color|title_style=###}" title="{$vo.title|mystr_replace=###}"><a href="__APP__/news-{$vo.id}">&middot;{$vo.title|mb_substr=###,0,26,'utf-8'}</a></span></div>
+           </volist></td>
+         </tr>
+    </table>
+       <div class="height_10px"></div>
+    <div class="clear"></div>
+  </div>
+<div class="width_5px_float"></div>
+<div class="width_315px_g4b">
+  <div class="heigh_30px_white">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="82" height="30" class="title_nv">时尚婚礼</td>
+        <td width="193" height="30" class="title_nv_nor">&nbsp;</td>
+        <td width="44" height="30"><span class="black_a"><a href="__APP__/news-list-{$news.sshl.id}">更多&gt;&gt;</a></span>                
+      </tr>
+    </table>
+  </div>
+  <div class="height_10px"></div>
+  
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+         <tr>
+           <td width="130" rowspan="2" align="center" valign="middle"><a href="__APP__/news-{$news.sshl.h.id}"><img src="__PUBLIC__/Upload/News/thumb_{$news.sshl.h.pic_url}" width="115" height="90" border="0" title="{$news.sshl.h.title|mystr_replace=###}" alt="图片:时尚婚礼"/></a></td>
+           <td height="30">&nbsp;</td>
+           <td width="190" height="30" align="center"><span class="red_s_a" title="{$news.sshl.h.title|mystr_replace=###}"><strong><a href="__APP__/news-{$news.sshl.h.id}">{$news.sshl.h.title|mb_substr=###,0,13,'utf-8'}</a></strong></span></td>
+           <td height="30">&nbsp;</td>
+         </tr>
+         <tr>
+           <td height="50">&nbsp;</td>
+           <td width="190" height="50"><span class="height_22px_text">&nbsp;&nbsp;&nbsp;<span class="gray_12px_fs" title="{$news.sshl.h.remark|mystr_replace=###}">{$news.sshl.h.remark|mb_substr=###,0,21,'utf-8'}...</span><span class="red_s_a"><a href="__APP__/news-{$news.sshl.h.id}">[详细]</a></span></td>
+           <td height="50">&nbsp;</td>
+         </tr>
+         <tr>
+           <td colspan="4">&nbsp;</td>
+         </tr>
+         <tr>
+           <td height="138" colspan="4" valign="top"><volist name="news.sshl.titles" id="vo">
+             <div class="height_22px_text">&nbsp;<span class="{$vo.title_color|title_style=###}" title="{$vo.title|mystr_replace=###}"><a href="__APP__/news-{$vo.id}">&middot;{$vo.title|mb_substr=###,0,26,'utf-8'}</a></span></div>
+           </volist></td>
+         </tr>
+    </table>
+  <div class="height_10px"></div>
+  <div class="clear"></div>
+</div>
+<div class="width_5px_float"></div>
+<div class="width_315px_g4b">
+  <div class="heigh_30px_white">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="82" height="30" class="title_nv">婚礼秘书</td>
+        <td width="193" height="30" class="title_nv_nor">&nbsp;</td>
+        <td width="44" height="30"><span class="black_a"><a href="__APP__/news-list-{$news.hlms.id}">更多&gt;&gt;</a></span>        
+      </tr>
+    </table>
+  </div>
+  <div class="height_10px"></div>
+  
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="130" rowspan="2" align="center" valign="middle"><a href="__APP__/news-{$news.hlms.h.id}"><img src="__PUBLIC__/Upload/News/thumb_{$news.hlms.h.pic_url}" width="115" height="90" border="0" title="{$news.hlms.h.title|mystr_replace=###}" alt="图片:婚礼秘书"/></a></td>
+            <td height="30">&nbsp;</td>
+            <td width="190" height="30" align="center"><span class="red_s_a" title="{$news.hlms.h.title|mystr_replace=###}"><strong><a href="__APP__/news-{$news.hlms.h.id}">{$news.hlms.h.title|mb_substr=###,0,13,'utf-8'}</a></strong></span></td>
+            <td height="30">&nbsp;</td>
+          </tr>
+          <tr>
+            <td height="50">&nbsp;</td>
+            <td width="190" height="50"><span class="height_22px_text">&nbsp;&nbsp;&nbsp;<span class="gray_12px_fs" title="{$news.hlms.h.remark|mystr_replace=###}">{$news.hlms.h.remark|mb_substr=###,0,21,'utf-8'}...</span><span class="red_s_a"><a href="__APP__/news-{$news.hlms.h.id}">[详细]</a></span></td>
+            <td height="50">&nbsp;</td>
+          </tr>
+          <tr>
+            <td colspan="4">&nbsp;</td>
+          </tr>
+          <tr>
+            <td height="138" colspan="4" valign="top"><volist name="news.hlms.titles" id="vo">
+              <div class="height_22px_text">&nbsp;<span class="{$vo.title_color|title_style=###}" title="{$vo.title|mystr_replace=###}"><a href="__APP__/news-{$vo.id}">&middot;{$vo.title|mb_substr=###,0,26,'utf-8'}</a></span></div>
+            </volist></td>
+          </tr>
+    </table>
+  <div class="height_10px"></div>
+  <div class="clear"></div>
+</div>
+<div class="clear"></div>
+<div class="height_5px"></div>
+<div class="width_315px_g4b">
+  <div class="heigh_30px_white">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="82" height="30" class="title_nv">婚房装修</td>
+        <td width="193" height="30" class="title_nv_nor">&nbsp;</td>
+        <td width="44" height="30"><span class="black_a"><a href="__APP__/news-list-{$news.hfzx.id}">更多&gt;&gt;</a></span>        
+      </tr>
+    </table>
+  </div>
+  <div class="height_10px"></div>
+ <table width="100%" border="0" cellspacing="0" cellpadding="0">
+         <tr>
+           <td width="130" rowspan="2" align="center" valign="middle"><a href="__APP__/news-{$news.hfzx.h.id}"><img src="__PUBLIC__/Upload/News/thumb_{$news.hfzx.h.pic_url}" width="115" height="90" border="0" title="{$news.hfzx.h.title|mystr_replace=###}" alt="图片:婚房装修"/></a></td>
+           <td height="30">&nbsp;</td>
+           <td width="190" height="30" align="center"><span class="red_s_a" title="{$news.hfzx.h.title|mystr_replace=###}"><strong><a href="__APP__/news-{$news.hfzx.h.id}">{$news.hfzx.h.title|mb_substr=###,0,13,'utf-8'}</a></strong></span></td>
+           <td height="30">&nbsp;</td>
+         </tr>
+         <tr>
+           <td height="50">&nbsp;</td>
+           <td width="190" height="50"><span class="height_22px_text">&nbsp;&nbsp;&nbsp;<span class="gray_12px_fs" title="{$news.hfzx.h.remark|mystr_replace=###}">{$news.hfzx.h.remark|mb_substr=###,0,21,'utf-8'}...</span><span class="red_s_a"><a href="__APP__/news-{$news.hfzx.h.id}">[详细]</a></span></td>
+           <td height="50">&nbsp;</td>
+         </tr>
+         <tr>
+           <td colspan="4">&nbsp;</td>
+      </tr>
+         <tr>
+           <td height="138" colspan="4" valign="top">
+          <volist name="news.hfzx.titles" id="vo">
+            <div class="height_22px_text"><span class="{$vo.title_color|title_style=###}" title="{$vo.title|mystr_replace=###}"><a href="__APP__/news-{$vo.id}">&nbsp;&middot;{$vo.title|mb_substr=###,0,26,'utf-8'}</a></span> </div>
+          </volist></td>
+      </tr>
+    </table>
+  
+  <div class="height_10px"></div>
+  <div class="clear"></div>
+</div>
+<div class="width_5px_float"></div>
+<div class="width_315px_g4b">
+  <div class="heigh_30px_white">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="82" height="30" class="title_nv">婚俗礼仪</td>
+        <td width="193" height="30" class="title_nv_nor">&nbsp;</td>
+        <td width="44" height="30"><span class="black_a"><a href="__APP__/news-list-{$news.hsly.id}">更多&gt;&gt;</a></span>        
+      </tr>
+    </table>
+  </div>
+  <div class="height_10px"></div>
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+         <tr>
+           <td width="130" rowspan="2" align="center" valign="middle"><a href="__APP__/news-{$news.hsly.h.id}"><img src="__PUBLIC__/Upload/News/thumb_{$news.hsly.h.pic_url}" width="115" height="90" border="0" title="{$news.hsly.h.title|mystr_replace=###}" alt="图片:婚俗礼仪"/></a></td>
+           <td height="30">&nbsp;</td>
+           <td width="190" height="30" align="center"><span class="red_s_a" title="{$news.hsly.h.title|mystr_replace=###}"><strong><a href="__APP__/news-{$news.hsly.h.id}">{$news.hsly.h.title|mb_substr=###,0,13,'utf-8'}</a></strong></span></td>
+           <td height="30">&nbsp;</td>
+         </tr>
+         <tr>
+           <td height="50">&nbsp;</td>
+           <td width="190" height="50"><span class="height_22px_text">&nbsp;&nbsp;&nbsp;<span class="gray_12px_fs" title="{$news.hsly.h.remark|mystr_replace=###}">{$news.hsly.h.remark|mb_substr=###,0,21,'utf-8'}...</span><span class="red_s_a"><a href="__APP__/news-{$news.hsly.h.id}">[详细]</a></span></td>
+           <td height="50">&nbsp;</td>
+         </tr>
+         <tr>
+           <td colspan="4">&nbsp;</td>
+         </tr>
+         <tr>
+           <td height="138" colspan="4" valign="top"><volist name="news.hsly.titles" id="vo">
+             <div class="height_22px_text"><span class="{$vo.title_color|title_style=###}" title="{$vo.title|mystr_replace=###}"><a href="__APP__/news-{$vo.id}">&nbsp;&middot;{$vo.title|mb_substr=###,0,26,'utf-8'}</a></span></div>
+           </volist></td>
+         </tr>
+    </table>
+  <div class="height_10px"></div>
+  <div class="clear"></div>
+</div>
+<div class="width_5px_float"></div>
+<div class="width_315px_g4b">
+  <div class="heigh_30px_white">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="82" height="30" class="title_nv">蜜月旅行</td>
+        <td width="193" height="30" class="title_nv_nor">&nbsp;</td>
+        <td width="44" height="30"><span class="black_a"><a href="__APP__/news-list-{$news.mylx.id}">更多&gt;&gt;</a></span>        
+      </tr>
+    </table>
+  </div>
+  <div class="height_10px"></div>
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+         <tr>
+           <td width="130" rowspan="2" align="center" valign="middle"><a href="__APP__/news-{$news.mylx.h.id}"><img src="__PUBLIC__/Upload/News/thumb_{$news.mylx.h.pic_url}" width="115" height="90" border="0" title="{$news.mylx.h.title|mystr_replace=###}" alt="图片:蜜月旅行"/></a></td>
+           <td height="30">&nbsp;</td>
+           <td width="190" height="30" align="center"><span class="red_s_a" title="{$news.mylx.h.title|mystr_replace=###}"><strong><a href="__APP__/news-{$news.mylx.h.id}">{$news.mylx.h.title|mb_substr=###,0,13,'utf-8'}</a></strong></span></td>
+           <td height="30">&nbsp;</td>
+         </tr>
+         <tr>
+           <td height="50">&nbsp;</td>
+           <td width="190" height="50"><span class="height_22px_text">&nbsp;&nbsp;&nbsp;<span class="gray_12px_fs" title="{$news.mylx.h.remark|mystr_replace=###}">{$news.mylx.h.remark|mb_substr=###,0,21,'utf-8'}...</span><span class="red_s_a"><a href="__APP__/news-{$news.mylx.h.id}">[详细]</a></span></td>
+           <td height="50">&nbsp;</td>
+         </tr>
+         <tr>
+           <td colspan="4">&nbsp;</td>
+         </tr>
+         <tr>
+           <td height="138" colspan="4" valign="top"><volist name="news.mylx.titles" id="vo">
+             <div class="height_22px_text">&nbsp;<span class="{$vo.title_color|title_style=###}" title="{$vo.title|mystr_replace=###}"><a href="__APP__/news-{$vo.id}">&middot;{$vo.title|mb_substr=###,0,26,'utf-8'}</a></span></div>
+           </volist></td>
+         </tr>
+    </table>
+  <div class="height_10px"></div>
+  <div class="clear"></div>
+</div>
+  <div class="clear"></div>
+ <div class="height_5px"></div>
+ <div class="width_315px_g4b">
+    <div class="heigh_30px_white" >
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="81" height="30" align="center" class="title_nv">婆媳关系</td>
+          <td width="187" height="30" align="right" class="black_a"><a href="__APP__/news-list-{$news.pxgx.id}" class="black_12px">更多&gt;&gt;</a>&nbsp;</td>
+        </tr>
+      </table>
+    </div>
+    <div class="height_5px"></div>
+    <div class="height_5px"></div>
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+         <tr>
+           <td width="130" rowspan="2" align="center" valign="middle"><a href="__APP__/news-{$news.pxgx.h.id}"><img src="__PUBLIC__/Upload/News/thumb_{$news.pxgx.h.pic_url}" width="115" height="90" border="0" title="{$news.pxgx.h.title|mystr_replace=###}" alt="图片:婆媳关系"/></a></td>
+           <td height="30">&nbsp;</td>
+           <td width="190" height="30" align="center"><span class="red_s_a" title="{$news.pxgx.h.title|mystr_replace=###}"><strong><a href="__APP__/news-{$news.pxgx.h.id}">{$news.pxgx.h.title|mb_substr=###,0,13,'utf-8'}</a></strong></span></td>
+           <td height="30">&nbsp;</td>
+         </tr>
+         <tr>
+           <td height="50">&nbsp;</td>
+           <td width="190" height="50"><span class="height_22px_text">&nbsp;&nbsp;&nbsp;<span class="gray_12px_fs" title="{$news.pxgx.h.remark|mystr_replace=###}">{$news.pxgx.h.remark|mb_substr=###,0,21,'utf-8'}...</span><span class="red_s_a"><a href="__APP__/news-{$news.pxgx.h.id}">[详细]</a></span></td>
+           <td height="50">&nbsp;</td>
+         </tr>
+         <tr>
+           <td colspan="4">&nbsp;</td>
+        </tr>
+         <tr>
+           <td height="138" colspan="4" valign="top">
+          <volist name="news.pxgx.titles" id="vo">
+            <div class="height_22px_text"><span class="{$vo.title_color|title_style=###}" title="{$vo.title|mystr_replace=###}"><a href="__APP__/news-{$vo.id}">&nbsp;&middot;{$vo.title|mb_substr=###,0,26,'utf-8'}</a></span> </div>
+          </volist></td>
+        </tr>
+      </table>
+<div class="height_5px_float"></div>
+ <div class="clear"></div>
+  </div>
+ <div class="width_5px_float"></div>
+  <div class="width_315px_g4b">
+    <div class="heigh_30px_white">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="81" height="30" align="center" class="title_nv">育儿宝典</td>
+          <td width="187" height="30" align="right" class="black_a"><a href="__APP__/news-list-{$news.yebd.id}" class="black_12px">更多&gt;&gt;</a>&nbsp;</td>
+        </tr>
+      </table>
+    </div>
+    <div class="height_5px"></div>
+    <div class="height_5px"></div>
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+         <tr>
+           <td width="130" rowspan="2" align="center" valign="middle"><a href="__APP__/news-{$news.yebd.h.id}"><img src="__PUBLIC__/Upload/News/thumb_{$news.yebd.h.pic_url}" width="115" height="90" border="0" title="{$news.yebd.h.title|mystr_replace=###}" alt="图片:育儿宝典"/></a></td>
+           <td height="30">&nbsp;</td>
+           <td width="190" height="30" align="center"><span class="green_nv_a" title="{$news.yebd.h.title|mystr_replace=###}"><strong><a href="__APP__/news-{$news.yebd.h.id}" class="green_a">{$news.yebd.h.title|mb_substr=###,0,13,'utf-8'}</a></strong></span></td>
+           <td height="30">&nbsp;</td>
+         </tr>
+         <tr>
+           <td height="50">&nbsp;</td>
+           <td width="190" height="50"><span class="height_22px_text">&nbsp;&nbsp;&nbsp;<span class="gray_12px_fs" title="{$news.yebd.h.remark|mystr_replace=###}">{$news.yebd.h.remark|mb_substr=###,0,21,'utf-8'}...</span><span class="red_s_a"><a href="__APP__/news-{$news.yebd.h.id}">[详细]</a></span></td>
+           <td height="50">&nbsp;</td>
+         </tr>
+         <tr>
+           <td colspan="4">&nbsp;</td>
+        </tr>
+         <tr>
+           <td height="138" colspan="4" valign="top">
+          <volist name="news.yebd.titles" id="vo">
+            <div class="height_22px_text"><span class="{$vo.title_color|title_style=###}" title="{$vo.title|mystr_replace=###}"><a href="__APP__/news-{$vo.id}">&nbsp;&middot;{$vo.title|mb_substr=###,0,26,'utf-8'}</a></span> </div>
+          </volist></td>
+        </tr>
+      </table>
+
+<div class="height_5px_float"></div>
+ <div class="clear"></div>
+  </div>
+  <div class="width_5px_float"></div>
+  <div class="width_315px_g4b">
+    <div class="heigh_30px_white" >
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="81" height="30" align="center" class="title_nv">话题PK</td>
+          <td width="187" height="30" align="right" class="black_a"><a href="__APP__/news-list-{$news.cjxw.id}" class="black_12px">&nbsp;</a><a href="__APP__/news-list-htpk" class="black_12px">更多&gt;&gt;</a>&nbsp;</td>
+        </tr>
+      </table>
+    </div>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr align="center">
+        <td height="43" colspan="3" class="red_14px_f"><strong><span class="green_a"><a href="__APP__/News/htpk_view/id/{$news.htpk.id}" class="green_14px_yahei">{$news.htpk.title}</a></span></strong></td>
+      </tr>
+      <tr>
+        <td width="18" height="55">&nbsp;</td>
+        <td width="231" height="55">&nbsp;&nbsp;&nbsp;<span class="height_20px_text">{$news.htpk.content}</span><span class="red_s_a"><a href="__APP__/News/htpk_view/id/{$news.htpk.id}">[详细]</a></span></td>
+        <td width="21" height="55">&nbsp;</td>
+      </tr>
+      <tr align="center">
+        <td height="145" colspan="3"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td height="120">&nbsp;</td>
+            <td height="120" align="center" valign="bottom"><span class="blue_s_text">{$news.htpk.b_num}票</span><br>              <img src="../Public/Images/pk_blue.png" width="45" height="{$news.htpk.b_num_per}" alt="蓝"></td>
+            <td height="120" align="center">&nbsp;</td>
+            <td height="120" align="center" valign="bottom"><span class="red_s_text">{$news.htpk.r_num}票</span><br>
+              <img src="../Public/Images/pk_red.png" width="45" height="{$news.htpk.r_num_per}" alt="红"></td>
+            <td height="120">&nbsp;</td>
+          </tr>
+          <tr>
+            <td height="39">&nbsp;</td>
+            <td height="39" align="center" class="blue_s_text">反方观点</td>
+            <td height="39" align="center">&nbsp;</td>
+            <td height="39" align="center" class="red_s_text">正方观点</td>
+            <td height="39">&nbsp;</td>
+          </tr>
+        </table></td>
+      </tr>
+      <tr align="center">
+        <td colspan="3"></td>
+      </tr>
+    </table>
+    <div class="clear"></div>
+  </div>
+  <div class="clear"></div>
+ <div class="height_10px"></div>
+ <a href="__APP__/shop-list-5"><img src="../Public/Images/sygzs_bg.png" width="960" height="40" border="0" alt="摄影工作室"></a>
+ <div class="width_958px_4bian">
+ <volist name="shop_list[5]" id="vo">
+   <div class="width_240px_float">&nbsp;&nbsp;<a href="__APP__/shop-{$vo.id}" title="{$vo.name}"> {$vo.name|trim|mb_substr=###,0,18,'utf-8'}</a></div>
+</volist>   
+<div class="clear"></div>
+ </div>
+ <div class="height_10px"></div>
+ <a href="__APP__/shop-list-6"><img src="../Public/Images/hsyl_bg.png" width="960" height="40" border="0" alt="婚纱影楼"></a>
+ <div class="width_958px_4bian">
+<volist name="shop_list[6]" id="vo">
+   <div class="width_240px_float">&nbsp;&nbsp;<a href="__APP__/shop-{$vo.id}" title="{$vo.name}"> {$vo.name|trim|mb_substr=###,0,18,'utf-8'}</a></div>
+</volist>
+  <div class="clear"></div><!--自动拉伸width_960px-->
+  </div>
+ <div class="height_10px"></div>
+ <a href="__APP__/shop-list-7"><img src="../Public/Images/hqgs_bg.png" width="960" height="40" border="0" alt="婚庆公司"></a>
+ <div class="width_958px_4bian">
+  <volist name="shop_list[7]" id="vo">
+   <div class="width_240px_float">&nbsp;&nbsp;<a href="__APP__/shop-{$vo.id}" title="{$vo.name}"> {$vo.name|trim|mb_substr=###,0,18,'utf-8'}</a></div>
+</volist>   
+<div class="clear"></div>
+ </div>
+ <div class="height_10px"></div>
+ <a href="__APP__/shop-list-8"><img src="../Public/Images/hslf_bg.png" width="960" height="40" border="0" alt="婚纱礼服"></a>
+ <div class="width_958px_4bian">
+  <volist name="shop_list[8]" id="vo">
+   <div class="width_240px_float">&nbsp;&nbsp;<a href="__APP__/shop-{$vo.id}" title="{$vo.name}"> {$vo.name|trim|mb_substr=###,0,18,'utf-8'}</a></div>
+</volist>   
+<div class="clear"></div>
+ </div>
+ <div class="height_10px"></div>
+ <a href="__APP__/shop-list-11"><img src="../Public/Images/hjss_bg.png" width="960" height="40" border="0" alt="婚戒首饰"></a>
+ <div class="width_958px_4bian">
+  <volist name="shop_list[11]" id="vo">
+   <div class="width_240px_float">&nbsp;&nbsp;<a href="__APP__/shop-{$vo.id}" title="{$vo.name}"> {$vo.name|trim|mb_substr=###,0,18,'utf-8'}</a></div>
+</volist>   
+<div class="clear"></div>
+ </div>
+
+ <div class="height_10px"></div>
+ <!--左边start---><!--左边end--><!--右边start--><!--右边end-->
+  <div class="clear"></div><!--自动拉伸width_680px_float-->
+</div>
+<!--中部第三大块结束--> 
+<div class="clear"></div><!--自动拉伸width_270px_float--><!--中部第四大块开始--><!--中部第四大块结束-->
+<div class="clear"></div><!--自动拉伸width_960px-->
+
+<div class="clear"></div><!--自动拉伸width_960px-->
+
+<!--中部第六大块开始-->
+
+<!--中部第六大块结束-->
+<div class="clear"></div><!--自动拉伸width_960px--><!--中部第七大块开始-->
+<!--报广展示start--><!--报广展示end--> 
+<!--中部第七大块结束-->
+
+
+<!--%%当前是否在首页嵌入-->
+
+
+    <div class="height_5px"></div>
+<!--友情连接目录start-->
+      
+<div id="big" onMouseOver="zhuan()" onMouseOut="jixu()" class="width_960px_top_bottom_1px">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td  width="7%" bgcolor="#F20018">&nbsp;</td>
+            <td width="93%" bgcolor="#E3E3E3">&nbsp;</td>
+          </tr>
+		  </table>
+  <div id="con_zzjs_net">
+    <ul id="tags">
+<li class="selectTag"><a onMouseOver="selectTag('tagContent0',this)" href="javascript:void(0)">合 </a></li>
+<li><a onMouseOver="selectTag('tagContent1',this)" href="javascript:void(0)"> 作 </a></li>
+<li><a onMouseOver="selectTag('tagContent2',this)" href="javascript:void(0)"> 朋 </a></li>
+<li><a onMouseOver="selectTag('tagContent3',this)" href="javascript:void(0)"> 友 </a></li>
+<li><a onMouseOver="selectTag('tagContent4',this)" href="javascript:void(0)"> 们 </a></li>
+<li><a href="__APP__/About/link">更多&gt;&gt;</a></li>
+    </ul>
+  <div id="tagContent">
+      <div class="tagContent selectTag" id="tagContent0">
+	  <!-- 1 s -->
+	  <div class="height_10px_float"></div>
+        <div class="clear"></div><!--自动拉伸width_960px-->
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="border_1px_top_bottom">
+      <tr>
+         <td height="55" class="height_22px_text black_a">
+         <volist name="lp_link[0]" id="vo" key="k">
+            <neq name="k" value="1">&nbsp;</neq> <a href="{$vo.url}" target="_blank">{$vo.webname}</a> | 
+         </volist>
+         </td>
+        </tr>
+      </table>
+       <div class="height_10px_float"></div> 
+         <div class="clear"></div><!--自动拉伸width_960px-->
+	 <!-- 1 e -->
+	  </div>
+      <div class="tagContent" id="tagContent1">
+	  <!-- 2 s -->
+	  <div class="height_10px_float"></div>
+        <div class="clear"></div><!--自动拉伸width_960px-->
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="border_1px_top_bottom">
+      <tr>
+         <td height="55" class="height_22px_text black_a">
+         <volist name="lp_link[1]" id="vo" key="k">
+            <neq name="k" value="1">&nbsp;</neq> <a href="{$vo.url}" target="_blank">{$vo.webname}</a> | 
+         </volist>
+         </td>
+        </tr>
+      </table>
+       <div class="height_10px_float"></div> 
+         <div class="clear"></div><!--自动拉伸width_960px-->
+	 <!-- 2 e -->
+	  </div>
+      <div class="tagContent" id="tagContent2">
+	  <!-- 3 s -->
+	  <div class="height_10px_float"></div>
+        <div class="clear"></div><!--自动拉伸width_960px-->
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="border_1px_top_bottom">
+      <tr>
+         <td height="55" class="height_22px_text black_a">
+         <volist name="lp_link[2]" id="vo" key="k">
+            <neq name="k" value="1">&nbsp;</neq> <a href="{$vo.url}" target="_blank">{$vo.webname}</a> | 
+         </volist>
+         </td>
+        </tr>
+      </table>
+       <div class="height_10px_float"></div> 
+         <div class="clear"></div><!--自动拉伸width_960px-->
+	 <!-- 3 e -->
+	  </div>
+	  <div class="tagContent" id="tagContent3">
+	  <!-- 4 s -->
+	  <div class="height_10px_float"></div>
+        <div class="clear"></div><!--自动拉伸width_960px-->
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="border_1px_top_bottom">
+      <tr>
+         <td height="55" class="height_22px_text black_a">
+         <volist name="lp_link[3]" id="vo" key="k">
+            <neq name="k" value="1">&nbsp;</neq> <a href="{$vo.url}" target="_blank">{$vo.webname}</a> | 
+         </volist>
+         </td>
+        </tr>
+      </table>
+       <div class="height_10px_float"></div> 
+         <div class="clear"></div><!--自动拉伸width_960px-->
+	 <!-- 4 e -->
+	  </div>
+	  <div class="tagContent" id="tagContent4">
+	  <!-- 5 s -->
+	  <div class="height_10px_float"></div>
+        <div class="clear"></div><!--自动拉伸width_960px-->
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="border_1px_top_bottom">
+      <tr>
+         <td height="55" class="height_22px_text black_a">
+         <volist name="lp_link[4]" id="vo" key="k">
+            <neq name="k" value="1">&nbsp;</neq> <a href="{$vo.url}" target="_blank">{$vo.webname}</a> | 
+         </volist>
+         </td>
+        </tr>
+      </table>
+       <div class="height_10px_float"></div> 
+         <div class="clear"></div><!--自动拉伸width_960px-->
+	 <!-- 5 e -->
+	  </div>
+  </div>
+</div>
+<script type="text/javascript">
+var obig=document.getElementById("big");
+function selectTag(showContent,selfObj){
+   var tag = document.getElementById("tags").getElementsByTagName("li");
+  var taglength = tag.length;
+  for(i=0; i<taglength; i++){
+    tag[i].className = "";
+  }
+  selfObj.parentNode.className = "selectTag";
+  for(i=0; j=document.getElementById("tagContent"+i); i++){
+    j.style.display = "none";
+  }
+  document.getElementById(showContent).style.display = "block";
+}
+ var x=0;
+ function scrollTag(){
+ var tags=document.getElementById("tags").getElementsByTagName("a");
+  if(x<2){x=x+1}
+  else
+  x=0;
+  var tag = document.getElementById("tags").getElementsByTagName("li");
+  var taglength = tag.length;
+  for(i=0; i<taglength; i++){
+    tag[i].className = "";
+  }
+tags[x].parentNode.className = "selectTag";
+for(i=0; j=document.getElementById("tagContent"+i);i++){
+   j.style.display="none";
+ }
+ document.getElementById("tagContent"+x).style.display="block";
+}
+var scrolll=setInterval(scrollTag,2000);
+function zhuan(){
+	clearInterval(scrolll);
+}
+function jixu(){
+	scrolll=setInterval(scrollTag,2000);
+}
+</script>
+</div>
+    
+    <!--end友情链接-->
+    
+    
+    <!--页脚start-->
+	<include file="Public:footer" />
+</body>
+</html>
+<script type="text/javascript">
+	$(function(){
+
+		//1.今日要闻与全国楼市加载效果------------------start---------------------------------------
+		var last_jryw=$('#yaoweng_title .yaoweng_title_nv_nor:eq(0)');
+		$('#yaoweng_title .yaoweng_title_nv_nor').mouseover(function(){
+			if($(this).hasClass('yaoweng_title_nv_nor')){
+				//加载栏目,并更换样式
+				var id="jryw_inc";
+				var url=APP+'/News/ajax_jryw/name/'+$(this).attr('id');
+				domAjax(id,url);	
+				
+				last_jryw.removeClass('yaoweng_title_nv').addClass('yaoweng_title_nv_nor');	
+				last_jryw=$(this);						
+				$(this).removeClass('yaoweng_title_nv_nor').addClass('yaoweng_title_nv');			
+			}
+			
+		});
+			
+		$('#yaoweng_title .yaoweng_title_nv_nor:eq(0)').removeClass('yaoweng_title_nv_nor').addClass('yaoweng_title_nv');
+		//1.今日要闻与全国楼市加载效果---------------end------------------------------------------
+		
+
+		//2.大嘴谈房与小编踩盘加载效果------------------start---------------------------------------
+		var last_lpdg=$('#dazui_title .title_nv_nor:eq(0)');
+		$('#dazui_title .title_nv_nor').mouseover(function(){
+			if($(this).hasClass('title_nv_nor')){
+				//加载栏目,并更换样式
+				var id="dazui_inc";
+				var url=APP+'/News/ajax_dztf/name/'+$(this).attr('id');
+				domAjax(id,url);	
+				
+				last_lpdg.removeClass('title_nv').addClass('title_nv_nor');	
+				last_lpdg=$(this);						
+				$(this).removeClass('title_nv_nor').addClass('title_nv');			
+			}
+			
+		});
+			
+		$('#dazui_title .title_nv_nor:eq(0)').removeClass('title_nv_nor').addClass('title_nv');
+		//2.大嘴谈房与小编踩盘加载效果---------------end------------------------------------------	
+		
+		
+		//8.土地出让/土地交易/楼盘规划加载效果------------------start---------------------------------------
+		var last_tdcr=$('#tdcr_title .title_nv_nor:eq(0)');
+		$('#tdcr_title .title_nv_nor').mouseover(function(){
+			if($(this).hasClass('title_nv_nor')){
+				//加载栏目,并更换样式
+				var id="tdcr_inc";
+				var url=APP+'/News/ajax_tdcr/name/'+$(this).attr('id');
+				domAjax(id,url);	
+				
+				last_tdcr.removeClass('title_nv').addClass('title_nv_nor');	
+				last_tdcr=$(this);						
+				$(this).removeClass('title_nv_nor').addClass('title_nv');			
+			}
+			
+		});
+			
+		$('#tdcr_title .title_nv_nor:eq(0)').removeClass('title_nv_nor').addClass('title_nv');
+		//8.土地出让/土地交易/楼盘规划加载效果加载效果---------------end------------------------------------------	
+		
+		//最新楼备与每日成交排行榜加载效果------------------start---------------------------------------
+		var last_xsph=$('#xsph_title .title_nv_style3_nor:eq(0)');
+		$('#xsph_title .title_nv_style3_nor').mouseover(function(){
+			if($(this).hasClass('title_nv_style3_nor')){
+				//加载栏目,并更换样式
+				var id=$(this).attr('id');
+				if(id=='xsph'){
+					$('#xsph_inc').css('display','block');
+					$('#zxlp_inc').css('display','none');
+				}else{
+					$('#xsph_inc').css('display','none');
+					$('#zxlp_inc').css('display','block');	
+				}
+				
+				last_xsph.removeClass('title_nv_style3').addClass('title_nv_style3_nor');	
+				last_xsph=$(this);						
+				$(this).removeClass('title_nv_style3_nor').addClass('title_nv_style3');			
+			}
+			
+		});
+			
+		$('#xsph_title .title_nv_style3_nor:eq(0)').removeClass('title_nv_style3_nor').addClass('title_nv_style3');
+		//最新楼备与每日成交排行榜加载效果加载效果---------------end------------------------------------------												
+	});
+	
+	
+	</script> 
+  <script type="text/javascript">
+		<!--//--><![CDATA[//><!--
+			
+		
+$(document).ready(function(){
+		/*var scrollPic_02 = new ScrollPic();
+		scrollPic_02.scrollContId   = "hot_lp_pic"; //内容容器ID
+		scrollPic_02.arrLeftId      = "hot_lpleft_pic";//左箭头ID
+		scrollPic_02.arrRightId     = "hot_lpright_pic"; //右箭头ID
+
+		scrollPic_02.frameWidth     = 800;//显示框宽度
+		scrollPic_02.pageWidth      = 318; //翻页宽度
+
+		scrollPic_02.speed          = 10; //移动速度(单位毫秒，越小越快)
+		scrollPic_02.space          = 10; //每次移动像素(单位px，越大越快)
+		scrollPic_02.autoPlay       = true; //自动播放
+		scrollPic_02.autoPlayTime   = 5; //自动播放间隔时间(秒)
+		
+	
+		//scrollPic_02.initialize(); //初始化
+
+				/*导入默认南昌新房价格查询;*/
+		domAjax('getrange_price','__APP__/News/getrange_price/b/4000/e/5000','get');
+		/*导入默认南昌区域价格查询;*/
+		domAjax('getquyu_price','__APP__/News/getquyu_price/range_id/3','get');
+});
+
+
+//pk
+function pkShow(type,event){
+
+	//type='red'支持红方
+	//type='blue'支持蓝方
+	var id='pk'+type;
+	var color;
+	if(type=='red'){
+		color='#FF6600';
+	}else{
+		color='#0090B9';	
+	}
+
+	//3.根据上面获取的信息，定位弹出框的位置;
+	var left=event.x;
+	var top=$('body').scrollTop()+event.y;	
+
+
+	var html='<div id="'+id+'" style="position: absolute;top:'+top+'px;left:'+left+'px;width:100px;height:100px;color:'+color+';font-size: 100px;font-family:Arial, Helvetica, sans-serif;z-index:100;"><b>+1</b></div>';
+	//创建一个dom模型容器
+	if(!$('#'+id).width()){
+	    $(html).appendTo('body');
+	}
+
+	//创建动画
+	$('#'+id).animate({top:top-200,fontSize:80,opacity:0},800,function(){
+		
+		//增加票数
+		$('#'+id+'_piao').html(Number($('#'+id+'_piao').html())+1);
+		//显示比例
+		var red_piao=Number($('#pkred_piao').html());
+		var blue_piao=Number($('#pkblue_piao').html());
+		var redBai=Math.round(red_piao/(red_piao+blue_piao)*100);
+		//显示文字比例
+		$('#pkred_num').html(redBai+'%');
+		$('#pkblue_num').html((100-redBai)+'%');
+		//显示图像比例
+		$('#pkred_pic').width=redBai;
+		$('#pkblue_pic').width=100-redBai;
+
+		$('#'+id).remove();//移除div
+	});
+	
+}
+
+</script>

@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>修改帐号-南昌婚庆网</title>
+<link href="../Public/Css/common.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/account.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/Js/jquery.min.js" /></script>
+
+<script type="text/javascript" src="../Public/Js/common.js" /></script>
+<script type="text/javascript">
+//指定当前组模块URL地址
+var URL = '__URL__';
+var APP	= '__APP__';
+var PUBLIC = '__PUBLIC__';
+
+var CURRENT_ITEM  = "nav_lf_act";  //当前选中
+</script>
+
+</head>
+
+<body>
+<include file="Public:header" /><!--共享登录头部 -->
+<div class="clear"></div>
+<!--面包屑s -->
+  <div class="height_30px_text gray_14px_r_a" style="line-height:50px; height:50px;">
+  <a href="__APP__/">首页</a> <strong>&gt;&gt; </strong>  修改帐号
+  </div>
+<!--面包屑e -->
+
+<!--个人信息开始-->
+<div class="edit_user">
+
+	<!-- ///////////////////内容开始///////////////////////// -->
+    <div class="user_main">       
+    
+		<!-- title begin -->
+		<div class="user_title"> 
+            <h2>帐号管理</h2>
+		</div>
+        <!-- title end -->
+        <div class="clear"></div>
+        <div class="float_height_10px"></div>
+        <div class="clear"></div>
+        <!-- 左菜单 s __URL__/edit_user-->
+      <div class="user_menu">
+            <include file="Account:account_left" /><!--共享左侧 -->
+      </div>
+        <!-- 左菜单 e  -->
+        
+        <!-- /////////////////右 s   -->
+        <div id="user_content">
+        <!-- 右top s   -->
+      	<div class="user_content_t"></div>
+        <!-- 右top e   -->
+        <div class="clear"></div>
+        <!-- 右middle s   -->
+        <div class="user_content_m">
+        	<div class="float_height_30px"></div>
+          <div class="clear"></div>
+            <!-- 切换块1  -->
+            <div class="c_box" id="edit_u" style="display:block;">
+		  <!-- 修改资料 begin  -->
+          
+		   <form action="__URL__/changeAccount" method="post" id="regform">
+            <div class="data" style="padding-left:80px;"><!-- 修改帐号 begin  -->
+			 <center><font color="red"><php>if(isset($_GET["t"])){echo "新账号激活邮件已发出，请去邮箱激活！";}</php></font></center>
+                <div class="lh18 alC border cGray2" style="padding:10px 0px;">为了更好地保护你的账户安全，需要验证你拥有这个Email地址。
+                    <br />
+                我们会向你的新Email地址发送一封电子邮件，请单击电子邮件正文中的链接或按照说明操作。</div>
+                <ul>
+                    <li><div class="float_l alR" style="width: 15%;">旧Email：</div><div class="float_l" style="width: 70%;">{$old_email}</div>
+                    </li>
+                    <li>
+                        <div class="float_l alR" style="width: 15%;">新Email：</div><div class="float_l" style="width: 70%;">
+                            <input name="email" type="text" class="input_text" id="textfield14" style="width:200px;"  onBlur="this.className='input_text'" onFocus="this.className='input_text'" require="true" datatype="email|ajax" url="__URL__/checkEmail" msg="重要！请填有效邮箱地址，以收邮件完成注册|邮箱已被占用!"/>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="float_l alR" style="width: 15%;">验证码：</div><div class="float_l" style="width: 70%;">
+                            <input name="checkcode" class="input_text" id="checkcode" style="width:60px;" onBlur="this.className='input_text'" onFocus="this.className='input_text'" msg="验证码不能为空|验证码输入有误，请重输！"/>
+                            <div class="float_l">
+                                <img  id="verify" src="__APP__/Public/verify/" alt="验证码" align="absmiddle" /> <a href="javascript:fleshVerify()">看不清？</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="float_l alR" style="width: 15%;">&nbsp;</div>
+                        <div class="float_l" style="width: 70%;">
+                            <input name="button" type="submit" class="input_button" id="button" value="确认修改" />
+                        </div>
+                    </li>
+                </ul>
+            </div><!-- 修改帐号 end  -->
+        </form>
+
+     <div class="clear"></div> 
+    </div>
+    <!-- 切换块1  -->
+    <div class="clear"></div>
+    <div class="float_height_10px"></div>
+    <div class="clear"></div>
+    <!-- 修改资料 end  -->
+	</div>
+     <!-- 右middle e   -->
+     <div class="clear"></div>
+	 <!-- 右bottom s   -->
+     <div class="user_content_b"></div>
+     <!-- 右bottom e   -->
+    <div class="clear"></div>
+	</div>
+    <!-- /////////////////右 e   -->
+ 	<div class="clear"></div>
+	</div>
+	<!-- ///////////////////内容结束///////////////////////// -->
+
+<div class="clear"></div>
+</div>
+<!-- 个人信息结束 -->
+<div class="clear"></div>
+<div class="float_height_30px"></div>
+<div class="clear"></div>
+<!-- footer -->
+<include file="Public:footer" /> {//共用尾部}
+</body>
+</html>

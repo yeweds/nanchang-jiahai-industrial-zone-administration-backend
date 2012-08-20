@@ -1,0 +1,164 @@
+/*------promptBox-- style--------------------*/
+.prompt_box_inc{
+	position: absolute;
+	top: -2000px;
+	z-index: 1000005;
+}	
+
+.prompt_box_inc .prompt_box1 {
+	background-image: url(../Images/prompt_box1.png);
+	background-repeat: no-repeat;
+	float: left;
+	height: 15px;
+	width: 15px;
+	background-position: bottom;
+}
+.prompt_box_inc .prompt_box2 {
+	background-image: url(../Images/prompt_box2.png);
+	background-repeat: repeat-x;
+	float: left;
+	height: 15px;
+	width: 300px;
+	position: relative;
+	background-position: left bottom;
+}
+.prompt_box_inc .prompt_box3 {
+	float: left;
+	height: 15px;
+	width: 15px;
+	background-image: url(../Images/prompt_box3.png);
+	background-repeat: no-repeat;
+	background-position: bottom;
+}
+.prompt_box_inc .prompt_box4 {
+	background-image: url(../Images/prompt_box4.png);
+	background-repeat: repeat-y;
+	float: left;
+	height: 100px;
+	width: 15px;
+	position: relative;
+}
+.prompt_box_inc .prompt_box5 {
+	background-image: url(../Images/prompt_box5.png);
+	float: left;
+	height: 100px;
+	width: 300px;
+	background-repeat: repeat-y;
+	background-position: right top;
+	font-size: 12px;
+	color: #090;
+	background-color: #FFF;
+}
+.prompt_box_inc .prompt_box6 {
+	background-image: url(../Images/prompt_box6.png);
+	background-repeat: repeat-y;
+	float: left;
+	height: 100px;
+	width: 15px;
+	position: relative;
+}
+.prompt_box_inc .prompt_box7 {
+	background-image: url(../Images/prompt_box7.png);
+	background-repeat: no-repeat;
+	float: left;
+	height: 16px;
+	width: 15px;
+}
+.prompt_box_inc .prompt_box8 {
+	background-image: url(../Images/prompt_box8.png);
+	background-repeat: repeat-x;
+	float: left;
+	height: 15px;
+	width: 300px;
+	position: relative;
+}
+.prompt_box_inc .prompt_box9 {
+	background-image: url(../Images/prompt_box9.png);
+	background-repeat: no-repeat;
+	float: left;
+	height: 15px;
+	width: 15px;
+}
+.prompt_box_inc .prompt_box_info {
+	width: 100%;
+}
+
+.prompt_box_inc .prompt_box_close {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	height: 15px;
+	width: 15px;
+	background-image: url(../Images/prompt_close.png);
+	cursor: pointer;
+	background-position: bottom;
+	background-repeat: no-repeat;
+	z-index: 3000005;	
+}
+.prompt_box_inc .prompt_box_closem {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	height: 15px;
+	width: 15px;
+	background-image: url(../Images/prompt_closem.png);
+	cursor: pointer;
+	background-repeat: no-repeat;
+	z-index: 3000005;	
+}
+.prompt_box_inc .prompt_box_closec {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	height: 15px;
+	width: 15px;
+	background-image: url(../Images/prompt_closec.png);
+	cursor: pointer;
+	background-position: bottom;
+	background-repeat: no-repeat;
+	z-index: 3000005;		
+}
+.prompt_box_inc .prompt_box_title{
+	position: absolute;
+	left: 15px;
+	top: 10px;
+	font-family: "微软雅黑";
+	font-size: 14px;
+	font-weight: bold;
+	color: #090;
+}
+
+.prompt_box_inc .prompt_jian_bottom{
+	position: absolute;
+	width:25px;
+	height:40px;
+	right: 0px;
+	top: 0px;
+	background-image: url(../Images/prompt_jian_bottom.png);	
+}
+.prompt_box_inc .prompt_jian_top{
+	position: absolute;
+	width:25px;
+	height:40px;
+	right: 0px;
+	top: -25px;
+	background-image: url(../Images/prompt_jian_top.png);
+	background-repeat: no-repeat;
+	background-position: left bottom;
+}
+.prompt_box_inc .prompt_jian_left{
+	position: absolute;
+	width:40px;
+	height:25px;
+	right: 0px;
+	bottom: 0px;
+	background-image: url(../Images/prompt_jian_left.png);	
+}
+.prompt_box_inc .prompt_jian_right{
+	position: absolute;
+	width:40px;
+	height:25px;
+	left: 0px;
+	bottom: 0px;
+	background-image: url(../Images/prompt_jian_right.png);	
+}

@@ -1,0 +1,26 @@
+<style>
+	font-size: 12px;
+	.page{float:left;}
+</style>
+<table width="100%" border="0" cellspacing="1" cellpadding="0">
+  <tr>
+    <td width="50%" valign="top" >
+<volist name="list" id="vo">
+	<eq name="vo.g_or_b" value="g">
+	<li><img src="../Public/Images/dp_ico.png" alt="" width="30" height="30" />支持 {$vo.user_name} 对 {$typeArr[$vo['type']]} 有话说： <br/>
+		{$vo.content} [{$vo.add_time|date='Y-m-d H:i',###}]</li>
+	</eq>
+</volist>
+	</td>
+    <td valign="top">
+	<volist name="list" id="vo">
+	<eq name="vo.g_or_b" value="b">
+		<li><img src="../Public/Images/dp_cha_ico.png" alt="" width="30" height="30" />不支持 {$vo.user_name} 对 {$typeArr[$vo['type']]} 有话说： <br/>
+			{$vo.content} [{$vo.add_time|date='Y-m-d H:i',###}]</li>
+	</eq>
+	</volist>
+	</td>
+  </tr>
+</table>
+<notpresent name="list">暂无该类型微评</notpresent>
+<div class="page">{$page}</div>

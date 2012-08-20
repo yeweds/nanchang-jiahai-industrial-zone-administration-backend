@@ -1,0 +1,129 @@
+<include file="Public:html_header" /> 
+
+<link href="../Public/Css/base.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/class_com.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/select_box.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/law.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/law_xiangqing.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="../Public/Js/base.js"></script> 
+<body>
+<include file="News:news_header" /> <!--头部包含共用 -->
+
+<!--顶图片s-->
+<div id="law_xiangqing_head"><include file="Ask:ad" /></div>
+<div class="height_30px_text blue_a" style="width:970px;margin:0 auto"><strong class="blue_14px_f">&gt;&gt;</strong><a href="__URL__/"> 0791首页</a> <span class="gray_14px_f">&gt;</span> <a href="__URL__/">婚庆在线</a></div>
+<!--顶图片e-->
+<div class="height_10px"> </div>
+<!--主体s-->
+<div id="law_xiangqing_master">
+  <div class="height_10px"> </div>
+  <table width="801" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="184">&nbsp;</td>
+      <td width="315"><span class="green_a"><a href="__URL__/">婚庆咨询首页</a> &gt;&gt; 咨询</span></td>
+      <td width="302" align="right"><span class="green_a"><a href="javascript:history.go(-1)">返回</a></span></td>
+    </tr>
+    <tr>
+      <td colspan="3"  height="10px"></td>
+    </tr>
+  </table>
+  <div id="master_bg"> 
+    <!--大表格s-->
+    <table width="659" border="0" cellspacing="0" cellpadding="0">
+      <form id="form1" name="form1" method="post" action="" enctype="multipart/form-data">
+        <label for="text_yanzheng"></label>
+        <tr>
+          <td width="60" height="55">&nbsp;</td>
+          <td width="145" height="55">&nbsp;</td>
+          <td width="60" height="55">&nbsp;</td>
+          <td width="145" height="55">&nbsp;</td>
+          <td width="60" height="55">&nbsp;</td>
+          <td width="70" height="55">&nbsp;</td>
+          <td width="70" height="55">&nbsp;</td>
+          <td width="49" rowspan="9">&nbsp;</td>
+        </tr>
+        <tr>
+          <td width="60" height="30" align="center" valign="middle">标题:</td>
+          <td height="30" colspan="6"><input type="text" name="title" id="text_biaoti" /></td>
+        </tr>
+        <tr>
+          <td width="60" height="15">&nbsp;</td>
+          <td width="145" height="15">&nbsp;</td>
+          <td width="60" height="15">&nbsp;</td>
+          <td width="145" height="15">&nbsp;</td>
+          <td width="60" height="15">&nbsp;</td>
+          <td width="70" height="15">&nbsp;</td>
+          <td width="70" height="15">&nbsp;</td>
+        </tr>
+        <tr>
+          <td width="60" height="55" align="center" valign="top">内容:</td>
+          <td colspan="6" rowspan="2" align="center" valign="middle"><div id="text_textarea">
+              <table width="535" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td width="535" height="14">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td width="535" height="248" align="center" valign="top"><textarea name="content" id="textarea_input" cols="45" rows="5"></textarea></td>
+                </tr>
+              </table>
+            </div></td>
+        </tr>
+        <tr>
+          <td width="60" height="257">&nbsp;</td>
+        </tr>
+        <tr>
+          <td width="60" height="15">&nbsp;</td>
+          <td width="145" height="15">&nbsp;</td>
+          <td width="60" height="15">&nbsp;</td>
+          <td width="145" height="15">&nbsp;</td>
+          <td width="60" height="15">&nbsp;</td>
+          <td width="70" height="15">&nbsp;</td>
+          <td width="70" height="15">&nbsp;</td>
+        </tr>
+        <tr>
+          <td width="60" height="30" align="center" valign="middle">姓名:</td>
+          <td width="145" height="30" valign="middle"><input type="text" name="name" id="text_xingming" class="master_text" /></td>
+          <td width="60" height="30" align="center" valign="middle">联系:</td>
+          <td width="145" height="30" valign="middle"><input name="link" type="text" class="master_text" id="text_lianxi" value="QQ/Email/手机" onClick="this.value=''" /></td>
+          <td width="60" height="30" align="center" valign="middle">验证:</td>
+          <td width="70" height="30" valign="middle"><input type="text" name="verify" id="text_yanzheng" /></td>
+          <td width="70" height="30" align="center" valign="middle"><a href="javascript:fleshVerify()"><img src="__URL__/verify/" name="verifyImg" border="0" align="absmiddle" id="verifyImg" title="请点图片刷新验证码"></a></td>
+        </tr>
+        <tr>
+          <td width="60" height="15">&nbsp;</td>
+          <td width="145" height="15">&nbsp;</td>
+          <td width="60" height="15">&nbsp;</td>
+          <td width="145" height="15">&nbsp;</td>
+          <td width="60" height="15">&nbsp;</td>
+          <td width="70" height="15">&nbsp;</td>
+          <td width="70" height="15">&nbsp;</td>
+        </tr>
+        <tr>
+          <td width="60" height="40">&nbsp;</td>
+          <td width="145" height="40">&nbsp;</td>
+          <td width="60" height="40">&nbsp;</td>
+          <td width="145" height="40">&nbsp;</td>
+          <td width="60" height="40">&nbsp;</td>
+          <td height="40" colspan="2" ><div class="botton_green1" onClick="subAsk()" onMouseOut="this.className='botton_green1'"></div></td>
+        </tr>
+      </form>
+    </table>
+    
+    <!--大表格e--> 
+  </div>
+  <div class="height_10px"></div>
+</div>
+<!--主体e--> 
+<include file="Public:footer" /> {//共用尾部}
+</body>
+</html>
+<script type="text/javascript" src="__PUBLIC__/Js/FCKeditor/fckeditor.js"></script>
+<script type="text/javascript"> var oFCKeditor = new FCKeditor( "content","100%","184px" ) ; oFCKeditor.BasePath = "__PUBLIC__/Js/FCKeditor/" ; oFCKeditor.ReplaceTextarea() ;function resetEditor(){setContents("content",document.getElementById("content").value)}; function saveEditor(){document.getElementById("content").value = getContents("content");} function InsertHTML(html){ var oEditor = FCKeditorAPI.GetInstance("content") ;if (oEditor.EditMode == FCK_EDITMODE_WYSIWYG ){oEditor.InsertHtml(html) ;}else	alert( "FCK必须处于WYSIWYG模式!" ) ;}</script><!-- 编辑器调用结束 -->
+<script type="text/javascript">
+    function subAsk(){
+	    var url=APP+'/Ask/ask';
+	    $('#form1').attr('action',url);
+	    $('#form1').submit();
+	}
+</script>

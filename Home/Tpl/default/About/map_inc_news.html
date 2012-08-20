@@ -1,0 +1,10 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- 新闻地图 -->
+<ul class="about_map_news">
+<volist name="news_list" id="vo">
+<li><a target="_blank" href="http://nc.tengfang.net/news-{$vo.id}">{$vo.title}</a></li>
+</volist>
+<notpresent name="news_list">
+<li>暂无</li>
+</notpresent>
+</ul>

@@ -1,0 +1,92 @@
+<div id="tf_head">
+	<div class="th_center white_a">
+	  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+	    <tr>
+	      <td width="54%"><a href="__APP__/">0791婚庆首页</a> | <a href="__APP__/News/">婚庆资讯</a> | <a href="__APP__/shop-list">商家大全</a></td>
+	      <td width="15%">&nbsp;</td>
+	      <td width="31%" align="right">
+                    <a href="/Reg/">注册</a> | <a href="/Login/index/fromUrl/L1RvaHRtbC9tYWtlX2hlYWRlcg==">登录</a>
+          
+           | <a href="#" onclick="bookmark()">加入收藏</a>&nbsp;</td>
+        </tr>
+      </table>
+	</div>
+</div>
+
+<div id="head_nv">
+  <div id="head_photo1">
+    <div class="height_5px"></div>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr class="green_nv_a">
+        <td width="50" height="20" align="center" class="green_nv_a">&nbsp;</td>
+        <td height="20" align="center" class="green_nv_a"><a href="__APP__/News/">今日焦点</a></td>
+        <td align="center" class="green_nv_a"><a href="__APP__/news-list-26">婚礼资讯</a></td>
+        <td width="100" align="center" class="green_nv_a">&nbsp;</td>
+        <td align="center" class="green_nv_a"><a href="__APP__/news-list-19">商家活动</a></td>
+        <td align="center" class="green_nv_a"><a href="__APP__/news-list-13">婚礼百货</a></td>
+        <td width="100" align="center">&nbsp;</td>
+        <td align="center" class="green_nv_a"><a href="__APP__/news-list-29">蜜月旅行</a></td>
+        <td align="center" class="green_nv_a"><a href="__APP__/News/news-list/cid/htpk">话题 P K</a></td>
+      </tr>
+      <tr class="green_nv_a">
+        <td height="20" align="center" class="green_nv_a">&nbsp;</td>
+        <td align="center" class="green_nv_a"><a href="__APP__/news-list-27">时尚婚礼</a></td>
+        <td align="center" class="green_nv_a"><a href="__APP__/news-list-28">婚俗礼仪</a></td>
+        <td width="56" align="center" class="green_nv_a">&nbsp;</td>
+        <td align="center" class="green_nv_a"><a href="__APP__/news-list-12">0791独家</a></td>
+        <td height="20" align="center" class="green_nv_a"><a href="__APP__/Pano/">热点推荐</a></td>
+        <td width="65" align="center">&nbsp;</td>
+        <td align="center" class="green_nv_a"><a href="__APP__/Reviews/all_reviews">商家点评</a></td>
+        <td align="center" class="green_nv_a"><a href="__APP__/Law/">解答疑问</a></td>
+      </tr>
+    </table>
+  </div>
+</div>
+<div class="height_18px_text"></div>
+
+<div id="head_search">
+  <div class="pic_nv_bn"><a href="/" title="腾房网"><img src="../Public/Images/logo.png" alt="腾房Logo" width="280" height="80" border="0" /></a></div>
+  
+<div class="width_5px_float"></div>
+  <div id="search_inc">
+  <div class="height_15px_text"></div>
+    <table width="590" border="0" cellspacing="0" cellpadding="0">
+       <form action="/Search" method="post" id="searchForm" onsubmit="return submit_search();">
+      <tr>
+        <td width="9" align="right">&nbsp;</td>
+        <td width="145" height="50"><div id="search_type_inc">
+		<select name="search_type" id="search_type" style="padding:6px; border:1px solid #fff; width:100px" >
+			<option value="news">新闻</option>
+			<option value="loupan">商家</option>
+		</select>
+		</div></td>
+        <td width="351" height="50"><label for="key"></label>
+        <input type="text" name="key" id="key" /></td>
+        <td width="" height="50"><input type="image" name="search_sub" id="search_sub" src="/Home/Tpl/default/Public/Images/news_search_bn.png" /></td>
+      </tr>
+      <input type="hidden" name="__hash__" value="ea151da715c0781ab9bfa5766c99e6d9" /></form>
+    </table>
+  </div>
+  <div class="width_5px_float"></div>
+
+</div>
+<div class="height_10px"></div>
+<script type="text/javascript">
+
+//提交搜索
+function submit_search(){
+	var key = jQuery("input:[name='key']").val();
+	if(key == '请输入搜索条件'){
+		key = '';
+	}
+	key = encodeURI(encodeURI(key));
+	var search_type = jQuery("input:[name='search_type']").val();
+	if(search_type == 'news'){
+		location.href = '/Search/index?&search_type='+ search_type +'&key='+ key ;
+	}else{
+		location.href = '/General/ct_list?&search_type='+ search_type +'&key='+ key ;
+	}
+	return false;	
+}
+
+</script>

@@ -1,0 +1,74 @@
+<include file="Public:html_header" />
+<link href="../Public/Css/news_com.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/class_com.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/select_box.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/law.css" rel="stylesheet" type="text/css" />
+<link href="../Public/Css/law_xiangqing.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="../Public/Js/base.js"></script> 
+<body>
+<include file="Public:news_header" /> <!--头部包含共用 --> 
+
+<!--顶图片s-->
+<div id="law_xiangqing_head"><include file="Ask:ad" /></div>
+<div class="height_30px_text blue_a" style="width:970px;margin:0 auto"><strong class="blue_14px_f">&gt;&gt;</strong><a href="__APP__/"> 0791首页</a> <span class="gray_14px_f">&gt;</span> <a href="__URL__/">婚庆在线</a></div>
+<!--顶图片e-->
+<div class="height_10px"> </div>
+<!--主体s-->
+<div id="law_xiangqing_master">
+  <div class="height_10px"> </div>
+  <table width="752" border="0" cellspacing="0" cellpadding="0" align="center">
+    <tr>
+      <td width="124">&nbsp;</td>
+      <td width="283"><span class="green_a"><a href="__URL__/lawyer_edit">管理首页</a>: |<a href="__URL__/lawyerAdmin">咨询师管理</a> |<a href="__URL__/pageSet">页面设置</a></span></td>
+      <td width="345" align="right"><span class="green_a"><a href="javascript:history.go(-1)">返回</a>&nbsp;&nbsp;&nbsp; &nbsp; </span></td>
+    </tr>
+    <tr>
+      <td colspan="3"  height="10px"></td>
+    </tr>
+  </table>
+  <table width="752" border="0" cellspacing="0" cellpadding="0" align="center">
+    <form action="__URL__/insertLawyer" method="post">
+      <tr>
+        <td width="128" height="35" align="center" valign="middle">邮箱:</td>
+        <td width="261" height="35" valign="middle"><input type="text" name="email" id="text_xingming" class="master_text"/>
+          <span class="green_12px">(登录时使用的账号)</span></td>
+        <td width="102" height="35" align="center" valign="middle">姓名:</td>
+        <td width="261" height="35" valign="middle"><input name="name" type="text" class="master_text" id="text_lianxi"/></td>
+      </tr>
+      <tr>
+        <td width="128" height="35" align="center" valign="middle">密码:</td>
+        <td width="261" height="35" valign="middle"><input type="password" name="pwd" id="text_xingming" class="master_text"  /></td>
+        <td width="102" height="35" align="center" valign="middle">确认密码:</td>
+        <td width="261" height="35" valign="middle"><input name="pwd2" type="password" class="master_text" id="text_lianxi" /></td>
+      </tr>
+      <tr>
+        <td height="35" align="center" valign="middle">是否设为管理员：</td>
+        <td height="35" align="left" valign="middle"><input type="radio" name="is_admin" value="0" checked> 否 <input type="radio" name="is_admin" value="1"> 是 </td>
+        <td height="35" align="center" valign="middle">电话：</td>
+        <td height="35" valign="middle"><input name="telephone" type="text" class="master_text" id="text_lianxi"/></td>
+      </tr>
+       <tr>
+        <td height="35" align="center" valign="middle">联系地址：</td>
+        <td height="35" align="left" valign="middle"><input name="address" type="text" class="master_text" id="text_lianxi"/></td>
+        <td height="35" align="center" valign="middle">验证码：
+          </td>
+        <td height="35" valign="middle"><input name="verify" type="text" id="right_top_input_yanzheng" maxlength="4" />
+          <a href="javascript:fleshVerify()"><img src="__APP__Public/verify/" alt="" name="verifyImg" border="0" align="absmiddle" id="verifyImg" title="请点图片刷新验证码"></a></td>
+      </tr>
+      <tr><td colspan="4" align="center"><input type="submit" value="确认 添加" /></td></tr>
+    </form>
+  </table>
+  <div class="height_10px"></div>
+</div>
+<!--主体e--> 
+<include file="Public:footer" /> {//共用尾部}
+</body>
+</html><script type="text/javascript">
+    function delLawyer(id){
+	      if(confirm('删除之后不可恢复，你确认要删除吗？')){
+			    var url =  URL+ '/delLawywer/id/' + id; 
+				window.location.href = URL+ '/delLawywer/id/' + id;  
+		  }
+	}
+</script>

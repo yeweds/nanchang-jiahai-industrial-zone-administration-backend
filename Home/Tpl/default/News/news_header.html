@@ -1,0 +1,86 @@
+<!--start腾房公共头部-->
+<include file="Public:com_header" />
+<!--end腾房公共头部-->
+<div id="head_nv">
+  <div id="head_photo1">
+    <div class="height_5px"></div>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr class="green_nv_a">
+        <td width="50" height="20" align="center" class="green_nv_a">&nbsp;</td>
+        <td height="20" align="center" class="green_nv_a"><a href="__APP__/news-list-21">每日焦点</a></td>
+        <td align="center" class="green_nv_a"><a href="__APP__/news-list-26">婚礼资讯</a></td>
+        <td width="100" align="center" class="green_nv_a">&nbsp;</td>
+        <td align="center" class="green_nv_a"><a href="__APP__/news-list-19">商家活动</a></td>
+        <td align="center" class="green_nv_a"><a href="__APP__/news-list-13">婚礼百货</a></td>
+        <td width="100" align="center">&nbsp;</td>
+        <td align="center" class="green_nv_a"><a href="__APP__/news-list-29">蜜月旅行</a></td>
+        <td align="center" class="green_nv_a"><a href="__APP__/news-list-htpk">话题 P K</a></td>
+      </tr>
+      <tr class="green_nv_a">
+        <td height="20" align="center" class="green_nv_a">&nbsp;</td>
+        <td align="center" class="green_nv_a"><a href="__APP__/news-list-27">时尚婚礼</a></td>
+        <td align="center" class="green_nv_a"><a href="__APP__/news-list-28">婚俗礼仪</a></td>
+        <td width="56" align="center" class="green_nv_a">&nbsp;</td>
+        <td align="center" class="green_nv_a"><a href="__APP__/news-list-12">0791独家</a></td>
+        <td height="20" align="center" class="green_nv_a"><a href="__APP__/news-list-rdtj">热点推荐</a></td>
+        <td width="65" align="center">&nbsp;</td>
+        <td align="center" class="green_nv_a"><a href="__APP__/Reviews/">商家点评</a></td>
+        <td align="center" class="green_nv_a"><a href="__APP__/Ask/">解答疑问</a></td>
+      </tr>
+    </table>
+  </div>
+</div>
+<div class="height_18px_text"></div>
+
+<div id="head_search">
+  <div class="pic_nv_bn"><a href="__APP__/"><img src="../Public/Images/logo_news.png" title="南昌婚庆网" alt="南昌婚庆网" width="280" height="80" border="0" /></a></div>
+  
+<div class="width_5px_float"></div>
+  <div id="search_inc">
+  <div class="height_15px_text"></div>
+    <table width="590" border="0" cellspacing="0" cellpadding="0">
+       <form action="__APP__/Search" method="post" id="searchForm" onsubmit="return submit_search();">
+      <tr>
+        <td width="9" align="right">&nbsp;</td>
+        <td width="145" height="50"><div id="search_type_inc"></div></td>
+        <td width="351" height="50"><label for="key"></label>
+        <input type="text" name="key" id="key" /></td>
+        <td width="" height="50"><input type="image" name="search_sub" id="search_sub" src="../Public/Images/search_news_bt.png" /></td>
+      </tr>
+      </form>
+    </table>
+  </div>
+  <div class="width_5px_float"></div>
+
+</div>
+<div class="height_10px"></div>
+<script type="text/javascript" src="../Public/Js/select_box.js"></script><!--下拉框对象-->
+<script type="text/javascript">
+//下拉框新闻
+optionNewsTextA=['新闻','商家'];//room_hx
+optionNewsValueA=['news','loupan'];
+var optionNews={id:'search_type_inc',inputId:'search_type',defText:'新闻',defVal:'news',text:optionNewsTextA,value:optionNewsValueA,beforeHtml:'',afterHtml:'',width:'auto',height:
+'auto'};
+var optionRoomAreaObject;//房屋面积
+$(function(){
+	optionNewsObject=new selectBox(optionNews);
+});
+
+
+//提交搜索
+function submit_search(){
+	var key = $("input:[name='key']").val();
+	if(key == '请输入搜索条件'){
+		key = '';
+	}
+	key = encodeURI(encodeURI(key));
+	var search_type = $("input:[name='search_type']").val();
+	if(search_type == 'news'){
+		location.href = '__APP__/Search/index?&search_type='+ search_type +'&key='+ key ;
+	}else{
+		location.href = '__APP__/Shop/index?&search_type='+ search_type +'&key='+ key ;
+	}
+	return false;
+}
+
+</script>
