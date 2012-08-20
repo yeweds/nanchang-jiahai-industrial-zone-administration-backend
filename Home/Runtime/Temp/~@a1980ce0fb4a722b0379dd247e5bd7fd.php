@@ -1,0 +1,3 @@
+<?php
+//000000003600a:6:{i:0;a:6:{i:0;a:4:{s:2:"id";s:1:"2";s:7:"webname";s:12:"南昌黄页";s:3:"url";s:21:"http://www.791114.com";s:7:"urllogo";s:0:"";}i:1;a:4:{s:2:"id";s:1:"3";s:7:"webname";s:12:"圈圈房产";s:3:"url";s:28:"http://fang.0791quanquan.com";s:7:"urllogo";s:0:"";}i:2;a:4:{s:2:"id";s:1:"5";s:7:"webname";s:12:"优优房产";s:3:"url";s:20:"http://house.jxuu.cn";s:7:"urllogo";s:0:"";}i:3;a:4:{s:2:"id";s:1:"6";s:7:"webname";s:15:"左岸摄影展";s:3:"url";s:19:"http://www.zuoan.me";s:7:"urllogo";s:0:"";}i:4;a:4:{s:2:"id";s:1:"7";s:7:"webname";s:12:"天使集团";s:3:"url";s:22:"http://www.jxtsjt.com/";s:7:"urllogo";s:0:"";}i:5;a:4:{s:2:"id";s:1:"8";s:7:"webname";s:15:"澄迈房地产";s:3:"url";s:20:"http://www.cmfdc.cn/";s:7:"urllogo";s:0:"";}}i:1;a:0:{}i:2;a:0:{}i:3;a:0:{}i:4;a:0:{}i:5;a:0:{}}
+?>

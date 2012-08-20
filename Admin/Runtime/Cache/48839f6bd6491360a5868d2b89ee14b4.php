@@ -19,13 +19,13 @@ var SELF = '__SELF__';
 <body>
 
 <div class="bodyTitle">
-	<div class="bodyTitleLeft"></div>
+  <div class="bodyTitleLeft"></div>
   <div class="bodyTitleText">管理员管理</div>
 </div>
 <script type="text/javascript">
-	function child(id){
-		location.href = URL+"/index/b_classid/"+id;
-	}
+  function child(id){
+    location.href = URL+"/index/b_classid/"+id;
+  }
 </script>
 </head>
 <body>
@@ -38,23 +38,29 @@ var SELF = '__SELF__';
 </table>
 
 <table width="95%" border="0" align="center" cellpadding="1" cellspacing="2">
-<form action="__URL__/insert" method="post" name="TypeForm">
-<tr>	<td width="15%" align="right" class="tright">管理用户名：</td>
-	<td width="12%">
-<input name="adminname" type="text" id="adminname" size="13">	</td>
-	<td width="7%" class="tright">密码：</td>
-	<td width="13%"><input name="pwd" type="password" id="pwd" 
-      size="13" /></td>
-    <td width="7%" class="tright"><!--类型：--></td>
-	<td width="14%"><!--<SELECT NAME="types" id="types" >
-	<option value="1">超级管理员</option>
-	<option value="2">普通管理员</option>
-	<option value="5">网站客服</option>
-	</SELECT>-->
-	 </td>
-	<td class="tright">	  <input type="submit" class="df_button" value="添加管理员"/></td>
-	</tr>
-</FORM>  
+  <form action="__URL__/insert" method="post" name="TypeForm">
+    <tr>  
+      <td width="15%" align="right" class="tright">管理用户名：</td>
+      <td width="12%">
+        <input name="adminname" type="text" id="adminname" size="13"> </td>
+      <td width="7%" class="tright">密码：</td>
+      <td width="13%">
+        <input name="pwd" type="password" id="pwd" size="13" />
+      </td>
+      <td width="7%" class="tright"><!--类型：--></td>
+      <td width="18%">
+        <label for="types">选择权限--></label>
+        <SELECT NAME="types" id="types" >
+          <option value="1">超级管理员</option>
+          <option value="2">普通管理员</option>
+          <option value="8">编辑</option>
+        </SELECT>
+      </td>
+      <td class="tright">   
+        <input type="submit" class="df_button" value="添加管理员"/>
+      </td>
+    </tr>
+  </form>  
 </table>
 
 <table width="95%" class="datalist fixwidth">
@@ -66,6 +72,7 @@ var SELF = '__SELF__';
       <input name="chkAll" type="checkbox" id="check" value="checkbox"  onclick="selAll(this,'key[]')"></td>
     <td width="63" align="center">ID</td>
     <td width="152" align="center">管理员用户名</td>
+    <td align='center'>全名</td>
     <td width="165" align="center">类型</td>
     <td width="189" align="center">最后登录时间</td>
     <td width="112" align="center">最后登录IP</td>
@@ -74,10 +81,17 @@ var SELF = '__SELF__';
 <?php if(is_array($list)): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): ++$i;$mod = ($i % 2 )?><tr>
     <td height="25" align="center"><input name="key[]" type="checkbox" id="key[]" value="<?php echo ($vo["id"]); ?>" /></td>
     <td align="center"><?php echo ($vo["id"]); ?></td>
-    <td><?php echo ($vo["admin"]); ?></td>
-    <td><?php echo ($vo["role_id"]); ?></td>
-    <td align="center"><?php echo (date('Y-m-d H',$vo["login_time"])); ?></td>
-    <td align="center"><?php echo ($vo["ip"]); ?></td>
+    <td align="center"><?php echo ($vo["admin"]); ?></td>
+    <td align="center"><?php echo ($vo["realname"]); ?></td>
+    <td align="center"><?php echo ($vo["role_id_cn"]); ?></td>
+    <td align="center">
+      <?php if(isset($vo["last_login_time"])): ?><?php echo (date('Y-m-d H:i:s',$vo["last_login_time"])); ?>
+        <?php else: ?> 未曾登录过<?php endif; ?>
+    </td>
+    <td align="center">
+      <?php if(($vo["last_login_ip"])  ==  "0"): ?>未曾登录过
+        <?php else: ?><?php echo ($vo["last_login_ip"]); ?><?php endif; ?>
+    </td>
     <td height="25" align="center">[<a href="__URL__/edit/id/<?php echo ($vo["id"]); ?>">编辑</a>] [<a href="javascript:del(<?php echo ($vo["id"]); ?>)">删除</a>] </td>
   </tr><?php endforeach; endif; else: echo "" ;endif; ?><?php endif; ?>
 </table>

@@ -42,7 +42,7 @@ class AdminAction extends GlobalAction
         $admin=D("Admin");
         $username =trim($_POST['adminname']);
         $password = $_POST['pwd'];
-        $types = $_POST['types'];
+        $types = intval($_POST['types']);
         // dump($_POST);exit;
         if(empty($username))
         {
@@ -52,10 +52,9 @@ class AdminAction extends GlobalAction
         {
             $this->error('管理员密码不能为空');
         }
-        $map['admin'] = $username;
-        if($admin->where($map)->count()>=1)
+        if($admin->where("'admin=".$username."'")->count()>=1)
         {
-            $this->error('该用户已经存在，请重新选择用户名！');
+            $this->error('该用户已经存在！');
         }
         $vo = $admin->create();
         if(false === $vo) {
@@ -63,8 +62,9 @@ class AdminAction extends GlobalAction
         }       
         $vo['admin']= $username;
         $vo['pwd']  = md5($password);
-        $vo['types']= $types;
+        $vo['role_id']= $types;
         $vo['add_time'] = time();
+        // dump($vo);exit;
         $id = $admin->add($vo);
         $this->assign('waitSecond',3);  
         $this->assign('jumpUrl',__URL__.'/index');
@@ -81,7 +81,6 @@ class AdminAction extends GlobalAction
         $admin=D("Admin");
         $list=$admin->find($id);
         $this->assign('listone',$list);
-        // dump($list);exit;
         $this->assign('id',$id); 
         $this->display('edit_admin');   
     }
@@ -101,8 +100,7 @@ class AdminAction extends GlobalAction
         }else{
             $vo['pwd']  = md5($password);
         }
-        $vo['role_id']= $types;
-        // dump($vo);exit;
+        $vo['types']= $types;
         $result=$admin->where('id='.$id)->save($vo);
         $this->assign('waitSecond',3);  
         if($result){
@@ -121,34 +119,29 @@ class AdminAction extends GlobalAction
             $this->error('删除项不存在');
         }
         $class=D("Admin");
-        $map['id'] = $id;
-        $admin_arr = $class->where($map)->field('admin')->find();
-
-        // dump($admin_arr);exit;
-        $result=$class->where($map)->delete();
-        $this->assign('jumpUrl',__URL__.'/index');
+        $result=$class->deleteById($id);
+        $this->assign('jumpUrl',__URL__.'/adminManage');
         if(false!==$result)
         {
-            $this->success($admin_arr['admin'] . ' 删除成功!');
+            $this->success('管理员删除成功!');
         }
         else
         {
-            $this->error($admin_arr['admin'] . ' 删除失败!');
+            $this->error('管理员删除失败!');
         }
     }
 
     //全选删除
     function Delall()
     {
-        // dump($_POST);
         if(empty($_POST['key'])){
             $this->ajaxReturn('','您未选中任何项！',0);
         }
         $Form=D("Admin");
-        foreach($_POST['key'] as $id) //循环删除
-        {
-        $result=$Form->deleteById($id);
-        }
+         foreach($_POST['key'] as $id) //循环删除
+          {
+            $result=$Form->deleteById($id);
+          }
        $this->ajaxReturn('','所选管理员删除成功',1);
     }
 

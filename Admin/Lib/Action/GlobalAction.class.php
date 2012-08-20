@@ -47,11 +47,11 @@ class GlobalAction extends Action{
 		return $this->admin;
 	}
 
-/************************************************************************************
-		@ 公共操作：普通   删除/锁定/审核
-		@ $tableName : 操作数据表, 默认为 $this->name
-		@ $act : 操作类型 /  $getid: 条件ID
-***************************************/
+	/***************************************
+	@ 公共操作：普通   删除/锁定/审核
+	@ $tableName : 操作数据表, 默认为 $this->name
+	@ $act : 操作类型 /  $getid: 条件ID
+	***************************************/
 	public function _subAction($tableName="",$act="",$getid=null,$pk='id')
 	{
 		if(isset($_REQUEST[$pk]))   $getid=$_REQUEST[$pk];
@@ -87,14 +87,14 @@ class GlobalAction extends Action{
 
 	}
 	
-//---获取一个分类信息 [ 参数：class_id ]
+	//---获取一个分类信息 [ 参数：class_id ]
 	public function getOneClass($class_id){
         $condition['id']   =   $class_id;
         $vo  =  D("Class")->where($condition)->field('id,name,doc_class,level,curr_path')->find();
         return $vo;
 	}	
 	
-//---获取所有分类列表,最多三级
+	//---获取所有分类列表,最多三级
 	public function getClass(){
         $classT=  D("Class")->where($condition)->field('id,pid,name,level,curr_path')->order('pid ASC,sortrank ASC')->findAll();
 
@@ -133,9 +133,9 @@ class GlobalAction extends Action{
 	}	
 	
 	
-//根据id值或class_id查出图像,返回图像数组
-public function find_pic($id,$mode,$class_id){
-	//$mode: index为查出首张图，all 表示查出所有的图
+	//根据id值或class_id查出图像,返回图像数组
+	public function find_pic($id,$mode,$class_id){
+		//$mode: index为查出首张图，all 表示查出所有的图
 		
 		//如果存在class_id,则以此为主
 		if(isset($class_id)){
@@ -170,7 +170,7 @@ public function find_pic($id,$mode,$class_id){
 		
 		return $pic;
 		
-}	
+	}	
 	
 }
 ?>

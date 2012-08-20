@@ -5,10 +5,9 @@ return array (
   2 => 'pwd',
   3 => 'realname',
   4 => 'role_id',
-  5 => 'city_id',
-  6 => 'add_time',
-  7 => 'login_time',
-  8 => 'ip',
+  5 => 'add_time',
+  6 => 'last_login_time',
+  7 => 'last_login_ip',
   '_autoinc' => true,
   '_pk' => 'id',
 );

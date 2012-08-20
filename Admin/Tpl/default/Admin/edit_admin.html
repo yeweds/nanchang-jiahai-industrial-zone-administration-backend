@@ -16,24 +16,35 @@
     <td ><input name="pwd" type="text" id="pwd"></td>
   </tr>
   <tr>
-    <td>添加时间：</td>
-    <td><input name="add_time" type="text" id="add_time" value="{$listone.add_time}"></td>
+    <td>全名:</td>
+    <td><input type="text" name='realname' id='realname' value='{$listone.realname}'></td>
   </tr>
   <tr>
+    <td><label for="types">选择权限: </label></td>
+    <td>
+        <SELECT NAME="types" id="types" >
+          <option value="1">超级管理员</option>
+          <option value="2">普通管理员</option>
+          <option value="8">编辑</option>
+        </SELECT>
+    </td>
+  </tr>
+  <!-- <tr>
     <td>最后登录时间：</td>
     <td><input name="login_time" type="text" id="login_time" value="{$listone.login_time}"></td>
   </tr>
   <tr>
     <td>最后登录IP：</td>
     <td><input name="ip" type="text" id="ip" value="{$listone.ip}"></td>
-  </tr>
+  </tr> -->
   <tr>
     <td height="45" ></td>
     <td class="center"><div style="width:85%;margin:5px">
       <input name="id" type="hidden" id="id" value="{$id}">
-	  <input name="old_pwd" type="hidden" id="old_pwd" value="{$listone.pwd}">
+  	  <input name="old_pwd" type="hidden" id="old_pwd" value="{$listone.pwd}">
       <input name="SaveEdit" type="submit" class="df_button" id="SaveEdit" value=" 修改 " />
-      &nbsp;&nbsp;</div></td>
+      &nbsp;&nbsp;</div>
+    </td>
   </tr>
   </form>
 </table>

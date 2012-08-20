@@ -8,7 +8,7 @@
 <body>
 <div class="topnav">
 	<div class="sitenav">
-		<div class="welcome">你好，<span class="username"><?php echo ($admin); ?></span>，欢迎使用0791婚庆网管理系统</div>
+		<div class="welcome">你好，<span class="username"><?php echo ($admin); ?></span>，欢迎使用南昌佳海产业园管理系统</div>
 		<div class="sitelink"> 
 			<a href="<?php echo ($http); ?>" target="_blank">网站主页</a> | 
 			<a href="__APP__/System/modify_pwd/id/<?php echo ($uid); ?>" target="MainFrame">修改密码</a> | 

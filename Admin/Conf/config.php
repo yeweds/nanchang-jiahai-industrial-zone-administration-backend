@@ -1,6 +1,6 @@
 <?php
     if (!defined('THINK_PATH')) exit();
-    $config =   require './config.php';  //导入共享配置
+    $config = require './config.php';  //导入共享配置
     $config['TOKEN_ON'] = false;
     $config['URL_MODEL'] = 1;   //2 去index
     

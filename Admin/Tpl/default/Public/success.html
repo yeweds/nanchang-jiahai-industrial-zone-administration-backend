@@ -3,33 +3,33 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset={$charset}" />
 <meta http-equiv='Refresh' content='{$waitSecond};URL={$jumpUrl}'>
-<title>0791婚庆网提示您</title>
+<title>南昌佳海产业园 提示您</title>
 <link rel="stylesheet" href="../Public/Css/main.css" type="text/css" media="all" />
 <style>
 .red{ color: #FF0000;}
 .blue{ color:blue;}
 </style>
 </head>
-<body><div id="append"></div>	<div class="container">
-		<div class="ajax rtninfo">
-			<div class="ajaxbg">
-				<h4>0791婚庆网提示您：{$msgTitle}</h4>
-<present name="message" >
-		<eq name="status" value="0" >
-			<p  class="red">{$message}</p>
-		</eq>
-		<eq name="status" value="1">
-			<p  class="blue">{$message}</p>
-		</eq>
-</present>
-	<present name="error" >
-	<p><font color="red">{$error}</font></p>
-	</present>
-<p><span style="color:blue;font-weight:bold">{$waitSecond}</span> 秒后自动跳转,如果不想等待,直接点击 <a HREF="{$jumpUrl}">这里跳转</a> </p>
-					
-							</div>
-		</div>
-	</div>
+<body><div id="append"></div>   <div class="container">
+        <div class="ajax rtninfo">
+            <div class="ajaxbg">
+                <h4>南昌佳海产业园 提示您：</h4>
+                <present name="message" >
+                        <eq name="status" value="0" >
+                            <p  class="red">{$message}</p>
+                        </eq>
+                        <eq name="status" value="1">
+                            <p  class="blue">{$message}</p>
+                        </eq>
+                </present>
+                <present name="error" >
+                    <p><font color="red">{$error}</font></p>
+                </present>
+                <p><span style="color:blue;font-weight:bold">{$waitSecond}</span> 秒后自动跳转,如果不想等待,直接点击 <a HREF="{$jumpUrl}">这里跳转</a> </p>
+                    
+            </div>
+        </div>
+    </div>
 
 <include file="Public:footer" />
 
