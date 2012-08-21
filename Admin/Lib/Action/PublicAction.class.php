@@ -9,7 +9,7 @@ class PublicAction extends Action{
         $this->groupid = Cookie::get('ht_groupid');
     }
     
-    //登录界面
+    //显示登录界面
     public function login()
     {
         if(!isset($this->sid) || $this->groupid=='')
@@ -24,6 +24,7 @@ class PublicAction extends Action{
     //检验登录  
     public function checkLogin()
     {
+        header("Content-type:text/html;charset=utf-8");
         $Member = D('Admin');
         $username=trim($_POST['username']);
         $password=trim($_POST['password']);
@@ -53,9 +54,26 @@ class PublicAction extends Action{
             }
             //if($user['is_lock']==1)$this->error('用户被锁定');
             //修改管理员最后登录时间及IP
+            //记录每次登录时间及IP
             include_once THINK_PATH.'/Common/extend.php'; //导入扩展函数
             $vo['last_login_ip']   = get_client_ip();
             $vo['last_login_time'] = time();
+
+            //insert admin log record
+            $log['admin_id'] = $user['id'];
+            $log['admin_name'] = $username;
+            $whr['id'] = $user['id'];
+            $realname = $Member->field('realname')->where($whr)->find();
+            // dump($realname);exit;
+            $log['admin_realname'] = $realname['realname'];
+            $log['action'] = "登进";
+            $log['login_ip']   = get_client_ip();
+            $log['time'] = time();
+
+            // dump($log);exit;
+            M("Admin_log")->add($log);
+            //end insert admin log record 
+            
             // dump($vo);exit;
             $where['id'] = $user['id'];
             $Member->where($where)->save($vo);
@@ -106,6 +124,21 @@ class PublicAction extends Action{
 
         if(isset($this->sid)) {
             //Session::destroy();
+            header("Content-type:text/html;charset=utf-8");
+            include_once THINK_PATH.'/Common/extend.php'; //导入扩展函数
+            $log['admin_id'] = $this->sid;
+            $whr['id'] = $this->sid;
+            $admin = M("Admin")->field('admin, realname')->where($whr)->find();
+            // dump($admin);exit;
+            $log['admin_name'] = $admin['admin'];
+            // dump($realname);exit;
+            $log['admin_realname'] = $admin['realname'];
+            $log['action'] = "登出";
+            $log['login_ip']   = get_client_ip();
+            $log['time'] = time();
+
+            // dump($log);exit;
+            M("Admin_log")->add($log);
             Cookie::delete('ht_'.C('cfg_auth_key'));
             Cookie::delete('ht_admin');
             Cookie::delete('ht_groupid');

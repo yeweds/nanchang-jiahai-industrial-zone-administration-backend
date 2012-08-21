@@ -1,26 +1,67 @@
 <?php 
-class AdminAction extends GlobalAction
+class TousuAction extends GlobalAction
 {
-    public function index() //管理员管理
+
+    public function index() //complain list
     {
-        $role_arr = array(
-            1 => "超级管理员",
-            2 => "普通管理员",
-            3 => "",
-            8 => "编辑"
-        );
+        // dump($_POST);exit;
+        if(isset($_POST['title'])){
+            $field = trim($_POST['field']);
+            $u_name= trim($_POST['title']);
+            $where = $field." like '%".$u_name."%'";
+        }else{
+            $where='';
+        }
+        // dump($where);exit;
         $Brand = D("Admin"); 
         $field = '*'; // 如果是查询的视图,必须写明所查列
-        $count= $Brand->count($where); 
+        $count= $Brand->where($where)->count();
         import("ORG.Util.Page"); //导入分页类 
         $listRows = 20; 
         $p= new Page($count,$listRows); 
  
-        $list=$Brand->field($field)->order("id asc")->limit($p->firstRow.', '.$p->listRows)
+        $list=$Brand->field($field)->where($where)->order("id asc")->limit($p->firstRow.', '.$p->listRows)
             ->select(); 
         $page=$p->show();
         foreach ($list as $key => $value) {
-            $list[$key]['role_id_cn'] = $role_arr[$value['role_id']];
+            $list[$key]['role_id_cn'] = $this->role_arr[$value['role_id']];
+        }
+        if($list){
+            $this->assign('list',$list); 
+        }
+        // dump($list);exit;
+        $this->assign('page',$page); 
+        $this->display();
+    }
+
+    public function log()
+    {
+        // dump($_POST);exit;
+        if(isset($_POST['title'])){
+            $field = trim($_POST['field']);
+            $u_name= trim($_POST['title']);
+            $where = $field." like '%".$u_name."%'";
+        }else{
+            $where='';
+        }
+        // dump($where);exit;
+        $Brand = D("Admin_log"); 
+        $field = '*'; // 如果是查询的视图,必须写明所查列
+        $count= $Brand->where($where)->count();
+        import("ORG.Util.Page"); //导入分页类 
+        $listRows = 20; 
+        $p= new Page($count,$listRows); 
+ 
+        $list=$Brand->field($field)->where($where)->order("id asc")->limit($p->firstRow.', '.$p->listRows)
+            ->select(); 
+        $page=$p->show();
+
+        $AdminModel = M("Admin");
+        foreach ($list as $key => $value) {
+            $whr['id'] = $value['admin_id'];
+            $admin = $AdminModel->where($whr)->field('role_id')->find();
+            // dump($admin);
+            $list[$key]['role_id_cn'] = $this->role_arr[$admin['role_id']];
         }
         if($list){
             $this->assign('list',$list); 
@@ -42,7 +83,7 @@ class AdminAction extends GlobalAction
         $admin=D("Admin");
         $username =trim($_POST['adminname']);
         $password = $_POST['pwd'];
-        $types = intval($_POST['types']);
+        $types = $_POST['types'];
         // dump($_POST);exit;
         if(empty($username))
         {
@@ -52,9 +93,10 @@ class AdminAction extends GlobalAction
         {
             $this->error('管理员密码不能为空');
         }
-        if($admin->where("'admin=".$username."'")->count()>=1)
+        $map['admin'] = $username;
+        if($admin->where($map)->count()>=1)
         {
-            $this->error('该用户已经存在！');
+            $this->error('该用户已经存在，请重新选择用户名！');
         }
         $vo = $admin->create();
         if(false === $vo) {
@@ -62,9 +104,8 @@ class AdminAction extends GlobalAction
         }       
         $vo['admin']= $username;
         $vo['pwd']  = md5($password);
-        $vo['role_id']= $types;
+        $vo['types']= $types;
         $vo['add_time'] = time();
-        // dump($vo);exit;
         $id = $admin->add($vo);
         $this->assign('waitSecond',3);  
         $this->assign('jumpUrl',__URL__.'/index');
@@ -81,6 +122,7 @@ class AdminAction extends GlobalAction
         $admin=D("Admin");
         $list=$admin->find($id);
         $this->assign('listone',$list);
+        // dump($list);exit;
         $this->assign('id',$id); 
         $this->display('edit_admin');   
     }
@@ -100,7 +142,8 @@ class AdminAction extends GlobalAction
         }else{
             $vo['pwd']  = md5($password);
         }
-        $vo['types']= $types;
+        $vo['role_id']= $types;
+        // dump($vo);exit;
         $result=$admin->where('id='.$id)->save($vo);
         $this->assign('waitSecond',3);  
         if($result){
@@ -119,29 +162,34 @@ class AdminAction extends GlobalAction
             $this->error('删除项不存在');
         }
         $class=D("Admin");
-        $result=$class->deleteById($id);
-        $this->assign('jumpUrl',__URL__.'/adminManage');
+        $map['id'] = $id;
+        $admin_arr = $class->where($map)->field('admin')->find();
+
+        // dump($admin_arr);exit;
+        $result=$class->where($map)->delete();
+        $this->assign('jumpUrl',__URL__.'/index');
         if(false!==$result)
         {
-            $this->success('管理员删除成功!');
+            $this->success($admin_arr['admin'] . ' 删除成功!');
         }
         else
         {
-            $this->error('管理员删除失败!');
+            $this->error($admin_arr['admin'] . ' 删除失败!');
         }
     }
 
     //全选删除
     function Delall()
     {
+        // dump($_POST);
         if(empty($_POST['key'])){
             $this->ajaxReturn('','您未选中任何项！',0);
         }
         $Form=D("Admin");
-         foreach($_POST['key'] as $id) //循环删除
-          {
-            $result=$Form->deleteById($id);
-          }
+        foreach($_POST['key'] as $id) //循环删除
+        {
+        $result=$Form->deleteById($id);
+        }
        $this->ajaxReturn('','所选管理员删除成功',1);
     }
 

@@ -2,7 +2,7 @@
 
 <div class="bodyTitle">
   <div class="bodyTitleLeft"></div>
-  <div class="bodyTitleText">管理员管理</div>
+  <div class="bodyTitleText">管理员登录记录</div>
 </div>
 <script type="text/javascript">
   function child(id){
@@ -21,26 +21,26 @@
 
 <table border="0" cellspacing="0" cellpadding="0" style="margin:6px 0px;">
   <tr>
-    <td width="21%" height="30"><input type="button" name="delete" value="删除选中用户" class="df_button_green" onClick="delAll()"> </td>
- <form method="post" action="__URL__/" id="search" >
+    <!-- <td width="21%" height="30"><input type="button" name="delete" value="删除选中用户" class="df_button_green" onClick="delAll()"> </td> -->
+ <form method="post" action="__URL__/log" id="search" >
   <td width="22%" align="right">
     <input type="text" name="title" title="标题查询" />
   </td>
   <td width="25%" align="center">
     <select name="field" class="datainput" id="field">
-      <option value="admin">按用户名</option>
-      <option value="realname">按全名</option>
+      <option value="admin_name">按用户名</option>
+      <option value="admin_realname">按全名</option>
       <!-- <option value="role_id">按权限类型</option> -->
     </select>
   </td>
   <td width="32%">
-    <input type="submit" class="df_button_green" value="查 询" >
+    <input type="submit" class="df_button_green" value="筛选用户" >
   </td>
 </form>
   </tr>
 </table>
 
-<table width="95%" border="0" align="center" cellpadding="1" cellspacing="2">
+<!-- <table width="95%" border="0" align="center" cellpadding="1" cellspacing="2">
   <form action="__URL__/insert" method="post" name="TypeForm">
     <tr>  
       <td width="15%" align="right" class="tright">新增用户名：</td>
@@ -50,21 +50,21 @@
       <td width="13%">
         <input name="pwd" type="password" id="pwd" size="13" />
       </td>
-      <td width="7%" class="tright"><!--类型：--></td>
+      <td width="7%" class="tright"><!类型：--><!-- </td>
       <td width="18%">
-        <label for="types">选择权限--></label>
+        <label for="types">选择权限--><!-- </label>
         <SELECT NAME="types" id="types" >
           <option value="1">超级管理员</option>
           <option value="2">普通管理员</option>
           <option value="8">编辑</option>
         </SELECT>
-      </td>
-      <td class="tright">   
+      </td> -->
+      <!-- <td class="tright">   
         <input type="submit" class="df_button" value="添加管理员"/>
       </td>
-    </tr>
-  </form>  
-</table>
+    </tr> -->
+  <!-- </form>  
+</table> --> 
 
 <table width="95%" class="datalist fixwidth">
   <notpresent name="list">
@@ -88,17 +88,17 @@
   <tr>
     <td height="25" align="center"><input name="key[]" type="checkbox" id="key[]" value="{$vo.id}" /></td>
     <td align="center">{$vo.id}</td>
-    <td align="center">{$vo.admin}</td>
-    <td align="center">{$vo.realname}</td>
+    <td align="center">{$vo.admin_name}</td>
+    <td align="center">{$vo.admin_realname}</td>
     <td align="center">{$vo.role_id_cn}</td>
     <td align="center">
-      <present name="vo.last_login_time">{$vo.last_login_time|date='Y-m-d H:i:s',###}
+      <present name="vo.time">{$vo.time|date='Y-m-d H:i:s',###}
         <else /> 未曾登录过
       </present>
     </td>
     <td align="center">
-      <eq name="vo.last_login_ip" value="0">未曾登录过
-        <else/>{$vo.last_login_ip}
+      <eq name="vo.login_ip" value="0">未曾登录过
+        <else/>{$vo.login_ip}
       </eq>
     </td>
     <td height="25" align="center">[<a href="__URL__/edit/id/{$vo.id}">编辑</a>] [<a href="javascript:del({$vo.id})">删除</a>] </td>

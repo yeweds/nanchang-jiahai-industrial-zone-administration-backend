@@ -1,26 +1,73 @@
 <?php 
 class AdminAction extends GlobalAction
 {
+    protected $role_arr = array(
+        1 => "超级管理员",
+        2 => "普通管理员",
+        3 => "",
+        8 => "编辑"
+    );
+
     public function index() //管理员管理
     {
-        $role_arr = array(
-            1 => "超级管理员",
-            2 => "普通管理员",
-            3 => "",
-            8 => "编辑"
-        );
+        // dump($_POST);exit;
+        if(isset($_POST['title'])){
+            $field = trim($_POST['field']);
+            $u_name= trim($_POST['title']);
+            $where = $field." like '%".$u_name."%'";
+        }else{
+            $where='';
+        }
+        // dump($where);exit;
         $Brand = D("Admin"); 
         $field = '*'; // 如果是查询的视图,必须写明所查列
-        $count= $Brand->count($where); 
+        $count= $Brand->where($where)->count();
         import("ORG.Util.Page"); //导入分页类 
         $listRows = 20; 
         $p= new Page($count,$listRows); 
  
-        $list=$Brand->field($field)->order("id asc")->limit($p->firstRow.', '.$p->listRows)
+        $list=$Brand->field($field)->where($where)->order("id asc")->limit($p->firstRow.', '.$p->listRows)
             ->select(); 
         $page=$p->show();
         foreach ($list as $key => $value) {
-            $list[$key]['role_id_cn'] = $role_arr[$value['role_id']];
+            $list[$key]['role_id_cn'] = $this->role_arr[$value['role_id']];
+        }
+        if($list){
+            $this->assign('list',$list); 
+        }
+        // dump($list);exit;
+        $this->assign('page',$page); 
+        $this->display();
+    }
+
+    public function log()
+    {
+        // dump($_POST);exit;
+        if(isset($_POST['title'])){
+            $field = trim($_POST['field']);
+            $u_name= trim($_POST['title']);
+            $where = $field." like '%".$u_name."%'";
+        }else{
+            $where='';
+        }
+        // dump($where);exit;
+        $Brand = D("Admin_log"); 
+        $field = '*'; // 如果是查询的视图,必须写明所查列
+        $count= $Brand->where($where)->count();
+        import("ORG.Util.Page"); //导入分页类 
+        $listRows = 20; 
+        $p= new Page($count,$listRows); 
+ 
+        $list=$Brand->field($field)->where($where)->order("id asc")->limit($p->firstRow.', '.$p->listRows)
+            ->select(); 
+        $page=$p->show();
+
+        $AdminModel = M("Admin");
+        foreach ($list as $key => $value) {
+            $whr['id'] = $value['admin_id'];
+            $admin = $AdminModel->where($whr)->field('role_id')->find();
+            // dump($admin);
+            $list[$key]['role_id_cn'] = $this->role_arr[$admin['role_id']];
         }
         if($list){
             $this->assign('list',$list); 

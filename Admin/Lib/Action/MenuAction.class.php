@@ -34,6 +34,7 @@ class MenuAction extends GlobalAction{
             case 'Class':$url=__APP__.'/Class';break;
             case 'Statistics':$url=__APP__.'/Statistics';break;
             case 'Pics':$url=__APP__.'/Pic';break;
+            case 'Tousu':$url=__APP__.'/Tousu';break;
             case 'Reviews':$url=__APP__.'/Reviews';break;   //跳向点评
             case 'Order':$url=__APP__.'/Order';break;
             case 'Admin':$url=__APP__.'/Admin';break;
