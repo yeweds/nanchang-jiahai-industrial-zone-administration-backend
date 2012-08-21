@@ -51,59 +51,52 @@
  *
  */
 
-class PHPRPC_Server
-{
-    public $callback;
-    public $charset;
-    public $encode;
-    public $ref;
-    public $encrypt;
-    public $enableGZIP;
-    public $debug;
-    public $keylen;
-    public $key;
-    public $errno;
-    public $errstr;
-    public $functions;
-    public $cid;
-    public $buffer;
+class PHPRPC_Server {
+    var $callback;
+    var $charset;
+    var $encode;
+    var $ref;
+    var $encrypt;
+    var $enableGZIP;
+    var $debug;
+    var $keylen;
+    var $key;
+    var $errno;
+    var $errstr;
+    var $functions;
+    var $cid;
+    var $buffer;
     // Private Methods
-    public function addJsSlashes($str, $flag)
-    {
+    function addJsSlashes($str, $flag) {
         if ($flag) {
             $str = addcslashes($str, "\0..\006\010..\012\014..\037\042\047\134\177..\377");
-        } else {
+        }
+        else {
             $str = addcslashes($str, "\0..\006\010..\012\014..\037\042\047\134\177");
         }
-
         return str_replace(array(chr(7), chr(11)), array('\007', '\013'), $str);
     }
-    public function encodeString($str, $flag = true)
-    {
+    function encodeString($str, $flag = true) {
         if ($this->encode) {
             return base64_encode($str);
-        } else {
+        }
+        else {
             return $this->addJsSlashes($str, $flag);
         }
     }
-    public function encryptString($str, $level)
-    {
+    function encryptString($str, $level) {
         if ($this->encrypt >= $level) {
             $str = xxtea_encrypt($str, $this->key);
         }
-
         return $str;
     }
-    public function decryptString($str, $level)
-    {
+    function decryptString($str, $level) {
         if ($this->encrypt >= $level) {
             $str = xxtea_decrypt($str, $this->key);
         }
-
         return $str;
     }
-    public function sendHeader()
-    {
+    function sendHeader() {
         header("HTTP/1.1 200 OK");
         header("Content-Type: text/plain; charset={$this->charset}");
         header("X-Powered-By: PHPRPC Server/3.0");
@@ -111,23 +104,21 @@ class PHPRPC_Server
         header('Expires: ' . gmdate('D, d M Y H:i:s') . ' GMT');
         header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
     }
-    public function getRequestURL()
-    {
+    function getRequestURL() {
         if (!isset($_SERVER['HTTPS']) ||
             $_SERVER['HTTPS'] == 'off'  ||
             $_SERVER['HTTPS'] == '') {
             $scheme = 'http';
-        } else {
+        }
+        else {
             $scheme = 'https';
         }
         $host = $_SERVER['SERVER_NAME'];
         $port = $_SERVER['SERVER_PORT'];
         $path = $_SERVER['SCRIPT_NAME'];
-
         return $scheme . '://' . $host . (($port == 80) ? '' : ':' . $port) . $path;
     }
-    public function sendURL()
-    {
+    function sendURL() {
         if (SID != "") {
             $url = $this->getRequestURL();
             if (count($_GET) > 0) {
@@ -141,8 +132,7 @@ class PHPRPC_Server
             $this->buffer .= "phprpc_url=\"" . $this->encodeString($url) . "\";\r\n";
         }
     }
-    public function gzip($buffer)
-    {
+    function gzip($buffer) {
         $len = strlen($buffer);
         if ($this->enableGZIP && strstr($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip,deflate')) {
             $gzbuffer = gzencode($buffer);
@@ -150,16 +140,13 @@ class PHPRPC_Server
             if ($len > $gzlen) {
                 header("Content-Length: $gzlen");
                 header("Content-Encoding: gzip");
-
                 return $gzbuffer;
             }
         }
         header("Content-Length: $len");
-
         return $buffer;
     }
-    public function sendCallback()
-    {
+    function sendCallback() {
         $this->buffer .= $this->callback;
         echo $this->gzip($this->buffer);
         ob_end_flush();
@@ -169,21 +156,19 @@ class PHPRPC_Server
         }
         exit();
     }
-    public function sendFunctions()
-    {
+    function sendFunctions() {
         $this->buffer .= "phprpc_functions=\"" . $this->encodeString(serialize_fix(array_keys($this->functions))) . "\";\r\n";
         $this->sendCallback();
     }
-    public function sendOutput($output)
-    {
+    function sendOutput($output) {
         if ($this->encrypt >= 3) {
             $this->buffer .= "phprpc_output=\"" . $this->encodeString(xxtea_encrypt($output, $this->key)) . "\";\r\n";
-        } else {
+        }
+        else {
             $this->buffer .= "phprpc_output=\"" . $this->encodeString($output, false) . "\";\r\n";
         }
     }
-    public function sendError($output = NULL)
-    {
+    function sendError($output = NULL) {
         if (is_null($output)) {
             $output = ob_get_clean();
         }
@@ -192,17 +177,18 @@ class PHPRPC_Server
         $this->sendOutput($output);
         $this->sendCallback();
     }
-    public function fatalErrorHandler($buffer)
-    {
+    function fatalErrorHandler($buffer) {
         if (preg_match('/<b>(.*?) error<\/b>:(.*?)<br/', $buffer, $match)) {
             if ($match[1] == 'Fatal') {
                 $errno = E_ERROR;
-            } else {
+            }
+            else {
                 $errno = E_COMPILE_ERROR;
             }
             if ($this->debug) {
                 $errstr = preg_replace('/<.*?>/', '', $match[2]);
-            } else {
+            }
+            else {
                 $errstr = preg_replace('/ in <b>.*<\/b>$/', '', $match[2]);
             }
 
@@ -212,11 +198,9 @@ class PHPRPC_Server
                        $this->callback;
             $buffer = $this->gzip($buffer);
         }
-
         return $buffer;
     }
-    public function errorHandler($errno, $errstr, $errfile, $errline)
-    {
+    function errorHandler($errno, $errstr, $errfile, $errline) {
         if ($this->debug) {
             $errstr .= " in $errfile on line $errline";
         }
@@ -225,13 +209,15 @@ class PHPRPC_Server
             $this->errno = $errno;
             $this->errstr = $errstr;
             $this->sendError();
-        } else {
+        }
+        else {
             if (($errno == E_NOTICE) or ($errno == E_USER_NOTICE)) {
                 if ($this->errno == 0) {
                     $this->errno = $errno;
                     $this->errstr = $errstr;
                 }
-            } else {
+            }
+            else {
                 if (($this->errno == 0) or
                     ($this->errno == E_NOTICE) or
                     ($this->errno == E_USER_NOTICE)) {
@@ -240,11 +226,9 @@ class PHPRPC_Server
                 }
             }
         }
-
         return true;
     }
-    public function exceptionHandler($exception)
-    {
+    function exceptionHandler($exception) {
         $this->errno = $exception->getCode();
         $this->errstr = $exception->getMessage();
         if ($this->debug) {
@@ -254,8 +238,7 @@ class PHPRPC_Server
         }
         $this->sendError();
     }
-    public function initErrorHandler()
-    {
+    function initErrorHandler() {
         $this->errno = 0;
         $this->errstr = "";
         set_error_handler(array(&$this, 'errorHandler'));
@@ -263,30 +246,26 @@ class PHPRPC_Server
             set_exception_handler(array(&$this, 'exceptionHandler'));
         }
     }
-    public function call($function, &$args)
-    {
+    function call($function, &$args) {
         if ($this->ref) {
             $arguments = array();
             for ($i = 0; $i < count($args); $i++) {
                 $arguments[$i] = &$args[$i];
             }
-        } else {
+        }
+        else {
             $arguments = $args;
         }
-
         return call_user_func_array($function, $arguments);
     }
-    public function getRequest($name)
-    {
+    function getRequest($name) {
         $result = $_REQUEST[$name];
         if (get_magic_quotes_gpc()) {
             $result = stripslashes($result);
         }
-
         return $result;
     }
-    public function getBooleanRequest($name)
-    {
+    function getBooleanRequest($name) {
         $var = true;
         if (isset($_REQUEST[$name])) {
             $var = strtolower($this->getRequest($name));
@@ -294,50 +273,47 @@ class PHPRPC_Server
                 $var = false;
             }
         }
-
         return $var;
     }
-    public function initEncode()
-    {
+    function initEncode() {
         $this->encode = $this->getBooleanRequest('phprpc_encode');
     }
-    public function initRef()
-    {
+    function initRef() {
         $this->ref = $this->getBooleanRequest('phprpc_ref');
     }
-    public function initCallback()
-    {
+    function initCallback() {
         if (isset($_REQUEST['phprpc_callback'])) {
             $this->callback = base64_decode($this->getRequest('phprpc_callback'));
-        } else {
+        }
+        else {
             $this->callback = "";
         }
     }
-    public function initKeylen()
-    {
+    function initKeylen() {
         if (isset($_REQUEST['phprpc_keylen'])) {
-            $this->keylen = (int) $this->getRequest('phprpc_keylen');
-        } elseif (isset($_SESSION[$this->cid])) {
+            $this->keylen = (int)$this->getRequest('phprpc_keylen');
+        }
+        else if (isset($_SESSION[$this->cid])) {
             $session = unserialize(base64_decode($_SESSION[$this->cid]));
             if (isset($session['keylen'])) {
-                $this->keylen = $session['keylen'];
-            } else {
+                $this->keylen = $session['keylen'];                
+            }
+            else {
                 $this->keylen = 128;
             }
-        } else {
+        }
+        else {
             $this->keylen = 128;
         }
     }
-    public function initClientID()
-    {
+    function initClientID() {
         $this->cid = 0;
         if (isset($_REQUEST['phprpc_id'])) {
             $this->cid = $this->getRequest('phprpc_id');
         }
         $this->cid = "phprpc_" . $this->cid;
     }
-    public function initEncrypt()
-    {
+    function initEncrypt() {
         $this->encrypt = false;
         if (isset($_REQUEST['phprpc_encrypt'])) {
             $this->encrypt = $this->getRequest('phprpc_encrypt');
@@ -345,16 +321,15 @@ class PHPRPC_Server
             if ($this->encrypt === "false") $this->encrypt = false;
         }
     }
-    public function initKey()
-    {
+    function initKey() {
         if ($this->encrypt == 0) {
             return;
-        } elseif (isset($_SESSION[$this->cid])) {
+        }
+        else if (isset($_SESSION[$this->cid])) {
             $session = unserialize(base64_decode($_SESSION[$this->cid]));
             if (isset($session['key'])) {
                 $this->key = $session['key'];
-                require_once 'xxtea.php';
-
+                require_once('xxtea.php');
                 return;
             }
         }
@@ -363,19 +338,17 @@ class PHPRPC_Server
         $this->encrypt = 0;
         $this->sendError();
     }
-    public function getArguments()
-    {
+    function getArguments() {
         if (isset($_REQUEST['phprpc_args'])) {
             $arguments = unserialize($this->decryptString(base64_decode($this->getRequest('phprpc_args')), 1));
             ksort($arguments);
-        } else {
+        }
+        else {
             $arguments = array();
         }
-
         return $arguments;
     }
-    public function callFunction()
-    {
+    function callFunction() {
         $this->initKey();
         $function = strtolower($this->getRequest('phprpc_func'));
         if (array_key_exists($function, $this->functions)) {
@@ -388,24 +361,25 @@ class PHPRPC_Server
                 $arguments = $this->encodeString($this->encryptString(serialize_fix($arguments), 1));
                 $this->buffer .= "phprpc_args=\"$arguments\";\r\n";
             }
-        } else {
+        }
+        else {
             $this->errno = E_ERROR;
             $this->errstr = "Can't find this function $function().";
             $output = ob_get_clean();
         }
         $this->sendError($output);
     }
-    public function keyExchange()
-    {
-        require_once 'bigint.php';
+    function keyExchange() {
+        require_once('bigint.php');
         $this->initKeylen();
         if (isset($_SESSION[$this->cid])) {
             $session = unserialize(base64_decode($_SESSION[$this->cid]));
-        } else {
-            $session = array();
         }
+        else {
+            $session = array();
+        }        
         if ($this->encrypt === true) {
-            require_once 'dhparams.php';
+            require_once('dhparams.php');
             $DHParams = new DHParams($this->keylen);
             $this->keylen = $DHParams->getL();
             $encrypt = $DHParams->getDHParams();
@@ -419,14 +393,16 @@ class PHPRPC_Server
                 $this->buffer .= "phprpc_keylen=\"{$this->keylen}\";\r\n";
             }
             $this->sendURL();
-        } else {
+        }
+        else {
             $y = bigint_dec2num($this->encrypt);
             $x = bigint_dec2num($session['x']);
             $p = bigint_dec2num($session['p']);
             $key = bigint_powmod($y, $x, $p);
             if ($this->keylen == 128) {
                 $key = bigint_num2str($key);
-            } else {
+            }
+            else {
                 $key = pack('H*', md5(bigint_num2dec($key)));
             }
             $session['key'] = str_pad($key, 16, "\0", STR_PAD_LEFT);
@@ -434,29 +410,25 @@ class PHPRPC_Server
         $_SESSION[$this->cid] = base64_encode(serialize($session));
         $this->sendCallback();
     }
-    public function initSession()
-    {
+    function initSession() {
         @ob_start();
         ob_implicit_flush(0);
         session_start();
     }
-    public function initOutputBuffer()
-    {
+    function initOutputBuffer() {
         @ob_start(array(&$this, "fatalErrorHandler"));
         ob_implicit_flush(0);
         $this->buffer = "";
     }
     // Public Methods
-    public function PHPRPC_Server()
-    {
-        require_once 'compat.php';
+    function PHPRPC_Server() {
+        require_once('compat.php');
         $this->functions = array();
         $this->charset = 'UTF-8';
         $this->debug = false;
         $this->enableGZIP = false;
     }
-    public function add($functions, $obj = NULL, $aliases = NULL)
-    {
+    function add($functions, $obj = NULL, $aliases = NULL) {
         if (is_null($functions) || (gettype($functions) != gettype($aliases) && !is_null($aliases))) {
             return false;
         }
@@ -471,12 +443,15 @@ class PHPRPC_Server
         if (is_string($functions)) {
             if (is_null($obj)) {
                 $this->functions[strtolower($aliases)] = $functions;
-            } elseif (is_object($obj)) {
+            }
+            else if (is_object($obj)) {
                 $this->functions[strtolower($aliases)] = array(&$obj, $functions);
-            } elseif (is_string($obj)) {
+            }
+            else if (is_string($obj)) {
                 $this->functions[strtolower($aliases)] = array($obj, $functions);
             }
-        } else {
+        }
+        else {
             if (count($functions) != count($aliases)) {
                 return false;
             }
@@ -484,23 +459,18 @@ class PHPRPC_Server
                 $this->add($function, $obj, $aliases[$key]);
             }
         }
-
         return true;
     }
-    public function setCharset($charset)
-    {
+    function setCharset($charset) {
         $this->charset = $charset;
     }
-    public function setDebugMode($debug)
-    {
+    function setDebugMode($debug) {
         $this->debug = $debug;
     }
-    public function setEnableGZIP($enableGZIP)
-    {
+    function setEnableGZIP($enableGZIP) {
         $this->enableGZIP = $enableGZIP;
     }
-    public function start()
-    {
+    function start() {
         while(ob_get_length() !== false) @ob_end_clean();
         $this->initOutputBuffer();
         $this->sendHeader();
@@ -512,12 +482,15 @@ class PHPRPC_Server
         $this->initEncrypt();
         if (isset($_REQUEST['phprpc_func'])) {
             $this->callFunction();
-        } elseif ($this->encrypt != false) {
+        }
+        else if ($this->encrypt != false) {
             $this->keyExchange();
-        } else {
+        }
+        else {
             $this->sendFunctions();
         }
     }
 }
 
 PHPRPC_Server::initSession();
+?>

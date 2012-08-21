@@ -40,7 +40,7 @@ class ArrayList extends Think implements IteratorAggregate
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param string $elements 初始化数组元素
+     * @param string $elements  初始化数组元素
      +----------------------------------------------------------
      */
     public function __construct($elements = array())
@@ -70,7 +70,7 @@ class ArrayList extends Think implements IteratorAggregate
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param mixed $element 要添加的元素
+     * @param mixed $element  要添加的元素
      +----------------------------------------------------------
      * @return boolen
      +----------------------------------------------------------
@@ -98,7 +98,7 @@ class ArrayList extends Think implements IteratorAggregate
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param ArrayList $list 元素列表
+     * @param ArrayList $list  元素列表
      +----------------------------------------------------------
      * @return boolen
      +----------------------------------------------------------
@@ -108,11 +108,10 @@ class ArrayList extends Think implements IteratorAggregate
     public function addAll($list)
     {
         $before = $this->size();
-        foreach ($list as $element) {
+        foreach( $list as $element) {
             $this->add($element);
         }
         $after = $this->size();
-
         return ($before < $after);
     }
 
@@ -134,7 +133,7 @@ class ArrayList extends Think implements IteratorAggregate
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param mixed $element 查找元素
+     * @param mixed $element  查找元素
      +----------------------------------------------------------
      * @return string
      +----------------------------------------------------------
@@ -167,7 +166,7 @@ class ArrayList extends Think implements IteratorAggregate
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param mixed $element 查找元素
+     * @param mixed $element  查找元素
      +----------------------------------------------------------
      * @return integer
      +----------------------------------------------------------
@@ -199,7 +198,7 @@ class ArrayList extends Think implements IteratorAggregate
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param mixed $element 查找元素
+     * @param mixed $element  查找元素
      +----------------------------------------------------------
      * @return integer
      +----------------------------------------------------------
@@ -232,7 +231,6 @@ class ArrayList extends Think implements IteratorAggregate
     {
         $element = $this->get($index);
         if (!is_null($element)) { array_splice($this->_elements, $index, 1); }
-
         return $element;
     }
 
@@ -242,8 +240,8 @@ class ArrayList extends Think implements IteratorAggregate
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param integer $offset 开始移除位置
-     * @param integer $length 移除长度
+     * @param integer $offset  开始移除位置
+     * @param integer $length  移除长度
      +----------------------------------------------------------
      */
     public function removeRange($offset , $length)
@@ -258,8 +256,7 @@ class ArrayList extends Think implements IteratorAggregate
      * @access public
      +----------------------------------------------------------
      */
-    public function unique()
-    {
+    public function unique() {
         $this->_elements = array_unique($this->_elements);
     }
 
@@ -269,8 +266,8 @@ class ArrayList extends Think implements IteratorAggregate
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param integer $offset 开始位置
-     * @param integer $length 长度
+     * @param integer $offset  开始位置
+     * @param integer $length  长度
      +----------------------------------------------------------
      */
     public function range($offset,$length=null)
@@ -285,8 +282,8 @@ class ArrayList extends Think implements IteratorAggregate
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param integer $index   索引
-     * @param mixed   $element 元素
+     * @param integer $index 索引
+     * @param mixed $element  元素
      +----------------------------------------------------------
      * @return mixed
      +----------------------------------------------------------
@@ -295,7 +292,6 @@ class ArrayList extends Think implements IteratorAggregate
     {
         $previous = $this->get($index);
         $this->_elements[$index] = $element;
-
         return $previous;
     }
 
@@ -352,3 +348,4 @@ class ArrayList extends Think implements IteratorAggregate
     }
 
 }//类定义结束
+?>

@@ -3,9 +3,8 @@
  * Menu  菜单管理类
  * @author 熊彦 <cnxiongyan@gmail.com>
  */
-class MenuAction extends GlobalAction
-{
-    public function _initialize()
+class MenuAction extends GlobalAction{
+    function _initialize()
     {
         parent::_initialize();
         $VERSION = C('cfg_version');
@@ -22,15 +21,14 @@ class MenuAction extends GlobalAction
         $this->assign('uid',$uid);
         $this->assign('admin',$username);
         $this->assign('security',$security);
-
+        
         //Session::destroy('admin');
     }
 
     //左侧菜单
-    public function leftmenu()
-    {
+    public function leftmenu(){
         $action = $_REQUEST['action'];
-        switch ($action) {
+        switch ($action){
             case 'Systemconfig':$url=__APP__.'/System/sys_cfg';break;
             case 'Info':$url=__APP__.'/Shop';break;
             case 'Class':$url=__APP__.'/Class';break;
@@ -40,7 +38,7 @@ class MenuAction extends GlobalAction
             case 'Order':$url=__APP__.'/Order';break;
             case 'Admin':$url=__APP__.'/Admin';break;
             case 'Other':$url=__APP__.'/Pages';break;
-            default:$url=__APP__.'/Shop';
+            default:$url=__APP__.'/Shop';               
         }
         $this->assign('url',$url);
         $this->assign('action',$action);
@@ -48,9 +46,9 @@ class MenuAction extends GlobalAction
     }
 
     //头部菜单
-    public function topmenu()
-    {
+    public function topmenu(){
         $this->assign('http',C('cfg_domain'));
         $this->display("Menu:topmenu");
-    }
-}
+    }       
+} 
+?>

@@ -90,7 +90,7 @@ abstract class Zend_Server_Abstract implements Zend_Server_Interface
      * Constructor
      *
      * Setup server description
-     *
+     * 
      * @return void
      */
     public function __construct()
@@ -115,7 +115,7 @@ abstract class Zend_Server_Abstract implements Zend_Server_Interface
      * Lowercase a string
      *
      * Lowercase's a string by reference
-     *
+     * 
      * @deprecated
      * @param  string $string value
      * @param  string $key
@@ -124,14 +124,13 @@ abstract class Zend_Server_Abstract implements Zend_Server_Interface
     public static function lowerCase(&$value, &$key)
     {
         trigger_error(__CLASS__ . '::' . __METHOD__ . '() is deprecated and will be removed in a future version', E_USER_NOTICE);
-
         return $value = strtolower($value);
     }
 
     /**
      * Build callback for method signature
-     *
-     * @param  Zend_Server_Reflection_Function_Abstract $reflection
+     * 
+     * @param  Zend_Server_Reflection_Function_Abstract $reflection 
      * @return Zend_Server_Method_Callback
      */
     protected function _buildCallback(Zend_Server_Reflection_Function_Abstract $reflection)
@@ -145,17 +144,16 @@ abstract class Zend_Server_Abstract implements Zend_Server_Interface
             $callback->setType('function')
                      ->setFunction($reflection->getName());
         }
-
         return $callback;
     }
 
     /**
      * Build a method signature
-     *
-     * @param  Zend_Server_Reflection_Function_Abstract $reflection
-     * @param  null|string|object                       $class
+     * 
+     * @param  Zend_Server_Reflection_Function_Abstract $reflection 
+     * @param  null|string|object $class
      * @return Zend_Server_Method_Definition
-     * @throws Zend_Server_Exception                    on duplicate entry
+     * @throws Zend_Server_Exception on duplicate entry
      */
     protected function _buildSignature(Zend_Server_Reflection_Function_Abstract $reflection, $class = null)
     {
@@ -194,15 +192,14 @@ abstract class Zend_Server_Abstract implements Zend_Server_Interface
             $definition->setObject($class);
         }
         $this->_table->addMethod($definition);
-
         return $definition;
     }
 
     /**
      * Dispatch method
-     *
-     * @param  Zend_Server_Method_Definition $invocable
-     * @param  array                         $params
+     * 
+     * @param  Zend_Server_Method_Definition $invocable 
+     * @param  array $params 
      * @return mixed
      */
     protected function _dispatch(Zend_Server_Method_Definition $invocable, array $params)
@@ -212,7 +209,6 @@ abstract class Zend_Server_Abstract implements Zend_Server_Interface
 
         if ('function' == $type) {
             $function = $callback->getFunction();
-
             return call_user_func_array($function, $params);
         }
 
@@ -233,14 +229,13 @@ abstract class Zend_Server_Abstract implements Zend_Server_Interface
                 $object = new $class;
             }
         }
-
         return call_user_func_array(array($object, $method), $params);
     }
 
     /**
      * Map PHP type to protocol type
-     *
-     * @param  string $type
+     * 
+     * @param  string $type 
      * @return string
      */
     abstract protected function _fixType($type);

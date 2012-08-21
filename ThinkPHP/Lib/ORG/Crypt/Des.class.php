@@ -10,6 +10,7 @@
 // +----------------------------------------------------------------------
 // $Id$
 
+
 /**
  +------------------------------------------------------------------------------
  * Des 加密实现类
@@ -44,12 +45,11 @@ class Des
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-    public function encrypt($str, $key)
+    function encrypt($str, $key)
     {
         if ($str == "") {
             return "";
         }
-
         return self::_des($key,$str,1);
     }
 
@@ -68,12 +68,11 @@ class Des
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-    public function decrypt($str, $key)
+    function decrypt($str, $key)
     {
         if ($str == "") {
             return "";
         }
-
         return self::_des($key,$str,0);
     }
 
@@ -92,8 +91,7 @@ class Des
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-    public function _des($key, $message, $encrypt, $mode=0, $iv=null)
-    {
+    function _des($key, $message, $encrypt, $mode=0, $iv=null) {
       //declaring this locally speeds things up a bit
       $spfunction1 = array (0x1010400,0,0x10000,0x1010404,0x1010004,0x10404,0x4,0x10000,0x400,0x1010400,0x1010404,0x400,0x1000404,0x1010004,0x1000000,0x4,0x404,0x1000400,0x1000400,0x10400,0x10400,0x1010000,0x1010000,0x1000404,0x10004,0x1000004,0x1000004,0x10004,0,0x404,0x10404,0x1000000,0x10000,0x1010404,0x4,0x1010000,0x1010400,0x1000000,0x1000000,0x400,0x1010004,0x10000,0x10400,0x1000004,0x400,0x4,0x1000404,0x10404,0x1010404,0x10004,0x1010000,0x1000404,0x1000004,0x404,0x10404,0x1010400,0x404,0x1000400,0x1000400,0,0x10004,0x10400,0,0x1010004);
       $spfunction2 = array (-0x7fef7fe0,-0x7fff8000,0x8000,0x108020,0x100000,0x20,-0x7fefffe0,-0x7fff7fe0,-0x7fffffe0,-0x7fef7fe0,-0x7fef8000,-0x80000000,-0x7fff8000,0x100000,0x20,-0x7fefffe0,0x108000,0x100020,-0x7fff7fe0,0,-0x80000000,0x8000,0x108020,-0x7ff00000,0x100020,-0x7fffffe0,0,0x108000,0x8020,-0x7fef8000,-0x7ff00000,0x8020,0,0x108020,-0x7fefffe0,0x100000,-0x7fff7fe0,-0x7ff00000,-0x7fef8000,0x8000,-0x7ff00000,-0x7fff8000,0x20,-0x7fef7fe0,0x108020,0x20,0x8000,-0x80000000,0x8020,-0x7fef8000,0x100000,-0x7fffffe0,0x100020,-0x7fff7fe0,-0x7fffffe0,0x100020,0x108000,0,-0x7fff8000,0x8020,-0x80000000,-0x7fefffe0,-0x7fef7fe0,0x108000);
@@ -112,7 +110,8 @@ class Des
       $chunk = 0;
       //set up the loops for single and triple des
       $iterations = ((count($keys) == 32) ? 3 : 9); //single or triple des
-      if ($iterations == 3) {$looping = (($encrypt) ? array (0, 32, 2) : array (30, -2, -2));} else {$looping = (($encrypt) ? array (0, 32, 2, 62, 30, -2, 64, 96, 2) : array (94, 62, -2, 32, 64, 2, 30, -2, -2));}
+      if ($iterations == 3) {$looping = (($encrypt) ? array (0, 32, 2) : array (30, -2, -2));}
+      else {$looping = (($encrypt) ? array (0, 32, 2, 62, 30, -2, 64, 96, 2) : array (94, 62, -2, 32, 64, 2, 30, -2, -2));}
 
       $message .= (chr(0) . chr(0) . chr(0) . chr(0) . chr(0) . chr(0) . chr(0) . chr(0)); //pad the message out with null bytes
       //store the result here
@@ -201,8 +200,7 @@ class Des
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-    public function _createKeys ($key)
-    {
+    function _createKeys ($key) {
       //declaring this locally speeds things up a bit
       $pc2bytes0  = array (0,0x4,0x20000000,0x20000004,0x10000,0x10004,0x20010000,0x20010004,0x200,0x204,0x20000200,0x20000204,0x10200,0x10204,0x20010200,0x20010204);
       $pc2bytes1  = array (0,0x1,0x100000,0x100001,0x4000000,0x4000001,0x4100000,0x4100001,0x100,0x101,0x100100,0x100101,0x4000100,0x4000101,0x4100100,0x4100101);
@@ -282,3 +280,4 @@ class Des
     } //end of des_createKeys
 
 }
+?>

@@ -1,6 +1,5 @@
-<?php
-class AdminModel extends Model
-{
+<?php 
+class AdminModel extends Model {
     // 自动验证设置
     protected $_validate     =   array(
         array('admin','require','请输入用户名！'),
@@ -14,13 +13,13 @@ class AdminModel extends Model
         array('login_time','time','ADD','function'),
         );
 
-    public function CheckVerify()
-    {
+    public function CheckVerify() {
         return md5($_POST['verify']) == $_SESSION['verify'];
     }
 
     // public function deleteById($id)
     // {
-
+        
     // }
 }
+?>

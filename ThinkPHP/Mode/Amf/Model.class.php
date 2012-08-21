@@ -54,9 +54,9 @@ class Model extends Think
         // 模型初始化
         $this->_initialize();
         // 获取模型名称
-        if (!empty($name)) {
+        if(!empty($name)) {
             $this->name   =  $name;
-        } elseif (empty($this->name)) {
+        }elseif(empty($this->name)){
             $this->name =   $this->getModelName();
         }
         // 数据库初始化操作
@@ -78,16 +78,15 @@ class Model extends Think
      * @return void
      +----------------------------------------------------------
      */
-    protected function _checkTableInfo()
-    {
+    protected function _checkTableInfo() {
         // 如果不是Model类 自动记录数据表信息
         // 只在第一次执行记录
-        if (empty($this->fields)) {
+        if(empty($this->fields)) {
             // 如果数据表字段没有定义则自动获取
-            if (C('DB_FIELDS_CACHE')) {
+            if(C('DB_FIELDS_CACHE')) {
                 $this->fields = F('_fields/'.$this->name);
                 if(!$this->fields)   $this->flush();
-            } else {
+            }else{
                 // 每次都会读取数据表信息
                 $this->flush();
             }
@@ -103,16 +102,15 @@ class Model extends Think
      * @return void
      +----------------------------------------------------------
      */
-    public function flush()
-    {
+    public function flush() {
         // 缓存不存在则查询数据表信息
         $fields =   $this->db->getFields($this->getTableName());
         $this->fields   =   array_keys($fields);
         $this->fields['_autoinc'] = false;
-        foreach ($fields as $key=>$val) {
+        foreach ($fields as $key=>$val){
             // 记录字段类型
             $type[$key]    =   $val['type'];
-            if ($val['primary']) {
+            if($val['primary']) {
                 $this->fields['_pk'] = $key;
                 if($val['autoinc']) $this->fields['_autoinc']   =   true;
             }
@@ -135,32 +133,27 @@ class Model extends Think
      * @access public
      +----------------------------------------------------------
      * @param string $method 方法名称
-     * @param array  $args   调用参数
+     * @param array $args 调用参数
      +----------------------------------------------------------
      * @return mixed
      +----------------------------------------------------------
      */
-    public function __call($method,$args)
-    {
-        if (in_array(strtolower($method),array('field','table','where','order','limit','page','having','group','lock','distinct'),true)) {
+    public function __call($method,$args) {
+        if(in_array(strtolower($method),array('field','table','where','order','limit','page','having','group','lock','distinct'),true)) {
             // 连贯操作的实现
             $this->options[strtolower($method)] =   $args[0];
-
             return $this;
-        } elseif (in_array(strtolower($method),array('count','sum','min','max','avg'),true)) {
+        }elseif(in_array(strtolower($method),array('count','sum','min','max','avg'),true)){
             // 统计查询的实现
             $field =  isset($args[0])?$args[0]:'*';
-
             return $this->getField(strtoupper($method).'('.$field.') AS tp_'.$method);
-        } elseif (strtolower(substr($method,0,5))=='getby') {
+        }elseif(strtolower(substr($method,0,5))=='getby') {
             // 根据某个字段获取记录
             $field   =   parse_name(substr($method,5));
             $options['where'] =  $field.'=\''.$args[0].'\'';
-
             return $this->find($options);
-        } else {
+        }else{
             throw_exception(__CLASS__.':'.$method.L('_METHOD_NOT_EXIST_'));
-
             return;
         }
     }
@@ -171,14 +164,13 @@ class Model extends Think
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param string $name  名称
-     * @param mixed  $value 值
+     * @param string $name 名称
+     * @param mixed $value 值
      +----------------------------------------------------------
      * @return void
      +----------------------------------------------------------
      */
-    public function __set($name,$value)
-    {
+    public function __set($name,$value) {
         // 设置数据对象属性
         $this->data[$name]  =   $value;
     }
@@ -194,8 +186,7 @@ class Model extends Think
      * @return mixed
      +----------------------------------------------------------
      */
-    public function __get($name)
-    {
+    public function __get($name) {
         return isset($this->data[$name])?$this->data[$name]:null;
     }
 
@@ -205,21 +196,19 @@ class Model extends Think
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param mixed $data    数据
+     * @param mixed $data 数据
      * @param array $options 表达式
      +----------------------------------------------------------
      * @return mixed
      +----------------------------------------------------------
      */
-    public function add($data='',$options=array())
-    {
-        if (empty($data)) {
+    public function add($data='',$options=array()) {
+        if(empty($data)) {
             // 没有传递数据，获取当前数据对象的值
-            if (!empty($this->data)) {
+            if(!empty($this->data)) {
                 $data    =   $this->data;
-            } else {
+            }else{
                 $this->error = L('_DATA_TYPE_INVALID_');
-
                 return false;
             }
         }
@@ -228,7 +217,7 @@ class Model extends Think
         // 写入数据到数据库
         $result = $this->db->insert($data,$options);
         $insertId   =   $this->getLastInsID();
-        if ($insertId) {
+        if($insertId) {
             return $insertId;
         }
         //成功后返回插入ID
@@ -241,41 +230,37 @@ class Model extends Think
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param mixed $data    数据
+     * @param mixed $data 数据
      * @param array $options 表达式
      +----------------------------------------------------------
      * @return boolean
      +----------------------------------------------------------
      */
-    public function save($data='',$options=array())
-    {
-        if (empty($data)) {
+    public function save($data='',$options=array()) {
+        if(empty($data)) {
             // 没有传递数据，获取当前数据对象的值
-            if (!empty($this->data)) {
+            if(!empty($this->data)) {
                 $data    =   $this->data;
-            } else {
+            }else{
                 $this->error = L('_DATA_TYPE_INVALID_');
-
                 return false;
             }
         }
         // 分析表达式
         $options =  $this->_parseOptions($options);
-        if (!isset($options['where']) ) {
+        if(!isset($options['where']) ) {
             // 如果存在主键数据 则自动作为更新条件
-            if (isset($data[$this->getPk()])) {
+            if(isset($data[$this->getPk()])) {
                 $pk   =  $this->getPk();
                 $options['where']  =  $pk.'=\''.$data[$pk].'\'';
                 $pkValue = $data[$pk];
                 unset($data[$pk]);
-            } else {
+            }else{
                 // 如果没有任何更新条件则不执行
                 $this->error = L('_OPERATION_WRONG_');
-
                 return false;
             }
         }
-
         return $this->db->update($data,$options);
     }
 
@@ -290,17 +275,15 @@ class Model extends Think
      * @return mixed
      +----------------------------------------------------------
      */
-    public function delete($options=array())
-    {
-        if (empty($options) && empty($this->options)) {
+    public function delete($options=array()) {
+        if(empty($options) && empty($this->options)) {
             // 如果删除条件为空 则删除当前数据对象所对应的记录
             if(!empty($this->data) && isset($this->data[$this->getPk()]))
-
                 return $this->delete($this->data[$this->getPk()]);
             else
                 return false;
         }
-        if (is_numeric($options)  || is_string($options)) {
+        if(is_numeric($options)  || is_string($options)) {
             // 根据主键删除记录
             $pk   =  $this->getPk();
             $where  =  $pk.'=\''.$options.'\'';
@@ -310,7 +293,6 @@ class Model extends Think
         }
         // 分析表达式
         $options =  $this->_parseOptions($options);
-
         return $this->db->delete($options);
     }
 
@@ -325,16 +307,13 @@ class Model extends Think
      * @return mixed
      +----------------------------------------------------------
      */
-    public function select($options=array())
-    {
+    public function select($options=array()) {
         // 分析表达式
         $options =  $this->_parseOptions($options);
         $resultSet = $this->db->select($options);
-        if (empty($resultSet)) { // 查询结果为空
-
+        if(empty($resultSet)) { // 查询结果为空
             return false;
         }
-
         return $resultSet;
     }
 
@@ -349,9 +328,8 @@ class Model extends Think
      * @return mixed
      +----------------------------------------------------------
      */
-     public function find($options=array())
-     {
-         if (is_numeric($options) || is_string($options)) {
+     public function find($options=array()) {
+         if(is_numeric($options) || is_string($options)) {
              $where = $this->getPk().'=\''.$options.'\'';
              $options = array();
              $options['where'] = $where;
@@ -361,12 +339,10 @@ class Model extends Think
         // 分析表达式
         $options =  $this->_parseOptions($options);
         $resultSet = $this->db->select($options);
-        if (empty($resultSet)) {// 查询结果为空
-
+        if(empty($resultSet)) {// 查询结果为空
             return false;
         }
         $this->data = $resultSet[0];
-
         return $this->data;
      }
 
@@ -381,8 +357,7 @@ class Model extends Think
      * @return array
      +----------------------------------------------------------
      */
-    private function _parseOptions($options)
-    {
+    private function _parseOptions($options) {
         if(is_array($options))
             $options =  array_merge($this->options,$options);
         // 查询过后清空sql表达式组装 避免影响下次查询
@@ -390,7 +365,6 @@ class Model extends Think
         if(!isset($options['table']))
             // 自动获取表名
             $options['table'] =$this->getTableName();
-
         return $options;
     }
 
@@ -400,38 +374,36 @@ class Model extends Think
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param mixed  $data 创建数据
+     * @param mixed $data 创建数据
      * @param string $type 状态
      +----------------------------------------------------------
      * @return mixed
      +----------------------------------------------------------
      */
-     public function create($data='',$type='')
-     {
+     public function create($data='',$type='') {
         // 如果没有传值默认取POST数据
-        if (empty($data)) {
+        if(empty($data)) {
             $data    =   $_POST;
-        } elseif (is_object($data)) {
+        }elseif(is_object($data)){
             $data   =   get_object_vars($data);
-        } elseif (!is_array($data)) {
+        }elseif(!is_array($data)){
             $this->error = L('_DATA_TYPE_INVALID_');
-
             return false;
         }
         // 生成数据对象
         $vo   =  array();
-        foreach ($this->fields as $key=>$name) {
+        foreach ($this->fields as $key=>$name){
             if(substr($key,0,1)=='_') continue;
             $val = isset($data[$name])?$data[$name]:null;
             //保证赋值有效
-            if (!is_null($val)) {
+            if(!is_null($val)){
                 $vo[$name] = (MAGIC_QUOTES_GPC && is_string($val))?   stripslashes($val)  :  $val;
-                if (C('DB_FIELDTYPE_CHECK')) {
+                if(C('DB_FIELDTYPE_CHECK')) {
                     // 字段类型检查
                     $fieldType = strtolower($this->fields['_type'][$name]);
-                    if (false !== strpos($fieldType,'int')) {
+                    if(false !== strpos($fieldType,'int')) {
                         $vo[$name]   =  intval($vo[$name]);
-                    } elseif (false !== strpos($fieldType,'float') || false !== strpos($fieldType,'double')) {
+                    }elseif(false !== strpos($fieldType,'float') || false !== strpos($fieldType,'double')){
                         $vo[$name]   =  floatval($vo[$name]);
                     }
                 }
@@ -449,19 +421,18 @@ class Model extends Think
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param string $sql SQL指令
+     * @param string $sql  SQL指令
      +----------------------------------------------------------
      * @return array
      +----------------------------------------------------------
      */
     public function query($sql)
     {
-        if (!empty($sql)) {
+        if(!empty($sql)) {
             if(strpos($sql,'__TABLE__'))
                 $sql    =   str_replace('__TABLE__',$this->getTableName(),$sql);
-
             return $this->db->query($sql);
-        } else {
+        }else{
             return false;
         }
     }
@@ -472,19 +443,18 @@ class Model extends Think
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param string $sql SQL指令
+     * @param string $sql  SQL指令
      +----------------------------------------------------------
      * @return false | integer
      +----------------------------------------------------------
      */
     public function execute($sql='')
     {
-        if (!empty($sql)) {
+        if(!empty($sql)) {
             if(strpos($sql,'__TABLE__'))
                 $sql    =   str_replace('__TABLE__',$this->getTableName(),$sql);
-
             return $this->db->execute($sql);
-        } else {
+        }else {
             return false;
         }
     }
@@ -500,10 +470,9 @@ class Model extends Think
      */
     public function getModelName()
     {
-        if (empty($this->name)) {
+        if(empty($this->name)) {
             $this->name =   substr(get_class($this),0,-5);
         }
-
         return $this->name;
     }
 
@@ -518,19 +487,18 @@ class Model extends Think
      */
     public function getTableName()
     {
-        if (empty($this->trueTableName)) {
+        if(empty($this->trueTableName)) {
             $tableName  = !empty($this->tablePrefix) ? $this->tablePrefix : '';
-            if (!empty($this->tableName)) {
+            if(!empty($this->tableName)) {
                 $tableName .= $this->tableName;
-            } else {
+            }else{
                 $tableName .= parse_name($this->name);
             }
-            if (!empty($this->dbName)) {
+            if(!empty($this->dbName)) {
                 $tableName    =  $this->dbName.'.'.$tableName;
             }
             $this->trueTableName    =   strtolower($tableName);
         }
-
         return $this->trueTableName;
     }
 
@@ -547,7 +515,6 @@ class Model extends Think
     {
         $this->commit();
         $this->db->startTrans();
-
         return ;
     }
 
@@ -587,8 +554,7 @@ class Model extends Think
      * @return string
      +----------------------------------------------------------
      */
-    public function getPk()
-    {
+    public function getPk() {
         return isset($this->fields['_pk'])?$this->fields['_pk']:$this->pk;
     }
 
@@ -601,8 +567,8 @@ class Model extends Think
      * @return string
      +----------------------------------------------------------
      */
-    public function getLastSql()
-    {
+    public function getLastSql() {
         return $this->db->getLastSql();
     }
 };
+?>

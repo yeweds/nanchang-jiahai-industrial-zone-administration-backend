@@ -38,8 +38,7 @@ class Hmac
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-    public static function sha1($key,$str)
-    {
+	public static function sha1($key,$str) {
         $blocksize=64;
         $hashfunc='sha1';
         if (strlen($key)>$blocksize)
@@ -56,7 +55,6 @@ class Hmac
                         )
                     )
                 );
-
         return $hmac;
     }
 
@@ -74,8 +72,7 @@ class Hmac
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-    public static function md5($key, $str)
-    {
+	public static function md5($key, $str) {
         $b = 64;
         if (strlen($key) > $b) {
             $key = pack("H*",md5($key));
@@ -91,3 +88,4 @@ class Hmac
     }
 
 }
+?>

@@ -39,3 +39,4 @@ return  array(
     'SHOW_PAGE_TRACE'=>true,        // 显示页面Trace信息 由Trace文件定义和Action操作赋值
     'APP_FILE_CASE'  =>   true, // 是否检查文件的大小写 对Windows平台有效
 );
+?>

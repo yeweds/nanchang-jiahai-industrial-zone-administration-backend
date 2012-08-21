@@ -21,8 +21,7 @@
  * @version   $Id$
  +------------------------------------------------------------------------------
  */
-class AdvModel extends Model
-{
+class AdvModel extends Model {
     // 数据库连接对象列表
     private $_db = array();
     private $_fields = null;
@@ -34,11 +33,10 @@ class AdvModel extends Model
     protected $readonlyField  = array();
     protected $_filter           = array();
 
-    public function __construct($name='')
-    {
-        if ('' !== $name || is_subclass_of($this,'AdvModel') ) {
+    public function __construct($name='') {
+        if('' !== $name || is_subclass_of($this,'AdvModel') ){
             // 如果是AdvModel子类或者有传入模型名称则获取字段缓存
-        } else {
+        }else{
             // 空的模型 关闭字段缓存
             $this->autoCheckFields = false;
         }
@@ -56,20 +54,18 @@ class AdvModel extends Model
      * @access public
      +----------------------------------------------------------
      * @param string $method 方法名称
-     * @param mixed  $args   调用参数
+     * @param mixed $args 调用参数
      +----------------------------------------------------------
      * @return mixed
      +----------------------------------------------------------
      */
-    public function __call($method,$args)
-    {
-        if (strtolower(substr($method,0,3))=='top') {
+    public function __call($method,$args) {
+        if(strtolower(substr($method,0,3))=='top'){
             // 获取前N条记录
             $count = substr($method,3);
             array_unshift($args,$count);
-
             return call_user_func_array(array(&$this, 'topN'), $args);
-        } else {
+        }else{
             return parent::__call($method,$args);
         }
     }
@@ -85,17 +81,14 @@ class AdvModel extends Model
      * @return boolean
      +----------------------------------------------------------
      */
-     protected function _facade($data)
-     {
+     protected function _facade($data) {
         // 检查序列化字段
         $data = $this->serializeField($data);
-
         return parent::_facade($data);
      }
 
     // 查询成功后的回调方法
-    protected function _after_find(&$result,$options='')
-    {
+    protected function _after_find(&$result,$options='') {
         // 检查序列化字段
         $this->checkSerializeField($result);
         // 获取文本字段
@@ -107,8 +100,7 @@ class AdvModel extends Model
     }
 
     // 查询数据集成功后的回调方法
-    protected function _after_select(&$resultSet,$options='')
-    {
+    protected function _after_select(&$resultSet,$options='') {
         // 检查序列化字段
         $resultSet   =  $this->checkListSerializeField($resultSet);
         // 获取文本字段
@@ -118,8 +110,7 @@ class AdvModel extends Model
     }
 
     // 写入前的回调方法
-    protected function _before_insert(&$data,$options='')
-    {
+    protected function _before_insert(&$data,$options='') {
         // 记录乐观锁
         $data = $this->recordLockVersion($data);
         // 检查文本字段
@@ -128,17 +119,15 @@ class AdvModel extends Model
         $data   =  $this->setFilterFields($data);
     }
 
-    protected function _after_insert($data,$options)
-    {
+    protected function _after_insert($data,$options) {
         // 保存文本字段
         $this->saveBlobFields($data);
     }
 
     // 更新前的回调方法
-    protected function _before_update(&$data,$options='')
-    {
+    protected function _before_update(&$data,$options='') {
         // 检查乐观锁
-        if (!$this->checkLockVersion($data,$options)) {
+        if(!$this->checkLockVersion($data,$options)) {
             return false;
         }
         // 检查文本字段
@@ -149,14 +138,12 @@ class AdvModel extends Model
         $data   =  $this->setFilterFields($data);
     }
 
-    protected function _after_update($data,$options)
-    {
+    protected function _after_update($data,$options) {
         // 保存文本字段
         $this->saveBlobFields($data);
     }
 
-    protected function _after_delete($data,$options)
-    {
+    protected function _after_delete($data,$options) {
         // 删除Blob数据
         $this->delBlobFields($data);
     }
@@ -172,15 +159,13 @@ class AdvModel extends Model
      * @return array
      +----------------------------------------------------------
      */
-    protected function recordLockVersion($data)
-    {
+    protected function recordLockVersion($data) {
         // 记录乐观锁
-        if ($this->optimLock && !isset($data[$this->optimLock]) ) {
-            if (in_array($this->optimLock,$this->fields,true)) {
+        if($this->optimLock && !isset($data[$this->optimLock]) ) {
+            if(in_array($this->optimLock,$this->fields,true)) {
                 $data[$this->optimLock]  =   0;
             }
         }
-
         return $data;
     }
 
@@ -195,10 +180,9 @@ class AdvModel extends Model
      * @return void
      +----------------------------------------------------------
      */
-    protected function cacheLockVersion($data)
-    {
-        if ($this->optimLock) {
-            if (isset($data[$this->optimLock]) && isset($data[$this->getPk()])) {
+    protected function cacheLockVersion($data) {
+        if($this->optimLock) {
+            if(isset($data[$this->optimLock]) && isset($data[$this->getPk()])) {
                 // 只有当存在乐观锁字段和主键有值的时候才记录乐观锁
                 $_SESSION[$this->name.'_'.$data[$this->getPk()].'_lock_version']    =   $data[$this->optimLock];
             }
@@ -211,39 +195,36 @@ class AdvModel extends Model
      +----------------------------------------------------------
      * @access protected
      +----------------------------------------------------------
-     * @param array $data    当前数据
+     * @param array $data  当前数据
      * @param array $options 查询表达式
      +----------------------------------------------------------
      * @return mixed
      +----------------------------------------------------------
      */
-    protected function checkLockVersion(&$data,$options)
-    {
+    protected function checkLockVersion(&$data,$options) {
         $id = $data[$this->getPk()];
         // 检查乐观锁
         $identify   = $this->name.'_'.$id.'_lock_version';
-        if ($this->optimLock && isset($_SESSION[$identify])) {
+        if($this->optimLock && isset($_SESSION[$identify])) {
             $lock_version = $_SESSION[$identify];
             $vo   =  $this->field($this->optimLock)->find($id);
             $_SESSION[$identify]     =   $lock_version;
             $curr_version = $vo[$this->optimLock];
-            if (isset($curr_version)) {
-                if ($curr_version>0 && $lock_version != $curr_version) {
+            if(isset($curr_version)) {
+                if($curr_version>0 && $lock_version != $curr_version) {
                     // 记录已经更新
                     $this->error = L('_RECORD_HAS_UPDATE_');
-
                     return false;
-                } else {
+                }else{
                     // 更新乐观锁
                     $save_version = $data[$this->optimLock];
-                    if ($save_version != $lock_version+1) {
+                    if($save_version != $lock_version+1) {
                         $data[$this->optimLock]  =   $lock_version+1;
                     }
                     $_SESSION[$identify]     =   $lock_version+1;
                 }
             }
         }
-
         return true;
     }
 
@@ -253,16 +234,14 @@ class AdvModel extends Model
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param integer $count   记录个数
-     * @param array   $options 查询表达式
+     * @param integer $count 记录个数
+     * @param array $options 查询表达式
      +----------------------------------------------------------
      * @return array
      +----------------------------------------------------------
      */
-    public function topN($count,$options=array())
-    {
+    public function topN($count,$options=array()) {
         $options['limit'] =  $count;
-
         return $this->select($options);
     }
 
@@ -274,21 +253,18 @@ class AdvModel extends Model
      * @access public
      +----------------------------------------------------------
      * @param integer $position 记录位置
-     * @param array   $options  查询表达式
+     * @param array $options 查询表达式
      +----------------------------------------------------------
      * @return mixed
      +----------------------------------------------------------
      */
-    public function getN($position=0,$options=array())
-    {
-        if ($position>=0) { // 正向查找
+    public function getN($position=0,$options=array()) {
+        if($position>=0) { // 正向查找
             $options['limit'] = $position.',1';
             $list   =  $this->select($options);
-
             return $list?$list[0]:false;
-        } else { // 逆序查找
+        }else{ // 逆序查找
             $list   =  $this->select($options);
-
             return $list?$list[count($list)-abs($position)]:false;
         }
     }
@@ -304,8 +280,7 @@ class AdvModel extends Model
      * @return mixed
      +----------------------------------------------------------
      */
-    public function first($options=array())
-    {
+    public function first($options=array()) {
         return $this->getN(0,$options);
     }
 
@@ -320,8 +295,7 @@ class AdvModel extends Model
      * @return mixed
      +----------------------------------------------------------
      */
-    public function last($options=array())
-    {
+    public function last($options=array()) {
         return $this->getN(-1,$options);
     }
 
@@ -331,22 +305,20 @@ class AdvModel extends Model
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param array  $data 数据
+     * @param array $data 数据
      * @param string $type 返回类型 默认为数组
      +----------------------------------------------------------
      * @return mixed
      +----------------------------------------------------------
      */
-    public function returnResult($data,$type='')
-    {
+    public function returnResult($data,$type='') {
         if('' === $type)
             $type = $this->returnType;
-        switch ($type) {
+        switch($type) {
             case 'array' :  return $data;
-            case 'object':  return (object) $data;
+            case 'object':  return (object)$data;
             default:// 允许用户自定义返回类型
                 if(class_exists($type))
-
                     return new $type($data);
                 else
                     throw_exception(L('_CLASS_NOT_EXIST_').':'.$type);
@@ -364,17 +336,16 @@ class AdvModel extends Model
      * @return array
      +----------------------------------------------------------
      */
-    protected function getFilterFields(&$result)
-    {
-        if (!empty($this->_filter)) {
-            foreach ($this->_filter as $field=>$filter) {
-                if (isset($result[$field])) {
+    protected function getFilterFields(&$result) {
+        if(!empty($this->_filter)) {
+            foreach ($this->_filter as $field=>$filter){
+                if(isset($result[$field])) {
                     $fun  =  $filter[1];
-                    if (!empty($fun)) {
-                        if (isset($filter[2]) && $filter[2]) {
+                    if(!empty($fun)) {
+                        if(isset($filter[2]) && $filter[2]){
                             // 传递整个数据对象作为参数
                             $result[$field]  =  call_user_func($fun,$result);
-                        } else {
+                        }else{
                             // 传递字段的值作为参数
                             $result[$field]  =  call_user_func($fun,$result[$field]);
                         }
@@ -382,17 +353,14 @@ class AdvModel extends Model
                 }
             }
         }
-
         return $result;
     }
 
-    protected function getFilterListFields(&$resultSet)
-    {
-        if (!empty($this->_filter)) {
+    protected function getFilterListFields(&$resultSet) {
+        if(!empty($this->_filter)) {
             foreach ($resultSet as $key=>$result)
                 $resultSet[$key]  =  $this->getFilterFields($result);
         }
-
         return $resultSet;
     }
 
@@ -407,17 +375,16 @@ class AdvModel extends Model
      * @return array
      +----------------------------------------------------------
      */
-    protected function setFilterFields($data)
-    {
-        if (!empty($this->_filter)) {
-            foreach ($this->_filter as $field=>$filter) {
-                if (isset($data[$field])) {
+    protected function setFilterFields($data) {
+        if(!empty($this->_filter)) {
+            foreach ($this->_filter as $field=>$filter){
+                if(isset($data[$field])) {
                     $fun              =  $filter[0];
-                    if (!empty($fun)) {
-                        if (isset($filter[2]) && $filter[2]) {
+                    if(!empty($fun)) {
+                        if(isset($filter[2]) && $filter[2]) {
                             // 传递整个数据对象作为参数
                             $data[$field]   =  call_user_func($fun,$data);
-                        } else {
+                        }else{
                             // 传递字段的值作为参数
                             $data[$field]   =  call_user_func($fun,$data[$field]);
                         }
@@ -425,7 +392,6 @@ class AdvModel extends Model
                 }
             }
         }
-
         return $data;
     }
 
@@ -435,26 +401,23 @@ class AdvModel extends Model
      +----------------------------------------------------------
      * @access protected
      +----------------------------------------------------------
-     * @param array  $resultSet 数据
-     * @param string $type      返回类型 默认为数组
+     * @param array $resultSet 数据
+     * @param string $type 返回类型 默认为数组
      +----------------------------------------------------------
      * @return void
      +----------------------------------------------------------
      */
-    protected function returnResultSet(&$resultSet,$type='')
-    {
+    protected function returnResultSet(&$resultSet,$type='') {
         foreach ($resultSet as $key=>$data)
             $resultSet[$key]  =  $this->returnResult($data,$type);
-
         return $resultSet;
     }
 
-    protected function checkBlobFields(&$data)
-    {
+    protected function checkBlobFields(&$data) {
         // 检查Blob文件保存字段
-        if (!empty($this->blobFields)) {
-            foreach ($this->blobFields as $field) {
-                if (isset($data[$field])) {
+        if(!empty($this->blobFields)) {
+            foreach ($this->blobFields as $field){
+                if(isset($data[$field])) {
                     if(isset($data[$this->getPk()]))
                         $this->blobValues[$this->name.'/'.$data[$this->getPk()].'_'.$field] =   $data[$field];
                     else
@@ -463,7 +426,6 @@ class AdvModel extends Model
                 }
             }
         }
-
         return $data;
     }
 
@@ -473,21 +435,19 @@ class AdvModel extends Model
      +----------------------------------------------------------
      * @access protected
      +----------------------------------------------------------
-     * @param mixed  $resultSet 查询的数据
-     * @param string $field     查询的字段
+     * @param mixed $resultSet 查询的数据
+     * @param string $field 查询的字段
      +----------------------------------------------------------
      * @return void
      +----------------------------------------------------------
      */
-    protected function getListBlobFields(&$resultSet,$field='')
-    {
-        if (!empty($this->blobFields)) {
-            foreach ($resultSet as $key=>$result) {
+    protected function getListBlobFields(&$resultSet,$field='') {
+        if(!empty($this->blobFields)) {
+            foreach ($resultSet as $key=>$result){
                 $result =   $this->getBlobFields($result,$field);
                 $resultSet[$key]    =   $result;
             }
         }
-
         return $resultSet;
     }
 
@@ -497,27 +457,24 @@ class AdvModel extends Model
      +----------------------------------------------------------
      * @access protected
      +----------------------------------------------------------
-     * @param mixed  $data  查询的数据
+     * @param mixed $data 查询的数据
      * @param string $field 查询的字段
      +----------------------------------------------------------
      * @return void
      +----------------------------------------------------------
      */
-    protected function getBlobFields(&$data,$field='')
-    {
-        if (!empty($this->blobFields)) {
+    protected function getBlobFields(&$data,$field='') {
+        if(!empty($this->blobFields)) {
             $pk =   $this->getPk();
             $id =   $data[$pk];
-            if (empty($field)) {
-                foreach ($this->blobFields as $field) {
+            if(empty($field)) {
+                foreach ($this->blobFields as $field){
                     $identify   =   $this->name.'/'.$id.'_'.$field;
                     $data[$field]   =   F($identify);
                 }
-
                 return $data;
-            } else {
+            }else{
                 $identify   =   $this->name.'/'.$id.'_'.$field;
-
                 return F($identify);
             }
         }
@@ -534,10 +491,9 @@ class AdvModel extends Model
      * @return void
      +----------------------------------------------------------
      */
-    protected function saveBlobFields(&$data)
-    {
-        if (!empty($this->blobFields)) {
-            foreach ($this->blobValues as $key=>$val) {
+    protected function saveBlobFields(&$data) {
+        if(!empty($this->blobFields)) {
+            foreach ($this->blobValues as $key=>$val){
                 if(strpos($key,'@?id@'))
                     $key    =   str_replace('@?id@',$data[$this->getPk()],$key);
                 F($key,$val);
@@ -551,23 +507,22 @@ class AdvModel extends Model
      +----------------------------------------------------------
      * @access protected
      +----------------------------------------------------------
-     * @param mixed  $data  保存的数据
+     * @param mixed $data 保存的数据
      * @param string $field 查询的字段
      +----------------------------------------------------------
      * @return void
      +----------------------------------------------------------
      */
-    protected function delBlobFields(&$data,$field='')
-    {
-        if (!empty($this->blobFields)) {
+    protected function delBlobFields(&$data,$field='') {
+        if(!empty($this->blobFields)) {
             $pk =   $this->getPk();
             $id =   $data[$pk];
-            if (empty($field)) {
-                foreach ($this->blobFields as $field) {
+            if(empty($field)) {
+                foreach ($this->blobFields as $field){
                     $identify   =   $this->name.'/'.$id.'_'.$field;
                     F($identify,null);
                 }
-            } else {
+            }else{
                 $identify   =   $this->name.'/'.$id.'_'.$field;
                 F($identify,null);
             }
@@ -580,28 +535,25 @@ class AdvModel extends Model
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param string  $field     字段名
-     * @param mixed   $condition 条件
-     * @param integer $step      增长值
+     * @param string $field  字段名
+     * @param mixed $condition  条件
+     * @param integer $step  增长值
      * @param integer $lazyTime  延时时间(s)
      +----------------------------------------------------------
      * @return boolean
      +----------------------------------------------------------
      */
-    public function setLazyInc($field,$condition='',$step=1,$lazyTime=0)
-    {
+    public function setLazyInc($field,$condition='',$step=1,$lazyTime=0) {
         if(empty($condition) && isset($this->options['where']))
             $condition   =  $this->options['where'];
-        if (empty($condition)) { // 没有条件不做任何更新
-
+        if(empty($condition)) { // 没有条件不做任何更新
             return false;
         }
-        if ($lazyTime>0) {// 延迟写入
+        if($lazyTime>0) {// 延迟写入
             $guid =  md5($this->name.'_'.$field.'_'.serialize($condition));
             $step = $this->lazyWrite($guid,$step,$lazyTime);
             if(false === $step ) return true; // 等待下次写入
         }
-
         return $this->setField($field,array('exp',$field.'+'.$step),$condition);
     }
 
@@ -611,28 +563,25 @@ class AdvModel extends Model
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param string  $field     字段名
-     * @param mixed   $condition 条件
-     * @param integer $step      减少值
+     * @param string $field  字段名
+     * @param mixed $condition  条件
+     * @param integer $step  减少值
      * @param integer $lazyTime  延时时间(s)
      +----------------------------------------------------------
      * @return boolean
      +----------------------------------------------------------
      */
-    public function setLazyDec($field,$condition='',$step=1,$lazyTime=0)
-    {
+    public function setLazyDec($field,$condition='',$step=1,$lazyTime=0) {
         if(empty($condition) && isset($this->options['where']))
             $condition   =  $this->options['where'];
-        if (empty($condition)) { // 没有条件不做任何更新
-
+        if(empty($condition)) { // 没有条件不做任何更新
             return false;
         }
-        if ($lazyTime>0) {// 延迟写入
+        if($lazyTime>0) {// 延迟写入
             $guid =  md5($this->name.'_'.$field.'_'.serialize($condition));
             $step = $this->lazyWrite($guid,$step,$lazyTime);
             if(false === $step ) return true; // 等待下次写入
         }
-
         return $this->setField($field,array('exp',$field.'-'.$step),$condition);
     }
 
@@ -643,33 +592,29 @@ class AdvModel extends Model
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param string  $guid     写入标识
-     * @param integer $step     写入步进值
-     * @param integer $lazyTime 延时时间(s)
+     * @param string $guid  写入标识
+     * @param integer $step  写入步进值
+     * @param integer $lazyTime  延时时间(s)
      +----------------------------------------------------------
      * @return false|integer
      +----------------------------------------------------------
      */
-    protected function lazyWrite($guid,$step,$lazyTime)
-    {
-        if (false !== ($value = F($guid))) { // 存在缓存写入数据
-            if (time()>F($guid.'_time')+$lazyTime) {
+    protected function lazyWrite($guid,$step,$lazyTime) {
+        if(false !== ($value = F($guid))) { // 存在缓存写入数据
+            if(time()>F($guid.'_time')+$lazyTime) {
                 // 延时更新时间到了，删除缓存数据 并实际写入数据库
                 F($guid,NULL);
                 F($guid.'_time',NULL);
-
                 return $value+$step;
-            } else {
+            }else{
                 // 追加数据到缓存
                 F($guid,$value+$step);
-
                 return false;
             }
-        } else { // 没有缓存数据
+        }else{ // 没有缓存数据
             F($guid,$step);
             // 计时开始
             F($guid.'_time',time());
-
             return false;
         }
     }
@@ -685,16 +630,15 @@ class AdvModel extends Model
      * @return array
      +----------------------------------------------------------
      */
-     protected function serializeField(&$data)
-     {
+     protected function serializeField(&$data) {
         // 检查序列化字段
-        if (!empty($this->serializeField)) {
+        if(!empty($this->serializeField)) {
             // 定义方式  $this->serializeField = array('ser'=>array('name','email'));
-            foreach ($this->serializeField as $key=>$val) {
-                if (empty($data[$key])) {
+            foreach ($this->serializeField as $key=>$val){
+                if(empty($data[$key])) {
                     $serialize  =   array();
-                    foreach ($val as $name) {
-                        if (isset($data[$name])) {
+                    foreach ($val as $name){
+                        if(isset($data[$name])) {
                             $serialize[$name]   =   $data[$name];
                             unset($data[$name]);
                         }
@@ -703,17 +647,15 @@ class AdvModel extends Model
                 }
             }
         }
-
         return $data;
      }
 
     // 检查返回数据的序列化字段
-    protected function checkSerializeField(&$result)
-    {
+    protected function checkSerializeField(&$result) {
         // 检查序列化字段
-        if (!empty($this->serializeField)) {
-            foreach ($this->serializeField as $key=>$val) {
-                if (isset($result[$key])) {
+        if(!empty($this->serializeField)) {
+            foreach ($this->serializeField as $key=>$val){
+                if(isset($result[$key])) {
                     $serialize   =   unserialize($result[$key]);
                     foreach ($serialize as $name=>$value)
                         $result[$name]  =   $value;
@@ -721,18 +663,16 @@ class AdvModel extends Model
                 }
             }
         }
-
         return $result;
     }
 
     // 检查数据集的序列化字段
-    protected function checkListSerializeField(&$resultSet)
-    {
+    protected function checkListSerializeField(&$resultSet) {
         // 检查序列化字段
-        if (!empty($this->serializeField)) {
-            foreach ($this->serializeField as $key=>$val) {
-                foreach ($resultSet as $k=>$result) {
-                    if (isset($result[$key])) {
+        if(!empty($this->serializeField)) {
+            foreach ($this->serializeField as $key=>$val){
+                foreach ($resultSet as $k=>$result){
+                    if(isset($result[$key])) {
                         $serialize   =   unserialize($result[$key]);
                         foreach ($serialize as $name=>$value)
                             $result[$name]  =   $value;
@@ -742,7 +682,6 @@ class AdvModel extends Model
                 }
             }
         }
-
         return $resultSet;
     }
 
@@ -757,15 +696,13 @@ class AdvModel extends Model
      * @return array
      +----------------------------------------------------------
      */
-    protected function checkReadonlyField(&$data)
-    {
-        if (!empty($this->readonlyField)) {
-            foreach ($this->readonlyField as $key=>$field) {
+    protected function checkReadonlyField(&$data) {
+        if(!empty($this->readonlyField)) {
+            foreach ($this->readonlyField as $key=>$field){
                 if(isset($data[$field]))
                     unset($data[$field]);
             }
         }
-
         return $data;
     }
 
@@ -777,26 +714,22 @@ class AdvModel extends Model
      +----------------------------------------------------------
      * @param mixed $config 数据库连接信息
      * 支持批量添加 例如 array(1=>$config1,2=>$config2)
-     * @param mixed $linkNum 创建的连接序号
+     * @param mixed $linkNum  创建的连接序号
      +----------------------------------------------------------
      * @return boolean
      +----------------------------------------------------------
      */
-    public function addConnect($config,$linkNum=NULL)
-    {
+    public function addConnect($config,$linkNum=NULL) {
         if(isset($this->_db[$linkNum]))
-
             return false;
-        if (NULL === $linkNum && is_array($config)) {
+        if(NULL === $linkNum && is_array($config)) {
             // 支持批量增加数据库连接
             foreach ($config as $key=>$val)
                 $this->_db[$key]            =    Db::getInstance($val);
-
             return true;
         }
         // 创建一个新的实例
         $this->_db[$linkNum]            =    Db::getInstance($config);
-
         return true;
     }
 
@@ -806,22 +739,19 @@ class AdvModel extends Model
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param integer $linkNum 创建的连接序号
+     * @param integer $linkNum  创建的连接序号
      +----------------------------------------------------------
      * @return boolean
      +----------------------------------------------------------
      */
-    public function delConnect($linkNum)
-    {
-        if (isset($this->_db[$linkNum])) {
+    public function delConnect($linkNum) {
+        if(isset($this->_db[$linkNum])) {
             $this->_db[$linkNum]->close();
             unset($this->_db[$linkNum]);
             // 恢复之前的数据表字段信息
             $this->fields    =    $this->_fields;
-
             return true;
         }
-
         return false;
     }
 
@@ -831,19 +761,16 @@ class AdvModel extends Model
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param integer $linkNum 创建的连接序号
+     * @param integer $linkNum  创建的连接序号
      +----------------------------------------------------------
      * @return boolean
      +----------------------------------------------------------
      */
-    public function closeConnect($linkNum)
-    {
-        if (isset($this->_db[$linkNum])) {
+    public function closeConnect($linkNum) {
+        if(isset($this->_db[$linkNum])) {
             $this->_db[$linkNum]->close();
-
             return true;
         }
-
         return false;
     }
 
@@ -853,15 +780,14 @@ class AdvModel extends Model
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param integer $linkNum 创建的连接序号
-     * @param string  $name    要操作的模型名称
+     * @param integer $linkNum  创建的连接序号
+     * @param string $name  要操作的模型名称
      +----------------------------------------------------------
      * @return boolean
      +----------------------------------------------------------
      */
-    public function switchConnect($linkNum,$name='')
-    {
-        if (isset($this->_db[$linkNum])) {
+    public function switchConnect($linkNum,$name='') {
+        if(isset($this->_db[$linkNum])) {
             // 在不同实例直接切换
             $this->db   =   $this->_db[$linkNum];
             // 重置当前表名 可以在切换之前重新设置前缀
@@ -869,9 +795,8 @@ class AdvModel extends Model
             if(!empty($name))   $this->name   =  $name;
             // 更新数据表字段缓存信息
             $this->flush();
-
             return true;
-        } else {
+        }else{
             return false;
         }
     }
@@ -883,23 +808,21 @@ class AdvModel extends Model
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param array $sql SQL批处理指令
+     * @param array $sql  SQL批处理指令
      +----------------------------------------------------------
      * @return boolean
      +----------------------------------------------------------
      */
-    public function patchQuery($sql=array())
-    {
+    public function patchQuery($sql=array()) {
         if(!is_array($sql)) return false;
         // 自动启动事务支持
         $this->startTrans();
-        try {
-            foreach ($sql as $_sql) {
+        try{
+            foreach ($sql as $_sql){
                 $result   =  $this->execute($_sql);
-                if (false === $result) {
+                if(false === $result) {
                     // 发生错误自动回滚事务
                     $this->rollback();
-
                     return false;
                 }
             }
@@ -908,7 +831,6 @@ class AdvModel extends Model
         } catch (ThinkException $e) {
             $this->rollback();
         }
-
         return true;
     }
 
@@ -923,12 +845,11 @@ class AdvModel extends Model
      * @return string
      +----------------------------------------------------------
      */
-    public function getPartitionTableName($data=array())
-    {
+    public function getPartitionTableName($data=array()) {
         // 对数据表进行分区
-        if (isset($data[$this->partition['field']])) {
+        if(isset($data[$this->partition['field']])) {
             $field   =   $data[$this->partition['field']];
-            switch ($this->partition['type']) {
+            switch($this->partition['type']) {
                 case 'id':
                     // 按照id范围分表
                     $step    =   $this->partition['expr'];
@@ -936,7 +857,7 @@ class AdvModel extends Model
                     break;
                 case 'year':
                     // 按照年份分表
-                    if (!is_numeric($field)) {
+                    if(!is_numeric($field)) {
                         $field   =   strtotime($field);
                     }
                     $seq    =   date('Y',$field)-$this->partition['expr']+1;
@@ -950,26 +871,25 @@ class AdvModel extends Model
                     $seq    =   (ord(substr(md5($field),0,1)) % $this->partition['num'])+1;
                     break;
                 default :
-                    if (function_exists($this->partition['type'])) {
+                    if(function_exists($this->partition['type'])) {
                         // 支持指定函数哈希
                         $fun    =   $this->partition['type'];
                         $seq    =   (ord(substr($fun($field),0,1)) % $this->partition['num'])+1;
-                    } else {
+                    }else{
                         // 按照字段的首字母的值分表
                         $seq    =   (ord($field{0}) % $this->partition['num'])+1;
                     }
             }
-
             return $this->getTableName().'_'.$seq;
-        } else {
+        }else{
             // 当设置的分表字段不在查询条件或者数据中
             // 进行联合查询，必须设定 partition['num']
             $tableName  =   array();
             for($i=0;$i<$this->partition['num'];$i++)
                 $tableName[] = 'SELECT * FROM '.$this->getTableName().'_'.($i+1);
             $tableName = '( '.implode(" UNION ",$tableName).') AS '.$this->name;
-
             return $tableName;
         }
     }
 }
+?>

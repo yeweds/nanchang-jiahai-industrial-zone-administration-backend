@@ -47,9 +47,9 @@ class Zend_Server_Method_Prototype
     protected $_parameters = array();
 
     /**
-     * Constructor
-     *
-     * @param  null|array $options
+     * Constructor 
+     * 
+     * @param  null|array $options 
      * @return void
      */
     public function __construct($options = null)
@@ -62,13 +62,12 @@ class Zend_Server_Method_Prototype
     /**
      * Set return value
      *
-     * @param  string                       $returnType
+     * @param  string $returnType
      * @return Zend_Server_Method_Prototype
      */
     public function setReturnType($returnType)
     {
         $this->_returnType = $returnType;
-
         return $this;
     }
 
@@ -84,8 +83,8 @@ class Zend_Server_Method_Prototype
 
     /**
      * Add a parameter
-     *
-     * @param  string                       $parameter
+     * 
+     * @param  string $parameter 
      * @return Zend_Server_Method_Prototype
      */
     public function addParameter($parameter)
@@ -102,14 +101,13 @@ class Zend_Server_Method_Prototype
             ));
             $this->_parameters[] = $parameter;
         }
-
         return $this;
     }
 
     /**
      * Add parameters
-     *
-     * @param  array                        $parameter
+     * 
+     * @param  array $parameter 
      * @return Zend_Server_Method_Prototype
      */
     public function addParameters(array $parameters)
@@ -117,14 +115,13 @@ class Zend_Server_Method_Prototype
         foreach ($parameters as $parameter) {
             $this->addParameter($parameter);
         }
-
         return $this;
     }
 
     /**
      * Set parameters
      *
-     * @param  array                        $parameters
+     * @param  array $parameters
      * @return Zend_Server_Method_Prototype
      */
     public function setParameters(array $parameters)
@@ -132,7 +129,6 @@ class Zend_Server_Method_Prototype
         $this->_parameters       = array();
         $this->_parameterNameMap = array();
         $this->addParameters($parameters);
-
         return $this;
     }
 
@@ -147,13 +143,12 @@ class Zend_Server_Method_Prototype
         foreach ($this->_parameters as $parameter) {
             $types[] = $parameter->getType();
         }
-
         return $types;
     }
 
     /**
      * Get parameter objects
-     *
+     * 
      * @return array
      */
     public function getParameterObjects()
@@ -163,8 +158,8 @@ class Zend_Server_Method_Prototype
 
     /**
      * Retrieve a single parameter by name or index
-     *
-     * @param  string|int                        $index
+     * 
+     * @param  string|int $index 
      * @return null|Zend_Server_Method_Parameter
      */
     public function getParameter($index)
@@ -178,14 +173,13 @@ class Zend_Server_Method_Prototype
         if (array_key_exists($index, $this->_parameters)) {
             return $this->_parameters[$index];
         }
-
         return null;
     }
 
     /**
      * Set object state from array
-     *
-     * @param  array                        $options
+     * 
+     * @param  array $options 
      * @return Zend_Server_Method_Prototype
      */
     public function setOptions(array $options)
@@ -196,13 +190,12 @@ class Zend_Server_Method_Prototype
                 $this->$method($value);
             }
         }
-
         return $this;
     }
 
     /**
      * Serialize to array
-     *
+     * 
      * @return array
      */
     public function toArray()

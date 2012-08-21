@@ -32,30 +32,24 @@
  */
 
 if (extension_loaded('gmp')) {
-    function bigint_dec2num($dec)
-    {
+    function bigint_dec2num($dec) {
         return gmp_init($dec);
     }
-    function bigint_num2dec($num)
-    {
+    function bigint_num2dec($num) {
         return gmp_strval($num);
     }
-    function bigint_str2num($str)
-    {
+    function bigint_str2num($str) {
         return gmp_init("0x".bin2hex($str));
     }
-    function bigint_num2str($num)
-    {
+    function bigint_num2str($num) {
         $str = gmp_strval($num, 16);
         $len = strlen($str);
         if ($len % 2 == 1) {
             $str = '0'.$str;
         }
-
         return pack("H*", $str);
     }
-    function bigint_random($n, $s)
-    {
+    function bigint_random($n, $s) {
         $result = gmp_init(0);
         for ($i = 0; $i < $n; $i++) {
             if (mt_rand(0, 1)) {
@@ -65,60 +59,49 @@ if (extension_loaded('gmp')) {
         if ($s) {
             gmp_setbit($result, $n - 1);
         }
-
         return $result;
     }
-    function bigint_powmod($x, $y, $m)
-    {
+    function bigint_powmod($x, $y, $m) {
         return gmp_powm($x, $y, $m);
     }
-} elseif (extension_loaded('big_int')) {
-    function bigint_dec2num($dec)
-    {
+}
+else if (extension_loaded('big_int')) {
+    function bigint_dec2num($dec) {
         return bi_from_str($dec);
     }
-    function bigint_num2dec($num)
-    {
+    function bigint_num2dec($num) {
         return bi_to_str($num);
     }
-    function bigint_str2num($str)
-    {
+    function bigint_str2num($str) {
         return bi_from_str(bin2hex($str), 16);
     }
-    function bigint_num2str($num)
-    {
+    function bigint_num2str($num) {
         $str = bi_to_str($num, 16);
         $len = strlen($str);
         if ($len % 2 == 1) {
             $str = '0'.$str;
         }
-
         return pack("H*", $str);
     }
-    function bigint_random($n, $s)
-    {
+    function bigint_random($n, $s) {
         $result = bi_rand($n);
         if ($s) {
             $result = bi_set_bit($result, $n - 1);
         }
-
         return $result;
     }
-    function bigint_powmod($x, $y, $m)
-    {
+    function bigint_powmod($x, $y, $m) {
         return bi_powmod($x, $y, $m);
     }
-} elseif (extension_loaded('bcmath')) {
-    function bigint_dec2num($dec)
-    {
+}
+else if (extension_loaded('bcmath')) {
+    function bigint_dec2num($dec) {
         return $dec;
     }
-    function bigint_num2dec($num)
-    {
+    function bigint_num2dec($num) {
         return $num;
     }
-    function bigint_str2num($str)
-    {
+    function bigint_str2num($str) {
         bcscale(0);
         $len = strlen($str);
         $result = '0';
@@ -127,23 +110,19 @@ if (extension_loaded('gmp')) {
             $result = bcadd(bcmul($m, ord($str{$len - $i - 1})), $result);
             $m = bcmul($m, '256');
         }
-
         return $result;
     }
-    function bigint_num2str($num)
-    {
+    function bigint_num2str($num) {
         bcscale(0);
         $str = "";
         while (bccomp($num, '0') == 1) {
            $str = chr(bcmod($num, '256')) . $str;
            $num = bcdiv($num, '256');
         }
-
         return $str;
     }
     // author of bcmath bigint_random: mgccl <mgcclx@gmail.com>
-    function bigint_pow($b, $e)
-    {
+    function bigint_pow($b, $e) {
         if ($b == 2) {
             $a[96] = '79228162514264337593543950336';
             $a[128] = '340282366920938463463374607431768211456';
@@ -158,38 +137,34 @@ if (extension_loaded('gmp')) {
             $a[3072] = '5809605995369958062859502533304574370686975176362895236661486152287203730997110225737336044533118407251326157754980517443990529594540047121662885672187032401032111639706440498844049850989051627200244765807041812394729680540024104827976584369381522292361208779044769892743225751738076979568811309579125511333093243519553784816306381580161860200247492568448150242515304449577187604136428738580990172551573934146255830366405915000869643732053218566832545291107903722831634138599586406690325959725187447169059540805012310209639011750748760017095360734234945757416272994856013308616958529958304677637019181594088528345061285863898271763457294883546638879554311615446446330199254382340016292057090751175533888161918987295591531536698701292267685465517437915790823154844634780260102891718032495396075041899485513811126977307478969074857043710716150121315922024556759241239013152919710956468406379442914941614357107914462567329693696';
             $a[4096] = '1044388881413152506691752710716624382579964249047383780384233483283953907971557456848826811934997558340890106714439262837987573438185793607263236087851365277945956976543709998340361590134383718314428070011855946226376318839397712745672334684344586617496807908705803704071284048740118609114467977783598029006686938976881787785946905630190260940599579453432823469303026696443059025015972399867714215541693835559885291486318237914434496734087811872639496475100189041349008417061675093668333850551032972088269550769983616369411933015213796825837188091833656751221318492846368125550225998300412344784862595674492194617023806505913245610825731835380087608622102834270197698202313169017678006675195485079921636419370285375124784014907159135459982790513399611551794271106831134090584272884279791554849782954323534517065223269061394905987693002122963395687782878948440616007412945674919823050571642377154816321380631045902916136926708342856440730447899971901781465763473223850267253059899795996090799469201774624817718449867455659250178329070473119433165550807568221846571746373296884912819520317457002440926616910874148385078411929804522981857338977648103126085903001302413467189726673216491511131602920781738033436090243804708340403154190336';
             $a[8192] = '1090748135619415929462984244733782862448264161996232692431832786189721331849119295216264234525201987223957291796157025273109870820177184063610979765077554799078906298842192989538609825228048205159696851613591638196771886542609324560121290553901886301017900252535799917200010079600026535836800905297805880952350501630195475653911005312364560014847426035293551245843928918752768696279344088055617515694349945406677825140814900616105920256438504578013326493565836047242407382442812245131517757519164899226365743722432277368075027627883045206501792761700945699168497257879683851737049996900961120515655050115561271491492515342105748966629547032786321505730828430221664970324396138635251626409516168005427623435996308921691446181187406395310665404885739434832877428167407495370993511868756359970390117021823616749458620969857006263612082706715408157066575137281027022310927564910276759160520878304632411049364568754920967322982459184763427383790272448438018526977764941072715611580434690827459339991961414242741410599117426060556483763756314527611362658628383368621157993638020878537675545336789915694234433955666315070087213535470255670312004130725495834508357439653828936077080978550578912967907352780054935621561090795845172954115972927479877527738560008204118558930004777748727761853813510493840581861598652211605960308356405941821189714037868726219481498727603653616298856174822413033485438785324024751419417183012281078209729303537372804574372095228703622776363945290869806258422355148507571039619387449629866808188769662815778153079393179093143648340761738581819563002994422790754955061288818308430079648693232179158765918035565216157115402992120276155607873107937477466841528362987708699450152031231862594203085693838944657061346236704234026821102958954951197087076546186622796294536451620756509351018906023773821539532776208676978589731966330308893304665169436185078350641568336944530051437491311298834367265238595404904273455928723949525227184617404367854754610474377019768025576605881038077270707717942221977090385438585844095492116099852538903974655703943973086090930596963360767529964938414598185705963754561497355827813623833288906309004288017321424808663962671333528009232758350873059614118723781422101460198615747386855096896089189180441339558524822867541113212638793675567650340362970031930023397828465318547238244232028015189689660418822976000815437610652254270163595650875433851147123214227266605403581781469090806576468950587661997186505665475715792896';
-
             return (isset($a[$e]) ? $a[$e] : bcpow(2, $e));
         }
-
         return bcpow($b, $e);
     }
-    function bigint_random($n, $s)
-    {
+    function bigint_random($n, $s) {
         bcscale(0);
         $t = bigint_pow(2, $n);
         if ($s == 1) {
             $m = bcdiv($t, 2);
             $t = bcsub($m, 1);
-        } else {
+        }
+        else {
             $m = 0;
             $t = bcsub($t, 1);
         }
         $l = strlen($t);
         $n = (int) ($l / 9) + 1;
         $r = '';
-        while ($n) {
+        while($n) {
             $r .= substr('000000000' . mt_rand(0, 999999999), -9);
             --$n;
         }
         $r = substr($r, 0, $l);
         while (bccomp($r, $t) == 1) $r = substr($r, 1, $l) . mt_rand(0, 9);
-
         return bcadd($r, $m);
     }
     if (!function_exists('bcpowmod')) {
-        function bcpowmod($x, $y, $modulus, $scale = 0)
-        {
+        function bcpowmod($x, $y, $modulus, $scale = 0) {
             $t = '1';
             while (bccomp($y, '0')) {
                 if (bccomp(bcmod($y, '2'), '0')) {
@@ -200,17 +175,15 @@ if (extension_loaded('gmp')) {
                 $x = bcmod(bcmul($x, $x), $modulus);
                 $y = bcdiv($y, '2');
             }
-
             return $t;
         }
     }
-    function bigint_powmod($x, $y, $m)
-    {
+    function bigint_powmod($x, $y, $m) {
         return bcpowmod($x, $y, $m);
     }
-} else {
-    function bigint_mul($a, $b)
-    {
+}
+else {
+    function bigint_mul($a, $b) {
         $n = count($a);
         $m = count($b);
         $nm = $n + $m;
@@ -222,11 +195,9 @@ if (extension_loaded('gmp')) {
                 $c[$i + $j] &= 0x7fff;
             }
         }
-
         return $c;
     }
-    function bigint_div($a, $b, $is_mod = 0)
-    {
+    function bigint_div($a, $b, $is_mod = 0) {
         $n = count($a);
         $m = count($b);
         $c = array();
@@ -264,15 +235,12 @@ if (extension_loaded('gmp')) {
         if (!$is_mod) return $c;
         $b = array();
         for ($i = 0; $i < $m; $i++) $b[$i] = $a[$i];
-
         return bigint_div($b, array($d));
     }
-    function bigint_zerofill($str, $num)
-    {
+    function bigint_zerofill($str, $num) {
         return str_pad($str, $num, '0', STR_PAD_LEFT);
     }
-    function bigint_dec2num($dec)
-    {
+    function bigint_dec2num($dec) {
         $n = strlen($dec);
         $a = array(0);
         $n += 4 - ($n % 4);
@@ -280,7 +248,7 @@ if (extension_loaded('gmp')) {
         $n >>= 2;
         for ($i = 0; $i < $n; $i++) {
             $a = bigint_mul($a, array(10000));
-            $a[0] += (int) substr($dec, 4 * $i, 4);
+            $a[0] += (int)substr($dec, 4 * $i, 4);
             $m = count($a);
             $j = 0;
             $a[$m] = 0;
@@ -290,11 +258,9 @@ if (extension_loaded('gmp')) {
             }
             while ((count($a) > 1) && (!$a[count($a) - 1])) array_pop($a);
         }
-
         return $a;
     }
-    function bigint_num2dec($num)
-    {
+    function bigint_num2dec($num) {
         $n = count($num) << 1;
         $b = array();
         for ($i = 0; $i < $n; $i++) {
@@ -302,15 +268,13 @@ if (extension_loaded('gmp')) {
             $b[$i] = bigint_zerofill($tmp[0], 4);
             $num = bigint_div($num, array(10000));
         }
-        while ((count($b) > 1) && !(int) $b[count($b) - 1]) array_pop($b);
+        while ((count($b) > 1) && !(int)$b[count($b) - 1]) array_pop($b);
         $n = count($b) - 1;
-        $b[$n] = (int) $b[$n];
+        $b[$n] = (int)$b[$n];
         $b = join('', array_reverse($b));
-
         return $b;
     }
-    function bigint_str2num($str)
-    {
+    function bigint_str2num($str) {
         $n = strlen($str);
         $n += 15 - ($n % 15);
         $str = str_pad($str, $n, chr(0), STR_PAD_LEFT);
@@ -332,11 +296,9 @@ if (extension_loaded('gmp')) {
             array_pop($result);
             $i--;
         }
-
         return $result;
     }
-    function bigint_num2str($num)
-    {
+    function bigint_num2str($num) {
         ksort($num, SORT_NUMERIC);
         $n = count($num);
         $n += 8 - ($n % 8);
@@ -359,12 +321,10 @@ if (extension_loaded('gmp')) {
             $s .= chr((($num[$i++] & 0x01) << 7) | ($num[$i] >> 8));
             $s .= chr($num[$i] & 0xff);
         }
-
         return ltrim($s, chr(0));
     }
 
-    function bigint_random($n, $s)
-    {
+    function bigint_random($n, $s) {
         $lowBitMasks = array(0x0000, 0x0001, 0x0003, 0x0007,
                              0x000f, 0x001f, 0x003f, 0x007f,
                              0x00ff, 0x01ff, 0x03ff, 0x07ff,
@@ -380,14 +340,13 @@ if (extension_loaded('gmp')) {
             if ($s) {
                 $result[$q] |= 1 << ($r - 1);
             }
-        } elseif ($s) {
+        }
+        else if ($s) {
             $result[$q - 1] |= 0x4000;
         }
-
         return $result;
     }
-    function bigint_powmod($x, $y, $m)
-    {
+    function bigint_powmod($x, $y, $m) {
         $n = count($y);
         $p = array(1);
         for ($i = 0; $i < $n - 1; $i++) {
@@ -404,7 +363,7 @@ if (extension_loaded('gmp')) {
             $tmp >>= 1;
             $x = bigint_div(bigint_mul($x, $x), $m, 1);
         }
-
         return $p;
     }
 }
+?>

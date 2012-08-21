@@ -30,21 +30,20 @@ class TemplateThink
      * @access public
      +----------------------------------------------------------
      * @param string $templateFile 模板文件名
-     * @param array  $var          模板变量
-     * @param string $charset      模板输出字符集
-     * @param string $varPrefix    模板变量前缀
+     * @param array $var 模板变量
+     * @param string $charset 模板输出字符集
+     * @param string $varPrefix 模板变量前缀
      +----------------------------------------------------------
      * @return void
      +----------------------------------------------------------
      */
-    public function fetch($templateFile,$var,$charset)
-    {
-        if (!$this->checkCache($templateFile)) {
+    public function fetch($templateFile,$var,$charset) {
+        if(!$this->checkCache($templateFile)) {
             // 缓存无效 重新编译
             $tpl = Think::instance('ThinkTemplate');
             // 编译并加载模板文件
             $tpl->load($templateFile,$var,$charset);
-        } else {
+        }else{
             // 缓存有效 直接载入模板缓存
             // 模板阵列变量分解成为独立变量
             extract($var, EXTR_OVERWRITE);
@@ -60,7 +59,7 @@ class TemplateThink
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param string $tmplTemplateFile 模板文件名
+     * @param string $tmplTemplateFile  模板文件名
      +----------------------------------------------------------
      * @return boolen
      +----------------------------------------------------------
@@ -71,7 +70,6 @@ class TemplateThink
             return false;
         $tmplCacheFile = C('CACHE_PATH').md5($tmplTemplateFile).C('TMPL_CACHFILE_SUFFIX');
         if(!is_file($tmplCacheFile))
-
             return false;
         elseif (filemtime($tmplTemplateFile) > filemtime($tmplCacheFile)) {
             // 模板文件如果有更新则缓存需要更新
@@ -84,3 +82,4 @@ class TemplateThink
         return true;
     }
 }
+?>

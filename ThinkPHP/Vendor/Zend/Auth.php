@@ -19,6 +19,7 @@
  * @version    $Id: Auth.php 18039 2009-09-09 03:35:19Z ralph $
  */
 
+
 /**
  * @category   Zend
  * @package    Zend_Auth
@@ -97,12 +98,11 @@ class Zend_Auth
      * Sets the persistent storage handler
      *
      * @param  Zend_Auth_Storage_Interface $storage
-     * @return Zend_Auth                   Provides a fluent interface
+     * @return Zend_Auth Provides a fluent interface
      */
     public function setStorage(Zend_Auth_Storage_Interface $storage)
     {
         $this->_storage = $storage;
-
         return $this;
     }
 
@@ -119,11 +119,11 @@ class Zend_Auth
         /**
          * ZF-7546 - prevent multiple succesive calls from storing inconsistent results
          * Ensure storage has clean state
-         */
+         */ 
         if ($this->hasIdentity()) {
             $this->clearIdentity();
         }
-
+        
         if ($result->isValid()) {
             $this->getStorage()->write($result->getIdentity());
         }

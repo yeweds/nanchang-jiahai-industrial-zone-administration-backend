@@ -18,3 +18,4 @@ alias_import(array(
     'Session'             =>   THINK_PATH.'/Lib/Think/Util/Session.class.php',
     )
 );
+?>

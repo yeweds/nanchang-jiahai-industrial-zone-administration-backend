@@ -21,10 +21,10 @@
  * @version   $Id$
  +------------------------------------------------------------------------------
  */
-class DbPdo extends Db
-{
+class DbPdo extends Db{
+
     protected $PDOStatement = null;
-    private $table = '';
+    private   $table = '';
 
     /**
      +----------------------------------------------------------
@@ -35,14 +35,13 @@ class DbPdo extends Db
      * @param array $config 数据库配置数组
      +----------------------------------------------------------
      */
-    public function __construct($config='')
-    {
+    public function __construct($config=''){
         if ( !class_exists('PDO') ) {
             throw_exception(L('_NOT_SUPPERT_').':PDO');
         }
-        if (!empty($config)) {
+        if(!empty($config)) {
             $this->config   =   $config;
-            if (empty($this->config['params'])) {
+            if(empty($this->config['params'])) {
                 $this->config['params'] =   array();
             }
         }
@@ -58,22 +57,21 @@ class DbPdo extends Db
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-    public function connect($config='',$linkNum=0)
-    {
+    public function connect($config='',$linkNum=0) {
         if ( !isset($this->linkID[$linkNum]) ) {
             if(empty($config))  $config =   $this->config;
-            if ($this->pconnect) {
+            if($this->pconnect) {
                 $config['params'][PDO::ATTR_PERSISTENT] = true;
             }
             //$config['params'][PDO::ATTR_CASE] = C("DB_CASE_LOWER")?PDO::CASE_LOWER:PDO::CASE_UPPER;
-            try {
+            try{
                 $this->linkID[$linkNum] = new PDO( $config['dsn'], $config['username'], $config['password'],$config['params']);
-            } catch (PDOException $e) {
+            }catch (PDOException $e) {
                 throw_exception($e->getMessage());
             }
             // 因为PDO的连接切换可能导致数据库类型不同，因此重新获取下当前的数据库类型
             $this->dbType = $this->_getDsnType($config['dsn']);
-            if (in_array($this->dbType,array('MSSQL','ORACLE','IBASE','OCI'))) {
+            if(in_array($this->dbType,array('MSSQL','ORACLE','IBASE','OCI'))) {
                 // 由于PDO对于以上的数据库支持不够完美，所以屏蔽了 如果仍然希望使用PDO 可以注释下面一行代码
                 throw_exception('由于目前PDO暂时不能完美支持'.$this->dbType.' 请使用官方的'.$this->dbType.'驱动');
             }
@@ -83,7 +81,6 @@ class DbPdo extends Db
             // 注销数据库连接配置信息
             if(1 != C('DB_DEPLOY_TYPE')) unset($this->config);
         }
-
         return $this->linkID[$linkNum];
     }
 
@@ -94,8 +91,7 @@ class DbPdo extends Db
      * @access public
      +----------------------------------------------------------
      */
-    public function free()
-    {
+    public function free() {
         $this->PDOStatement = null;
     }
 
@@ -105,15 +101,14 @@ class DbPdo extends Db
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param string $str sql指令
+     * @param string $str  sql指令
      +----------------------------------------------------------
      * @return mixed
      +----------------------------------------------------------
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-    public function query($str)
-    {
+    public function query($str) {
         $this->initConnect(false);
         if ( !$this->_linkID ) return false;
         $this->queryStr = $str;
@@ -127,9 +122,8 @@ class DbPdo extends Db
             throw_exception($this->error());
         $result =   $this->PDOStatement->execute();
         $this->debug();
-        if (false === $result) {
+        if ( false === $result ) {
             $this->error();
-
             return false;
         } else {
             return $this->getAll();
@@ -142,23 +136,23 @@ class DbPdo extends Db
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param string $str sql指令
+     * @param string $str  sql指令
      +----------------------------------------------------------
      * @return integer
      +----------------------------------------------------------
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-    public function execute($str)
-    {
+    public function execute($str) {
         $this->initConnect(true);
         if ( !$this->_linkID ) return false;
         $this->queryStr = $str;
         $flag = false;
-        if ($this->dbType == 'OCI') {
-            if (preg_match("/^\s*(INSERT\s+INTO)\s+(\w+)\s+/i", $this->queryStr, $match)) {
+        if($this->dbType == 'OCI')
+        {
+            if(preg_match("/^\s*(INSERT\s+INTO)\s+(\w+)\s+/i", $this->queryStr, $match)) {
                 $this->table = C("DB_SEQUENCE_PREFIX").str_ireplace(C("DB_PREFIX"), "", $match[2]);
-                $flag = (boolean) $this->query("SELECT * FROM user_sequences WHERE sequence_name='" . strtoupper($this->table) . "'");
+                $flag = (boolean)$this->query("SELECT * FROM user_sequences WHERE sequence_name='" . strtoupper($this->table) . "'");
             }
         }//modify by wyfeng at 2009.08.28
         //释放前次的查询结果
@@ -167,21 +161,19 @@ class DbPdo extends Db
         // 记录开始执行时间
         G('queryStartTime');
         $this->PDOStatement	=	$this->_linkID->prepare($str);
-        if (false === $this->PDOStatement) {
+        if(false === $this->PDOStatement) {
             throw_exception($this->error());
         }
         $result	=	$this->PDOStatement->execute();
         $this->debug();
-        if (false === $result) {
+        if ( false === $result) {
             $this->error();
-
             return false;
         } else {
             $this->numRows = $result;
-            if ($flag || preg_match("/^\s*(INSERT\s+INTO|REPLACE\s+INTO)\s+/i", $str)) {
+            if($flag || preg_match("/^\s*(INSERT\s+INTO|REPLACE\s+INTO)\s+/i", $str)) {
                 $this->lastInsID = $this->getLastInsertId();
             }
-
             return $this->numRows;
         }
     }
@@ -195,8 +187,7 @@ class DbPdo extends Db
      * @return void
      +----------------------------------------------------------
      */
-    public function startTrans()
-    {
+    public function startTrans() {
         $this->initConnect(true);
         if ( !$this->_linkID ) return false;
         //数据rollback 支持
@@ -204,7 +195,6 @@ class DbPdo extends Db
             $this->_linkID->beginTransaction();
         }
         $this->transTimes++;
-
         return ;
     }
 
@@ -222,11 +212,10 @@ class DbPdo extends Db
         if ($this->transTimes > 0) {
             $result = $this->_linkID->commit();
             $this->transTimes = 0;
-            if (!$result) {
+            if(!$result){
                 throw_exception($this->error());
             }
         }
-
         return true;
     }
 
@@ -246,11 +235,10 @@ class DbPdo extends Db
         if ($this->transTimes > 0) {
             $result = $this->_linkID->rollback();
             $this->transTimes = 0;
-            if (!$result) {
+            if(!$result){
                 throw_exception($this->error());
             }
         }
-
         return true;
     }
 
@@ -265,12 +253,10 @@ class DbPdo extends Db
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-    private function getAll()
-    {
+    private function getAll() {
         //返回数据集
         $result =   $this->PDOStatement->fetchAll(constant('PDO::FETCH_ASSOC'));
         $this->numRows = count( $result );
-
         return $result;
     }
 
@@ -283,14 +269,13 @@ class DbPdo extends Db
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-    public function getFields($tableName)
-    {
+    public function getFields($tableName) {
         $this->initConnect(true);
-        if (C('DB_DESCRIBE_TABLE_SQL')) {
+        if(C('DB_DESCRIBE_TABLE_SQL')) {
             // 定义特殊的字段查询SQL
             $sql   = str_replace('%table%',$tableName,C('DB_DESCRIBE_TABLE_SQL'));
-        } else {
-            switch ($this->dbType) {
+        }else{
+            switch($this->dbType) {
                 case 'MSSQL':
                     $sql   = "SELECT   column_name as 'Name',   data_type as 'Type',   column_default as 'Default',   is_nullable as 'Null'
         FROM    information_schema.tables AS t
@@ -322,21 +307,20 @@ class DbPdo extends Db
         }
         $result = $this->query($sql);
         $info   =   array();
-        if ($result) {
+        if($result) {
             foreach ($result as $key => $val) {
                 $val['Name'] = isset($val['name'])?$val['name']:$val['Name'];
                 $name= strtolower(isset($val['Field'])?$val['Field']:$val['Name']);
                 $info[$name] = array(
                     'name'    => $name ,
                     'type'    => $val['Type'],
-                    'notnull' => (bool) (((isset($val['Null'])) && ($val['Null'] === '')) || ((isset($val['notnull'])) && ($val['notnull'] === ''))), // not null is empty, null is yes
+                    'notnull' => (bool)(((isset($val['Null'])) && ($val['Null'] === '')) || ((isset($val['notnull'])) && ($val['notnull'] === ''))), // not null is empty, null is yes
                     'default' => isset($val['Default'])? $val['Default'] :(isset($val['dflt_value'])?$val['dflt_value']:""),
                     'primary' => isset($val['Key'])?strtolower($val['Key']) == 'pri':(isset($val['pk'])?$val['pk']:false),
                     'autoinc' => isset($val['Extra'])?strtolower($val['Extra']) == 'auto_increment':(isset($val['Key'])?$val['Key']:false),
                 );
             }
         }
-
         return $info;
     }
 
@@ -349,13 +333,12 @@ class DbPdo extends Db
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-    public function getTables($dbName='')
-    {
-        if (C('DB_FETCH_TABLES_SQL')) {
+    public function getTables($dbName='') {
+        if(C('DB_FETCH_TABLES_SQL')) {
             // 定义特殊的表查询SQL
             $sql   = str_replace('%db%',$dnName,C('DB_FETCH_TABLES_SQL'));
-        } else {
-            switch ($this->dbType) {
+        }else{
+            switch($this->dbType) {
             case 'ORACLE':
             case 'OCI':
                 $sql   = 'SELECT table_name FROM user_tables';
@@ -377,9 +360,9 @@ class DbPdo extends Db
                  break;
             case 'MYSQL':
             default:
-                if (!empty($dbName)) {
+                if(!empty($dbName)) {
                    $sql    = 'SHOW TABLES FROM '.$dbName;
-                } else {
+                }else{
                    $sql    = 'SHOW TABLES ';
                 }
             }
@@ -389,7 +372,6 @@ class DbPdo extends Db
         foreach ($result as $key => $val) {
             $info[$key] = current($val);
         }
-
         return $info;
     }
 
@@ -404,17 +386,16 @@ class DbPdo extends Db
      * @return string
      +----------------------------------------------------------
      */
-    protected function parseLimit($limit)
-    {
+    protected function parseLimit($limit) {
         $limitStr    = '';
-        if (!empty($limit)) {
-            switch ($this->dbType) {
+        if(!empty($limit)) {
+            switch($this->dbType){
                 case 'PGSQL':
                 case 'SQLITE':
                     $limit  =   explode(',',$limit);
-                    if (count($limit)>1) {
+                    if(count($limit)>1) {
                         $limitStr .= ' LIMIT '.$limit[1].' OFFSET '.$limit[0].' ';
-                    } else {
+                    }else{
                         $limitStr .= ' LIMIT '.$limit[0].' ';
                     }
                     break;
@@ -431,7 +412,6 @@ class DbPdo extends Db
                     $limitStr .= ' LIMIT '.$limit.' ';
             }
         }
-
         return $limitStr;
     }
 
@@ -442,8 +422,7 @@ class DbPdo extends Db
      * @access public
      +----------------------------------------------------------
      */
-    public function close()
-    {
+    public function close() {
         $this->_linkID = null;
     }
 
@@ -457,18 +436,16 @@ class DbPdo extends Db
      * @return string
      +----------------------------------------------------------
      */
-    public function error()
-    {
-        if ($this->PDOStatement) {
+    public function error() {
+        if($this->PDOStatement) {
             $error = $this->PDOStatement->errorInfo();
             $this->error = $error[2];
-        } else {
+        }else{
             $this->error = '';
         }
-        if ($this->debug && '' != $this->queryStr) {
+        if($this->debug && '' != $this->queryStr){
             $this->error .= "\n [ SQL语句 ] : ".$this->queryStr;
         }
-
         return $this->error;
     }
 
@@ -478,14 +455,14 @@ class DbPdo extends Db
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param string $str SQL指令
+     * @param string $str  SQL指令
      +----------------------------------------------------------
      * @return string
      +----------------------------------------------------------
      */
-    public function escape_string($str)
-    {
-         switch ($this->dbType) {
+    public function escape_string($str) {
+         switch($this->dbType)
+         {
             case 'PGSQL':
             case 'MSSQL':
             case 'IBASE':
@@ -509,7 +486,8 @@ class DbPdo extends Db
      */
     public function getLastInsertId()
     {
-         switch ($this->dbType) {
+         switch($this->dbType)
+         {
             case 'PGSQL':
             case 'SQLITE':
             case 'MSSQL':
@@ -520,7 +498,6 @@ class DbPdo extends Db
             case 'OCI':
                 $sequenceName = $this->table;
                 $vo = $this->query("SELECT {$sequenceName}.currval currval FROM dual");
-
                 return $vo?$vo[0]["currval"]:0;
         }
     }
@@ -538,3 +515,4 @@ class DbPdo extends Db
         $this->close();
     }
 }//类定义结束
+?>

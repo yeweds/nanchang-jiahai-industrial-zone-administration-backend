@@ -10,6 +10,7 @@
 // +----------------------------------------------------------------------
 // $Id$
 
+
 /**
  +------------------------------------------------------------------------------
  * 日期时间操作类
@@ -180,7 +181,7 @@ class Date extends Think
      * 架构函数
      * 创建一个Date对象
      +----------------------------------------------------------
-     * @param mixed $date 日期
+     * @param mixed $date  日期
      +----------------------------------------------------------
      * @static
      * @access public
@@ -218,7 +219,7 @@ class Date extends Think
                 //把字符串转换成UNIX时间戳
                 $tmpdate = strtotime($date);
             }
-        } elseif (is_null($date)) {
+        } elseif (is_null($date))  {
             //为空默认取得当前时间戳
             $tmpdate = time();
 
@@ -257,6 +258,7 @@ class Date extends Think
 
     }
 
+
     /**
      +----------------------------------------------------------
      * 日期参数设置
@@ -264,7 +266,7 @@ class Date extends Think
      * @static
      * @access public
      +----------------------------------------------------------
-     * @param integer $date 日期时间戳
+     * @param integer $date  日期时间戳
      +----------------------------------------------------------
      * @return void
      +----------------------------------------------------------
@@ -301,15 +303,14 @@ class Date extends Think
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param string $format 格式化参数
+     * @param string $format  格式化参数
      +----------------------------------------------------------
      * @return string
      +----------------------------------------------------------
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-    public function format($format = "%Y-%m-%d %H:%M:%S")
-    {
+    public function format($format = "%Y-%m-%d %H:%M:%S") {
         return strftime($format, $this->date);
     }
 
@@ -327,10 +328,9 @@ class Date extends Think
      */
     public function isLeapYear($year='')
     {
-        if (empty($year)) {
+        if(empty($year)) {
             $year = $this->year;
         }
-
         return ((($year % 4) == 0) && (($year % 100) != 0) || (($year % 400) == 0));
     }
 
@@ -347,8 +347,8 @@ class Date extends Think
      * @static
      * @access public
      +----------------------------------------------------------
-     * @param mixed  $date  要比较的日期
-     * @param string $elaps 比较跨度
+     * @param mixed $date 要比较的日期
+     * @param string $elaps  比较跨度
      +----------------------------------------------------------
      * @return integer
      +----------------------------------------------------------
@@ -385,7 +385,6 @@ class Date extends Think
                 $__DAYSELAPS =  $__DAYSELAPS * $__SECONDS_IN_A_DAY__;
                 break;
         }
-
         return $__DAYSELAPS;
     }
 
@@ -396,7 +395,7 @@ class Date extends Think
      * @static
      * @access public
      +----------------------------------------------------------
-     * @param mixed $time      要比较的时间
+     * @param mixed $time 要比较的时间
      * @param mixed $precision 返回的精度
      +----------------------------------------------------------
      * @return string
@@ -404,29 +403,26 @@ class Date extends Think
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-    public function timeDiff( $time ,$precision=false)
-    {
-        if (!is_numeric($precision) && !is_bool($precision)) {
+    public function timeDiff( $time ,$precision=false) {
+        if(!is_numeric($precision) && !is_bool($precision)) {
             static $_diff = array('y'=>'年','M'=>'个月','d'=>'天','w'=>'周','s'=>'秒','h'=>'小时','m'=>'分钟');
-
             return ceil($this->dateDiff($time,$precision)).$_diff[$precision].'前';
         }
         $diff = abs($this->parse($time) - $this->date);
         static $chunks = array(array(31536000,'年'),array(2592000,'个月'),array(604800,'周'),array(86400,'天'),array(3600 ,'小时'),array(60,'分钟'),array(1,'秒'));
         $count =0;
         $since = '';
-        for ($i=0;$i<count($chunks);$i++) {
-            if ($diff>=$chunks[$i][0]) {
+        for($i=0;$i<count($chunks);$i++) {
+            if($diff>=$chunks[$i][0]) {
                 $num   =  floor($diff/$chunks[$i][0]);
                 $since .= sprintf('%d'.$chunks[$i][1],$num);
-                $diff =  (int) ($diff-$chunks[$i][0]*$num);
+                $diff =  (int)($diff-$chunks[$i][0]*$num);
                 $count++;
-                if (!$precision || $count>=$precision) {
+                if(!$precision || $count>=$precision) {
                     break;
                 }
             }
        }
-
         return $since.'前';
     }
 
@@ -442,8 +438,7 @@ class Date extends Think
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-    public function firstDayOfMonth()
-    {
+    public function firstDayOfMonth() {
         return (new Date(strftime("%Y-%m-%d", mktime(0, 0, 0,
                                $this->month,
                                1,
@@ -462,8 +457,7 @@ class Date extends Think
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-    public function firstDayOfYear()
-    {
+    public function firstDayOfYear() {
         return (new Date(strftime("%Y-%m-%d", mktime(0, 0, 0,
                                1,
                                1,
@@ -482,8 +476,7 @@ class Date extends Think
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-    public function lastDayOfMonth()
-    {
+    public function lastDayOfMonth() {
         return (new Date(strftime("%Y-%m-%d", mktime(0, 0, 0,
                                $this->month + 1,
                                0,
@@ -502,8 +495,7 @@ class Date extends Think
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-    public function lastDayOfYear()
-    {
+    public function lastDayOfYear() {
         return (new Date(strftime("%Y-%m-%d", mktime(0, 0, 0,
                                1,
                                0,
@@ -525,7 +517,6 @@ class Date extends Think
     public function maxDayOfMonth()
     {
         $result = $this->dateDiff(strtotime($this->dateAdd(1,'m')),'d');
-
         return $result;
     }
 
@@ -546,8 +537,8 @@ class Date extends Think
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param integer $number   间隔数目
-     * @param string  $interval 比较类型
+     * @param integer $number 间隔数目
+     * @param string $interval  比较类型
      +----------------------------------------------------------
      * @return string
      +----------------------------------------------------------
@@ -563,7 +554,8 @@ class Date extends Think
         $day =  $this->day;
         $year =  $this->year;
 
-        switch ($interval) {
+        switch ($interval)
+        {
             case "yyyy":
                 //---Add $number to year
                 $year += $number;
@@ -636,19 +628,22 @@ class Date extends Think
         $number = intval($number);
         $array  = array('一','二','三','四','五','六','七','八','九','十');
         $str = '';
-        if ($number  ==0) { $str .= "十" ;}
-        if ($number  <  10) {
+        if($number  ==0)  { $str .= "十" ;}
+        if($number  <  10){
            $str .= $array[$number-1] ;
-        } elseif ($number  <  20) {
+        }
+        elseif($number  <  20  ){
            $str .= "十".$array[$number-11];
-        } elseif ($number  <  30) {
+        }
+        elseif($number  <  30  ){
            $str .= "二十".$array[$number-21];
-        } else {
+        }
+        else{
            $str .= "三十".$array[$number-31];
         }
-
         return $str;
     }
+
 
     /**
      +----------------------------------------------------------
@@ -659,21 +654,19 @@ class Date extends Think
      * @access public
      +----------------------------------------------------------
      * @param integer $yearStr 年份数字
-     * @param boolean $flag    是否显示公元
+     * @param boolean $flag 是否显示公元
      +----------------------------------------------------------
      * @return string
      +----------------------------------------------------------
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-    public function  yearToCh( $yearStr ,$flag=false )
-    {
+    public function  yearToCh( $yearStr ,$flag=false ){
         $array = array('零','一','二','三','四','五','六','七','八','九');
         $str = $flag? '公元' : '';
-        for ($i=0;$i<4;$i++) {
+        for($i=0;$i<4;$i++){
             $str .= $array[substr($yearStr,$i,1)];
         }
-
         return $str;
     }
 
@@ -686,7 +679,7 @@ class Date extends Think
      * @static
      * @access public
      +----------------------------------------------------------
-     * @param string $type 获取信息类型
+     * @param string $type  获取信息类型
      +----------------------------------------------------------
      * @return string
      +----------------------------------------------------------
@@ -700,14 +693,15 @@ class Date extends Think
         $y      =   $this->year;
         $d      =   $this->day;
 
-        switch ($type) {
+        switch ($type)
+        {
         case 'XZ'://星座
             $XZDict = array('摩羯','宝瓶','双鱼','白羊','金牛','双子','巨蟹','狮子','处女','天秤','天蝎','射手');
             $Zone   = array(1222,122,222,321,421,522,622,722,822,922,1022,1122,1222);
             if((100*$m+$d)>=$Zone[0]||(100*$m+$d)<$Zone[1])
                 $i=0;
             else
-                for ($i=1;$i<12;$i++) {
+                for($i=1;$i<12;$i++){
                 if((100*$m+$d)>=$Zone[$i]&&(100*$m+$d)<$Zone[$i+1])
                   break;
                 }
@@ -729,12 +723,13 @@ class Date extends Think
             break;
 
         }
-
         return $result;
     }
+
 
     public function __toString()
     {
         return $this->format();
     }
 }//类定义结束
+?>

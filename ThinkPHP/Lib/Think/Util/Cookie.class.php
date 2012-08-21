@@ -24,30 +24,26 @@
 class Cookie extends Think
 {
     // 判断Cookie是否存在
-    public static function is_set($name)
-    {
+    static function is_set($name) {
         return isset($_COOKIE[C('COOKIE_PREFIX').$name]);
     }
 
     // 获取某个Cookie值
-    public static function get($name)
-    {
+    static function get($name) {
         $value   = $_COOKIE[C('COOKIE_PREFIX').$name];
         $value   =  unserialize(base64_decode($value));
-
         return $value;
     }
 
     // 设置某个Cookie值
-    public static function set($name,$value,$expire='',$path='',$domain='')
-    {
-        if ($expire=='') {
+    static function set($name,$value,$expire='',$path='',$domain='') {
+        if($expire=='') {
             $expire =   C('COOKIE_EXPIRE');
         }
-        if (empty($path)) {
+        if(empty($path)) {
             $path = C('COOKIE_PATH');
         }
-        if (empty($domain)) {
+        if(empty($domain)) {
             $domain =   C('COOKIE_DOMAIN');
         }
         $expire =   !empty($expire)?    time()+$expire   :  0;
@@ -57,15 +53,14 @@ class Cookie extends Think
     }
 
     // 删除某个Cookie值
-    public static function delete($name)
-    {
+    static function delete($name) {
         Cookie::set($name,'',-3600);
         unset($_COOKIE[C('COOKIE_PREFIX').$name]);
     }
 
     // 清空Cookie值
-    public static function clear()
-    {
+    static function clear() {
         unset($_COOKIE);
     }
 }
+?>

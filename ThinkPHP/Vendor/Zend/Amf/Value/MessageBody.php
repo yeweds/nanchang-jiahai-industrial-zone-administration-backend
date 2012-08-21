@@ -54,7 +54,7 @@ class Zend_Amf_Value_MessageBody
      * contains the connection state information. Passing/specifying this
      * provides a convenient mechanism for the client/server to share access
      * to an object that is managing the state of the shared connection.
-     *
+     * 
      * Since the server will use this field in the event of an error,
      * this field is required even if a successful server request would
      * not be expected to return a value to the client.
@@ -80,10 +80,10 @@ class Zend_Amf_Value_MessageBody
 
     /**
      * Constructor
-     *
-     * @param  string $targetUri
-     * @param  string $responseUri
-     * @param  string $data
+     * 
+     * @param  string $targetUri 
+     * @param  string $responseUri 
+     * @param  string $data 
      * @return void
      */
     public function __construct($targetUri, $responseUri, $data)
@@ -95,7 +95,7 @@ class Zend_Amf_Value_MessageBody
 
     /**
      * Retrieve target Uri
-     *
+     * 
      * @return string
      */
     public function getTargetUri()
@@ -105,8 +105,8 @@ class Zend_Amf_Value_MessageBody
 
     /**
      * Set target Uri
-     *
-     * @param  string                     $targetUri
+     * 
+     * @param  string $targetUri 
      * @return Zend_Amf_Value_MessageBody
      */
     public function setTargetUri($targetUri)
@@ -115,13 +115,12 @@ class Zend_Amf_Value_MessageBody
             $targetUri = '';
         }
         $this->_targetUri = (string) $targetUri;
-
         return $this;
     }
 
     /**
      * Get target Uri
-     *
+     * 
      * @return string
      */
     public function getResponseUri()
@@ -131,8 +130,8 @@ class Zend_Amf_Value_MessageBody
 
     /**
      * Set response Uri
-     *
-     * @param  string                     $responseUri
+     * 
+     * @param  string $responseUri 
      * @return Zend_Amf_Value_MessageBody
      */
     public function setResponseUri($responseUri)
@@ -141,13 +140,12 @@ class Zend_Amf_Value_MessageBody
             $responseUri = '';
         }
         $this->_responseUri = $responseUri;
-
         return $this;
     }
 
     /**
      * Retrieve response data
-     *
+     * 
      * @return string
      */
     public function getData()
@@ -157,21 +155,20 @@ class Zend_Amf_Value_MessageBody
 
     /**
      * Set response data
-     *
-     * @param  mixed                      $data
+     * 
+     * @param  mixed $data 
      * @return Zend_Amf_Value_MessageBody
      */
     public function setData($data)
     {
         $this->_data = $data;
-
         return $this;
     }
 
     /**
      * Set reply method
-     *
-     * @param  string                     $methodName
+     * 
+     * @param  string $methodName 
      * @return Zend_Amf_Value_MessageBody
      */
     public function setReplyMethod($methodName)
@@ -180,7 +177,6 @@ class Zend_Amf_Value_MessageBody
             $this->_targetUri = rtrim($this->_targetUri, '/') . '/';
         }
         $this->_targetUri = $this->_targetUri . $methodName;
-
         return $this;
     }
 }

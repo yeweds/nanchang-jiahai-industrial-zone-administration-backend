@@ -29,12 +29,10 @@
  * LastModified: Apr 12, 2010
  * This library is free.  You can redistribute it and/or modify it under GPL.
  */
-class dhparams
-{
-    public $len;
-    public $dhParams;
-    public function getNearest($n, $a)
-    {
+class DHParams {
+    var $len;
+    var $dhParams;
+    function getNearest($n, $a) {
         $j = 0;
         $m = abs($a[0] - $n);
         for ($i = 1; $i < count($a); $i++) {
@@ -44,38 +42,36 @@ class dhparams
                 $j = $i;
             }
         }
-
         return $a[$j];
     }
-    public function DHParams($len = 128)
-    {
+    function DHParams($len = 128) {
         if (extension_loaded('gmp')) {
             $a = array(96, 128, 160, 192, 256, 512, 768, 1024, 1536, 2048, 3072, 4096);
-        } elseif (extension_loaded('big_int')) {
+        }
+        else if (extension_loaded('big_int')) {
             $a = array(96, 128, 160, 192, 256, 512, 768, 1024, 1536);
-        } elseif (extension_loaded('bcmath')) {
+        }
+        else if (extension_loaded('bcmath')) {
             $a = array(96, 128, 160, 192, 256, 512);
-        } else {
+        }
+        else {
             $a = array(96, 128, 160);
         }
         $this->len = $this->getNearest($len, $a);
         $dhParams = unserialize(file_get_contents("dhparams/{$this->len}.dhp", true));
         $this->dhParams = $dhParams[mt_rand(0, count($dhParams) - 1)];
     }
-    public function getL()
-    {
+    function getL() {
         return $this->len;
     }
-    public function getP()
-    {
+    function getP() {
         return $this->dhParams['p'];
     }
-    public function getG()
-    {
+    function getG() {
         return $this->dhParams['g'];
     }
-    public function getDHParams()
-    {
+    function getDHParams() {
         return $this->dhParams;
     }
 }
+?>

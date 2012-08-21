@@ -38,7 +38,7 @@ class Xxtea
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-    public function encrypt($str, $key)
+    function encrypt($str, $key)
     {
         if ($str == "") {
             return "";
@@ -64,7 +64,6 @@ class Xxtea
             $mx = self::int32((($z >> 5 & 0x07ffffff) ^ $y << 2) + (($y >> 3 & 0x1fffffff) ^ $z << 4)) ^ self::int32(($sum ^ $y) + ($k[$p & 3 ^ $e] ^ $z));
             $z = $v[$n] = self::int32($v[$n] + $mx);
         }
-
         return self::long2str($v, false);
     }
 
@@ -82,7 +81,7 @@ class Xxtea
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-    public function decrypt($str, $key)
+    function decrypt($str, $key)
     {
         if ($str == "") {
             return "";
@@ -108,7 +107,6 @@ class Xxtea
             $y = $v[0] = self::int32($v[0] - $mx);
             $sum = self::int32($sum - $delta);
         }
-
         return self::long2str($v, true);
     }
 
@@ -127,37 +125,35 @@ class Xxtea
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-    public function long2str($v, $w)
-    {
+    function long2str($v, $w) {
         $len = count($v);
         $s = array();
-        for ($i = 0; $i < $len; $i++) {
+        for ($i = 0; $i < $len; $i++)
+        {
             $s[$i] = pack("V", $v[$i]);
         }
         if ($w) {
             return substr(join('', $s), 0, $v[$len - 1]);
-        } else {
+        }
+        else {
             return join('', $s);
         }
     }
 
-    public function str2long($s, $w)
-    {
+    function str2long($s, $w) {
         $v = unpack("V*", $s. str_repeat("\0", (4 - strlen($s) % 4) & 3));
         $v = array_values($v);
         if ($w) {
             $v[count($v)] = strlen($s);
         }
-
         return $v;
     }
 
-    public function int32($n)
-    {
+    function int32($n) {
         while ($n >= 2147483648) $n -= 4294967296;
         while ($n <= -2147483649) $n += 4294967296;
-
-        return (int) $n;
+        return (int)$n;
     }
 
 }
+?>

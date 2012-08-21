@@ -24,6 +24,7 @@
 class CacheApachenote extends Cache
 {//类定义开始
 
+
     /**
      +----------------------------------------------------------
      * 架构函数
@@ -33,7 +34,7 @@ class CacheApachenote extends Cache
      */
     public function __construct($options='')
     {
-        if (empty($options)) {
+        if(empty($options)){
             $options = array(
                 'host' => '127.0.0.1',
                 'port' => 1042,
@@ -61,6 +62,7 @@ class CacheApachenote extends Cache
         return $this->connected;
     }
 
+
     /**
      +----------------------------------------------------------
      * 读取缓存
@@ -83,7 +85,6 @@ class CacheApachenote extends Cache
          }
         N('cache_read',1);
          $this->close();
-
          return $data === '' ? '' : unserialize($data);
      }
 
@@ -93,8 +94,8 @@ class CacheApachenote extends Cache
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param string $name  缓存变量名
-     * @param mixed  $value 存储数据
+     * @param string $name 缓存变量名
+     * @param mixed $value  存储数据
      +----------------------------------------------------------
      * @return boolen
      +----------------------------------------------------------
@@ -102,7 +103,7 @@ class CacheApachenote extends Cache
     public function set($name, $value)
     {
         N('cache_write',1);
-        $this->open();
+		$this->open();
         $value = serialize($value);
         $s = 'S' . pack('NN', strlen($name), strlen($value)) . $name . $value;
 
@@ -110,7 +111,6 @@ class CacheApachenote extends Cache
         $ret = fgets($this->handler);
         $this->close();
         $this->setTime[$name] = time();
-
         return $ret === "OK\n";
     }
 
@@ -165,3 +165,4 @@ class CacheApachenote extends Cache
      }
 
 }//类定义结束
+?>

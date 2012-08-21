@@ -21,3 +21,4 @@ return array(
     THINK_PATH.'/Mode/Amf/alias.php', // 加载别名
 
 );
+?>

@@ -70,17 +70,17 @@ class Zend_Amf_Parse_Amf3_Deserializer extends Zend_Amf_Parse_Deserializer
      * for deserializing those marker types. markers are the data type of
      * the following value.
      *
-     * @param  integer            $typeMarker
-     * @return mixed              Whatever the corresponding PHP data type is
+     * @param  integer $typeMarker
+     * @return mixed Whatever the corresponding PHP data type is
      * @throws Zend_Amf_Exception for unidentified marker type
      */
     public function readTypeMarker($typeMarker = null)
     {
-        if (null === $typeMarker) {
+        if(null === $typeMarker) {
             $typeMarker = $this->_stream->readByte();
         }
 
-        switch ($typeMarker) {
+        switch($typeMarker) {
             case Zend_Amf_Constants::AMF3_UNDEFINED:
                  return null;
             case Zend_Amf_Constants::AMF3_NULL:
@@ -156,7 +156,6 @@ class Zend_Amf_Parse_Amf3_Deserializer extends Zend_Amf_Parse_Deserializer
                 $result |= ~0xFFFFFFF;
             }
         }
-
         return $result;
     }
 
@@ -197,7 +196,6 @@ class Zend_Amf_Parse_Amf3_Deserializer extends Zend_Amf_Parse_Deserializer
         } else {
             $string = "";
         }
-
         return $string;
     }
 
@@ -221,7 +219,6 @@ class Zend_Amf_Parse_Amf3_Deserializer extends Zend_Amf_Parse_Deserializer
                 require_once 'Zend/Amf/Exception.php';
                 throw new Zend_Amf_Exception('Undefined date reference: ' . $dateReference);
             }
-
             return $this->_referenceObjects[$dateReference];
         }
 
@@ -230,7 +227,6 @@ class Zend_Amf_Parse_Amf3_Deserializer extends Zend_Amf_Parse_Deserializer
         require_once 'Zend/Date.php';
         $dateTime  = new Zend_Date((int) $timestamp);
         $this->_referenceObjects[] = $dateTime;
-
         return $dateTime;
     }
 
@@ -244,13 +240,12 @@ class Zend_Amf_Parse_Amf3_Deserializer extends Zend_Amf_Parse_Deserializer
     public function readArray()
     {
         $arrayReference = $this->readInteger();
-        if (($arrayReference & 0x01)==0) {
+        if (($arrayReference & 0x01)==0){
             $arrayReference = $arrayReference >> 1;
             if ($arrayReference>=count($this->_referenceObjects)) {
                 require_once 'Zend/Amf/Exception.php';
                 throw new Zend_Amf_Exception('Unknow array reference: ' . $arrayReference);
             }
-
             return $this->_referenceObjects[$arrayReference];
         }
 
@@ -373,7 +368,7 @@ class Zend_Amf_Parse_Amf3_Deserializer extends Zend_Amf_Parse_Deserializer
                     // basic property list object.
                     if (!$storedClass) {
                         $count = $traitsInfo; // Number of properties in the list
-                        for ($i=0; $i< $count; $i++) {
+                        for($i=0; $i< $count; $i++) {
                             $propertyNames[] = $this->readString();
                         }
                         // Add a refrence to the class.
@@ -390,22 +385,23 @@ class Zend_Amf_Parse_Amf3_Deserializer extends Zend_Amf_Parse_Deserializer
             }
 
             // Add properties back to the return object.
-            foreach ($properties as $key=>$value) {
-                if ($key) {
+            foreach($properties as $key=>$value) {
+                if($key) {
                     $returnObject->$key = $value;
                 }
             }
-
+			
+		  
         }
-
-       if ($returnObject instanceof Zend_Amf_Value_Messaging_ArrayCollection) {
-        if (isset($returnObject->externalizedData)) {
-            $returnObject = $returnObject->externalizedData;
-        } else {
-            $returnObject = get_object_vars($returnObject);
-        }
-       }
-
+		
+	   if($returnObject instanceof Zend_Amf_Value_Messaging_ArrayCollection) {
+		if(isset($returnObject->externalizedData)) {
+			$returnObject = $returnObject->externalizedData;
+		} else {
+			$returnObject = get_object_vars($returnObject);
+		}
+	   }
+	   
         return $returnObject;
     }
 
@@ -420,7 +416,6 @@ class Zend_Amf_Parse_Amf3_Deserializer extends Zend_Amf_Parse_Deserializer
         $xmlReference = $this->readInteger();
         $length = $xmlReference >> 1;
         $string = $this->_stream->readBytes($length);
-
         return simplexml_load_string($string);
     }
 }

@@ -33,9 +33,9 @@ class CacheFile extends Cache
      */
     public function __construct($options='')
     {
-        if (!empty($options['temp'])) {
+        if(!empty($options['temp'])){
             $this->options['temp'] = $options['temp'];
-        } else {
+        }else {
             $this->options['temp'] = C('DATA_CACHE_PATH');
         }
         $this->expire = isset($options['expire'])?$options['expire']:C('DATA_CACHE_TIME');
@@ -97,20 +97,19 @@ class CacheFile extends Cache
     private function filename($name)
     {
         $name	=	md5($name);
-        if (C('DATA_CACHE_SUBDIR')) {
+        if(C('DATA_CACHE_SUBDIR')) {
             // 使用子目录
             $dir   ='';
-            for ($i=0;$i<C('DATA_PATH_LEVEL');$i++) {
+            for($i=0;$i<C('DATA_PATH_LEVEL');$i++) {
                 $dir	.=	$name{$i}.'/';
             }
-            if (!is_dir($this->options['temp'].$dir)) {
+            if(!is_dir($this->options['temp'].$dir)) {
                 mk_dir($this->options['temp'].$dir);
             }
             $filename	=	$dir.$this->prefix.$name.'.php';
-        } else {
+        }else{
             $filename	=	$this->prefix.$name.'.php';
         }
-
         return $this->options['temp'].$filename;
     }
 
@@ -133,32 +132,30 @@ class CacheFile extends Cache
         }
         N('cache_read',1);
         $content    =   file_get_contents($filename);
-        if (false !== $content) {
-            $expire  =  (int) substr($content,8, 12);
-            if ($expire != -1 && time() > filemtime($filename) + $expire) {
+        if( false !== $content) {
+            $expire  =  (int)substr($content,8, 12);
+            if($expire != -1 && time() > filemtime($filename) + $expire) {
                 //缓存过期删除缓存文件
                 unlink($filename);
-
                 return false;
             }
-            if (C('DATA_CACHE_CHECK')) {//开启数据校验
+            if(C('DATA_CACHE_CHECK')) {//开启数据校验
                 $check  =  substr($content,20, 32);
                 $content   =  substr($content,52, -3);
-                if ($check != md5($content)) {//校验错误
-
+                if($check != md5($content)) {//校验错误
                     return false;
                 }
-            } else {
-                $content   =  substr($content,20, -3);
+            }else {
+            	$content   =  substr($content,20, -3);
             }
-            if (C('DATA_CACHE_COMPRESS') && function_exists('gzcompress')) {
+            if(C('DATA_CACHE_COMPRESS') && function_exists('gzcompress')) {
                 //启用数据压缩
                 $content   =   gzuncompress($content);
             }
             $content    =   unserialize($content);
-
             return $content;
-        } else {
+        }
+        else {
             return false;
         }
     }
@@ -169,9 +166,9 @@ class CacheFile extends Cache
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param string $name   缓存变量名
-     * @param mixed  $value  存储数据
-     * @param int    $expire 有效时间 -1 为永久
+     * @param string $name 缓存变量名
+     * @param mixed $value  存储数据
+     * @param int $expire  有效时间 -1 为永久
      +----------------------------------------------------------
      * @return boolen
      +----------------------------------------------------------
@@ -179,27 +176,26 @@ class CacheFile extends Cache
     public function set($name,$value,$expire='')
     {
         N('cache_write',1);
-        if ('' === $expire) {
+        if('' === $expire) {
             $expire =  $this->expire;
         }
         $filename   =   $this->filename($name);
         $data   =   serialize($value);
-        if ( C('DATA_CACHE_COMPRESS') && function_exists('gzcompress')) {
+        if( C('DATA_CACHE_COMPRESS') && function_exists('gzcompress')) {
             //数据压缩
             $data   =   gzcompress($data,3);
         }
-        if (C('DATA_CACHE_CHECK')) {//开启数据校验
+        if(C('DATA_CACHE_CHECK')) {//开启数据校验
             $check  =  md5($data);
-        } else {
+        }else {
             $check  =  '';
         }
         $data    = "<?php\n//".sprintf('%012d',$expire).$check.$data."\n?>";
         $result  =   file_put_contents($filename,$data);
-        if ($result) {
+        if($result) {
             clearstatcache();
-
             return true;
-        } else {
+        }else {
             return false;
         }
     }
@@ -234,16 +230,18 @@ class CacheFile extends Cache
     public function clear()
     {
         $path   =  $this->options['temp'];
-        if ( $dir = opendir( $path ) ) {
-            while ( $file = readdir( $dir ) ) {
+        if ( $dir = opendir( $path ) )
+        {
+            while ( $file = readdir( $dir ) )
+            {
                 $check = is_dir( $file );
                 if ( !$check )
                     unlink( $path . $file );
             }
             closedir( $dir );
-
             return true;
         }
     }
 
 }//类定义结束
+?>

@@ -24,57 +24,55 @@
 if (!function_exists('json_encode')) {
      function format_json_value(&$value)
     {
-        if (is_bool($value)) {
+        if(is_bool($value)) {
             $value = $value?'true':'false';
-        } elseif (is_int($value)) {
+        }elseif(is_int($value)) {
             $value = intval($value);
-        } elseif (is_float($value)) {
+        }elseif(is_float($value)) {
             $value = floatval($value);
-        } elseif (defined($value) && $value === null) {
+        }elseif(defined($value) && $value === null) {
             $value = strval(constant($value));
-        } elseif (is_string($value)) {
+        }elseif(is_string($value)) {
             $value = '"'.addslashes($value).'"';
         }
-
         return $value;
     }
 
-    public function json_encode($data)
+    function json_encode($data)
     {
-        if (is_object($data)) {
+        if(is_object($data)) {
             //对象转换成数组
             $data = get_object_vars($data);
-        } elseif (!is_array($data)) {
+        }else if(!is_array($data)) {
             // 普通格式直接输出
             return format_json_value($data);
         }
         // 判断是否关联数组
-        if (empty($data) || is_numeric(implode('',array_keys($data)))) {
+        if(empty($data) || is_numeric(implode('',array_keys($data)))) {
             $assoc  =  false;
-        } else {
+        }else {
             $assoc  =  true;
         }
         // 组装 Json字符串
         $json = $assoc ? '{' : '[' ;
-        foreach ($data as $key=>$val) {
-            if (!is_null($val)) {
-                if ($assoc) {
+        foreach($data as $key=>$val) {
+            if(!is_null($val)) {
+                if($assoc) {
                     $json .= "\"$key\":".json_encode($val).",";
-                } else {
+                }else {
                     $json .= json_encode($val).",";
                 }
             }
         }
-        if (strlen($json)>1) {// 加上判断 防止空数组
+        if(strlen($json)>1) {// 加上判断 防止空数组
             $json  = substr($json,0,-1);
         }
         $json .= $assoc ? '}' : ']' ;
-
         return $json;
     }
 }
 if (!function_exists('json_decode')) {
-    public function json_decode($json,$assoc=false)
+    function json_decode($json,$assoc=false)
     {
         // 目前不支持二维数组或对象
         $begin  =  substr($json,0,1) ;
@@ -83,23 +81,22 @@ if (!function_exists('json_decode')) {
             return $json;
         $parse = substr($json,1,-1);
         $data  = explode(',',$parse);
-        if ($flag = $begin =='{') {
+        if($flag = $begin =='{' ) {
             // 转换成PHP对象
             $result   = new stdClass();
-            foreach ($data as $val) {
+            foreach($data as $val) {
                 $item    = explode(':',$val);
                 $key =  substr($item[0],1,-1);
                 $result->$key = json_decode($item[1],$assoc);
             }
             if($assoc)
                 $result   = get_object_vars($result);
-        } else {
+        }else {
             // 转换成PHP数组
             $result   = array();
             foreach($data as $val)
                 $result[]  =  json_decode($val,$assoc);
         }
-
         return $result;
     }
 }
@@ -108,17 +105,16 @@ if (!function_exists('property_exists')) {
      +----------------------------------------------------------
      * 判断对象的属性是否存在 PHP5.1.0以上已经定义
      +----------------------------------------------------------
-     * @param object $class    对象实例
+     * @param object $class 对象实例
      * @param string $property 属性名称
      +----------------------------------------------------------
      * @return boolen
      +----------------------------------------------------------
      */
-    public function property_exists($class, $property)
-    {
+    function property_exists($class, $property) {
         if (is_object($class))
          $class = get_class($class);
-
         return array_key_exists($property, get_class_vars($class));
     }
 }
+?>

@@ -20,3 +20,4 @@ return array(
     THINK_PATH.'/Mode/Lite/Action.class.php',// 控制器类
     THINK_PATH.'/Mode/Lite/alias.php', // 加载别名
 );
+?>

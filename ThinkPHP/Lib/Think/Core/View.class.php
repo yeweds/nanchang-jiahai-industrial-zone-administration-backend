@@ -38,14 +38,13 @@ class View extends Think
      * @param mixed $value
      +----------------------------------------------------------
      */
-    public function assign($name,$value='')
-    {
-        if (is_array($name)) {
+    public function assign($name,$value=''){
+        if(is_array($name)) {
             $this->tVar   =  array_merge($this->tVar,$name);
-        } elseif (is_object($name)) {
+        }elseif(is_object($name)){
             foreach($name as $key =>$val)
                 $this->tVar[$key] = $val;
-        } else {
+        }else {
             $this->tVar[$name] = $value;
         }
     }
@@ -60,8 +59,7 @@ class View extends Think
      * @param mixed $value
      +----------------------------------------------------------
      */
-    public function trace($title,$value='')
-    {
+    public function trace($title,$value='') {
         if(is_array($title))
             $this->trace   =  array_merge($this->trace,$title);
         else
@@ -79,25 +77,21 @@ class View extends Think
      * @return mixed
      +----------------------------------------------------------
      */
-    public function get($name)
-    {
+    public function get($name){
         if(isset($this->tVar[$name]))
-
             return $this->tVar[$name];
         else
             return false;
     }
 
     /* 取得所有模板变量 */
-    public function getAllVar()
-    {
+    public function getAllVar(){
         return $this->tVar;
     }
 
     // 调试页面所有的模板变量
-    public function traceVar()
-    {
-        foreach ($this->tVar as $name=>$val) {
+    public function traceVar(){
+        foreach ($this->tVar as $name=>$val){
             dump($val,1,'['.$name.']<br/>');
         }
     }
@@ -109,8 +103,8 @@ class View extends Think
      * @access public
      +----------------------------------------------------------
      * @param string $templateFile 模板文件名 留空为自动获取
-     * @param string $charset      模板输出字符集
-     * @param string $contentType  输出类型
+     * @param string $charset 模板输出字符集
+     * @param string $contentType 输出类型
      +----------------------------------------------------------
      * @return mixed
      +----------------------------------------------------------
@@ -126,43 +120,42 @@ class View extends Think
      +----------------------------------------------------------
      * @access protected
      +----------------------------------------------------------
-     * @param string $charset     输出编码
+     * @param string $charset 输出编码
      * @param string $contentType 输出类型
-     * @param string $display     是否直接显示
+     * @param string $display 是否直接显示
      +----------------------------------------------------------
      * @return mixed
      +----------------------------------------------------------
      */
     protected function layout($content,$charset='',$contentType='')
     {
-        if (false !== strpos($content,'<!-- layout')) {
+        if(false !== strpos($content,'<!-- layout')) {
             // 查找布局包含的页面
             $find = preg_match_all('/<!-- layout::(.+?)::(.+?) -->/is',$content,$matches);
-            if ($find) {
+            if($find) {
                 for ($i=0; $i< $find; $i++) {
                     // 读取相关的页面模板替换布局单元
                     if(0===strpos($matches[1][$i],'$'))
                         // 动态布局
                         $matches[1][$i]  =  $this->get(substr($matches[1][$i],1));
-                    if (0 != $matches[2][$i]) {
+                    if(0 != $matches[2][$i] ) {
                         // 设置了布局缓存
                         // 检查布局缓存是否有效
                         $guid =  md5($matches[1][$i]);
                         $cache  =  S($guid);
-                        if ($cache) {
+                        if($cache) {
                             $layoutContent = $cache;
-                        } else {
+                        }else{
                             $layoutContent = $this->fetch($matches[1][$i],$charset,$contentType);
                             S($guid,$layoutContent,$matches[2][$i]);
                         }
-                    } else {
+                    }else{
                         $layoutContent = $this->fetch($matches[1][$i],$charset,$contentType);
                     }
                     $content    =   str_replace($matches[0][$i],$layoutContent,$content);
                 }
             }
         }
-
         return $content;
     }
 
@@ -173,9 +166,9 @@ class View extends Think
      * @access public
      +----------------------------------------------------------
      * @param string $templateFile 模板文件名 留空为自动获取
-     * @param string $charset      模板输出字符集
-     * @param string $contentType  输出类型
-     * @param string $display      是否直接显示
+     * @param string $charset 模板输出字符集
+     * @param string $contentType 输出类型
+     * @param string $display 是否直接显示
      +----------------------------------------------------------
      * @return mixed
      +----------------------------------------------------------
@@ -198,17 +191,17 @@ class View extends Think
         if(!file_exists_case($templateFile))
             $templateFile   = $this->parseTemplateFile($templateFile);
         $engine  = strtolower(C('TMPL_ENGINE_TYPE'));
-        if ('php'==$engine) {
+        if('php'==$engine) {
             // 模板阵列变量分解成为独立变量
             extract($this->tVar, EXTR_OVERWRITE);
             // 直接载入PHP模板
             include $templateFile;
-        } elseif ('think'==$engine && $this->checkCache($templateFile)) {
+        }elseif('think'==$engine && $this->checkCache($templateFile)) {
             // 如果是Think模板引擎并且缓存有效 分解变量并载入模板缓存
             extract($this->tVar, EXTR_OVERWRITE);
             //载入模版缓存文件
             include C('CACHE_PATH').md5($templateFile).C('TMPL_CACHFILE_SUFFIX');
-        } else {
+        }else{
             // 模板文件需要重新编译 支持第三方模板引擎
             // 调用模板引擎解析和输出
             $className   = 'Template'.ucwords($engine);
@@ -234,7 +227,7 @@ class View extends Think
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param string $tmplTemplateFile 模板文件名
+     * @param string $tmplTemplateFile  模板文件名
      +----------------------------------------------------------
      * @return boolen
      +----------------------------------------------------------
@@ -244,12 +237,12 @@ class View extends Think
         if (!C('TMPL_CACHE_ON')) // 优先对配置设定检测
             return false;
         $tmplCacheFile = C('CACHE_PATH').md5($tmplTemplateFile).C('TMPL_CACHFILE_SUFFIX');
-        if (!is_file($tmplCacheFile)) {
+        if(!is_file($tmplCacheFile)){
             return false;
-        } elseif (filemtime($tmplTemplateFile) > filemtime($tmplCacheFile)) {
+        }elseif (filemtime($tmplTemplateFile) > filemtime($tmplCacheFile)) {
             // 模板文件如果有更新则缓存需要更新
             return false;
-        } elseif (C('TMPL_CACHE_TIME') != -1 && time() > filemtime($tmplCacheFile)+C('TMPL_CACHE_TIME')) {
+        }elseif (C('TMPL_CACHE_TIME') != -1 && time() > filemtime($tmplCacheFile)+C('TMPL_CACHE_TIME')) {
             // 缓存是否在有效期
             return false;
         }
@@ -267,14 +260,13 @@ class View extends Think
      * @htmlpath 生成的静态文件路径
      * @param string $templateFile 指定要调用的模板文件
      * 默认为空 由系统自动定位模板文件
-     * @param string $charset     输出编码
+     * @param string $charset 输出编码
      * @param string $contentType 输出类型
      +----------------------------------------------------------
      * @return string
      +----------------------------------------------------------
      */
-    public function buildHtml($htmlfile,$htmlpath='',$templateFile='',$charset='',$contentType='')
-    {
+    public function buildHtml($htmlfile,$htmlpath='',$templateFile='',$charset='',$contentType='') {
         $content = $this->fetch($templateFile,$charset,$contentType);
         $htmlpath   = !empty($htmlpath)?$htmlpath:HTML_PATH;
         $htmlfile =  $htmlpath.$htmlfile.C('HTML_FILE_SUFFIX');
@@ -283,7 +275,6 @@ class View extends Think
             mk_dir(dirname($htmlfile));
         if(false === file_put_contents($htmlfile,$content))
             throw_exception(L('_CACHE_WRITE_ERROR_').':'.$htmlfile);
-
         return $content;
     }
 
@@ -293,25 +284,24 @@ class View extends Think
      +----------------------------------------------------------
      * @access protected
      +----------------------------------------------------------
-     * @param string  $content 模板内容
+     * @param string $content 模板内容
      * @param boolean $display 是否直接显示
      +----------------------------------------------------------
      * @return mixed
      +----------------------------------------------------------
      */
-    protected function output($content,$display)
-    {
+    protected function output($content,$display) {
         if(C('HTML_CACHE_ON'))  HtmlCache::writeHTMLCache($content);
-        if ($display) {
-            if (false !== strpos($content,'{__RUNTIME__}')) {
+        if($display) {
+            if(false !== strpos($content,'{__RUNTIME__}'))
+            {
                 $runtime = C('SHOW_RUN_TIME')? '<div  id="think_run_time" class="think_run_time">'.$this->showTime().'</div>' : '';
                 $content = str_replace('{__RUNTIME__}', $runtime, $content);
             }
             echo $content;
             if(C('SHOW_PAGE_TRACE'))   $this->showTrace();
-
             return null;
-        } else {
+        }else {
             return $content;
         }
     }
@@ -327,8 +317,7 @@ class View extends Think
      * @return string
      +----------------------------------------------------------
      */
-    protected function templateContentReplace($content)
-    {
+    protected function templateContentReplace($content) {
         // 系统默认的特殊变量替换
         $replace =  array(
             '../Public'     => APP_PUBLIC_PATH,// 项目公共目录
@@ -342,17 +331,18 @@ class View extends Think
             '__URL__'       => __URL__,
             '__INFO__'      => __INFO__,
         );
-        if (defined('GROUP_NAME')) {
+        if(defined('GROUP_NAME'))
+        {
             $replace['__GROUP__'] = __GROUP__;// 当前项目地址
         }
-        if (C('TOKEN_ON')) {
-            if (strpos($content,'{__TOKEN__}')) {
+        if(C('TOKEN_ON')) {
+            if(strpos($content,'{__TOKEN__}')) {
                 // 指定表单令牌隐藏域位置
                 $replace['{__TOKEN__}'] =  $this->buildFormToken();
-            } elseif (strpos($content,'{__NOTOKEN__}')) {
+            }elseif(strpos($content,'{__NOTOKEN__}')){
                 // 标记为不需要令牌验证
                 $replace['{__NOTOKEN__}'] =  '';
-            } elseif (preg_match('/<\/form(\s*)>/is',$content,$match)) {
+            }elseif(preg_match('/<\/form(\s*)>/is',$content,$match)) {
                 // 智能生成表单令牌隐藏域
                 $replace[$match[0]] = $this->buildFormToken().$match[0];
             }
@@ -361,7 +351,6 @@ class View extends Think
         if(is_array(C('TMPL_PARSE_STRING')) )
             $replace =  array_merge($replace,C('TMPL_PARSE_STRING'));
         $content = str_replace(array_keys($replace),array_values($replace),$content);
-
         return $content;
     }
 
@@ -374,15 +363,13 @@ class View extends Think
      * @return string
      +----------------------------------------------------------
      */
-    private function buildFormToken()
-    {
+    private function buildFormToken() {
         // 开启表单验证自动生成表单令牌
         $tokenName   = C('TOKEN_NAME');
         $tokenType = C('TOKEN_TYPE');
         $tokenValue = $tokenType(microtime(TRUE));
         $token   =  '<input type="hidden" name="'.$tokenName.'" value="'.$tokenValue.'" />';
         $_SESSION[$tokenName]  =  $tokenValue;
-
         return $token;
     }
 
@@ -399,12 +386,11 @@ class View extends Think
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-    private function parseTemplateFile($templateFile)
-    {
-        if (''==$templateFile) {
+    private function parseTemplateFile($templateFile) {
+        if(''==$templateFile) {
             // 如果模板文件名为空 按照默认规则定位
             $templateFile = C('TMPL_FILE_NAME');
-        } elseif (false === strpos($templateFile,'.')) {
+        }elseif(false === strpos($templateFile,'.')){
             $templateFile  = str_replace(array('@',':'),'/',$templateFile);
             $count   =  substr_count($templateFile,'/');
             $path   = dirname(C('TMPL_FILE_NAME'));
@@ -414,7 +400,6 @@ class View extends Think
         }
         if(!file_exists_case($templateFile))
             throw_exception(L('_TEMPLATE_NOT_EXIST_').'['.$templateFile.']');
-
         return $templateFile;
     }
 
@@ -427,30 +412,28 @@ class View extends Think
      * @return string
      +----------------------------------------------------------
      */
-    private function showTime()
-    {
+    private function showTime() {
         // 显示运行时间
         G('viewStartTime');
         $showTime   =   'Process: '.G('beginTime','viewEndTime').'s ';
-        if (C('SHOW_ADV_TIME')) {
+        if(C('SHOW_ADV_TIME')) {
             // 显示详细运行时间
             $showTime .= '( Load:'.G('beginTime','loadTime').'s Init:'.G('loadTime','initTime').'s Exec:'.G('initTime','viewStartTime').'s Template:'.G('viewStartTime','viewEndTime').'s )';
         }
-        if (C('SHOW_DB_TIMES') && class_exists('Db',false) ) {
+        if(C('SHOW_DB_TIMES') && class_exists('Db',false) ) {
             // 显示数据库操作次数
             $showTime .= ' | DB :'.N('db_query').' queries '.N('db_write').' writes ';
         }
-        if (C('SHOW_CACHE_TIMES') && class_exists('Cache',false)) {
+        if(C('SHOW_CACHE_TIMES') && class_exists('Cache',false)) {
             // 显示缓存读写次数
             $showTime .= ' | Cache :'.N('cache_read').' gets '.N('cache_write').' writes ';
         }
-        if (MEMORY_LIMIT_ON && C('SHOW_USE_MEM')) {
+        if(MEMORY_LIMIT_ON && C('SHOW_USE_MEM')) {
             // 显示内存开销
             $startMem    =  array_sum(explode(' ', $GLOBALS['_startUseMems']));
             $endMem     =  array_sum(explode(' ', memory_get_usage()));
             $showTime .= ' | UseMem:'. number_format(($endMem - $startMem)/1024).' kb';
         }
-
         return $showTime;
     }
 
@@ -461,8 +444,7 @@ class View extends Think
      * @access private
      +----------------------------------------------------------
      */
-    private function showTrace()
-    {
+    private function showTrace(){
         // 显示页面Trace信息 读取Trace定义文件
         // 定义格式 return array('当前页面'=>$_SERVER['PHP_SELF'],'通信协议'=>$_SERVER['SERVER_PROTOCOL'],...);
         $traceFile  =   CONFIG_PATH.'trace.php';
@@ -485,3 +467,4 @@ class View extends Think
     }
 
 }//
+?>

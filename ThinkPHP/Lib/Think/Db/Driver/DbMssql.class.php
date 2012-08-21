@@ -21,8 +21,7 @@
  * @version   $Id$
  +------------------------------------------------------------------------------
  */
-class DbMssql extends Db
-{
+class DbMssql extends Db{
     protected $selectSql  =     'SELECT T1.* FROM (SELECT ROW_NUMBER() OVER (%ORDER%) AS ROW_NUMBER, thinkphp.* FROM (SELECT %DISTINCT% %FIELDS% FROM %TABLE%%JOIN%%WHERE%%GROUP%%HAVING%) AS thinkphp) AS T1 WHERE %LIMIT%';
     /**
      +----------------------------------------------------------
@@ -33,12 +32,11 @@ class DbMssql extends Db
      * @param array $config 数据库配置数组
      +----------------------------------------------------------
      */
-    public function __construct($config='')
-    {
+    public function __construct($config=''){
         if ( !function_exists('mssql_connect') ) {
             throw_exception(L('_NOT_SUPPERT_').':mssql');
         }
-        if (!empty($config)) {
+        if(!empty($config)) {
             $this->config	=	$config;
         }
     }
@@ -52,8 +50,7 @@ class DbMssql extends Db
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-    public function connect($config='',$linkNum=0)
-    {
+    public function connect($config='',$linkNum=0) {
         if ( !isset($this->linkID[$linkNum]) ) {
             if(empty($config))	$config  =  $this->config;
             $conn = $this->pconnect ? 'mssql_pconnect':'mssql_connect';
@@ -69,7 +66,6 @@ class DbMssql extends Db
             //注销数据库安全信息
             if(1 != C('DB_DEPLOY_TYPE')) unset($this->config);
         }
-
         return $this->linkID[$linkNum];
     }
 
@@ -80,8 +76,7 @@ class DbMssql extends Db
      * @access public
      +----------------------------------------------------------
      */
-    public function free()
-    {
+    public function free() {
         mssql_free_result($this->queryID);
         $this->queryID = 0;
     }
@@ -92,15 +87,14 @@ class DbMssql extends Db
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param string $str sql指令
+     * @param string $str  sql指令
      +----------------------------------------------------------
      * @return mixed
      +----------------------------------------------------------
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-    public function query($str)
-    {
+    public function query($str) {
         $this->initConnect(false);
         if ( !$this->_linkID ) return false;
         $this->queryStr = $str;
@@ -111,13 +105,11 @@ class DbMssql extends Db
         G('queryStartTime');
         $this->queryID = mssql_query($str, $this->_linkID);
         $this->debug();
-        if (false === $this->queryID) {
+        if ( false === $this->queryID ) {
             $this->error();
-
             return false;
         } else {
             $this->numRows = mssql_num_rows($this->queryID);
-
             return $this->getAll();
         }
     }
@@ -128,15 +120,14 @@ class DbMssql extends Db
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param string $str sql指令
+     * @param string $str  sql指令
      +----------------------------------------------------------
      * @return integer
      +----------------------------------------------------------
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-    public function execute($str)
-    {
+    public function execute($str) {
         $this->initConnect(true);
         if ( !$this->_linkID ) return false;
         $this->queryStr = $str;
@@ -147,14 +138,12 @@ class DbMssql extends Db
         G('queryStartTime');
         $result	=	mssql_query($str, $this->_linkID);
         $this->debug();
-        if (false === $result) {
+        if ( false === $result ) {
             $this->error();
-
             return false;
         } else {
             $this->numRows = mssql_rows_affected($this->_linkID);
             $this->lastInsID = $this->mssql_insert_id();
-
             return $this->numRows;
         }
     }
@@ -174,7 +163,6 @@ class DbMssql extends Db
         $result =   mssql_query($query, $this->_linkID);
         list($last_insert_id)   =   mssql_fetch_row($result);
         mssql_free_result($result);
-
         return $last_insert_id;
     }
 
@@ -187,8 +175,7 @@ class DbMssql extends Db
      * @return void
      +----------------------------------------------------------
      */
-    public function startTrans()
-    {
+    public function startTrans() {
         $this->initConnect(true);
         if ( !$this->_linkID ) return false;
         //数据rollback 支持
@@ -196,7 +183,6 @@ class DbMssql extends Db
             mssql_query('BEGIN TRAN', $this->_linkID);
         }
         $this->transTimes++;
-
         return ;
     }
 
@@ -214,11 +200,10 @@ class DbMssql extends Db
         if ($this->transTimes > 0) {
             $result = mssql_query('COMMIT TRAN', $this->_linkID);
             $this->transTimes = 0;
-            if (!$result) {
+            if(!$result){
                 throw_exception($this->error());
             }
         }
-
         return true;
     }
 
@@ -236,11 +221,10 @@ class DbMssql extends Db
         if ($this->transTimes > 0) {
             $result = mssql_query('ROLLBACK TRAN', $this->_linkID);
             $this->transTimes = 0;
-            if (!$result) {
+            if(!$result){
                 throw_exception($this->error());
             }
         }
-
         return true;
     }
 
@@ -255,15 +239,13 @@ class DbMssql extends Db
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-    private function getAll()
-    {
+    private function getAll() {
         //返回数据集
         $result = array();
-        if ($this->numRows >0) {
+        if($this->numRows >0) {
             while($row = mssql_fetch_assoc($this->queryID))
                 $result[]   =   $row;
         }
-
         return $result;
     }
 
@@ -276,8 +258,7 @@ class DbMssql extends Db
      * @return array
      +----------------------------------------------------------
      */
-    public function getFields($tableName)
-    {
+    function getFields($tableName) {
         $result =   $this->query("SELECT   column_name,   data_type,   column_default,   is_nullable
         FROM    information_schema.tables AS t
         JOIN    information_schema.columns AS c
@@ -286,7 +267,7 @@ class DbMssql extends Db
         AND t.table_name    = c.table_name
         WHERE   t.table_name = '$tableName'");
         $info   =   array();
-        if ($result) {
+        if($result) {
             foreach ($result as $key => $val) {
                 $info[$val['column_name']] = array(
                     'name'    => $val['column_name'],
@@ -298,7 +279,6 @@ class DbMssql extends Db
                 );
             }
         }
-
         return $info;
     }
 
@@ -311,8 +291,7 @@ class DbMssql extends Db
      * @return array
      +----------------------------------------------------------
      */
-    public function getTables($dbName='')
-    {
+    function getTables($dbName='') {
         $result   =  $this->query("SELECT TABLE_NAME
             FROM INFORMATION_SCHEMA.TABLES
             WHERE TABLE_TYPE = 'BASE TABLE'
@@ -321,11 +300,10 @@ class DbMssql extends Db
         foreach ($result as $key => $val) {
             $info[$key] = current($val);
         }
-
         return $info;
     }
 
-    /**
+	/**
      +----------------------------------------------------------
      * order分析
      +----------------------------------------------------------
@@ -336,8 +314,7 @@ class DbMssql extends Db
      * @return string
      +----------------------------------------------------------
      */
-    protected function parseOrder($order)
-    {
+    protected function parseOrder($order) {
         return !empty($order)?  ' ORDER BY '.$order:' ORDER BY rand()';
     }
 
@@ -350,15 +327,13 @@ class DbMssql extends Db
      * @return string
      +----------------------------------------------------------
      */
-    public function parseLimit($limit)
-    {
-        if(empty($limit)) $limit=1;
+    public function parseLimit($limit) {
+		if(empty($limit)) $limit=1;
         $limit	=	explode(',',$limit);
         if(count($limit)>1)
             $limitStr	=	'(T1.ROW_NUMBER BETWEEN '.$limit[0].' + 1 AND '.$limit[0].' + '.$limit[1].')';
-        else
+		else
             $limitStr = '(T1.ROW_NUMBER BETWEEN 1 AND '.$limit[0].")";
-
         return $limitStr;
     }
 
@@ -371,11 +346,10 @@ class DbMssql extends Db
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-    public function close()
-    {
+    public function close() {
         if (!empty($this->queryID))
             mssql_free_result($this->queryID);
-        if ($this->_linkID && !mssql_close($this->_linkID)) {
+        if ($this->_linkID && !mssql_close($this->_linkID)){
             throw_exception($this->error());
         }
         $this->_linkID = 0;
@@ -391,13 +365,11 @@ class DbMssql extends Db
      * @return string
      +----------------------------------------------------------
      */
-    public function error()
-    {
+    public function error() {
         $this->error = mssql_get_last_message();
-        if ($this->debug && '' != $this->queryStr) {
+        if($this->debug && '' != $this->queryStr){
             $this->error .= "\n [ SQL语句 ] : ".$this->queryStr;
         }
-
         return $this->error;
     }
 
@@ -407,13 +379,12 @@ class DbMssql extends Db
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param string $str SQL指令
+     * @param string $str  SQL指令
      +----------------------------------------------------------
      * @return string
      +----------------------------------------------------------
      */
-    public function escape_string($str)
-    {
+    public function escape_string($str) {
         return addslashes($str);
     }
 
@@ -430,3 +401,4 @@ class DbMssql extends Db
         $this->close();
     }
 }//类定义结束
+?>

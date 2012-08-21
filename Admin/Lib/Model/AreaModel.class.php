@@ -1,4 +1,4 @@
-<?php
-class AreaModel extends Model
-{
+<?php 
+class AreaModel extends Model {
 }
+?>

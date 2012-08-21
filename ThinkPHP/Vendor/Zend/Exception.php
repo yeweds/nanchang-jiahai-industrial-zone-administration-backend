@@ -19,6 +19,7 @@
  * @version    $Id: Exception.php 16541 2009-07-07 06:59:03Z bkarwin $
  */
 
+
 /**
  * @category   Zend
  * @package    Zend
@@ -27,3 +28,4 @@
  */
 class Zend_Exception extends Exception
 {}
+

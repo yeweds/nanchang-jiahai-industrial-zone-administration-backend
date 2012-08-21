@@ -20,7 +20,7 @@ define('CLIENT_MULTI_RESULTS', 131072);
 class Db extends Think
 {
 
-    private static $_instance = null;
+    static private $_instance = null;
     // 是否自动释放查询结果
     protected $autoFree         = false;
     // 是否显示调试信息 如果启用会在日志文件记录sql语句
@@ -60,8 +60,7 @@ class Db extends Think
      * @param array $config 数据库配置数组
      +----------------------------------------------------------
      */
-    public function __construct($config='')
-    {
+    public function __construct($config=''){
         if ( !extension_loaded('mysql') ) {
             throw_exception(L('_NOT_SUPPERT_').':mysql');
         }
@@ -77,15 +76,14 @@ class Db extends Think
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-    public function connect()
-    {
-        if (!$this->connected) {
+    public function connect() {
+        if(!$this->connected) {
             $config =   $this->config;
             // 处理不带端口号的socket连接情况
             $host = $config['hostname'].($config['hostport']?":{$config['hostport']}":'');
-            if ($this->pconnect) {
+            if($this->pconnect) {
                 $this->linkID = mysql_pconnect( $host, $config['username'], $config['password'],CLIENT_MULTI_RESULTS);
-            } else {
+            }else{
                 $this->linkID = mysql_connect( $host, $config['username'], $config['password'],true,CLIENT_MULTI_RESULTS);
             }
             if ( !$this->linkID || (!empty($config['database']) && !mysql_select_db($config['database'], $this->linkID)) ) {
@@ -97,7 +95,7 @@ class Db extends Think
                 mysql_query("SET NAMES '".C('DB_CHARSET')."'", $this->linkID);
             }
             //设置 sql_model
-            if ($dbVersion >'5.0.1') {
+            if($dbVersion >'5.0.1'){
                 mysql_query("SET sql_mode=''",$this->linkID);
             }
             // 标记连接成功
@@ -114,8 +112,7 @@ class Db extends Think
      * @access public
      +----------------------------------------------------------
      */
-    public function free()
-    {
+    public function free() {
         mysql_free_result($this->queryID);
         $this->queryID = 0;
     }
@@ -127,33 +124,31 @@ class Db extends Think
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param string $str sql指令
+     * @param string $str  sql指令
      +----------------------------------------------------------
      * @return mixed
      +----------------------------------------------------------
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-    public function query($str='')
-    {
+    public function query($str='') {
         $this->connect();
         if ( !$this->linkID ) return false;
         if ( $str != '' ) $this->queryStr = $str;
         //释放前次的查询结果
-        if ($this->queryID) {    $this->free();    }
+        if ( $this->queryID ) {    $this->free();    }
         N('db_query',1);
         // 记录开始执行时间
         G('queryStartTime');
         $this->queryID = mysql_query($this->queryStr, $this->linkID);
         $this->debug();
-        if (!$this->queryID) {
+        if ( !$this->queryID ) {
             if ( $this->debug )
                 throw_exception($this->error());
             else
                 return false;
         } else {
             $this->numRows = mysql_num_rows($this->queryID);
-
             return $this->getAll();
         }
     }
@@ -164,26 +159,25 @@ class Db extends Think
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param string $str sql指令
+     * @param string $str  sql指令
      +----------------------------------------------------------
      * @return integer
      +----------------------------------------------------------
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-    public function execute($str='')
-    {
+    public function execute($str='') {
         $this->connect();
         if ( !$this->linkID ) return false;
         if ( $str != '' ) $this->queryStr = $str;
         //释放前次的查询结果
-        if ($this->queryID) {    $this->free();    }
+        if ( $this->queryID ) {    $this->free();    }
         N('db_write',1);
         // 记录开始执行时间
         G('queryStartTime');
         $result =   mysql_query($this->queryStr, $this->linkID) ;
         $this->debug();
-        if (false === $result) {
+        if ( false === $result) {
             if ( $this->debug )
                 throw_exception($this->error());
             else
@@ -191,7 +185,6 @@ class Db extends Think
         } else {
             $this->numRows = mysql_affected_rows($this->linkID);
             $this->lastInsID = mysql_insert_id($this->linkID);
-
             return $this->numRows;
         }
     }
@@ -207,8 +200,7 @@ class Db extends Think
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-    public function startTrans()
-    {
+    public function startTrans() {
         $this->connect(true);
         if ( !$this->linkID ) return false;
         //数据rollback 支持
@@ -216,7 +208,6 @@ class Db extends Think
             mysql_query('START TRANSACTION', $this->linkID);
         }
         $this->transTimes++;
-
         return ;
     }
 
@@ -236,13 +227,11 @@ class Db extends Think
         if ($this->transTimes > 0) {
             $result = mysql_query('COMMIT', $this->linkID);
             $this->transTimes = 0;
-            if (!$result) {
+            if(!$result){
                 throw_exception($this->error());
-
                 return false;
             }
         }
-
         return true;
     }
 
@@ -262,13 +251,11 @@ class Db extends Think
         if ($this->transTimes > 0) {
             $result = mysql_query('ROLLBACK', $this->linkID);
             $this->transTimes = 0;
-            if (!$result) {
+            if(!$result){
                 throw_exception($this->error());
-
                 return false;
             }
         }
-
         return true;
     }
 
@@ -283,22 +270,19 @@ class Db extends Think
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-    public function getAll()
-    {
-        if (!$this->queryID) {
+    public function getAll() {
+        if ( !$this->queryID ) {
             throw_exception($this->error());
-
             return false;
         }
         //返回数据集
         $result = array();
-        if ($this->numRows >0) {
-            while ($row = mysql_fetch_assoc($this->queryID)) {
+        if($this->numRows >0) {
+            while($row = mysql_fetch_assoc($this->queryID)){
                 $result[]   =   $row;
             }
             mysql_data_seek($this->queryID,0);
         }
-
         return $result;
     }
 
@@ -311,11 +295,10 @@ class Db extends Think
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-    public function close()
-    {
+    public function close() {
         if (!empty($this->queryID))
             mysql_free_result($this->queryID);
-        if ($this->linkID && !mysql_close($this->linkID)) {
+        if ($this->linkID && !mysql_close($this->linkID)){
             throw_exception($this->error());
         }
         $this->linkID = 0;
@@ -331,13 +314,11 @@ class Db extends Think
      * @return string
      +----------------------------------------------------------
      */
-    public function error()
-    {
+    public function error() {
         $this->error = mysql_error($this->linkID);
-        if ($this->queryStr!='') {
+        if($this->queryStr!=''){
             $this->error .= "\n [ SQL语句 ] : ".$this->queryStr;
         }
-
         return $this->error;
     }
 
@@ -347,13 +328,12 @@ class Db extends Think
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param string $str SQL字符串
+     * @param string $str  SQL字符串
      +----------------------------------------------------------
      * @return string
      +----------------------------------------------------------
      */
-    public function escape_string($str)
-    {
+    public function escape_string($str) {
         return mysql_escape_string($str);
     }
 
@@ -382,11 +362,10 @@ class Db extends Think
      */
     public static function getInstance($db_config='')
     {
-        if (self::$_instance==null) {
-            self::$_instance = new Db($db_config);
-        }
-
-        return self::$_instance;
+		if ( self::$_instance==null ){
+			self::$_instance = new Db($db_config);
+		}
+		return self::$_instance;
     }
 
     /**
@@ -400,12 +379,11 @@ class Db extends Think
      * @return string
      +----------------------------------------------------------
      */
-    private function parseConfig($db_config='')
-    {
+    private function parseConfig($db_config='') {
         if ( !empty($db_config) && is_string($db_config)) {
             // 如果DSN字符串则进行解析
             $db_config = $this->parseDSN($db_config);
-        } elseif (empty($db_config)) {
+        }else if(empty($db_config)){
             // 如果配置为空，读取配置文件设置
             $db_config = array (
                 'dbms'        =>   C('DB_TYPE'),
@@ -418,7 +396,6 @@ class Db extends Think
                 'params'     =>   C('DB_PARAMS'),
             );
         }
-
         return $db_config;
     }
 
@@ -437,9 +414,9 @@ class Db extends Think
      */
     public function parseDSN($dsnStr)
     {
-        if ( empty($dsnStr) ) {return false;}
+        if( empty($dsnStr) ){return false;}
         $info = parse_url($dsnStr);
-        if ($info['scheme']) {
+        if($info['scheme']){
             $dsn = array(
             'dbms'        => $info['scheme'],
             'username'  => isset($info['user']) ? $info['user'] : '',
@@ -448,7 +425,7 @@ class Db extends Think
             'hostport'    => isset($info['port']) ? $info['port'] : '',
             'database'   => isset($info['path']) ? substr($info['path'],1) : ''
             );
-        } else {
+        }else {
             preg_match('/^(.*?)\:\/\/(.*?)\:(.*?)\@(.*?)\:([0-9]{1, 6})\/(.*?)$/',trim($dsnStr),$matches);
             $dsn = array (
             'dbms'        => $matches[1],
@@ -459,7 +436,6 @@ class Db extends Think
             'database'   => $matches[6]
             );
         }
-
         return $dsn;
      }
 
@@ -470,10 +446,9 @@ class Db extends Think
      * @access protected
      +----------------------------------------------------------
      */
-    protected function debug()
-    {
+    protected function debug() {
         // 记录操作结束时间
-        if ($this->debug) {
+        if ( $this->debug ) {
             G('queryEndTime');
             Log::record($this->queryStr." [ RunTime:".G('queryStartTime','queryEndTime',6)."s ]",Log::SQL);
         }
@@ -488,9 +463,9 @@ class Db extends Think
      * @return string
      +----------------------------------------------------------
      */
-    public function getLastSql()
-    {
+    public function getLastSql() {
         return $this->queryStr;
     }
 
 }//类定义结束
+?>

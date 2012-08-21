@@ -18,3 +18,4 @@ return array(
     'cfg_design'=>'tengfang.Net',
     'cfg_version'=>1.1,
 );
+?>

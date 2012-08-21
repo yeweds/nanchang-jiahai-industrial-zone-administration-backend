@@ -42,10 +42,10 @@ class Log extends Think
     const FILE       = 3;
 
     // 日志信息
-    public static $log =   array();
+    static $log =   array();
 
     // 日期格式
-    public static $format =  '[ c ]';
+    static $format =  '[ c ]';
 
     /**
      +----------------------------------------------------------
@@ -54,16 +54,15 @@ class Log extends Think
      * @static
      * @access public
      +----------------------------------------------------------
-     * @param string  $message 日志信息
-     * @param string  $level   日志级别
+     * @param string $message 日志信息
+     * @param string $level  日志级别
      * @param boolean $record  是否强制记录
      +----------------------------------------------------------
      * @return void
      +----------------------------------------------------------
      */
-    public static function record($message,$level=self::ERR,$record=false)
-    {
-        if ($record || in_array($level,C('LOG_RECORD_LEVEL'))) {
+    static function record($message,$level=self::ERR,$record=false) {
+        if($record || in_array($level,C('LOG_RECORD_LEVEL'))) {
             $now = date(self::$format);
             self::$log[] =   "{$now} {$level}: {$message}\r\n";
         }
@@ -76,18 +75,18 @@ class Log extends Think
      * @static
      * @access public
      +----------------------------------------------------------
-     * @param integer $type        日志记录方式
-     * @param string  $destination 写入目标
-     * @param string  $extra       额外参数
+     * @param integer $type 日志记录方式
+     * @param string $destination  写入目标
+     * @param string $extra 额外参数
      +----------------------------------------------------------
      * @return void
      +----------------------------------------------------------
      */
-    public static function save($type=self::FILE,$destination='',$extra='')
+    static function save($type=self::FILE,$destination='',$extra='')
     {
         if(empty($destination))
             $destination = LOG_PATH.date('y_m_d').".log";
-        if (self::FILE == $type) { // 文件方式记录日志信息
+        if(self::FILE == $type) { // 文件方式记录日志信息
             //检测日志文件大小，超过配置大小则备份日志文件重新生成
             if(is_file($destination) && floor(C('LOG_FILE_SIZE')) <= filesize($destination) )
                   rename($destination,dirname($destination).'/'.time().'-'.basename($destination));
@@ -105,21 +104,21 @@ class Log extends Think
      * @static
      * @access public
      +----------------------------------------------------------
-     * @param string  $message     日志信息
-     * @param string  $level       日志级别
-     * @param integer $type        日志记录方式
-     * @param string  $destination 写入目标
-     * @param string  $extra       额外参数
+     * @param string $message 日志信息
+     * @param string $level  日志级别
+     * @param integer $type 日志记录方式
+     * @param string $destination  写入目标
+     * @param string $extra 额外参数
      +----------------------------------------------------------
      * @return void
      +----------------------------------------------------------
      */
-    public static function write($message,$level=self::ERR,$type=self::FILE,$destination='',$extra='')
+    static function write($message,$level=self::ERR,$type=self::FILE,$destination='',$extra='')
     {
         $now = date(self::$format);
         if(empty($destination))
             $destination = LOG_PATH.date('y_m_d').".log";
-        if (self::FILE == $type) { // 文件方式记录日志
+        if(self::FILE == $type) { // 文件方式记录日志
             //检测日志文件大小，超过配置大小则备份日志文件重新生成
             if(is_file($destination) && floor(C('LOG_FILE_SIZE')) <= filesize($destination) )
                   rename($destination,dirname($destination).'/'.time().'-'.basename($destination));
@@ -129,3 +128,4 @@ class Log extends Think
     }
 
 }//类定义结束
+?>

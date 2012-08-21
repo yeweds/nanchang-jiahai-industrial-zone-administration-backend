@@ -21,7 +21,7 @@
  */
 
 /**
- * This class will convert mysql result resource to array suitable for passing
+ * This class will convert mysql result resource to array suitable for passing 
  * to the external entities.
  *
  * @package    Zend_Amf
@@ -29,44 +29,42 @@
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Amf_Parse_Resource_MysqlResult
+class Zend_Amf_Parse_Resource_MysqlResult 
 {
     /**
      * @var array List of Mysql types with PHP counterparts
-     *
+     * 
      * Key => Value is Mysql type (exact string) => PHP type
      */
-    public static $fieldTypes = array(
+    static public $fieldTypes = array(
         "int" => "int",
         "timestamp" => "int",
         "year" => "int",
-        "real" => "float",
+    	"real" => "float",
     );
     /**
      * Parse resource into array
-     *
-     * @param  resource $resource
+     * 
+     * @param resource $resource
      * @return array
      */
-    public function parse($resource)
-    {
+    public function parse($resource) {
         $result = array();
         $fieldcnt = mysql_num_fields($resource);
         $fields_transform = array();
-        for ($i=0;$i<$fieldcnt;$i++) {
+        for($i=0;$i<$fieldcnt;$i++) {
             $type = mysql_field_type($resource, $i);
-            if (isset(self::$fieldTypes[$type])) {
+            if(isset(self::$fieldTypes[$type])) {
                 $fields_transform[mysql_field_name($resource, $i)] = self::$fieldTypes[$type];
             }
         }
 
-        while ($row = mysql_fetch_object($resource)) {
-            foreach ($fields_transform as $fieldname => $fieldtype) {
+        while($row = mysql_fetch_object($resource)) {
+            foreach($fields_transform as $fieldname => $fieldtype) {
                settype($row->$fieldname, $fieldtype);
             }
             $result[] = $row;
         }
-
         return $result;
     }
 }

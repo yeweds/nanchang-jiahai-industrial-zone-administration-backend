@@ -30,23 +30,22 @@ class TemplateLite
      * @access public
      +----------------------------------------------------------
      * @param string $templateFile 模板文件名
-     * @param array  $var          模板变量
-     * @param string $charset      模板输出字符集
+     * @param array $var 模板变量
+     * @param string $charset 模板输出字符集
      +----------------------------------------------------------
      * @return void
      +----------------------------------------------------------
      */
-    public function fetch($templateFile,$var,$charset)
-    {
+    public function fetch($templateFile,$var,$charset) {
         $templateFile=substr($templateFile,strlen(TMPL_PATH));
         vendor("TemplateLite.class#template");
         $tpl = new Template_Lite();
-        if (C('TMPL_ENGINE_CONFIG')) {
+        if(C('TMPL_ENGINE_CONFIG')) {
             $config  =  C('TMPL_ENGINE_CONFIG');
-            foreach ($config as $key=>$val) {
+            foreach ($config as $key=>$val){
                 $tpl->{$key}   =  $val;
             }
-        } else {
+        }else{
             $tpl->template_dir = TMPL_PATH;
             $tpl->compile_dir = CACHE_PATH ;
             $tpl->cache_dir = TEMP_PATH ;
@@ -55,3 +54,4 @@ class TemplateLite
         $tpl->display($templateFile);
     }
 }
+?>

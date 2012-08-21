@@ -50,9 +50,9 @@ class Model extends Think
         // 模型初始化
         $this->_initialize();
         // 获取模型名称
-        if (!empty($name)) {
+        if(!empty($name)) {
             $this->name   =  $name;
-        } elseif (empty($this->name)) {
+        }elseif(empty($this->name)){
             $this->name =   $this->getModelName();
         }
         // 数据库初始化操作
@@ -74,23 +74,22 @@ class Model extends Think
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param mixed $sql SQL指令
+     * @param mixed $sql  SQL指令
      +----------------------------------------------------------
      * @return array
      +----------------------------------------------------------
      */
     public function query($sql)
     {
-        if (is_array($sql)) {
+        if(is_array($sql)) {
             return $this->patchQuery($sql);
         }
-        if (!empty($sql)) {
-            if (strpos($sql,'__TABLE__')) {
+        if(!empty($sql)) {
+            if(strpos($sql,'__TABLE__')) {
                 $sql    =   str_replace('__TABLE__',$this->getTableName(),$sql);
             }
-
             return $this->db->query($sql);
-        } else {
+        }else{
             return false;
         }
     }
@@ -101,21 +100,20 @@ class Model extends Think
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param string $sql SQL指令
+     * @param string $sql  SQL指令
      +----------------------------------------------------------
      * @return false | integer
      +----------------------------------------------------------
      */
     public function execute($sql='')
     {
-        if (!empty($sql)) {
-            if (strpos($sql,'__TABLE__')) {
+        if(!empty($sql)) {
+            if(strpos($sql,'__TABLE__')) {
                 $sql    =   str_replace('__TABLE__',$this->getTableName(),$sql);
             }
             $result =   $this->db->execute($sql);
-
             return $result;
-        } else {
+        }else {
             return false;
         }
     }
@@ -131,10 +129,9 @@ class Model extends Think
      */
     public function getModelName()
     {
-        if (empty($this->name)) {
+        if(empty($this->name)) {
             $this->name =   substr(get_class($this),0,-5);
         }
-
         return $this->name;
     }
 
@@ -149,19 +146,18 @@ class Model extends Think
      */
     public function getTableName()
     {
-        if (empty($this->trueTableName)) {
+        if(empty($this->trueTableName)) {
             $tableName  = !empty($this->tablePrefix) ? $this->tablePrefix : '';
-            if (!empty($this->tableName)) {
+            if(!empty($this->tableName)) {
                 $tableName .= $this->tableName;
-            } else {
+            }else{
                 $tableName .= parse_name($this->name);
             }
-            if (!empty($this->dbName)) {
+            if(!empty($this->dbName)) {
                 $tableName    =  $this->dbName.'.'.$tableName;
             }
             $this->trueTableName    =   strtolower($tableName);
         }
-
         return $this->trueTableName;
     }
 
@@ -178,7 +174,6 @@ class Model extends Think
     {
         $this->commit();
         $this->db->startTrans();
-
         return ;
     }
 
@@ -218,26 +213,22 @@ class Model extends Think
      +----------------------------------------------------------
      * @param mixed $config 数据库连接信息
      * 支持批量添加 例如 array(1=>$config1,2=>$config2)
-     * @param mixed $linkNum 创建的连接序号
+     * @param mixed $linkNum  创建的连接序号
      +----------------------------------------------------------
      * @return boolean
      +----------------------------------------------------------
      */
-    public function addConnect($config,$linkNum=NULL)
-    {
+    public function addConnect($config,$linkNum=NULL) {
         if(isset($this->_db[$linkNum]))
-
             return false;
-        if (NULL === $linkNum && is_array($config)) {
+        if(NULL === $linkNum && is_array($config)) {
             // 支持批量增加数据库连接
             foreach ($config as $key=>$val)
                 $this->_db[$key]            =    Db::getInstance($val);
-
             return true;
         }
         // 创建一个新的实例
         $this->_db[$linkNum]            =    Db::getInstance($config);
-
         return true;
     }
 
@@ -247,20 +238,17 @@ class Model extends Think
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param integer $linkNum 创建的连接序号
+     * @param integer $linkNum  创建的连接序号
      +----------------------------------------------------------
      * @return boolean
      +----------------------------------------------------------
      */
-    public function delConnect($linkNum)
-    {
-        if (isset($this->_db[$linkNum])) {
+    public function delConnect($linkNum) {
+        if(isset($this->_db[$linkNum])) {
             $this->_db[$linkNum]->close();
             unset($this->_db[$linkNum]);
-
             return true;
         }
-
         return false;
     }
 
@@ -270,19 +258,16 @@ class Model extends Think
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param integer $linkNum 创建的连接序号
+     * @param integer $linkNum  创建的连接序号
      +----------------------------------------------------------
      * @return boolean
      +----------------------------------------------------------
      */
-    public function closeConnect($linkNum)
-    {
-        if (isset($this->_db[$linkNum])) {
+    public function closeConnect($linkNum) {
+        if(isset($this->_db[$linkNum])) {
             $this->_db[$linkNum]->close();
-
             return true;
         }
-
         return false;
     }
 
@@ -292,20 +277,19 @@ class Model extends Think
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param integer $linkNum 创建的连接序号
+     * @param integer $linkNum  创建的连接序号
      +----------------------------------------------------------
      * @return boolean
      +----------------------------------------------------------
      */
-    public function switchConnect($linkNum)
-    {
-        if (isset($this->_db[$linkNum])) {
+    public function switchConnect($linkNum) {
+        if(isset($this->_db[$linkNum])) {
             // 在不同实例直接切换
             $this->db   =   $this->_db[$linkNum];
-
             return true;
-        } else {
+        }else{
             return false;
         }
     }
 };
+?>

@@ -32,7 +32,7 @@ class Stack extends ArrayList
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param array $values 初始化数组元素
+     * @param array $values  初始化数组元素
      +----------------------------------------------------------
      */
     public function __construct($values = array())
@@ -69,8 +69,8 @@ class Stack extends ArrayList
     public function push($value)
     {
         $this->add($value);
-
         return $value;
     }
 
 }//类定义结束
+?>

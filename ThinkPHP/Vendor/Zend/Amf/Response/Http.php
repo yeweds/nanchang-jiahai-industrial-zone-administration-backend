@@ -45,7 +45,6 @@ class Zend_Amf_Response_Http extends Zend_Amf_Response
             header('Pragma: public');
             header('Content-Type: application/x-amf');
         }
-
         return parent::getResponse();
     }
 }

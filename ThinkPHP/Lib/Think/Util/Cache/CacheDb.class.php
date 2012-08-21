@@ -41,7 +41,7 @@ class CacheDb extends Cache
      * @access protected
      +----------------------------------------------------------
      */
-    public $db     ;
+    var $db     ;
 
     /**
      +----------------------------------------------------------
@@ -50,9 +50,9 @@ class CacheDb extends Cache
      * @access public
      +----------------------------------------------------------
      */
-    public function __construct($options='')
+    function __construct($options='')
     {
-        if (empty($options)) {
+        if(empty($options)){
             $options= array
             (
                 'db'        => C('DB_NAME'),
@@ -82,6 +82,7 @@ class CacheDb extends Cache
         return $this->connected;
     }
 
+
     /**
      +----------------------------------------------------------
      * 读取缓存
@@ -98,25 +99,24 @@ class CacheDb extends Cache
         $name  =  addslashes($name);
         N('cache_read',1);
         $result  =  $this->db->getRow('select `data`,`datacrc`,`datasize` from `'.$this->options['table'].'` where `cachekey`=\''.$name.'\' and (`expire` =-1 OR `expire`>'.time().') limit 0,1');
-        if (false !== $result) {
-            if (is_object($result)) {
-                $result  =  get_object_vars($result);
+        if(false !== $result ) {
+            if(is_object($result)) {
+            	$result  =  get_object_vars($result);
             }
-            if (C('DATA_CACHE_CHECK')) {//开启数据校验
-                if ($result['datacrc'] != md5($result['data'])) {//校验错误
-
+            if(C('DATA_CACHE_CHECK')) {//开启数据校验
+                if($result['datacrc'] != md5($result['data'])) {//校验错误
                     return false;
                 }
             }
             $content   =  $result['data'];
-            if (C('DATA_CACHE_COMPRESS') && function_exists('gzcompress')) {
+            if(C('DATA_CACHE_COMPRESS') && function_exists('gzcompress')) {
                 //启用数据压缩
                 $content   =   gzuncompress($content);
             }
             $content    =   unserialize($content);
-
             return $content;
-        } else {
+        }
+        else {
             return false;
         }
     }
@@ -127,9 +127,9 @@ class CacheDb extends Cache
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param string  $name   缓存变量名
-     * @param mixed   $value  存储数据
-     * @param integer $expire 有效时间（秒）
+     * @param string $name 缓存变量名
+     * @param mixed $value  存储数据
+     * @param integer $expire  有效时间（秒）
      +----------------------------------------------------------
      * @return boolen
      +----------------------------------------------------------
@@ -139,14 +139,14 @@ class CacheDb extends Cache
         $data   =   serialize($value);
         $name  =  addslashes($name);
         N('cache_write',1);
-        if ( C('DATA_CACHE_COMPRESS') && function_exists('gzcompress')) {
+        if( C('DATA_CACHE_COMPRESS') && function_exists('gzcompress')) {
             //数据压缩
             $data   =   gzcompress($data,3);
         }
-        if (C('DATA_CACHE_CHECK')) {//开启数据校验
-            $crc  =  md5($data);
-        } else {
-            $crc  =  '';
+        if(C('DATA_CACHE_CHECK')) {//开启数据校验
+        	$crc  =  md5($data);
+        }else {
+        	$crc  =  '';
         }
         $expire =  !empty($expireTime)? $expireTime : $this->options['expire'];
         $map    = array();
@@ -156,17 +156,17 @@ class CacheDb extends Cache
         $map['expire']	=	($expire==-1)?-1: (time()+$expire) ;//缓存有效期为－1表示永久缓存
         $map['datasize']	=	strlen($data);
         $result  =  $this->db->getRow('select `id` from `'.$this->options['table'].'` where `cachekey`=\''.$name.'\' limit 0,1');
-        if (false !== $result) {
-            //更新记录
+        if(false !== $result ) {
+        	//更新记录
             $result  =  $this->db->save($map,$this->options['table'],'`cachekey`=\''.$name.'\'');
-        } else {
-            //新增记录
+        }else {
+        	//新增记录
              $result  =  $this->db->add($map,$this->options['table']);
         }
-        if ($result) {
+        if($result) {
             return true;
-        } else {
-            return false;
+        }else {
+        	return false;
         }
     }
 
@@ -184,7 +184,6 @@ class CacheDb extends Cache
     public function rm($name)
     {
         $name  =  addslashes($name);
-
         return $this->db->_execute('delete from `'.$this->options['table'].'` where `cachekey`=\''.$name.'\'');
     }
 
@@ -203,3 +202,4 @@ class CacheDb extends Cache
     }
 
 }//类定义结束
+?>
