@@ -19,4 +19,3 @@ return array(
     THINK_PATH.'/Mode/Cli/Action.class.php',
     THINK_PATH.'/Mode/Cli/alias.php', // 加载别名
 );
-?>

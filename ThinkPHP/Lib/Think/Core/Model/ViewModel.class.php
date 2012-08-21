@@ -21,8 +21,8 @@
  * @version   $Id$
  +------------------------------------------------------------------------------
  */
-class ViewModel extends Model {
-
+class ViewModel extends Model
+{
     protected $viewFields = array();
 
     /**
@@ -47,9 +47,9 @@ class ViewModel extends Model {
      */
     public function getTableName()
     {
-        if(empty($this->trueTableName)) {
+        if (empty($this->trueTableName)) {
             $tableName = '';
-            foreach ($this->viewFields as $key=>$view){
+            foreach ($this->viewFields as $key=>$view) {
                 // 获取数据表名称
                 $class  =   $key.'Model';
                 $Model  =  class_exists($class)?new $class():M($key);
@@ -66,6 +66,7 @@ class ViewModel extends Model {
             $tableName = substr($tableName,0,-$len);
             $this->trueTableName    =   $tableName;
         }
+
         return $this->trueTableName;
     }
 
@@ -80,7 +81,8 @@ class ViewModel extends Model {
      * @return void
      +----------------------------------------------------------
      */
-    protected function _options_filter(&$options) {
+    protected function _options_filter(&$options)
+    {
         if(isset($options['field']))
             $options['field'] = $this->checkFields($options['field']);
         else
@@ -99,17 +101,19 @@ class ViewModel extends Model {
      +----------------------------------------------------------
      * @access protected
      +----------------------------------------------------------
-     * @param string $name 模型名称
-     * @param array $fields 字段数组
+     * @param string $name   模型名称
+     * @param array  $fields 字段数组
      +----------------------------------------------------------
      * @return array
      +----------------------------------------------------------
      */
-    private function _checkFields($name,$fields) {
-        if(false !== $pos = array_search('*',$fields)) {// 定义所有字段
+    private function _checkFields($name,$fields)
+    {
+        if (false !== $pos = array_search('*',$fields)) {// 定义所有字段
             $fields  =  array_merge($fields,M($name)->getDbFields());
             unset($fields[$pos]);
         }
+
         return $fields;
     }
 
@@ -124,15 +128,16 @@ class ViewModel extends Model {
      * @return array
      +----------------------------------------------------------
      */
-    protected function checkCondition($where) {
-        if(is_array($where)) {
+    protected function checkCondition($where)
+    {
+        if (is_array($where)) {
             $view   =   array();
             // 检查视图字段
-            foreach ($this->viewFields as $key=>$val){
+            foreach ($this->viewFields as $key=>$val) {
                 $k = isset($val['_as'])?$val['_as']:$key;
                 $val  =  $this->_checkFields($key,$val);
-                foreach ($where as $name=>$value){
-                    if(false !== $field = array_search($name,$val,true)) {
+                foreach ($where as $name=>$value) {
+                    if (false !== $field = array_search($name,$val,true)) {
                         // 存在视图字段
                         $_key   =   is_numeric($field)?    $k.'.'.$name   :   $k.'.'.$field;
                         $view[$_key]    =   $value;
@@ -142,6 +147,7 @@ class ViewModel extends Model {
             }
             $where    =   array_merge($where,$view);
          }
+
         return $where;
     }
 
@@ -156,19 +162,20 @@ class ViewModel extends Model {
      * @return string
      +----------------------------------------------------------
      */
-    protected function checkOrder($order='') {
-         if(!empty($order)) {
+    protected function checkOrder($order='')
+    {
+         if (!empty($order)) {
             $orders = explode(',',$order);
             $_order = array();
-            foreach ($orders as $order){
+            foreach ($orders as $order) {
                 $array = explode(' ',$order);
                 $field   =   $array[0];
                 $sort   =   isset($array[1])?$array[1]:'ASC';
                 // 解析成视图字段
-                foreach ($this->viewFields as $name=>$val){
+                foreach ($this->viewFields as $name=>$val) {
                     $k = isset($val['_as'])?$val['_as']:$name;
                     $val  =  $this->_checkFields($name,$val);
-                    if(false !== $_field = array_search($field,$val,true)) {
+                    if (false !== $_field = array_search($field,$val,true)) {
                         // 存在视图字段
                         $field     =  is_numeric($_field)?$k.'.'.$field:$k.'.'.$_field;
                         break;
@@ -178,6 +185,7 @@ class ViewModel extends Model {
             }
             $order = implode(',',$_order);
          }
+
         return $order;
     }
 
@@ -192,16 +200,17 @@ class ViewModel extends Model {
      * @return string
      +----------------------------------------------------------
      */
-    protected function checkGroup($group='') {
-         if(!empty($group)) {
+    protected function checkGroup($group='')
+    {
+         if (!empty($group)) {
             $groups = explode(',',$group);
             $_group = array();
-            foreach ($groups as $field){
+            foreach ($groups as $field) {
                 // 解析成视图字段
-                foreach ($this->viewFields as $name=>$val){
+                foreach ($this->viewFields as $name=>$val) {
                     $k = isset($val['_as'])?$val['_as']:$name;
                     $val  =  $this->_checkFields($name,$val);
-                    if(false !== $_field = array_search($field,$val,true)) {
+                    if (false !== $_field = array_search($field,$val,true)) {
                         // 存在视图字段
                         $field     =  is_numeric($_field)?$k.'.'.$field:$k.'.'.$_field;
                         break;
@@ -211,6 +220,7 @@ class ViewModel extends Model {
             }
             $group  =   implode(',',$_group);
          }
+
         return $group;
     }
 
@@ -225,49 +235,50 @@ class ViewModel extends Model {
      * @return string
      +----------------------------------------------------------
      */
-    protected function checkFields($fields='') {
-        if(empty($fields) || '*'==$fields ) {
+    protected function checkFields($fields='')
+    {
+        if (empty($fields) || '*'==$fields ) {
             // 获取全部视图字段
             $fields =   array();
-            foreach ($this->viewFields as $name=>$val){
+            foreach ($this->viewFields as $name=>$val) {
                 $k = isset($val['_as'])?$val['_as']:$name;
                 $val  =  $this->_checkFields($name,$val);
-                foreach ($val as $key=>$field){
-                    if(is_numeric($key)) {
+                foreach ($val as $key=>$field) {
+                    if (is_numeric($key)) {
                         $fields[]    =   $k.'.'.$field.' AS '.$field;
-                    }elseif('_' != substr($key,0,1)) {
+                    } elseif ('_' != substr($key,0,1)) {
                         // 以_开头的为特殊定义
-                        if( false !== strpos($key,'*') ||  false !== strpos($key,'(') || false !== strpos($key,'.')) {
+                        if ( false !== strpos($key,'*') ||  false !== strpos($key,'(') || false !== strpos($key,'.')) {
                             //如果包含* 或者 使用了sql方法 则不再添加前面的表名
                             $fields[]    =   $key.' AS '.$field;
-                        }else{
+                        } else {
                             $fields[]    =   $k.'.'.$key.' AS '.$field;
                         }
                     }
                 }
             }
             $fields = implode(',',$fields);
-        }else{
+        } else {
             if(!is_array($fields))
                 $fields =   explode(',',$fields);
             // 解析成视图字段
             $array =  array();
-            foreach ($fields as $key=>$field){
-                if(strpos($field,'(') || strpos(strtolower($field),' as ')){
+            foreach ($fields as $key=>$field) {
+                if (strpos($field,'(') || strpos(strtolower($field),' as ')) {
                     // 使用了函数或者别名
                     $array[] =  $field;
                     unset($fields[$key]);
                 }
             }
-            foreach ($this->viewFields as $name=>$val){
+            foreach ($this->viewFields as $name=>$val) {
                 $k = isset($val['_as'])?$val['_as']:$name;
                 $val  =  $this->_checkFields($name,$val);
-                foreach ($fields as $key=>$field){
-                    if(false !== $_field = array_search($field,$val,true)) {
+                foreach ($fields as $key=>$field) {
+                    if (false !== $_field = array_search($field,$val,true)) {
                         // 存在视图字段
-                        if(is_numeric($_field)) {
+                        if (is_numeric($_field)) {
                             $array[]    =   $k.'.'.$field.' AS '.$field;
-                        }elseif('_' != substr($_field,0,1)){
+                        } elseif ('_' != substr($_field,0,1)) {
                             if( false !== strpos($_field,'*') ||  false !== strpos($_field,'(') || false !== strpos($_field,'.'))
                                 //如果包含* 或者 使用了sql方法 则不再添加前面的表名
                                 $array[]    =   $_field.' AS '.$field;
@@ -279,7 +290,7 @@ class ViewModel extends Model {
             }
             $fields = implode(',',$array);
         }
+
         return $fields;
     }
 }
-?>

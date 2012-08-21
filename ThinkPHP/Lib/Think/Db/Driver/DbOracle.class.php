@@ -21,8 +21,8 @@
 * @version   $Id: DbOracle.class.php,v 1.1 2008/12/23 10:06:30 wangyufeng Exp $
 +------------------------------------------------------------------------------
 */
-class DbOracle extends Db{
-
+class DbOracle extends Db
+{
     private $mode = OCI_COMMIT_ON_SUCCESS;
     private $table  =  '';
     protected $selectSql  =     'SELECT * FROM (SELECT thinkphp.*, rownum AS numrow FROM (SELECT  %DISTINCT% %FIELDS% FROM %TABLE%%JOIN%%WHERE%%GROUP%%HAVING%%ORDER%) thinkphp ) %LIMIT%';
@@ -35,12 +35,13 @@ class DbOracle extends Db{
      * @param array $config 数据库配置数组
      +----------------------------------------------------------
      */
-    public function __construct($config=''){
+    public function __construct($config='')
+    {
         putenv("NLS_LANG=AMERICAN_AMERICA.UTF8");
         if ( !extension_loaded('oci8') ) {
             throw_exception(L('_NOT_SUPPERT_').'oracle');
         }
-        if(!empty($config)) {
+        if (!empty($config)) {
             $this->config        =        $config;
         }
     }
@@ -54,13 +55,14 @@ class DbOracle extends Db{
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-    public function connect($config='',$linkNum=0) {
+    public function connect($config='',$linkNum=0)
+    {
         if ( !isset($this->linkID[$linkNum]) ) {
             if(empty($config))  $config = $this->config;
             $conn = $this->pconnect ? 'oci_pconnect':'oci_new_connect';
             $this->linkID[$linkNum] = $conn($config['username'], $config['password'],$config['database']);//modify by wyfeng at 2008.12.19
 
-            if (!$this->linkID[$linkNum]){
+            if (!$this->linkID[$linkNum]) {
                 $error = $this->error(false);
                 throw_exception($error["message"], '', $error["code"]);
             }
@@ -69,6 +71,7 @@ class DbOracle extends Db{
             //注销数据库安全信息
             if(1 != C('DB_DEPLOY_TYPE')) unset($this->config);
         }
+
         return $this->linkID[$linkNum];
     }
 
@@ -79,7 +82,8 @@ class DbOracle extends Db{
      * @access public
      +----------------------------------------------------------
      */
-     public function free() {
+     public function free()
+     {
         oci_free_statement($this->queryID);
         $this->queryID = 0;
     }
@@ -90,14 +94,15 @@ class DbOracle extends Db{
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param string $str  sql指令
+     * @param string $str sql指令
      +----------------------------------------------------------
      * @return mixed
      +----------------------------------------------------------
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-    public function query($str) {
+    public function query($str)
+    {
         $this->initConnect(false);
         if ( !$this->_linkID ) return false;
         $this->queryStr = $str;
@@ -112,9 +117,10 @@ class DbOracle extends Db{
         $this->debug();
         if (false === oci_execute($this->queryID, $this->mode)) {
             $this->error();
+
             return false;
         } else {
-			return $this->getAll();
+            return $this->getAll();
         }
     }
 
@@ -124,22 +130,23 @@ class DbOracle extends Db{
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param string $str  sql指令
+     * @param string $str sql指令
      +----------------------------------------------------------
      * @return integer
      +----------------------------------------------------------
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-     public function execute($str) {
+     public function execute($str)
+     {
         $this->initConnect(true);
         if ( !$this->_linkID ) return false;
         $this->queryStr = $str;
         // 判断新增操作
         $flag = false;
-        if(preg_match("/^\s*(INSERT\s+INTO)\s+(\w+)\s+/i", $this->queryStr, $match)) {
+        if (preg_match("/^\s*(INSERT\s+INTO)\s+(\w+)\s+/i", $this->queryStr, $match)) {
             $this->table = C("DB_SEQUENCE_PREFIX") .str_ireplace(C("DB_PREFIX"), "", $match[2]);
-            $flag = (boolean)$this->query("SELECT * FROM user_sequences WHERE sequence_name='" . strtoupper($this->table) . "'");
+            $flag = (boolean) $this->query("SELECT * FROM user_sequences WHERE sequence_name='" . strtoupper($this->table) . "'");
         }//modify by wyfeng at 2009.08.28
 
         //更改事务模式
@@ -153,10 +160,12 @@ class DbOracle extends Db{
         $this->debug();
         if (false === oci_execute($stmt)) {
             $this->error();
+
             return false;
         } else {
             $this->numRows = oci_num_rows($stmt);
             $this->lastInsID = $flag?$this->insert_last_id():0;//modify by wyfeng at 2009.08.28
+
             return $this->numRows;
         }
     }
@@ -172,7 +181,8 @@ class DbOracle extends Db{
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-     public function startTrans() {
+     public function startTrans()
+     {
         $this->initConnect(true);
         if ( !$this->_linkID ) return false;
         //数据rollback 支持
@@ -180,6 +190,7 @@ class DbOracle extends Db{
             $this->mode = OCI_DEFAULT;
         }
         $this->transTimes++;
+
         return ;
     }
 
@@ -194,14 +205,16 @@ class DbOracle extends Db{
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-    public function commit(){
+    public function commit()
+    {
         if ($this->transTimes > 0) {
                 $result = oci_commit($this->_linkID);
-                if(!$result){
+                if (!$result) {
                     throw_exception($this->error());
                 }
                 $this->transTimes = 0;
         }
+
         return true;
     }
 
@@ -216,14 +229,16 @@ class DbOracle extends Db{
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-     public function rollback(){
+     public function rollback()
+     {
         if ($this->transTimes > 0) {
             $result = oci_rollback($this->_linkID);
-            if(!$result){
+            if (!$result) {
                 throw_exception($this->error());
             }
             $this->transTimes = 0;
         }
+
         return true;
     }
 
@@ -238,21 +253,20 @@ class DbOracle extends Db{
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-     private function getAll() {
+     private function getAll()
+     {
         //返回数据集
         $result = array();
         $this->numRows = oci_fetch_all($this->queryID, $result, 0, -1, OCI_FETCHSTATEMENT_BY_ROW);
-		//add by wyfeng at 2008-12-23 强制将字段名转换为小写，以配合Model类函数如count等
-		if(C("DB_CASE_LOWER"))
-		{
-			foreach($result as $k=>$v)
-			{
-				$result[$k] = array_change_key_case($result[$k], CASE_LOWER);
-			}
-		}
+        //add by wyfeng at 2008-12-23 强制将字段名转换为小写，以配合Model类函数如count等
+        if (C("DB_CASE_LOWER")) {
+            foreach ($result as $k=>$v) {
+                $result[$k] = array_change_key_case($result[$k], CASE_LOWER);
+            }
+        }
+
         return $result;
     }
-
 
     /**
      +----------------------------------------------------------
@@ -263,13 +277,14 @@ class DbOracle extends Db{
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-     public function getFields($tableName) {
+     public function getFields($tableName)
+     {
         $result = $this->query("select a.column_name,data_type,decode(nullable,'Y',0,1) notnull,data_default,decode(a.column_name,b.column_name,1,0) pk "
                   ."from user_tab_columns a,(select column_name from user_constraints c,user_cons_columns col "
           ."where c.constraint_name=col.constraint_name and c.constraint_type='P'and c.table_name='".strtoupper($tableName)
           ."') b where table_name='".strtoupper($tableName)."' and a.column_name=b.column_name(+)");
         $info   =   array();
-        if($result) {
+        if ($result) {
             foreach ($result as $key => $val) {
                 $info[strtolower($val['column_name'])] = array(
                     'name'    => strtolower($val['column_name']),
@@ -281,6 +296,7 @@ class DbOracle extends Db{
                 );
             }
         }
+
         return $info;
     }
 
@@ -293,12 +309,14 @@ class DbOracle extends Db{
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-    public function getTables($dbName='') {
+    public function getTables($dbName='')
+    {
         $result = $this->query("select table_name from user_tables");
         $info   =   array();
         foreach ($result as $key => $val) {
             $info[$key] = current($val);
         }
+
         return $info;
     }
 
@@ -311,10 +329,11 @@ class DbOracle extends Db{
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-    public function close() {
+    public function close()
+    {
         if (!empty($this->queryID))
             oci_free_statement($this->queryID);
-        if(!oci_close($this->_linkID)){
+        if (!oci_close($this->_linkID)) {
             throw_exception($this->error(false));
         }
         $this->_linkID = 0;
@@ -332,17 +351,19 @@ class DbOracle extends Db{
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-     public function error($result = true) {
-        if($result){
+     public function error($result = true)
+     {
+        if ($result) {
            $this->error = oci_error($this->queryID);
-        }elseif(!$this->_linkID){
+        } elseif (!$this->_linkID) {
             $this->error = oci_error();
-        }else{
+        } else {
             $this->error = oci_error($this->_linkID);
         }
-        if($this->debug && '' != $this->queryStr){
+        if ($this->debug && '' != $this->queryStr) {
             $this->error .= "\n [ SQL语句 ] : ".$this->queryStr;
         }
+
         return $this->error;
     }
 
@@ -352,14 +373,15 @@ class DbOracle extends Db{
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param mix $str  SQL指令
+     * @param mix $str SQL指令
      +----------------------------------------------------------
      * @return string
      +----------------------------------------------------------
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-    public function escape_string($str) {
+    public function escape_string($str)
+    {
         return str_ireplace("'", "''", $str);
     }
 
@@ -393,12 +415,14 @@ class DbOracle extends Db{
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-    public function insert_last_id() {
-        if(empty($this->table)) {
+    public function insert_last_id()
+    {
+        if (empty($this->table)) {
             return 0;
         }
         $sequenceName = $this->table;
         $vo = $this->query("SELECT {$sequenceName}.currval currval FROM dual");
+
         return $vo?$vo[0]["currval"]:0;
     }
 
@@ -411,16 +435,17 @@ class DbOracle extends Db{
      * @return string
      +----------------------------------------------------------
      */
-	public function parseLimit($limit) {
+    public function parseLimit($limit)
+    {
         $limitStr    = '';
-        if(!empty($limit)) {
+        if (!empty($limit)) {
             $limit	=	explode(',',$limit);
             if(count($limit)>1)
                 $limitStr = "(numrow>" . $limit[0] . ") AND (numrow<=" . ($limit[0]+$limit[1]) . ")";
             else
                 $limitStr = "(numrow>0 AND numrow<=".$limit[0].")";
         }
+
         return $limitStr?' WHERE '.$limitStr:'';
     }
 }//类定义结束
-?>

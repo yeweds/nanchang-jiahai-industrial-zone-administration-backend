@@ -6,9 +6,10 @@
  * @author 一凡
  +------------------------------------------------------------------------------
  */
-class AboutAction extends GlobalAction{
-    
-    public function index(){
+class AboutAction extends GlobalAction
+{
+    public function index()
+    {
         $this->display();
     }
 
@@ -55,12 +56,11 @@ class AboutAction extends GlobalAction{
         $shopNames = $shopTable->select();
         // dump($shopNames);
         // exit;
-        
-        
+
         $map_l['is_ershou'] = 0;
         $lp_list = M('New_loupan')->field('info_id,lpname')->where($map_l)->findall();
         $this->assign('lp_list', $lp_list);
-        
+
         //--获取最新新闻300条
         $map_n['ispublish'] = 1;  //业已发布
         $news_list = M('News')->field('id,title,add_time')->where($map_n)->limit('0,100')->order('id desc')->findall();
@@ -68,10 +68,9 @@ class AboutAction extends GlobalAction{
         $this->assign('class', $classNames);
         $this->assign('shopnames', $shopNames);
 
-
         $this->display();
     }
-    
+
 //--友情链接
     public function link()
     {
@@ -82,4 +81,3 @@ class AboutAction extends GlobalAction{
         $this->display();
     }
 }
-?>

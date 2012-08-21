@@ -38,7 +38,8 @@ class Image extends Think {//类定义开始
       +----------------------------------------------------------
      */
 
-    static function getImageInfo($img) {
+    public static function getImageInfo($img)
+    {
         $imageInfo = getimagesize($img);
         if ($imageInfo !== false) {
             $imageType = strtolower(substr(image_type_to_extension($imageInfo[2]), 1));
@@ -50,6 +51,7 @@ class Image extends Think {//类定义开始
                 "size" => $imageSize,
                 "mime" => $imageInfo['mime']
             );
+
             return $info;
         } else {
             return false;
@@ -62,17 +64,18 @@ class Image extends Think {//类定义开始
       +----------------------------------------------------------
      * @static public
       +----------------------------------------------------------
-     * @param string $source 原文件名
-     * @param string $water  水印图片
-     * @param string $$savename  添加水印后的图片名
-     * @param string $alpha  水印的透明度
+     * @param string $source    原文件名
+     * @param string $water     水印图片
+     * @param string $$savename 添加水印后的图片名
+     * @param string $alpha     水印的透明度
       +----------------------------------------------------------
      * @return string
       +----------------------------------------------------------
      * @throws ThinkExecption
       +----------------------------------------------------------
      */
-    static public function water($source, $water, $savename=null, $alpha=80) {
+    public static function water($source, $water, $savename=null, $alpha=80)
+    {
         //检查文件是否存在
         if (!file_exists($source) || !file_exists($water))
             return false;
@@ -113,7 +116,8 @@ class Image extends Think {//类定义开始
         imagedestroy($sImage);
     }
 
-    function showImg($imgFile, $text='', $x='10', $y='10', $alpha='50') {
+    public function showImg($imgFile, $text='', $x='10', $y='10', $alpha='50')
+    {
         //获取图像文件信息
         //2007/6/26 增加图片水印输出，$text为图片的完整路径即可
         $info = Image::getImageInfo($imgFile);
@@ -149,6 +153,7 @@ class Image extends Think {//类定义开始
                 Header("Content-type: " . $info['mime']);
                 $ImageFun($im);
                 @ImageDestroy($im);
+
                 return;
             }
 
@@ -162,6 +167,7 @@ class Image extends Think {//类定义开始
             imagefilledrectangle($im, 0, 0, 150, 30, $bgc);
             imagestring($im, 4, 5, 5, "no pic", $tc);
             Image::output($im);
+
             return;
         }
     }
@@ -173,18 +179,19 @@ class Image extends Think {//类定义开始
      * @static
      * @access public
       +----------------------------------------------------------
-     * @param string $image  原图
-     * @param string $type 图像格式
-     * @param string $thumbname 缩略图文件名
-     * @param string $maxWidth  宽度
-     * @param string $maxHeight  高度
-     * @param string $position 缩略图保存目录
+     * @param string  $image     原图
+     * @param string  $type      图像格式
+     * @param string  $thumbname 缩略图文件名
+     * @param string  $maxWidth  宽度
+     * @param string  $maxHeight 高度
+     * @param string  $position  缩略图保存目录
      * @param boolean $interlace 启用隔行扫描
       +----------------------------------------------------------
      * @return void
       +----------------------------------------------------------
      */
-    static function thumb($image, $thumbname, $type='', $maxWidth=200, $maxHeight=50, $interlace=true) {
+    public static function thumb($image, $thumbname, $type='', $maxWidth=200, $maxHeight=50, $interlace=true)
+    {
         // 获取原图信息
         $info = Image::getImageInfo($image);
         if ($info !== false) {
@@ -238,8 +245,10 @@ class Image extends Think {//类定义开始
             $imageFun($thumbImg, $thumbname);
             imagedestroy($thumbImg);
             imagedestroy($srcImg);
+
             return $thumbname;
         }
+
         return false;
     }
 
@@ -250,17 +259,18 @@ class Image extends Think {//类定义开始
      * @static
      * @access public
       +----------------------------------------------------------
-     * @param string $string  字符串
-     * @param string $size  图像大小 width,height 或者 array(width,height)
-     * @param string $font  字体信息 fontface,fontsize 或者 array(fontface,fontsize)
-     * @param string $type 图像格式 默认PNG
+     * @param string  $string  字符串
+     * @param string  $size    图像大小 width,height 或者 array(width,height)
+     * @param string  $font    字体信息 fontface,fontsize 或者 array(fontface,fontsize)
+     * @param string  $type    图像格式 默认PNG
      * @param integer $disturb 是否干扰 1 点干扰 2 线干扰 3 复合干扰 0 无干扰
-     * @param bool $border  是否加边框 array(color)
+     * @param bool    $border  是否加边框 array(color)
       +----------------------------------------------------------
      * @return string
       +----------------------------------------------------------
      */
-    static function buildString($string, $rgb=array(), $filename='', $type='png', $disturb=1, $border=true) {
+    public static function buildString($string, $rgb=array(), $filename='', $type='png', $disturb=1, $border=true)
+    {
         if (is_string($size))
             $size = explode(',', $size);
         $width = $size[0];
@@ -311,16 +321,17 @@ class Image extends Think {//类定义开始
      * @static
      * @access public
       +----------------------------------------------------------
-     * @param string $length  位数
-     * @param string $mode  类型
-     * @param string $type 图像格式
+     * @param string $length 位数
+     * @param string $mode   类型
+     * @param string $type   图像格式
      * @param string $width  宽度
-     * @param string $height  高度
+     * @param string $height 高度
       +----------------------------------------------------------
      * @return string
       +----------------------------------------------------------
      */
-    static function buildImageVerify($length=4, $mode=1, $type='png', $width=48, $height=22, $verifyName='verify') {
+    public static function buildImageVerify($length=4, $mode=1, $type='png', $width=48, $height=22, $verifyName='verify')
+    {
         import('ORG.Util.String');
         $randval = String::rand_string($length, $mode);
         $_SESSION[$verifyName] = md5($randval);
@@ -359,7 +370,8 @@ class Image extends Think {//类定义开始
     }
 
     // 中文验证码
-    static function GBVerify($length=4, $type='png', $width=180, $height=50, $fontface='simhei.ttf', $verifyName='verify') {
+    public static function GBVerify($length=4, $type='png', $width=180, $height=50, $fontface='simhei.ttf', $verifyName='verify')
+    {
         import('ORG.Util.String');
         $code = String::rand_string($length, 4);
         $width = ($length * 45) > $width ? $length * 45 : $width;
@@ -396,13 +408,14 @@ class Image extends Think {//类定义开始
      * @static
      * @access public
       +----------------------------------------------------------
-     * @param string $image  要显示的图像
+     * @param string $image 要显示的图像
      * @param string $type  图像类型，默认自动获取
       +----------------------------------------------------------
      * @return string
       +----------------------------------------------------------
      */
-    static function showASCIIImg($image, $string='', $type='') {
+    public static function showASCIIImg($image, $string='', $type='')
+    {
         $info = Image::getImageInfo($image);
         if ($info !== false) {
             $type = empty($type) ? $info['type'] : $type;
@@ -426,8 +439,10 @@ class Image extends Think {//类定义开始
             }
             $out .= '</span>';
             imagedestroy($im);
+
             return $out;
         }
+
         return false;
     }
 
@@ -438,14 +453,15 @@ class Image extends Think {//类定义开始
      * @static
      * @access public
       +----------------------------------------------------------
-     * @param string $type 图像格式
+     * @param string $type   图像格式
      * @param string $width  宽度
-     * @param string $height  高度
+     * @param string $height 高度
       +----------------------------------------------------------
      * @return string
       +----------------------------------------------------------
      */
-    static function showAdvVerify($type='png', $width=180, $height=40, $verifyName='verifyCode') {
+    public static function showAdvVerify($type='png', $width=180, $height=40, $verifyName='verifyCode')
+    {
         $rand = range('a', 'z');
         shuffle($rand);
         $verifyCode = array_slice($rand, 0, 10);
@@ -464,11 +480,11 @@ class Image extends Think {//类定义开始
         $stringColor = imagecolorallocate($im, rand(0, 100), rand(0, 100), 255);
         // 添加干扰
         /*
-          for($i=0;$i<10;$i++){
+          for ($i=0;$i<10;$i++) {
           $fontcolor=imagecolorallocate($im,mt_rand(0,255),mt_rand(0,255),mt_rand(0,255));
           imagearc($im,mt_rand(-10,$width),mt_rand(-10,$height),mt_rand(30,300),mt_rand(20,200),55,44,$fontcolor);
           }
-          for($i=0;$i<255;$i++){
+          for ($i=0;$i<255;$i++) {
           $fontcolor=imagecolorallocate($im,mt_rand(0,255),mt_rand(0,255),mt_rand(0,255));
           imagesetpixel($im,mt_rand(0,$width),mt_rand(0,$height),$fontcolor);
           } */
@@ -485,13 +501,14 @@ class Image extends Think {//类定义开始
       +----------------------------------------------------------
      * @param string $type 图像格式
      * @param string $type 图像格式
-     * @param string $lw  单元宽度
+     * @param string $lw   单元宽度
      * @param string $hi   条码高度
       +----------------------------------------------------------
      * @return string
       +----------------------------------------------------------
      */
-    static function UPCA($code, $type='png', $lw=2, $hi=100) {
+    public static function UPCA($code, $type='png', $lw=2, $hi=100)
+    {
         static $Lencode = array('0001101', '0011001', '0010011', '0111101', '0100011',
     '0110001', '0101111', '0111011', '0110111', '0001011');
         static $Rencode = array('1110010', '1100110', '1101100', '1000010', '1011100',
@@ -559,7 +576,8 @@ class Image extends Think {//类定义开始
         Image::output($im, $type);
     }
 
-    static function output($im, $type='png', $filename='') {
+    public static function output($im, $type='png', $filename='')
+    {
         header("Content-type: image/" . $type);
         $ImageFun = 'image' . $type;
         if (empty($filename)) {
@@ -573,4 +591,3 @@ class Image extends Think {//类定义开始
 }
 
 //类定义结束
-?>

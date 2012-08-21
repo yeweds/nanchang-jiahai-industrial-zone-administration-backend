@@ -25,24 +25,24 @@ abstract class Action extends Think
      * @access public
      +----------------------------------------------------------
      * @param string $method 方法名
-     * @param array $parms 参数
+     * @param array  $parms  参数
      +----------------------------------------------------------
      * @return mixed
      +----------------------------------------------------------
      */
-    public function __call($method,$parms) {
-        if(strtolower($method) == strtolower(ACTION_NAME)) {
+    public function __call($method,$parms)
+    {
+        if (strtolower($method) == strtolower(ACTION_NAME)) {
             // 如果定义了_empty操作 则调用
-            if(method_exists($this,'_empty')) {
+            if (method_exists($this,'_empty')) {
                 $this->_empty($method,$parms);
-            }else {
+            } else {
                 // 抛出异常
                 exit(L('_ERROR_ACTION_').ACTION_NAME);
             }
-        }else{
+        } else {
             exit(__CLASS__.':'.$method.L('_METHOD_NOT_EXIST_'));
         }
     }
 
 }//类定义结束
-?>

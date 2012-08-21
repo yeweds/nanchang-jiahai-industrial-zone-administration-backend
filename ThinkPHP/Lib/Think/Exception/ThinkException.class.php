@@ -43,7 +43,7 @@ class ThinkException extends Exception
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param string $message  异常信息
+     * @param string $message 异常信息
      +----------------------------------------------------------
      */
     public function __construct($message,$code=0,$extra=false)
@@ -77,7 +77,7 @@ class ThinkException extends Exception
         $file   =   file($this->file);
         $traceInfo='';
         $time = date("y-m-d H:i:m");
-        foreach($trace as $t) {
+        foreach ($trace as $t) {
             $traceInfo .= '['.$time.'] '.$t['file'].' ('.$t['line'].') ';
             $traceInfo .= $t['class'].$t['type'].$t['function'].'(';
             $traceInfo .= implode(', ', $t['args']);
@@ -98,7 +98,7 @@ class ThinkException extends Exception
         $error['trace']     = $traceInfo;
 
         // 记录 Exception 日志
-        if(C('LOG_EXCEPTION_RECORD')) {
+        if (C('LOG_EXCEPTION_RECORD')) {
             Log::Write('('.$this->type.') '.$this->message);
         }
 
@@ -106,4 +106,3 @@ class ThinkException extends Exception
     }
 
 }//类定义结束
-?>

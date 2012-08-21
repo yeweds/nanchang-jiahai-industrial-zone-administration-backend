@@ -57,13 +57,13 @@ return  array(
 
     /* 数据库设置 */
     'DB_TYPE'               => 'mysql',     // 数据库类型
-	'DB_HOST'               => 'localhost', // 服务器地址
-	'DB_NAME'               => '',          // 数据库名
-	'DB_USER'               => 'root',      // 用户名
-	'DB_PWD'                => '',          // 密码
-	'DB_PORT'               => 3306,        // 端口
-	'DB_PREFIX'             => 'think_',    // 数据库表前缀
-	'DB_SUFFIX'             => '',          // 数据库表后缀
+    'DB_HOST'               => 'localhost', // 服务器地址
+    'DB_NAME'               => '',          // 数据库名
+    'DB_USER'               => 'root',      // 用户名
+    'DB_PWD'                => '',          // 密码
+    'DB_PORT'               => 3306,        // 端口
+    'DB_PREFIX'             => 'think_',    // 数据库表前缀
+    'DB_SUFFIX'             => '',          // 数据库表后缀
     'DB_FIELDTYPE_CHECK'    => false,       // 是否进行字段类型检查
     'DB_FIELDS_CACHE'       => true,        // 启用字段缓存
     'DB_CHARSET'            => 'utf8',      // 数据库编码默认采用utf8
@@ -100,8 +100,8 @@ return  array(
     'LOG_RECORD_LEVEL'      => array('EMERG','ALERT','CRIT','ERR'),// 允许记录的日志级别
 
     /* 分页设置 */
-	'PAGE_ROLLPAGE'         => 5,      // 分页显示页数
-	'PAGE_LISTROWS'         => 20,     // 分页每页显示记录数
+    'PAGE_ROLLPAGE'         => 5,      // 分页显示页数
+    'PAGE_LISTROWS'         => 20,     // 分页每页显示记录数
 
     /* SESSION设置 */
     'SESSION_AUTO_START'    => true,    // 是否自动开启Session
@@ -153,7 +153,7 @@ return  array(
     'TOKEN_TYPE'            => 'md5',   // 令牌验证哈希规则
 
     /* URL设置 */
-	'URL_CASE_INSENSITIVE'  => false,   // URL地址是否不区分大小写
+    'URL_CASE_INSENSITIVE'  => false,   // URL地址是否不区分大小写
     'URL_ROUTER_ON'         => false,   // 是否开启URL路由
     'URL_ROUTE_RULES'       => array(), // 默认路由规则，注：分组配置无法替代
     //'URL_DISPATCH_ON'       => true,	// 是否启用Dispatcher，不再生效
@@ -172,11 +172,10 @@ return  array(
     'VAR_MODULE'            => 'm',		// 默认模块获取变量
     'VAR_ACTION'            => 'a',		// 默认操作获取变量
     'VAR_ROUTER'            => 'r',     // 默认路由获取变量
-   	'VAR_PAGE'              => 'p',		// 默认分页跳转变量
+       'VAR_PAGE'              => 'p',		// 默认分页跳转变量
     'VAR_TEMPLATE'          => 't',		// 默认模板切换变量
-	'VAR_LANGUAGE'          => 'l',		// 默认语言切换变量
+    'VAR_LANGUAGE'          => 'l',		// 默认语言切换变量
     'VAR_AJAX_SUBMIT'       => 'ajax',  // 默认的AJAX提交变量
     'VAR_PATHINFO'          => 's',	// PATHINFO 兼容模式获取变量例如 ?s=/module/action/id/1 后面的参数取决于URL_PATHINFO_MODEL 和 URL_PATHINFO_DEPR
 
 );
-?>

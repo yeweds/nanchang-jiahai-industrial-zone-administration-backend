@@ -21,4 +21,3 @@ return array(
     THINK_PATH.'/Lib/Think/Core/Model.class.php', // 模型类
     THINK_PATH.'/Mode/Phprpc/alias.php', // 加载别名
 );
-?>

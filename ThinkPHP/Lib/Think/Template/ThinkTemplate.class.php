@@ -33,7 +33,7 @@ class  ThinkTemplate extends Think
     // 模板变量
     public $tVar                 = array();
     public $config  =  array();
-    private   $literal = array();
+    private $literal = array();
 
     /**
      +----------------------------------------------------------
@@ -45,7 +45,7 @@ class  ThinkTemplate extends Think
      * @return ThinkTemplate
      +----------------------------------------------------------
      */
-    static public function  getInstance()
+    public static function  getInstance()
     {
         return get_instance_of(__CLASS__);
     }
@@ -59,7 +59,8 @@ class  ThinkTemplate extends Think
      * @param array $config 模板引擎配置数组
      +----------------------------------------------------------
      */
-    public function __construct(){
+    public function __construct()
+    {
         $this->config['cache_path']        =  C('CACHE_PATH');
         $this->config['template_suffix']   =  C('TMPL_TEMPLATE_SUFFIX');
         $this->config['cache_suffix']       =  C('TMPL_CACHFILE_SUFFIX');
@@ -73,25 +74,31 @@ class  ThinkTemplate extends Think
         $this->config['tag_level']            =  C('TAG_NESTED_LEVEL');
     }
 
-    private function stripPreg($str) {
+    private function stripPreg($str)
+    {
         $str = str_replace(array('{','}','(',')','|','[',']'),array('\{','\}','\(','\)','\|','\[','\]'),$str);
+
         return $str;
     }
 
     // 模板变量获取和设置
-    public function get($name) {
+    public function get($name)
+    {
         if(isset($this->tVar[$name]))
+
             return $this->tVar[$name];
         else
             return false;
     }
 
-    public function set($name,$value) {
+    public function set($name,$value)
+    {
         $this->tVar[$name]= $value;
     }
 
     // 加载模板
-    public function load($templateFile,$templateVar,$charset) {
+    public function load($templateFile,$templateVar,$charset)
+    {
         $this->tVar = $templateVar;
         $templateCacheFile  =  $this->loadTemplate($templateFile);
         // 模板阵列变量分解成为独立变量
@@ -107,7 +114,7 @@ class  ThinkTemplate extends Think
      * @access public
      +----------------------------------------------------------
      * @param string $tmplTemplateFile 模板文件
-     * @param string $varPrefix  模板变量前缀
+     * @param string $varPrefix        模板变量前缀
      +----------------------------------------------------------
      * @return string
      +----------------------------------------------------------
@@ -117,7 +124,7 @@ class  ThinkTemplate extends Think
     public function loadTemplate ($tmplTemplateFile='')
     {
         if(empty($tmplTemplateFile))    $tmplTemplateFile = $this->config['default_tmpl'];
-        if(!is_file($tmplTemplateFile)){
+        if (!is_file($tmplTemplateFile)) {
             $tmplTemplateFile =  dirname($this->config['default_tmpl']).'/'.$tmplTemplateFile.$this->config['template_suffix'];
             if(!is_file($tmplTemplateFile))
                 throw_exception(L('_TEMPLATE_NOT_EXIST_').':'.$tmplTemplateFile);
@@ -140,6 +147,7 @@ class  ThinkTemplate extends Think
             if( false === file_put_contents($tmplCacheFile,trim($tmplContent)))
                 throw_exception(L('_CACHE_WRITE_ERROR_').':'.$tmplCacheFile);
         }
+
         return $tmplCacheFile;
     }
 
@@ -165,12 +173,13 @@ class  ThinkTemplate extends Think
         $tmplContent = preg_replace('/<!--###literal(\d)###-->/eis',"\$this->restoreLiteral('\\1')",$tmplContent);
         // 添加安全代码
         $tmplContent  =  '<?php if (!defined(\'THINK_PATH\')) exit();?>'.$tmplContent;
-        if(C('TMPL_STRIP_SPACE')) {
+        if (C('TMPL_STRIP_SPACE')) {
             /* 去除html空格与换行 */
             $find     = array("~>\s+<~","~>(\s+\n|\r)~");
             $replace  = array("><",">");
             $tmplContent = preg_replace($find, $replace, $tmplContent);
         }
+
         return trim($tmplContent);
     }
 
@@ -181,7 +190,7 @@ class  ThinkTemplate extends Think
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param string $tmplTemplateFile  模板文件名
+     * @param string $tmplTemplateFile 模板文件名
      +----------------------------------------------------------
      * @return boolen
      +----------------------------------------------------------
@@ -191,12 +200,12 @@ class  ThinkTemplate extends Think
         if (!$this->config['tmpl_cache']) // 优先对配置检测
             return false;
         $tmplCacheFile = $this->config['cache_path'].md5($tmplTemplateFile).$this->config['cache_suffix'];
-        if(!is_file($tmplCacheFile)){
+        if (!is_file($tmplCacheFile)) {
             return false;
-        }elseif (filemtime($tmplTemplateFile) > filemtime($tmplCacheFile)) {
+        } elseif (filemtime($tmplTemplateFile) > filemtime($tmplCacheFile)) {
             // 模板文件如果有更新则缓存需要更新
             return false;
-        }elseif ($this->config['cache_time'] != -1 && time() > filemtime($tmplCacheFile)+$this->config['cache_time']) {
+        } elseif ($this->config['cache_time'] != -1 && time() > filemtime($tmplCacheFile)+$this->config['cache_time']) {
             // 缓存是否在有效期
             return false;
         }
@@ -228,15 +237,15 @@ class  ThinkTemplate extends Think
         // 一般放在文件的最前面
         // 格式：<taglib name="html,mytag..." />
         // 当TAGLIB_LOAD配置为true时才会进行检测
-        if(C('TAGLIB_LOAD')) {
+        if (C('TAGLIB_LOAD')) {
             $this->getIncludeTagLib($content);
-            if(!empty($this->tagLib)) {
+            if (!empty($this->tagLib)) {
                 // 对导入的TagLib进行解析
                 $_taglibs = C('_taglibs_');
-                foreach($this->tagLib as $tagLibName) {
+                foreach ($this->tagLib as $tagLibName) {
                     // 内置标签库
                     $tagLibName   = strtolower($tagLibName);
-                    if(!import('Think.Template.TagLib.TagLib'.ucwords($tagLibName))) {
+                    if (!import('Think.Template.TagLib.TagLib'.ucwords($tagLibName))) {
                         // 扩展标签库
                         if($_taglibs && isset($_taglibs[$tagLibName]))
                             // 'tagLibName'=>'importPath'
@@ -249,19 +258,20 @@ class  ThinkTemplate extends Think
             }
         }
         // 预先加载的标签库 无需在每个模板中使用taglib标签加载
-        if(C('TAGLIB_PRE_LOAD')) {
+        if (C('TAGLIB_PRE_LOAD')) {
             $tagLibs =  explode(',',C('TAGLIB_PRE_LOAD'));
-            foreach ($tagLibs as $tag){
+            foreach ($tagLibs as $tag) {
                 $this->parseTagLib($tag,$content);
             }
         }
         // 内置标签库 无需使用taglib标签导入就可以使用
         $tagLibs =  explode(',',C('TAGLIB_BUILD_IN'));
-        foreach ($tagLibs as $tag){
+        foreach ($tagLibs as $tag) {
             $this->parseTagLib($tag,$content,true);
         }
         //解析普通模板标签 {tagName:}
         $content = preg_replace('/('.$this->config['tmpl_begin'].')(\S.+?)('.$this->config['tmpl_end'].')/eis',"\$this->parseTag('\\2')",$content);
+
         return $content;
     }
 
@@ -271,18 +281,21 @@ class  ThinkTemplate extends Think
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param string $content  模板内容
+     * @param string $content 模板内容
      +----------------------------------------------------------
      * @return string|false
      +----------------------------------------------------------
      */
-    function parseLiteral($content) {
+    public function parseLiteral($content)
+    {
         if(trim($content)=='')
+
             return '';
         $content = stripslashes($content);
         $i  =   count($this->literal);
         $parseStr   =   "<!--###literal{$i}###-->";
         $this->literal[$i]  = $content;
+
         return $parseStr;
     }
 
@@ -292,16 +305,18 @@ class  ThinkTemplate extends Think
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param string $tag  literal标签序号
+     * @param string $tag literal标签序号
      +----------------------------------------------------------
      * @return string|false
      +----------------------------------------------------------
      */
-    function restoreLiteral($tag) {
+    public function restoreLiteral($tag)
+    {
         // 还原literal标签
         $parseStr   =  $this->literal[$tag];
         // 销毁literal记录
         unset($this->literal[$tag]);
+
         return $parseStr;
     }
 
@@ -312,7 +327,7 @@ class  ThinkTemplate extends Think
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param string $content  模板内容
+     * @param string $content 模板内容
      +----------------------------------------------------------
      * @return string|false
      +----------------------------------------------------------
@@ -321,7 +336,7 @@ class  ThinkTemplate extends Think
     {
         //搜索是否有TagLib标签
         $find = preg_match('/'.$this->config['taglib_begin'].'taglib\s(.+?)(\s*?)\/'.$this->config['taglib_end'].'\W/is',$content,$matches);
-        if($find) {
+        if ($find) {
             //替换TagLib标签
             $content = str_replace($matches[0],'',$content);
             //解析TagLib标签
@@ -330,10 +345,11 @@ class  ThinkTemplate extends Think
             $xml = simplexml_load_string($xml);
             if(!$xml)
                 throw_exception(L('_XML_TAG_ERROR_'));
-            $xml = (array)($xml->tag->attributes());
+            $xml = (array) ($xml->tag->attributes());
             $array = array_change_key_case($xml['@attributes']);
             $this->tagLib = explode(',',$array['name']);
         }
+
         return;
     }
 
@@ -343,9 +359,9 @@ class  ThinkTemplate extends Think
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param string $tagLib 要解析的标签库
+     * @param string $tagLib  要解析的标签库
      * @param string $content 要解析的模板内容
-     * @param boolen $hide 是否隐藏标签库前缀
+     * @param boolen $hide    是否隐藏标签库前缀
      +----------------------------------------------------------
      * @return string
      +----------------------------------------------------------
@@ -356,31 +372,31 @@ class  ThinkTemplate extends Think
         $end   = $this->config['taglib_end'];
         require_cache(dirname(__FILE__).'/TagLib/TagLib'.ucwords($tagLib).'.class.php');
         $tLib =  Think::instance('TagLib'.ucwords(strtolower($tagLib)));
-        foreach ($tLib->tags as $name=>$val){
+        foreach ($tLib->tags as $name=>$val) {
             $tags = array();
-            if(isset($val['alias'])) {// 别名设置
+            if (isset($val['alias'])) {// 别名设置
                 $tags = explode(',',$val['alias']);
                 $tags[]  =  $name;
-            }else{
+            } else {
                 $tags[] = $name;
             }
             $level = isset($val['level'])?$val['level']:1;
             $closeTag = isset($val['close'])?$val['close']:true;
-            foreach ($tags as $tag){
+            foreach ($tags as $tag) {
                 // 实际要解析的标签名称
                 $parseTag = !$hide?$tagLib.':'.$tag:$tag;
-                if(empty($val['attr'])){
+                if (empty($val['attr'])) {
                     // 无属性标签
-                    if(!$closeTag) {
+                    if (!$closeTag) {
                         $content = preg_replace('/'.$begin.$parseTag.'(\s*?)\/(\s*?)'.$end.'/eis',"\$this->parseXmlTag('$tagLib','$tag','\\1','')",$content);
-                    }else{
+                    } else {
                         for($i=0;$i<$level;$i++)
                             $content = preg_replace('/'.$begin.$parseTag.'(\s*?)'.$end.'(.*?)'.$begin.'\/'.$parseTag.'(\s*?)'.$end.'/eis',"\$this->parseXmlTag('$tagLib','$tag','\\1','\\2')",$content);
                     }
-                }else{
-                    if(!$closeTag) {
+                } else {
+                    if (!$closeTag) {
                         $content = preg_replace('/'.$begin.$parseTag.'\s(.*?)\/(\s*?)'.$end.'/eis',"\$this->parseXmlTag('$tagLib','$tag','\\1','')",$content);
-                    }else{
+                    } else {
                         for($i=0;$i<$level;$i++)
                             $content = preg_replace('/'.$begin.$parseTag.'\s(.*?)'.$end.'(.*?)'.$begin.'\/'.$parseTag.'(\s*?)'.$end.'/eis',"\$this->parseXmlTag('$tagLib','$tag','\\1','\\2')",$content);
                     }
@@ -397,9 +413,9 @@ class  ThinkTemplate extends Think
      * @access public
      +----------------------------------------------------------
      * @param string $tagLib  标签库名称
-     * @param string $tag  标签名
-     * @param string $attr  标签属性
-     * @param string $content  标签内容
+     * @param string $tag     标签名
+     * @param string $attr    标签属性
+     * @param string $content 标签内容
      +----------------------------------------------------------
      * @return string|false
      +----------------------------------------------------------
@@ -415,6 +431,7 @@ class  ThinkTemplate extends Think
         $tLib =  get_instance_of('TagLib'.ucwords(strtolower($tagLib)));
         $parse = '_'.$tag;
         $content = trim($content);
+
         return $tLib->$parse($attr,$content);
     }
 
@@ -430,7 +447,8 @@ class  ThinkTemplate extends Think
      * @return string
      +----------------------------------------------------------
      */
-    public function parseTag($tagStr){
+    public function parseTag($tagStr)
+    {
         //if (MAGIC_QUOTES_GPC) {
             $tagStr = stripslashes($tagStr);
         //}
@@ -440,44 +458,46 @@ class  ThinkTemplate extends Think
             return C('TMPL_L_DELIM') . $tagStr .C('TMPL_R_DELIM');
         $flag =  substr($tagStr,0,1);
         $name   = substr($tagStr,1);
-        if('$' == $flag){
+        if ('$' == $flag) {
             //解析模板变量 格式 {$varName}
             return $this->parseVar($name);
-        }elseif(':' == $flag){
+        } elseif (':' == $flag) {
             // 输出某个函数的结果
             return  '<?php echo '.$name.';?>';
-        }elseif('~' == $flag){
+        } elseif ('~' == $flag) {
             // 执行某个函数
             return  '<?php '.$name.';?>';
-        }elseif('&' == $flag){
+        } elseif ('&' == $flag) {
             // 输出配置参数
             return '<?php echo C("'.$name.'");?>';
-        }elseif('%' == $flag){
+        } elseif ('%' == $flag) {
             // 输出语言变量
             return '<?php echo L("'.$name.'");?>';
-		}elseif('@' == $flag){
-			// 输出SESSION变量
-            if(strpos($name,'.')) {
+        } elseif ('@' == $flag) {
+            // 输出SESSION变量
+            if (strpos($name,'.')) {
                 $array   =  explode('.',$name);
-	    		return '<?php echo $_SESSION["'.$array[0].'"]["'.$array[1].'"];?>';
-            }else{
-    			return '<?php echo $_SESSION["'.$name.'"];?>';
+
+                return '<?php echo $_SESSION["'.$array[0].'"]["'.$array[1].'"];?>';
+            } else {
+                return '<?php echo $_SESSION["'.$name.'"];?>';
             }
-		}elseif('#' == $flag){
-			// 输出COOKIE变量
-            if(strpos($name,'.')) {
+        } elseif ('#' == $flag) {
+            // 输出COOKIE变量
+            if (strpos($name,'.')) {
                 $array   =  explode('.',$name);
-	    		return '<?php echo $_COOKIE["'.$array[0].'"]["'.$array[1].'"];?>';
-            }else{
-    			return '<?php echo $_COOKIE["'.$name.'"];?>';
+
+                return '<?php echo $_COOKIE["'.$array[0].'"]["'.$array[1].'"];?>';
+            } else {
+                return '<?php echo $_COOKIE["'.$name.'"];?>';
             }
-		}elseif('.' == $flag){
+        } elseif ('.' == $flag) {
             // 输出GET变量
             return '<?php echo $_GET["'.$name.'"];?>';
-        }elseif('^' == $flag){
+        } elseif ('^' == $flag) {
             // 输出POST变量
             return '<?php echo $_POST["'.$name.'"];?>';
-        }elseif('*' == $flag){
+        } elseif ('*' == $flag) {
             // 输出常量
             return '<?php echo constant("'.$name.'");?>';
         }
@@ -494,9 +514,9 @@ class  ThinkTemplate extends Think
         $args = trim(substr($tagStr,$pos+1));
 
         //解析标签内容
-        if(!empty($args)) {
+        if (!empty($args)) {
             $tag  =  strtolower($tag);
-            switch($tag){
+            switch ($tag) {
                 case 'include':
                     return $this->parseInclude($args);
                     break;
@@ -506,16 +526,17 @@ class  ThinkTemplate extends Think
                 //这里扩展其它标签
                 //…………
                 default:
-                    if(C('TAG_EXTEND_PARSE')) {
+                    if (C('TAG_EXTEND_PARSE')) {
                         $method = C('TAG_EXTEND_PARSE');
                         if(array_key_exists($tag,$method))
+
                             return $method[$tag]($args);
                     }
             }
         }
+
         return C('TMPL_L_DELIM') . $tagStr .C('TMPL_R_DELIM');
     }
-
 
     /**
      +----------------------------------------------------------
@@ -525,19 +546,21 @@ class  ThinkTemplate extends Think
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param string $params  参数
+     * @param string $params 参数
      +----------------------------------------------------------
      * @return string
      +----------------------------------------------------------
      */
-    public function parseLoad($str) {
+    public function parseLoad($str)
+    {
         $type       = strtolower(substr(strrchr($str, '.'),1));
         $parseStr = '';
-        if($type=='js') {
+        if ($type=='js') {
             $parseStr .= '<script type="text/javascript" src="'.$str.'"></script>';
-        }elseif($type=='css') {
+        } elseif ($type=='css') {
             $parseStr .= '<link rel="stylesheet" type="text/css" href="'.$str.'" />';
         }
+
         return $parseStr;
     }
 
@@ -553,30 +576,31 @@ class  ThinkTemplate extends Think
      * @return string
      +----------------------------------------------------------
      */
-    public function parseVar($varStr){
+    public function parseVar($varStr)
+    {
         $varStr = trim($varStr);
         static $_varParseList = array();
         //如果已经解析过该变量字串，则直接返回变量值
         if(isset($_varParseList[$varStr])) return $_varParseList[$varStr];
         $parseStr ='';
         $varExists = true;
-        if(!empty($varStr)){
+        if (!empty($varStr)) {
             $varArray = explode('|',$varStr);
             //取得变量名称
             $var = array_shift($varArray);
             //非法变量过滤 不允许在变量里面使用 ->
             //TODO：还需要继续完善
             if(preg_match('/->/is',$var))
+
                 return '';
-            if('Think.' == substr($var,0,6)){
+            if ('Think.' == substr($var,0,6)) {
                 // 所有以Think.打头的以特殊变量对待 无需模板赋值就可以输出
                 $name = $this->parseThinkVar($var);
-            }
-            elseif( false !== strpos($var,'.')) {
+            } elseif ( false !== strpos($var,'.')) {
                 //支持 {$var.property}
                 $vars = explode('.',$var);
                 $var  =  array_shift($vars);
-                switch(strtolower(C('TMPL_VAR_IDENTIFY'))) {
+                switch (strtolower(C('TMPL_VAR_IDENTIFY'))) {
                     case 'array': // 识别为数组
                         $name = '$'.$var;
                         foreach ($vars as $key=>$val)
@@ -590,21 +614,18 @@ class  ThinkTemplate extends Think
                     default:  // 自动判断数组或对象 只支持二维
                         $name = 'is_array($'.$var.')?$'.$var.'["'.$vars[0].'"]:$'.$var.'->'.$vars[0];
                 }
-            }
-            elseif(false !==strpos($var,'::')){
+            } elseif (false !==strpos($var,'::')) {
                 //支持 {$var:property} 方式输出对象的属性
                 $vars = explode('::',$var);
                 $var  =  str_replace('::','->',$var);
                 $name = "$".$var;
                 $var  = $vars[0];
-            }
-            elseif(false !== strpos($var,'[')) {
+            } elseif (false !== strpos($var,'[')) {
                 //支持 {$var['key']} 方式输出数组
                 $name = "$".$var;
                 preg_match('/(.+?)\[(.+?)\]/is',$var,$match);
                 $var = $match[1];
-            }
-            else {
+            } else {
                 $name = "$$var";
             }
             //对变量使用函数
@@ -613,6 +634,7 @@ class  ThinkTemplate extends Think
             $parseStr = '<?php echo ('.$name.'); ?>';
         }
         $_varParseList[$varStr] = $parseStr;
+
         return $parseStr;
     }
 
@@ -623,43 +645,45 @@ class  ThinkTemplate extends Think
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param string $name 变量名
-     * @param array $varArray  函数列表
+     * @param string $name     变量名
+     * @param array  $varArray 函数列表
      +----------------------------------------------------------
      * @return string
      +----------------------------------------------------------
      */
-    public function parseVarFunction($name,$varArray){
+    public function parseVarFunction($name,$varArray)
+    {
         //对变量使用函数
         $length = count($varArray);
         //取得模板禁止使用函数列表
         $template_deny_funs = explode(',',C('TMPL_DENY_FUNC_LIST'));
-        for($i=0;$i<$length ;$i++ ){
+        for ($i=0;$i<$length ;$i++) {
             if (0===stripos($varArray[$i],'default='))
                 $args = explode('=',$varArray[$i],2);
             else
                 $args = explode('=',$varArray[$i]);
             //模板函数过滤
             $args[0] = trim($args[0]);
-            switch(strtolower($args[0])) {
+            switch (strtolower($args[0])) {
             case 'default':  // 特殊模板函数
                 $name   = '('.$name.')?('.$name.'):'.$args[1];
                 break;
             default:  // 通用模板函数
-                if(!in_array($args[0],$template_deny_funs)){
-                    if(isset($args[1])){
-                        if(strstr($args[1],'###')){
+                if (!in_array($args[0],$template_deny_funs)) {
+                    if (isset($args[1])) {
+                        if (strstr($args[1],'###')) {
                             $args[1] = str_replace('###',$name,$args[1]);
                             $name = "$args[0]($args[1])";
-                        }else{
+                        } else {
                             $name = "$args[0]($name,$args[1])";
                         }
-                    }else if(!empty($args[0])){
+                    } elseif (!empty($args[0])) {
                         $name = "$args[0]($name)";
                     }
                 }
             }
         }
+
         return $name;
     }
 
@@ -670,18 +694,19 @@ class  ThinkTemplate extends Think
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param string $varStr  变量字符串
+     * @param string $varStr 变量字符串
      +----------------------------------------------------------
      * @return string
      +----------------------------------------------------------
      */
-    public function parseThinkVar($varStr){
+    public function parseThinkVar($varStr)
+    {
         $vars = explode('.',$varStr);
         $vars[1] = strtoupper(trim($vars[1]));
         $parseStr = '';
-        if(count($vars)>=3){
+        if (count($vars)>=3) {
             $vars[2] = trim($vars[2]);
-            switch($vars[1]){
+            switch ($vars[1]) {
                 case 'SERVER':
                     $parseStr = '$_SERVER[\''.strtoupper($vars[2]).'\']';break;
                 case 'GET':
@@ -689,15 +714,15 @@ class  ThinkTemplate extends Think
                 case 'POST':
                     $parseStr = '$_POST[\''.$vars[2].'\']';break;
                 case 'COOKIE':
-                    if(isset($vars[3])) {
+                    if (isset($vars[3])) {
                         $parseStr = '$_COOKIE[\''.$vars[2].'\'][\''.$vars[3].'\']';
-                    }else{
+                    } else {
                         $parseStr = '$_COOKIE[\''.$vars[2].'\']';
                     }break;
                 case 'SESSION':
-                    if(isset($vars[3])) {
+                    if (isset($vars[3])) {
                         $parseStr = '$_SESSION[\''.$vars[2].'\'][\''.$vars[3].'\']';
-                    }else{
+                    } else {
                         $parseStr = '$_SESSION[\''.$vars[2].'\']';
                     }
                     break;
@@ -709,15 +734,15 @@ class  ThinkTemplate extends Think
                     $parseStr = strtoupper($vars[2]);break;
                 case 'LANG':
                     $parseStr = 'L("'.$vars[2].'")';break;
-				case 'CONFIG':
-                    if(isset($vars[3])) {
+                case 'CONFIG':
+                    if (isset($vars[3])) {
                         $vars[2] .= '.'.$vars[3];
                     }
                     $parseStr = 'C("'.$vars[2].'")';break;
                 default:break;
             }
-        }else if(count($vars)==2){
-            switch($vars[1]){
+        } elseif (count($vars)==2) {
+            switch ($vars[1]) {
                 case 'NOW':
                     $parseStr = "date('Y-m-d g:i a',time())";
                     break;
@@ -738,6 +763,7 @@ class  ThinkTemplate extends Think
                         $parseStr = $vars[1];
             }
         }
+
         return $parseStr;
     }
 
@@ -747,22 +773,23 @@ class  ThinkTemplate extends Think
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param string $tmplPublicName  公共模板文件名
+     * @param string $tmplPublicName 公共模板文件名
      +----------------------------------------------------------
      * @return string
      +----------------------------------------------------------
      */
-    public function parseInclude($tmplPublicName){
+    public function parseInclude($tmplPublicName)
+    {
         if(substr($tmplPublicName,0,1)=='$')
             //支持加载变量文件名
             $tmplPublicName = $this->get(substr($tmplPublicName,1));
 
-        if(is_file($tmplPublicName)) {
+        if (is_file($tmplPublicName)) {
             // 直接包含文件
             $parseStr = file_get_contents($tmplPublicName);
-        }else {
+        } else {
             $tmplPublicName  = str_replace(array('@',':'),'/',$tmplPublicName);
-            $count   =  substr_count($tmplPublicName,'/'); 
+            $count   =  substr_count($tmplPublicName,'/');
             $path   = dirname(C('TMPL_FILE_NAME'));
             for($i=0;$i<$count;$i++)
                 $path   = dirname($path);
@@ -774,4 +801,3 @@ class  ThinkTemplate extends Think
     }
 
 }//类定义结束
-?>

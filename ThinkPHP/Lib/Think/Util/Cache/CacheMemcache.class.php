@@ -31,12 +31,12 @@ class CacheMemcache extends Cache
      * @access public
      +----------------------------------------------------------
      */
-    function __construct($options='')
+    public function __construct($options='')
     {
         if ( !extension_loaded('memcache') ) {
             throw_exception(L('_NOT_SUPPERT_').':memcache');
         }
-        if(empty($options)) {
+        if (empty($options)) {
             $options = array
             (
                 'host'  => '127.0.0.1',
@@ -82,6 +82,7 @@ class CacheMemcache extends Cache
     public function get($name)
     {
         N('cache_read',1);
+
         return $this->handler->get($name);
     }
 
@@ -91,8 +92,8 @@ class CacheMemcache extends Cache
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param string $name 缓存变量名
-     * @param mixed $value  存储数据
+     * @param string $name  缓存变量名
+     * @param mixed  $value 存储数据
      +----------------------------------------------------------
      * @return boolen
      +----------------------------------------------------------
@@ -104,6 +105,7 @@ class CacheMemcache extends Cache
             $expire = $ttl;
         else
             $expire = $this->expire;
+
         return $this->handler->set($name, $value, 0, $expire);
     }
 
@@ -140,4 +142,3 @@ class CacheMemcache extends Cache
         return $this->handler->flush();
     }
 }//类定义结束
-?>

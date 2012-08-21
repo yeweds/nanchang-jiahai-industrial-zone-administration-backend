@@ -22,7 +22,8 @@
  */
 
 // 获取客户端IP地址
-function get_client_ip(){
+function get_client_ip()
+{
    if (getenv("HTTP_CLIENT_IP") && strcasecmp(getenv("HTTP_CLIENT_IP"), "unknown"))
        $ip = getenv("HTTP_CLIENT_IP");
    else if (getenv("HTTP_X_FORWARDED_FOR") && strcasecmp(getenv("HTTP_X_FORWARDED_FOR"), "unknown"))
@@ -33,6 +34,7 @@ function get_client_ip(){
        $ip = $_SERVER['REMOTE_ADDR'];
    else
        $ip = "unknown";
+
    return($ip);
 }
 
@@ -55,8 +57,9 @@ function get_client_ip(){
 function msubstr($str, $start=0, $length, $charset="utf-8", $suffix=true)
 {
     if(function_exists("mb_substr"))
+
         return mb_substr($str, $start, $length, $charset);
-    elseif(function_exists('iconv_substr')) {
+    elseif (function_exists('iconv_substr')) {
         return iconv_substr($str,$start,$length,$charset);
     }
     $re['utf-8']   = "/[\x01-\x7f]|[\xc2-\xdf][\x80-\xbf]|[\xe0-\xef][\x80-\xbf]{2}|[\xf0-\xff][\x80-\xbf]{3}/";
@@ -66,6 +69,7 @@ function msubstr($str, $start=0, $length, $charset="utf-8", $suffix=true)
     preg_match_all($re[$charset], $str, $match);
     $slice = join("",array_slice($match[0], $start, $length));
     if($suffix) return $slice."…";
+
     return $slice;
 }
 
@@ -81,9 +85,10 @@ function msubstr($str, $start=0, $length, $charset="utf-8", $suffix=true)
  * @return string
  +----------------------------------------------------------
  */
-function rand_string($len=6,$type='',$addChars='') {
+function rand_string($len=6,$type='',$addChars='')
+{
     $str ='';
-    switch($type) {
+    switch ($type) {
         case 0:
             $chars='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.$addChars;
             break;
@@ -104,18 +109,19 @@ function rand_string($len=6,$type='',$addChars='') {
             $chars='ABCDEFGHIJKMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789'.$addChars;
             break;
     }
-    if($len>10 ) {//位数过长重复字符串一定次数
+    if ($len>10) {//位数过长重复字符串一定次数
         $chars= $type==1? str_repeat($chars,$len) : str_repeat($chars,5);
     }
-    if($type!=4) {
+    if ($type!=4) {
         $chars   =   str_shuffle($chars);
         $str     =   substr($chars,0,$len);
-    }else{
+    } else {
         // 中文随机字
-        for($i=0;$i<$len;$i++){
+        for ($i=0;$i<$len;$i++) {
           $str.= msubstr($chars, floor(mt_rand(0,mb_strlen($chars,'utf-8')-1)),1);
         }
     }
+
     return $str;
 }
 
@@ -128,7 +134,8 @@ function rand_string($len=6,$type='',$addChars='') {
  * @return string
  +----------------------------------------------------------
  */
-function build_verify ($length=4,$mode=1) {
+function build_verify ($length=4,$mode=1)
+{
     return rand_string($length,$mode);
 }
 
@@ -141,13 +148,14 @@ function build_verify ($length=4,$mode=1) {
  */
 function byte_format($size, $dec=2)
 {
-	$a = array("B", "KB", "MB", "GB", "TB", "PB");
-	$pos = 0;
-	while ($size >= 1024) {
-		 $size /= 1024;
-		   $pos++;
-	}
-	return round($size,$dec)." ".$a[$pos];
+    $a = array("B", "KB", "MB", "GB", "TB", "PB");
+    $pos = 0;
+    while ($size >= 1024) {
+         $size /= 1024;
+           $pos++;
+    }
+
+    return round($size,$dec)." ".$a[$pos];
 }
 
 /**
@@ -161,15 +169,15 @@ function byte_format($size, $dec=2)
  */
 function is_utf8($string)
 {
-	return preg_match('%^(?:
-		 [\x09\x0A\x0D\x20-\x7E]            # ASCII
-	   | [\xC2-\xDF][\x80-\xBF]             # non-overlong 2-byte
-	   |  \xE0[\xA0-\xBF][\x80-\xBF]        # excluding overlongs
-	   | [\xE1-\xEC\xEE\xEF][\x80-\xBF]{2}  # straight 3-byte
-	   |  \xED[\x80-\x9F][\x80-\xBF]        # excluding surrogates
-	   |  \xF0[\x90-\xBF][\x80-\xBF]{2}     # planes 1-3
-	   | [\xF1-\xF3][\x80-\xBF]{3}          # planes 4-15
-	   |  \xF4[\x80-\x8F][\x80-\xBF]{2}     # plane 16
+    return preg_match('%^(?:
+         [\x09\x0A\x0D\x20-\x7E]            # ASCII
+       | [\xC2-\xDF][\x80-\xBF]             # non-overlong 2-byte
+       |  \xE0[\xA0-\xBF][\x80-\xBF]        # excluding overlongs
+       | [\xE1-\xEC\xEE\xEF][\x80-\xBF]{2}  # straight 3-byte
+       |  \xED[\x80-\x9F][\x80-\xBF]        # excluding surrogates
+       |  \xF0[\x90-\xBF][\x80-\xBF]{2}     # planes 1-3
+       | [\xF1-\xF3][\x80-\xBF]{3}          # planes 4-15
+       |  \xF4[\x80-\x8F][\x80-\xBF]{2}     # plane 16
    )*$%xs', $string);
 }
 /**
@@ -184,7 +192,7 @@ function is_utf8($string)
  */
 function highlight_code($str,$show=false)
 {
-    if(file_exists($str)) {
+    if (file_exists($str)) {
         $str    =   file_get_contents($str);
     }
     $str  =  stripslashes(trim($str));
@@ -202,15 +210,14 @@ function highlight_code($str,$show=false)
     // or B) whether the PHP tags enclose the entire string, we will add our
     // own PHP tags around the string along with some markers to make replacement easier later
 
-    $str = '<?php //tempstart'."\n".$str.'//tempend ?>'; // <?
+    $str = '<?php //tempstart'."\n".$str.'//tempend ?>'; // <?php
 
     // All the magic happens here, baby!
     $str = highlight_string($str, TRUE);
 
     // Prior to PHP 5, the highlight function used icky font tags
     // so we'll replace them with span tags.
-    if (abs(phpversion()) < 5)
-    {
+    if (abs(phpversion()) < 5) {
         $str = str_replace(array('<font ', '</font>'), array('<span ', '</span>'), $str);
         $str = preg_replace('#color="(.*?)"#', 'style="color: \\1"', $str);
     }
@@ -221,78 +228,81 @@ function highlight_code($str,$show=false)
     $str = preg_replace("#//tempend.+#is", "</span>\n</code>", $str);
 
     // Replace our markers back to PHP tags.
-    $str = str_replace(array('phptagopen', 'phptagclose', 'backslashtmp'), array('&lt;?php', '?&gt;', '\\'), $str); //<?
+    $str = str_replace(array('phptagopen', 'phptagclose', 'backslashtmp'), array('&lt;?php', '?&gt;', '\\'), $str); //<?php
     $line   =   explode("<br />", rtrim(ltrim($str,'<code>'),'</code>'));
     $result =   '<div class="code"><ol>';
-    foreach($line as $key=>$val) {
+    foreach ($line as $key=>$val) {
         $result .=  '<li>'.$val.'</li>';
     }
     $result .=  '</ol></div>';
     $result = str_replace("\n", "", $result);
-    if( $show!== false) {
+    if ($show!== false) {
         echo($result);
-    }else {
+    } else {
         return $result;
     }
 }
 //输出安全的html
-function h($text, $tags = null){
-	$text	=	trim($text);
-	//完全过滤注释
-	$text	=	preg_replace('/<!--?.*-->/','',$text);
-	//完全过滤动态代码
-	$text	=	preg_replace('/<\?|\?'.'>/','',$text);
-	//完全过滤js
-	$text	=	preg_replace('/<script?.*\/script>/','',$text);
+function h($text, $tags = null)
+{
+    $text	=	trim($text);
+    //完全过滤注释
+    $text	=	preg_replace('/<!--?.*-->/','',$text);
+    //完全过滤动态代码
+    $text	=	preg_replace('/<\?|\?'.'>/','',$text);
+    //完全过滤js
+    $text	=	preg_replace('/<script?.*\/script>/','',$text);
 
-	$text	=	str_replace('[','&#091;',$text);
-	$text	=	str_replace(']','&#093;',$text);
-	$text	=	str_replace('|','&#124;',$text);
-	//过滤换行符
-	$text	=	preg_replace('/\r?\n/','',$text);
-	//br
-	$text	=	preg_replace('/<br(\s\/)?'.'>/i','[br]',$text);
-	$text	=	preg_replace('/(\[br\]\s*){10,}/i','[br]',$text);
-	//过滤危险的属性，如：过滤on事件lang js
-	while(preg_match('/(<[^><]+)( lang|on|action|background|codebase|dynsrc|lowsrc)[^><]+/i',$text,$mat)){
-		$text=str_replace($mat[0],$mat[1],$text);
-	}
-	while(preg_match('/(<[^><]+)(window\.|javascript:|js:|about:|file:|document\.|vbs:|cookie)([^><]*)/i',$text,$mat)){
-		$text=str_replace($mat[0],$mat[1].$mat[3],$text);
-	}
-	if(empty($tags)) {
-		$tags = 'table|td|th|tr|i|b|u|strong|img|p|br|div|strong|em|ul|ol|li|dl|dd|dt|a';
-	}
-	//允许的HTML标签
-	$text	=	preg_replace('/<('.$tags.')( [^><\[\]]*)>/i','[\1\2]',$text);
-	//过滤多余html
-	$text	=	preg_replace('/<\/?(html|head|meta|link|base|basefont|body|bgsound|title|style|script|form|iframe|frame|frameset|applet|id|ilayer|layer|name|script|style|xml)[^><]*>/i','',$text);
-	//过滤合法的html标签
-	while(preg_match('/<([a-z]+)[^><\[\]]*>[^><]*<\/\1>/i',$text,$mat)){
-		$text=str_replace($mat[0],str_replace('>',']',str_replace('<','[',$mat[0])),$text);
-	}
-	//转换引号
-	while(preg_match('/(\[[^\[\]]*=\s*)(\"|\')([^\2=\[\]]+)\2([^\[\]]*\])/i',$text,$mat)){
-		$text=str_replace($mat[0],$mat[1].'|'.$mat[3].'|'.$mat[4],$text);
-	}
-	//过滤错误的单个引号
-	while(preg_match('/\[[^\[\]]*(\"|\')[^\[\]]*\]/i',$text,$mat)){
-		$text=str_replace($mat[0],str_replace($mat[1],'',$mat[0]),$text);
-	}
-	//转换其它所有不合法的 < >
-	$text	=	str_replace('<','&lt;',$text);
-	$text	=	str_replace('>','&gt;',$text);
-	$text	=	str_replace('"','&quot;',$text);
-	 //反转换
-	$text	=	str_replace('[','<',$text);
-	$text	=	str_replace(']','>',$text);
-	$text	=	str_replace('|','"',$text);
-	//过滤多余空格
-	$text	=	str_replace('  ',' ',$text);
-	return $text;
+    $text	=	str_replace('[','&#091;',$text);
+    $text	=	str_replace(']','&#093;',$text);
+    $text	=	str_replace('|','&#124;',$text);
+    //过滤换行符
+    $text	=	preg_replace('/\r?\n/','',$text);
+    //br
+    $text	=	preg_replace('/<br(\s\/)?'.'>/i','[br]',$text);
+    $text	=	preg_replace('/(\[br\]\s*){10,}/i','[br]',$text);
+    //过滤危险的属性，如：过滤on事件lang js
+    while (preg_match('/(<[^><]+)( lang|on|action|background|codebase|dynsrc|lowsrc)[^><]+/i',$text,$mat)) {
+        $text=str_replace($mat[0],$mat[1],$text);
+    }
+    while (preg_match('/(<[^><]+)(window\.|javascript:|js:|about:|file:|document\.|vbs:|cookie)([^><]*)/i',$text,$mat)) {
+        $text=str_replace($mat[0],$mat[1].$mat[3],$text);
+    }
+    if (empty($tags)) {
+        $tags = 'table|td|th|tr|i|b|u|strong|img|p|br|div|strong|em|ul|ol|li|dl|dd|dt|a';
+    }
+    //允许的HTML标签
+    $text	=	preg_replace('/<('.$tags.')( [^><\[\]]*)>/i','[\1\2]',$text);
+    //过滤多余html
+    $text	=	preg_replace('/<\/?(html|head|meta|link|base|basefont|body|bgsound|title|style|script|form|iframe|frame|frameset|applet|id|ilayer|layer|name|script|style|xml)[^><]*>/i','',$text);
+    //过滤合法的html标签
+    while (preg_match('/<([a-z]+)[^><\[\]]*>[^><]*<\/\1>/i',$text,$mat)) {
+        $text=str_replace($mat[0],str_replace('>',']',str_replace('<','[',$mat[0])),$text);
+    }
+    //转换引号
+    while (preg_match('/(\[[^\[\]]*=\s*)(\"|\')([^\2=\[\]]+)\2([^\[\]]*\])/i',$text,$mat)) {
+        $text=str_replace($mat[0],$mat[1].'|'.$mat[3].'|'.$mat[4],$text);
+    }
+    //过滤错误的单个引号
+    while (preg_match('/\[[^\[\]]*(\"|\')[^\[\]]*\]/i',$text,$mat)) {
+        $text=str_replace($mat[0],str_replace($mat[1],'',$mat[0]),$text);
+    }
+    //转换其它所有不合法的 < >
+    $text	=	str_replace('<','&lt;',$text);
+    $text	=	str_replace('>','&gt;',$text);
+    $text	=	str_replace('"','&quot;',$text);
+     //反转换
+    $text	=	str_replace('[','<',$text);
+    $text	=	str_replace(']','>',$text);
+    $text	=	str_replace('|','"',$text);
+    //过滤多余空格
+    $text	=	str_replace('  ',' ',$text);
+
+    return $text;
 }
 
-function ubb($Text) {
+function ubb($Text)
+{
   $Text=trim($Text);
   //$Text=htmlspecialchars($Text);
   $Text=preg_replace("/\\t/is","  ",$Text);
@@ -325,32 +335,36 @@ function ubb($Text) {
   $Text=preg_replace("/\[php\](.+?)\[\/php\]/eis","highlight_code('\\1')", $Text);
   $Text=preg_replace("/\[sig\](.+?)\[\/sig\]/is","<div class='sign'>\\1</div>", $Text);
   $Text=preg_replace("/\\n/is","<br/>",$Text);
+
   return $Text;
 }
 
 // 随机生成一组字符串
-function build_count_rand ($number,$length=4,$mode=1) {
-    if($mode==1 && $length<strlen($number) ) {
+function build_count_rand ($number,$length=4,$mode=1)
+{
+    if ($mode==1 && $length<strlen($number) ) {
         //不足以生成一定数量的不重复数字
         return false;
     }
     $rand   =  array();
-    for($i=0; $i<$number; $i++) {
+    for ($i=0; $i<$number; $i++) {
         $rand[] =   rand_string($length,$mode);
     }
     $unqiue = array_unique($rand);
-    if(count($unqiue)==count($rand)) {
+    if (count($unqiue)==count($rand)) {
         return $rand;
     }
     $count   = count($rand)-count($unqiue);
-    for($i=0; $i<$count*3; $i++) {
+    for ($i=0; $i<$count*3; $i++) {
         $rand[] =   rand_string($length,$mode);
     }
     $rand = array_slice(array_unique ($rand),0,$number);
+
     return $rand;
 }
 
-function remove_xss($val) {
+function remove_xss($val)
+{
    // remove all non-printable characters. CR(0a) and LF(0b) and TAB(9) are allowed
    // this prevents some character re-spacing such as <java\0script>
    // note that you have to handle splits with \n, \r, and \t later since they *are* allowed in some inputs
@@ -401,6 +415,7 @@ function remove_xss($val) {
          }
       }
    }
+
    return $val;
 }
 
@@ -421,7 +436,7 @@ function list_to_tree($list, $pk='id',$pid = 'pid',$child = '_child',$root=0)
 {
     // 创建Tree
     $tree = array();
-    if(is_array($list)) {
+    if (is_array($list)) {
         // 创建基于主键的数组引用
         $refer = array();
         foreach ($list as $key => $data) {
@@ -432,7 +447,7 @@ function list_to_tree($list, $pk='id',$pid = 'pid',$child = '_child',$root=0)
             $parentId = $data[$pid];
             if ($root == $parentId) {
                 $tree[] =& $list[$key];
-            }else{
+            } else {
                 if (isset($refer[$parentId])) {
                     $parent =& $refer[$parentId];
                     $parent[$child][] =& $list[$key];
@@ -440,6 +455,7 @@ function list_to_tree($list, $pk='id',$pid = 'pid',$child = '_child',$root=0)
             }
         }
     }
+
     return $tree;
 }
 
@@ -457,8 +473,9 @@ function list_to_tree($list, $pk='id',$pid = 'pid',$child = '_child',$root=0)
  * @return array
  +----------------------------------------------------------
  */
-function list_sort_by($list,$field, $sortby='asc') {
-   if(is_array($list)){
+function list_sort_by($list,$field, $sortby='asc')
+{
+   if (is_array($list)) {
        $refer = $resultSet = array();
        foreach ($list as $i => $data)
            $refer[$i] = &$data[$field];
@@ -475,8 +492,10 @@ function list_sort_by($list,$field, $sortby='asc') {
        }
        foreach ( $refer as $key=> $val)
            $resultSet[] = &$list[$key];
+
        return $resultSet;
    }
+
    return false;
 }
 
@@ -493,18 +512,19 @@ function list_sort_by($list,$field, $sortby='asc') {
  * @return array
  +----------------------------------------------------------
  */
-function list_search($list,$condition) {
+function list_search($list,$condition)
+{
     if(is_string($condition))
         parse_str($condition,$condition);
     // 返回的结果集合
     $resultSet = array();
-    foreach ($list as $key=>$data){
+    foreach ($list as $key=>$data) {
         $find   =   false;
-        foreach ($condition as $field=>$value){
-            if(isset($data[$field])) {
-                if(0 === strpos($value,'/')) {
+        foreach ($condition as $field=>$value) {
+            if (isset($data[$field])) {
+                if (0 === strpos($value,'/')) {
                     $find   =   preg_match($value,$data[$field]);
-                }elseif($data[$field]==$value){
+                } elseif ($data[$field]==$value) {
                     $find = true;
                 }
             }
@@ -512,12 +532,14 @@ function list_search($list,$condition) {
         if($find)
             $resultSet[]     =   &$list[$key];
     }
+
     return $resultSet;
 }
 
 // 发送Http状态信息
-function send_http_status($code) {
-    static $_status = array(
+function send_http_status($code)
+{
+    public static $_status = array(
         // Informational 1xx
         100 => 'Continue',
         101 => 'Switching Protocols',
@@ -566,8 +588,7 @@ function send_http_status($code) {
         505 => 'HTTP Version Not Supported',
         509 => 'Bandwidth Limit Exceeded'
     );
-    if(array_key_exists($code,$_status)) {
+    if (array_key_exists($code,$_status)) {
         header('HTTP/1.1 '.$code.' '.$_status[$code]);
     }
 }
-?>

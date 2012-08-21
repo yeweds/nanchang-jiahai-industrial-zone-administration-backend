@@ -24,15 +24,15 @@
 
 ob_start() ;
 
-require('./config.php') ;
-require('./util.php') ;
-require('./io.php') ;
-require('./basexml.php') ;
-require('./commands.php') ;
-require('./phpcompat.php') ;
+require './config.php' ;
+require './util.php' ;
+require './io.php' ;
+require './basexml.php' ;
+require './commands.php' ;
+require './phpcompat.php' ;
 
 if ( !$Config['Enabled'] )
-	SendError( 1, 'This connector is disabled. Please check the "editor/filemanager/connectors/php/config.php" file' ) ;
+    SendError( 1, 'This connector is disabled. Please check the "editor/filemanager/connectors/php/config.php" file' ) ;
 
 DoResponse() ;
 
@@ -41,47 +41,45 @@ function DoResponse()
     if (!isset($_GET)) {
         global $_GET;
     }
-	if ( !isset( $_GET['Command'] ) || !isset( $_GET['Type'] ) || !isset( $_GET['CurrentFolder'] ) )
-		return ;
+    if ( !isset( $_GET['Command'] ) || !isset( $_GET['Type'] ) || !isset( $_GET['CurrentFolder'] ) )
+        return ;
 
-	// Get the main request informaiton.
-	$sCommand		= $_GET['Command'] ;
-	$sResourceType	= $_GET['Type'] ;
-	$sCurrentFolder	= GetCurrentFolder() ;
+    // Get the main request informaiton.
+    $sCommand		= $_GET['Command'] ;
+    $sResourceType	= $_GET['Type'] ;
+    $sCurrentFolder	= GetCurrentFolder() ;
 
-	// Check if it is an allowed command
-	if ( ! IsAllowedCommand( $sCommand ) )
-		SendError( 1, 'The "' . $sCommand . '" command isn\'t allowed' ) ;
+    // Check if it is an allowed command
+    if ( ! IsAllowedCommand( $sCommand ) )
+        SendError( 1, 'The "' . $sCommand . '" command isn\'t allowed' ) ;
 
-	// Check if it is an allowed type.
-	if ( !IsAllowedType( $sResourceType ) )
-		SendError( 1, 'Invalid type specified' ) ;
+    // Check if it is an allowed type.
+    if ( !IsAllowedType( $sResourceType ) )
+        SendError( 1, 'Invalid type specified' ) ;
 
-	// File Upload doesn't have to Return XML, so it must be intercepted before anything.
-	if ( $sCommand == 'FileUpload' )
-	{
-		FileUpload( $sResourceType, $sCurrentFolder, $sCommand ) ;
-		return ;
-	}
+    // File Upload doesn't have to Return XML, so it must be intercepted before anything.
+    if ($sCommand == 'FileUpload') {
+        FileUpload( $sResourceType, $sCurrentFolder, $sCommand ) ;
 
-	CreateXmlHeader( $sCommand, $sResourceType, $sCurrentFolder ) ;
+        return ;
+    }
 
-	// Execute the required command.
-	switch ( $sCommand )
-	{
-		case 'GetFolders' :
-			GetFolders( $sResourceType, $sCurrentFolder ) ;
-			break ;
-		case 'GetFoldersAndFiles' :
-			GetFoldersAndFiles( $sResourceType, $sCurrentFolder ) ;
-			break ;
-		case 'CreateFolder' :
-			CreateFolder( $sResourceType, $sCurrentFolder ) ;
-			break ;
-	}
+    CreateXmlHeader( $sCommand, $sResourceType, $sCurrentFolder ) ;
 
-	CreateXmlFooter() ;
+    // Execute the required command.
+    switch ($sCommand) {
+        case 'GetFolders' :
+            GetFolders( $sResourceType, $sCurrentFolder ) ;
+            break ;
+        case 'GetFoldersAndFiles' :
+            GetFoldersAndFiles( $sResourceType, $sCurrentFolder ) ;
+            break ;
+        case 'CreateFolder' :
+            CreateFolder( $sResourceType, $sCurrentFolder ) ;
+            break ;
+    }
 
-	exit ;
+    CreateXmlFooter() ;
+
+    exit ;
 }
-?>

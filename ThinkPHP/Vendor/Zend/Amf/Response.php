@@ -68,6 +68,7 @@ class Zend_Amf_Response
     {
         $this->_outputStream = new Zend_Amf_Parse_OutputStream();
         $this->writeMessage($this->_outputStream);
+
         return $this;
     }
 
@@ -105,7 +106,7 @@ class Zend_Amf_Response
             $stream->writeUTF($body->getTargetURI());
             $stream->writeUTF($body->getResponseURI());
             $stream->writeLong(Zend_Amf_Constants::UNKNOWN_CONTENT_LENGTH);
-            if($this->_objectEncoding == Zend_Amf_Constants::AMF0_OBJECT_ENCODING) {
+            if ($this->_objectEncoding == Zend_Amf_Constants::AMF0_OBJECT_ENCODING) {
                 $serializer->writeTypeMarker($body->getData());
             } else {
                 // Content is AMF3
@@ -145,6 +146,7 @@ class Zend_Amf_Response
     public function addAmfBody(Zend_Amf_Value_MessageBody $body)
     {
         $this->_bodies[] = $body;
+
         return $this;
     }
 
@@ -167,12 +169,13 @@ class Zend_Amf_Response
     public function addAmfHeader(Zend_Amf_Value_MessageHeader $header)
     {
         $this->_headers[] = $header;
+
         return $this;
     }
 
     /**
      * Retrieve attached AMF message headers
-     * 
+     *
      * @return array Array of Zend_Amf_Value_MessageHeader objects
      */
     public function getAmfHeaders()
@@ -183,12 +186,13 @@ class Zend_Amf_Response
     /**
      * Set the AMF encoding that will be used for serialization
      *
-     * @param  int $encoding
+     * @param  int               $encoding
      * @return Zend_Amf_Response
      */
     public function setObjectEncoding($encoding)
     {
         $this->_objectEncoding = $encoding;
+
         return $this;
     }
 }

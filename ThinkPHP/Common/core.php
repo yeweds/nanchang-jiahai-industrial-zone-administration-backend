@@ -22,4 +22,3 @@ return array(
     THINK_PATH.'/Lib/Think/Core/View.class.php',  // 视图类
     THINK_PATH.'/Common/alias.php',  // 加载别名
 );
-?>

@@ -17,4 +17,3 @@ class UserModel extends Model
 //
 //	protected $blobFields = array('content');
 }
-?>

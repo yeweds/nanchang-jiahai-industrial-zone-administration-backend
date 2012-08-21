@@ -21,8 +21,8 @@
  * @version   $Id$
  +------------------------------------------------------------------------------
  */
-class DbIbase extends Db{
-
+class DbIbase extends Db
+{
     protected $selectSql  =     'SELECT %LIMIT% %DISTINCT% %FIELDS% FROM %TABLE%%JOIN%%WHERE%%GROUP%%HAVING%%ORDER%';
     /**
      +----------------------------------------------------------
@@ -33,11 +33,12 @@ class DbIbase extends Db{
      * @param array $config 数据库配置数组
      +----------------------------------------------------------
      */
-    public function __construct($config=''){
+    public function __construct($config='')
+    {
         if ( !extension_loaded('interbase') ) {
             throw_exception(L('_NOT_SUPPERT_').':Interbase or Firebird');
         }
-        if(!empty($config)) {
+        if (!empty($config)) {
             $this->config   =   $config;
         }
     }
@@ -51,14 +52,15 @@ class DbIbase extends Db{
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-    public function connect($config='',$linkNum=0) {
+    public function connect($config='',$linkNum=0)
+    {
         if ( !isset($this->linkID[$linkNum]) ) {
             if(empty($config))  $config =   $this->config;
             $conn = $this->pconnect ? 'ibase_pconnect':'ibase_connect';
             // 处理不带端口号的socket连接情况
             $host = $config['hostname'].($config['hostport']?"/{$config['hostport']}":'');
             $this->linkID[$linkNum] = $conn($host.':'.$config['database'], $config['username'], $config['password'],C('DB_CHARSET'),0,3);
-            if ( !$this->linkID[$linkNum]) {
+            if (!$this->linkID[$linkNum]) {
                 throw_exception(ibase_errmsg());
             }
             // 标记连接成功
@@ -66,6 +68,7 @@ class DbIbase extends Db{
             // 注销数据库连接配置信息
             if(1 != C('DB_DEPLOY_TYPE')) unset($this->config);
         }
+
         return $this->linkID[$linkNum];
     }
 
@@ -76,7 +79,8 @@ class DbIbase extends Db{
      * @access public
      +----------------------------------------------------------
      */
-    public function free() {
+    public function free()
+    {
         ibase_free_result($this->queryID);
         $this->queryID = 0;
     }
@@ -87,14 +91,15 @@ class DbIbase extends Db{
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param string $str  sql指令
+     * @param string $str sql指令
      +----------------------------------------------------------
      * @return mixed
      +----------------------------------------------------------
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-    public function query($str) {
+    public function query($str)
+    {
         $this->initConnect(false);
         if ( !$this->_linkID ) return false;
         $this->queryStr = $str;
@@ -105,8 +110,9 @@ class DbIbase extends Db{
         G('queryStartTime');
         $this->queryID = ibase_query($this->_linkID, $str);
         $this->debug();
-        if ( false === $this->queryID ) {
+        if (false === $this->queryID) {
             $this->error();
+
             return false;
         } else {
             return $this->getAll();
@@ -119,14 +125,15 @@ class DbIbase extends Db{
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param string $str  sql指令
+     * @param string $str sql指令
      +----------------------------------------------------------
      * @return integer
      +----------------------------------------------------------
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-    public function execute($str) {
+    public function execute($str)
+    {
         $this->initConnect(true);
         if ( !$this->_linkID ) return false;
         $this->queryStr = $str;
@@ -137,17 +144,20 @@ class DbIbase extends Db{
         G('queryStartTime');
         $result =   ibase_query($this->_linkID, $str) ;
         $this->debug();
-        if ( false === $result) {
+        if (false === $result) {
             $this->error();
+
             return false;
         } else {
             $this->numRows = ibase_affected_rows($this->_linkID);
             $this->lastInsID =0;
+
             return $this->numRows;
         }
     }
 
-    public function startTrans() {
+    public function startTrans()
+    {
         $this->initConnect(true);
         if ( !$this->_linkID ) return false;
         //数据rollback 支持
@@ -155,6 +165,7 @@ class DbIbase extends Db{
             ibase_trans( IBASE_DEFAULT, $this->_linkID);
         }
         $this->transTimes++;
+
         return ;
     }
 
@@ -174,10 +185,11 @@ class DbIbase extends Db{
         if ($this->transTimes > 0) {
             $result =  ibase_commit($this->_linkID);
             $this->transTimes = 0;
-            if(!$result){
+            if (!$result) {
                 throw_exception($this->error());
             }
         }
+
         return true;
     }
 
@@ -197,10 +209,11 @@ class DbIbase extends Db{
         if ($this->transTimes > 0) {
             $result =ibase_rollback($this->_linkID);
             $this->transTimes = 0;
-            if(!$result){
+            if (!$result) {
                 throw_exception($this->error());
             }
         }
+
         return true;
     }
 
@@ -222,18 +235,18 @@ class DbIbase extends Db{
         $maxblobsize = 262144;
         $blob_data = ibase_blob_info($this->_linkID, $blob );
         $blobid = ibase_blob_open($this->_linkID, $blob );
-        if( $blob_data[0] > $maxblobsize ) {
+        if ($blob_data[0] > $maxblobsize) {
             $realblob = ibase_blob_get($blobid, $maxblobsize);
-            while($string = ibase_blob_get($blobid, 8192)){
+            while ($string = ibase_blob_get($blobid, 8192)) {
                 $realblob .= $string;
             }
         } else {
             $realblob = ibase_blob_get($blobid, $blob_data[0]);
         }
         ibase_blob_close( $blobid );
+
         return( $realblob );
     }
-
 
     /**
      +----------------------------------------------------------
@@ -246,7 +259,8 @@ class DbIbase extends Db{
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-    private function getAll() {
+    private function getAll()
+    {
         //返回数据集
         $result = array();
         while ( $row = ibase_fetch_assoc($this->queryID)) {
@@ -266,12 +280,13 @@ class DbIbase extends Db{
        if (!empty($bloblist)) {
          $i=0;
          foreach ($result as $row) {
-           foreach($bloblist as $field) {
+           foreach ($bloblist as $field) {
                if (!empty($row[$field])) $result[$i][$field]=$this->BlobDecode($row[$field]);
           }
           $i++;
         }
       }
+
      return $result;
     }
 
@@ -284,10 +299,11 @@ class DbIbase extends Db{
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-    public function getFields($tableName) {
+    public function getFields($tableName)
+    {
         $result   =  $this->query('SELECT RDB$FIELD_NAME AS FIELD, RDB$DEFAULT_VALUE AS DEFAULT1, RDB$NULL_FLAG AS NULL1 FROM RDB$RELATION_FIELDS WHERE RDB$RELATION_NAME=UPPER(\''.$tableName.'\') ORDER By RDB$FIELD_POSITION');
         $info   =   array();
-        if($result) {
+        if ($result) {
             foreach ($result as $key => $val) {
                 $info[trim($val['FIELD'])] = array(
                     'name'    => trim($val['FIELD']),
@@ -304,8 +320,7 @@ class DbIbase extends Db{
      $rs_temp = ibase_query ($this->_linkID, $sql);
      $fieldCount = ibase_num_fields($rs_temp);
 
-     for ($i = 0; $i < $fieldCount; $i++)
-     {
+     for ($i = 0; $i < $fieldCount; $i++) {
        $col_info = ibase_field_info($rs_temp, $i);
        $info[trim($col_info['name'])]['type']=$col_info['type'];
      }
@@ -333,13 +348,15 @@ where a.rdb$constraint_type=\'PRIMARY KEY\' and a.rdb$relation_name=UPPER(\''.$t
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-    public function getTables($dbName='') {
+    public function getTables($dbName='')
+    {
         $sql='SELECT DISTINCT RDB$RELATION_NAME FROM RDB$RELATION_FIELDS WHERE RDB$SYSTEM_FLAG=0';
         $result   =  $this->query($sql);
         $info   =   array();
         foreach ($result as $key => $val) {
             $info[$key] = trim(current($val));
         }
+
         return $info;
     }
 
@@ -352,10 +369,11 @@ where a.rdb$constraint_type=\'PRIMARY KEY\' and a.rdb$relation_name=UPPER(\''.$t
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-    public function close() {
+    public function close()
+    {
         if (!empty($this->queryID))
             ibase_free_result($this->queryID);
-        if ($this->_linkID && !ibase_close($this->_linkID)){
+        if ($this->_linkID && !ibase_close($this->_linkID)) {
             throw_exception($this->error());
         }
         $this->_linkID = 0;
@@ -373,11 +391,13 @@ where a.rdb$constraint_type=\'PRIMARY KEY\' and a.rdb$relation_name=UPPER(\''.$t
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-    public function error() {
+    public function error()
+    {
         $this->error = ibase_errmsg();
-        if($this->debug && '' != $this->queryStr){
+        if ($this->debug && '' != $this->queryStr) {
             $this->error .= "\n [ SQL语句 ] : ".$this->queryStr;
         }
+
         return $this->error;
     }
 
@@ -387,14 +407,15 @@ where a.rdb$constraint_type=\'PRIMARY KEY\' and a.rdb$relation_name=UPPER(\''.$t
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param string $str  SQL字符串
+     * @param string $str SQL字符串
      +----------------------------------------------------------
      * @return string
      +----------------------------------------------------------
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-    public function escape_string($str) {
+    public function escape_string($str)
+    {
         return addslashes($str);
     }
 
@@ -407,18 +428,20 @@ where a.rdb$constraint_type=\'PRIMARY KEY\' and a.rdb$relation_name=UPPER(\''.$t
      * @return string
      +----------------------------------------------------------
      */
-	public function parseLimit($limit) {
+    public function parseLimit($limit)
+    {
         $limitStr    = '';
-        if(!empty($limit)) {
+        if (!empty($limit)) {
             $limit  =   explode(',',$limit);
-            if(count($limit)>1) {
+            if (count($limit)>1) {
                  $limitStr = ' FIRST '.($limit[1]-$limit[0]).' SKIP '.$limit[0].' ';
-            }else{
+            } else {
               $limitStr = ' FIRST '.$limit[0].' ';
             }
         }
-		return $limitStr;
-	}
+
+        return $limitStr;
+    }
 
    /**
      +----------------------------------------------------------
@@ -433,4 +456,3 @@ where a.rdb$constraint_type=\'PRIMARY KEY\' and a.rdb$relation_name=UPPER(\''.$t
         $this->close();
     }
 }//类定义结束
-?>

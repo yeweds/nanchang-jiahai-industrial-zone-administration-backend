@@ -20,7 +20,6 @@
  * @version    $Id: AsyncMessage.php 16971 2009-07-22 18:05:45Z mikaelkael $
  */
 
-
 /** Zend_Amf_Value_Messaging_AbstractMessage */
 require_once 'Zend/Amf/Value/Messaging/AbstractMessage.php';
 

@@ -36,7 +36,7 @@ class CacheShmop extends Cache
         if ( !extension_loaded('shmop') ) {
             throw_exception(L('_NOT_SUPPERT_').':shmop');
         }
-        if(!empty($options)){
+        if (!empty($options)) {
             $options = array(
                 'size' => C('SHARE_MEM_SIZE'),
                 'tmp'  => TEMP_PATH,
@@ -70,17 +70,18 @@ class CacheShmop extends Cache
             if ($name === false) {
                 return $ret;
             }
-            if(isset($ret[$name])) {
+            if (isset($ret[$name])) {
                 $content   =  $ret[$name];
-                if(C('DATA_CACHE_COMPRESS') && function_exists('gzcompress')) {
+                if (C('DATA_CACHE_COMPRESS') && function_exists('gzcompress')) {
                     //启用数据压缩
                     $content   =   gzuncompress($content);
                 }
+
                 return $content;
-            }else {
-            	return null;
+            } else {
+                return null;
             }
-        }else {
+        } else {
             return false;
         }
     }
@@ -91,8 +92,8 @@ class CacheShmop extends Cache
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param string $name 缓存变量名
-     * @param mixed $value  存储数据
+     * @param string $name  缓存变量名
+     * @param mixed  $value 存储数据
      +----------------------------------------------------------
      * @return boolen
      +----------------------------------------------------------
@@ -103,12 +104,13 @@ class CacheShmop extends Cache
         $lh = $this->_lock();
         $val = $this->get();
         if (!is_array($val)) $val = array();
-        if( C('DATA_CACHE_COMPRESS') && function_exists('gzcompress')) {
+        if ( C('DATA_CACHE_COMPRESS') && function_exists('gzcompress')) {
             //数据压缩
             $value   =   gzcompress($value,3);
         }
         $val[$name] = $value;
         $val = serialize($val);
+
         return $this->_write($val, $lh);
     }
 
@@ -130,6 +132,7 @@ class CacheShmop extends Cache
         if (!is_array($val)) $val = array();
         unset($val[$name]);
         $val = serialize($val);
+
         return $this->_write($val, $lh);
     }
 
@@ -147,13 +150,15 @@ class CacheShmop extends Cache
     private function _ftok($project)
     {
         if (function_exists('ftok'))   return ftok(__FILE__, $project);
-        if(strtoupper(PHP_OS) == 'WINNT'){
+        if (strtoupper(PHP_OS) == 'WINNT') {
             $s = stat(__FILE__);
+
             return sprintf("%u", (($s['ino'] & 0xffff) | (($s['dev'] & 0xff) << 16) |
             (($project & 0xff) << 24)));
-        }else {
+        } else {
             $filename = __FILE__ . (string) $project;
             for($key = array(); sizeof($key) < strlen($filename); $key[] = ord(substr($filename, sizeof($key), 1)));
+
             return dechex(array_sum($key));
         }
     }
@@ -176,9 +181,11 @@ class CacheShmop extends Cache
            $ret = shmop_write($id, $val, 0) == strlen($val);
            shmop_close($id);
            $this->_unlock($lh);
+
            return $ret;
         }
         $this->_unlock($lh);
+
         return false;
     }
 
@@ -202,6 +209,7 @@ class CacheShmop extends Cache
             $fp = fopen($this->options['tmp'].$this->prefix.md5($this->handler), 'w');
             flock($fp, LOCK_EX);
         }
+
         return $fp;
     }
 
@@ -226,4 +234,3 @@ class CacheShmop extends Cache
     }
 
 }//类定义结束
-?>

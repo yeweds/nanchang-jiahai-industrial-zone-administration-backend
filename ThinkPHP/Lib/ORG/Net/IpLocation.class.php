@@ -55,10 +55,11 @@ class IpLocation
     /**
      * 构造函数，打开 QQWry.Dat 文件并初始化类中的信息
      *
-     * @param string $filename
+     * @param  string     $filename
      * @return IpLocation
      */
-    public function __construct($filename = "UTFWry.dat") {
+    public function __construct($filename = "UTFWry.dat")
+    {
         $this->fp = 0;
         if (($this->fp = fopen(dirname(__FILE__).'/'.$filename, 'rb')) !== false) {
             $this->firstip = $this->getlong();
@@ -73,9 +74,11 @@ class IpLocation
      * @access private
      * @return int
      */
-    private function getlong() {
+    private function getlong()
+    {
         //将读取的little-endian编码的4个字节转化为长整型数
         $result = unpack('Vlong', fread($this->fp, 4));
+
         return $result['long'];
     }
 
@@ -85,9 +88,11 @@ class IpLocation
      * @access private
      * @return int
      */
-    private function getlong3() {
+    private function getlong3()
+    {
         //将读取的little-endian编码的3个字节转化为长整型数
         $result = unpack('Vlong', fread($this->fp, 3).chr(0));
+
         return $result['long'];
     }
 
@@ -95,10 +100,11 @@ class IpLocation
      * 返回压缩后可进行比较的IP地址
      *
      * @access private
-     * @param string $ip
+     * @param  string $ip
      * @return string
      */
-    private function packip($ip) {
+    private function packip($ip)
+    {
         // 将IP地址转化为长整型数，如果在PHP5中，IP地址错误，则返回False，
         // 这时intval将Flase转化为整数-1，之后压缩成big-endian编码的字符串
         return pack('N', intval(ip2long($ip)));
@@ -108,15 +114,17 @@ class IpLocation
      * 返回读取的字符串
      *
      * @access private
-     * @param string $data
+     * @param  string $data
      * @return string
      */
-    private function getstring($data = "") {
+    private function getstring($data = "")
+    {
         $char = fread($this->fp, 1);
         while (ord($char) > 0) {        // 字符串按照C格式保存，以\0结束
             $data .= $char;             // 将读取的字符连接到给定字符串之后
             $char = fread($this->fp, 1);
         }
+
         return $data;
     }
 
@@ -126,7 +134,8 @@ class IpLocation
      * @access private
      * @return string
      */
-    private function getarea() {
+    private function getarea()
+    {
         $byte = fread($this->fp, 1);    // 标志字节
         switch (ord($byte)) {
             case 0:                     // 没有区域信息
@@ -141,6 +150,7 @@ class IpLocation
                 $area = $this->getstring($byte);
                 break;
         }
+
         return $area;
     }
 
@@ -148,12 +158,13 @@ class IpLocation
      * 根据所给 IP 地址或域名返回所在地区信息
      *
      * @access public
-     * @param string $ip
+     * @param  string $ip
      * @return array
      */
-    public function getlocation($ip='') {
+    public function getlocation($ip='')
+    {
         if (!$this->fp) return null;            // 如果数据文件没有被正确打开，则直接返回空
-		if(empty($ip)) $ip = $this->get_client_ip();
+        if(empty($ip)) $ip = $this->get_client_ip();
         $location['ip'] = gethostbyname($ip);   // 将输入的域名转化为IP地址
         $ip = $this->packip($location['ip']);   // 将输入的IP地址转化为可比较的IP地址
                                                 // 不合法的IP地址会被转化为255.255.255.255
@@ -169,14 +180,12 @@ class IpLocation
             // 以便用于比较，后面相同。
             if ($ip < $beginip) {       // 用户的IP小于中间记录的开始IP地址时
                 $u = $i - 1;            // 将搜索的上边界修改为中间记录减一
-            }
-            else {
+            } else {
                 fseek($this->fp, $this->getlong3());
                 $endip = strrev(fread($this->fp, 4));   // 获取中间记录的结束IP地址
                 if ($ip > $endip) {     // 用户的IP大于中间记录的结束IP地址时
                     $l = $i + 1;        // 将搜索的下边界修改为中间记录加一
-                }
-                else {                  // 用户的IP在中间记录的IP范围内时
+                } else {                  // 用户的IP在中间记录的IP范围内时
                     $findip = $this->firstip + $i * 7;
                     break;              // 则表示找到结果，退出循环
                 }
@@ -225,6 +234,7 @@ class IpLocation
         if ($location['area'] == " CZ88.NET") {
             $location['area'] = "";
         }
+
         return $location;
     }
 
@@ -232,25 +242,27 @@ class IpLocation
      * 析构函数，用于在页面执行结束后自动关闭打开的文件。
      *
      */
-    public function __destruct() {
+    public function __destruct()
+    {
         if ($this->fp) {
             fclose($this->fp);
         }
         $this->fp = 0;
     }
 
-	function get_client_ip(){
-	   if (getenv("HTTP_CLIENT_IP") && strcasecmp(getenv("HTTP_CLIENT_IP"), "unknown"))
-		   $ip = getenv("HTTP_CLIENT_IP");
-	   else if (getenv("HTTP_X_FORWARDED_FOR") && strcasecmp(getenv("HTTP_X_FORWARDED_FOR"), "unknown"))
-		   $ip = getenv("HTTP_X_FORWARDED_FOR");
-	   else if (getenv("REMOTE_ADDR") && strcasecmp(getenv("REMOTE_ADDR"), "unknown"))
-		   $ip = getenv("REMOTE_ADDR");
-	   else if (isset($_SERVER['REMOTE_ADDR']) && $_SERVER['REMOTE_ADDR'] && strcasecmp($_SERVER['REMOTE_ADDR'], "unknown"))
-		   $ip = $_SERVER['REMOTE_ADDR'];
-	   else
-		   $ip = "unknown";
-	   return($ip);
-	}
+    public function get_client_ip()
+    {
+       if (getenv("HTTP_CLIENT_IP") && strcasecmp(getenv("HTTP_CLIENT_IP"), "unknown"))
+           $ip = getenv("HTTP_CLIENT_IP");
+       else if (getenv("HTTP_X_FORWARDED_FOR") && strcasecmp(getenv("HTTP_X_FORWARDED_FOR"), "unknown"))
+           $ip = getenv("HTTP_X_FORWARDED_FOR");
+       else if (getenv("REMOTE_ADDR") && strcasecmp(getenv("REMOTE_ADDR"), "unknown"))
+           $ip = getenv("REMOTE_ADDR");
+       else if (isset($_SERVER['REMOTE_ADDR']) && $_SERVER['REMOTE_ADDR'] && strcasecmp($_SERVER['REMOTE_ADDR'], "unknown"))
+           $ip = $_SERVER['REMOTE_ADDR'];
+       else
+           $ip = "unknown";
+
+       return($ip);
+    }
 }
-?>

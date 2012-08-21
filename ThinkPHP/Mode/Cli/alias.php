@@ -17,4 +17,3 @@ alias_import(array(
     'Debug'              =>    THINK_PATH.'/Lib/Think/Util/Debug.class.php',
     )
 );
-?>

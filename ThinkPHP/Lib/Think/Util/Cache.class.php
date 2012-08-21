@@ -90,8 +90,8 @@ class Cache extends Think
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param string $type 缓存类型
-     * @param array $options  配置数组
+     * @param string $type    缓存类型
+     * @param array  $options 配置数组
      +----------------------------------------------------------
      * @return object
      +----------------------------------------------------------
@@ -108,25 +108,31 @@ class Cache extends Think
             $cache = new $cacheClass($options);
         else
             throw_exception(L('_CACHE_TYPE_INVALID_').':'.$type);
+
         return $cache;
     }
 
-    public function __get($name) {
+    public function __get($name)
+    {
         return $this->get($name);
     }
 
-    public function __set($name,$value) {
+    public function __set($name,$value)
+    {
         return $this->set($name,$value);
     }
 
-    public function __unset($name) {
+    public function __unset($name)
+    {
         $this->rm($name);
     }
-    public function setOptions($name,$value) {
+    public function setOptions($name,$value)
+    {
         $this->options[$name]   =   $value;
     }
 
-    public function getOptions($name) {
+    public function getOptions($name)
+    {
         return $this->options[$name];
     }
     /**
@@ -139,11 +145,11 @@ class Cache extends Think
      * @return mixed
      +----------------------------------------------------------
      */
-    static function getInstance()
+    public static function getInstance()
     {
        $param = func_get_args();
+
         return get_instance_of(__CLASS__,'connect',$param);
     }
 
 }//类定义结束
-?>

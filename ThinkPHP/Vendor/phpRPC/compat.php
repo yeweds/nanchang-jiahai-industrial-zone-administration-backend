@@ -30,32 +30,35 @@
  * This library is free.  You can redistribute it and/or modify it under GPL.
  */
 
-require_once("phprpc_date.php");
+require_once 'phprpc_date.php';
 
 if (!function_exists('file_get_contents')) {
-    function file_get_contents($filename, $incpath = false, $resource_context = null) {
+    public function file_get_contents($filename, $incpath = false, $resource_context = null)
+    {
         if (false === $fh = fopen($filename, 'rb', $incpath)) {
             user_error('file_get_contents() failed to open stream: No such file or directory',
                 E_USER_WARNING);
+
             return false;
         }
         clearstatcache();
         if ($fsize = @filesize($filename)) {
             $data = fread($fh, $fsize);
-        }
-        else {
+        } else {
             $data = '';
             while (!feof($fh)) {
                 $data .= fread($fh, 8192);
             }
         }
         fclose($fh);
+
         return $data;
     }
 }
 
 if (!function_exists('ob_get_clean')) {
-    function ob_get_clean() {
+    public function ob_get_clean()
+    {
         $contents = ob_get_contents();
         if ($contents !== false) ob_end_clean();
         return $contents;
@@ -69,16 +72,19 @@ if (!function_exists('ob_get_clean')) {
 3. failed to work when the gz contained a comment - cannot verify.
 Returns some errors (not all!) and filename.
 */
-function gzdecode($data, &$filename = '', &$error = '', $maxlength = null) {
+function gzdecode($data, &$filename = '', &$error = '', $maxlength = null)
+{
     $len = strlen($data);
     if ($len < 18 || strcmp(substr($data, 0, 2), "\x1f\x8b")) {
         $error = "Not in GZIP format.";
+
         return null;  // Not GZIP format (See RFC 1952)
     }
     $method = ord(substr($data, 2, 1));  // Compression method
     $flags  = ord(substr($data, 3, 1));  // Flags
     if ($flags & 31 != $flags) {
         $error = "Reserved bits not allowed.";
+
         return null;
     }
     // NOTE: $mtime may be negative (PHP integer limitations)
@@ -141,6 +147,7 @@ function gzdecode($data, &$filename = '', &$error = '', $maxlength = null) {
         $headercrc = $headercrc[1];
         if ($headercrc != $calccrc) {
             $error = "Header checksum failed.";
+
             return false;    // Bad header CRC
         }
         $headerlen += 2;
@@ -166,6 +173,7 @@ function gzdecode($data, &$filename = '', &$error = '', $maxlength = null) {
             break;
         default:
             $error = "Unknown compression method.";
+
             return false;
         }
     }  // zero-byte body content is allowed
@@ -175,27 +183,32 @@ function gzdecode($data, &$filename = '', &$error = '', $maxlength = null) {
     $lenOK = $isize == strlen($data);
     if (!$lenOK || !$crcOK) {
         $error = ( $lenOK ? '' : 'Length check FAILED. ') . ( $crcOK ? '' : 'Checksum FAILED.');
+
         return false;
     }
+
     return $data;
 }
 
 if (version_compare(phpversion(), "5", "<")) {
-    function serialize_fix($v) {
+    public function serialize_fix($v)
+    {
         return str_replace('O:11:"phprpc_date":7:{', 'O:11:"PHPRPC_Date":7:{', serialize($v));
     }
-}
-else {
-    function serialize_fix($v) {
+} else {
+    public function serialize_fix($v)
+    {
         return serialize($v);
     }
 }
 
-function declare_empty_class($classname) {
-    static $callback = null;
+function declare_empty_class($classname)
+{
+    public static $callback = null;
     $classname = preg_replace('/[^a-zA-Z0-9\_]/', '', $classname);
     if ($callback===null) {
         $callback = $classname;
+
         return;
     }
     if ($callback) {
@@ -204,30 +217,26 @@ function declare_empty_class($classname) {
     if (!class_exists($classname)) {
         if (version_compare(phpversion(), "5", "<")) {
             eval('class ' . $classname . ' { }');
-        }
-        else {
+        } else {
             eval('
     class ' . $classname . ' {
-        private function __get($name) {
-            $vars = (array)$this;
+        private function __get($name)
+        {
+            $vars = (array) $this;
             $protected_name = "\0*\0$name";
             $private_name = "\0'.$classname.'\0$name";
             if (array_key_exists($name, $vars)) {
                 return $this->$name;
-            }
-            else if (array_key_exists($protected_name, $vars)) {
+            } elseif (array_key_exists($protected_name, $vars)) {
                 return $vars[$protected_name];
-            }
-            else if (array_key_exists($private_name, $vars)) {
+            } elseif (array_key_exists($private_name, $vars)) {
                 return $vars[$private_name];
-            }
-            else {
+            } else {
                 $keys = array_keys($vars);
                 $keys = array_values(preg_grep("/^\\\\x00.*?\\\\x00".$name."$/", $keys));
                 if (isset($keys[0])) {
                     return $vars[$keys[0]];
-                }
-                else {
+                } else {
                     return NULL;
                 }
             }
@@ -238,4 +247,3 @@ function declare_empty_class($classname) {
 }
 declare_empty_class(ini_get('unserialize_callback_func'));
 ini_set('unserialize_callback_func', 'declare_empty_class');
-?>

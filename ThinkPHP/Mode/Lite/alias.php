@@ -21,4 +21,3 @@ alias_import(array(
     'ThinkTemplateCompiler'   =>    THINK_PATH.'/Mode/Lite/ThinkTemplateCompiler.class.php',
     )
 );
-?>

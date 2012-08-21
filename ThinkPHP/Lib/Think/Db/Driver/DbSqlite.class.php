@@ -33,12 +33,13 @@ class DbSqlite extends Db
      * @param array $config 数据库配置数组
      +----------------------------------------------------------
      */
-    public function __construct($config=''){
+    public function __construct($config='')
+    {
         if ( !extension_loaded('sqlite') ) {
             throw_exception(L('_NOT_SUPPERT_').':sqlite');
         }
-        if(!empty($config)) {
-            if(!isset($config['mode'])) {
+        if (!empty($config)) {
+            if (!isset($config['mode'])) {
                 $config['mode']	=	0666;
             }
             $this->config	=	$config;
@@ -54,12 +55,13 @@ class DbSqlite extends Db
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-    public function connect($config='',$linkNum=0) {
+    public function connect($config='',$linkNum=0)
+    {
         if ( !isset($this->linkID[$linkNum]) ) {
             if(empty($config))	$config	=	$this->config;
             $conn = $this->pconnect ? 'sqlite_popen':'sqlite_open';
             $this->linkID[$linkNum] = $conn($config['database'],$config['mode']);
-            if ( !$this->linkID[$linkNum]) {
+            if (!$this->linkID[$linkNum]) {
                 throw_exception(sqlite_error_string());
             }
             // 标记连接成功
@@ -67,6 +69,7 @@ class DbSqlite extends Db
             //注销数据库安全信息
             if(1 != C('DB_DEPLOY_TYPE')) unset($this->config);
         }
+
         return $this->linkID[$linkNum];
     }
 
@@ -77,7 +80,8 @@ class DbSqlite extends Db
      * @access public
      +----------------------------------------------------------
      */
-    public function free() {
+    public function free()
+    {
         $this->queryID = 0;
     }
 
@@ -87,14 +91,15 @@ class DbSqlite extends Db
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param string $str  sql指令
+     * @param string $str sql指令
      +----------------------------------------------------------
      * @return mixed
      +----------------------------------------------------------
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-    public function query($str) {
+    public function query($str)
+    {
         $this->initConnect(false);
         if ( !$this->_linkID ) return false;
         $this->queryStr = $str;
@@ -105,11 +110,13 @@ class DbSqlite extends Db
         G('queryStartTime');
         $this->queryID = sqlite_query($this->_linkID,$str);
         $this->debug();
-        if ( false === $this->queryID ) {
+        if (false === $this->queryID) {
             $this->error();
+
             return false;
         } else {
             $this->numRows = sqlite_num_rows($this->queryID);
+
             return $this->getAll();
         }
     }
@@ -120,14 +127,15 @@ class DbSqlite extends Db
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param string $str  sql指令
+     * @param string $str sql指令
      +----------------------------------------------------------
      * @return integer
      +----------------------------------------------------------
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-    public function execute($str) {
+    public function execute($str)
+    {
         $this->initConnect(true);
         if ( !$this->_linkID ) return false;
         $this->queryStr = $str;
@@ -138,12 +146,14 @@ class DbSqlite extends Db
         G('queryStartTime');
         $result	=	sqlite_exec($this->_linkID,$str);
         $this->debug();
-        if ( false === $result ) {
+        if (false === $result) {
             $this->error();
+
             return false;
         } else {
             $this->numRows = sqlite_changes($this->_linkID);
             $this->lastInsID = sqlite_last_insert_rowid($this->_linkID);
+
             return $this->numRows;
         }
     }
@@ -159,7 +169,8 @@ class DbSqlite extends Db
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-    public function startTrans() {
+    public function startTrans()
+    {
         $this->initConnect(true);
         if ( !$this->_linkID ) return false;
         //数据rollback 支持
@@ -167,6 +178,7 @@ class DbSqlite extends Db
             sqlite_query($this->_linkID,'BEGIN TRANSACTION');
         }
         $this->transTimes++;
+
         return ;
     }
 
@@ -185,11 +197,12 @@ class DbSqlite extends Db
     {
         if ($this->transTimes > 0) {
             $result = sqlite_query($this->_linkID,'COMMIT TRANSACTION');
-            if(!$result){
+            if (!$result) {
                 throw_exception($this->error());
             }
             $this->transTimes = 0;
         }
+
         return true;
     }
 
@@ -208,11 +221,12 @@ class DbSqlite extends Db
     {
         if ($this->transTimes > 0) {
             $result = sqlite_query($this->_linkID,'ROLLBACK TRANSACTION');
-            if(!$result){
+            if (!$result) {
                 throw_exception($this->error());
             }
             $this->transTimes = 0;
         }
+
         return true;
     }
 
@@ -227,16 +241,18 @@ class DbSqlite extends Db
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-    private function getAll() {
+    private function getAll()
+    {
         //返回数据集
         $result = array();
-        if($this->numRows >0) {
-            for($i=0;$i<$this->numRows ;$i++ ){
+        if ($this->numRows >0) {
+            for ($i=0;$i<$this->numRows ;$i++) {
                 // 返回数组集
                 $result[$i] = sqlite_fetch_array($this->queryID,SQLITE_ASSOC);
             }
             sqlite_seek($this->queryID,0);
         }
+
         return $result;
     }
 
@@ -249,10 +265,11 @@ class DbSqlite extends Db
      * @return array
      +----------------------------------------------------------
      */
-    public function getFields($tableName) {
+    public function getFields($tableName)
+    {
         $result =   $this->query('PRAGMA table_info( '.$tableName.' )');
         $info   =   array();
-        if($result){
+        if ($result) {
             foreach ($result as $key => $val) {
                 $info[$val['Field']] = array(
                     'name'    => $val['Field'],
@@ -264,6 +281,7 @@ class DbSqlite extends Db
                 );
             }
         }
+
         return $info;
     }
 
@@ -276,7 +294,8 @@ class DbSqlite extends Db
      * @return array
      +----------------------------------------------------------
      */
-    public function getTables($dbName='') {
+    public function getTables($dbName='')
+    {
         $result =   $this->query("SELECT name FROM sqlite_master WHERE type='table' "
              . "UNION ALL SELECT name FROM sqlite_temp_master "
              . "WHERE type='table' ORDER BY name");
@@ -284,6 +303,7 @@ class DbSqlite extends Db
         foreach ($result as $key => $val) {
             $info[$key] = current($val);
         }
+
         return $info;
     }
 
@@ -296,8 +316,9 @@ class DbSqlite extends Db
      * @throws ThinkExecption
      +----------------------------------------------------------
      */
-    public function close() {
-        if ($this->_linkID && !sqlite_close($this->_linkID)){
+    public function close()
+    {
+        if ($this->_linkID && !sqlite_close($this->_linkID)) {
             throw_exception($this->error());
         }
         $this->_linkID = 0;
@@ -313,11 +334,13 @@ class DbSqlite extends Db
      * @return string
      +----------------------------------------------------------
      */
-    public function error() {
+    public function error()
+    {
         $this->error = sqlite_error_string(sqlite_last_error($this->_linkID));
-        if($this->debug && '' != $this->queryStr){
+        if ($this->debug && '' != $this->queryStr) {
             $this->error .= "\n [ SQL语句 ] : ".$this->queryStr;
         }
+
         return $this->error;
     }
 
@@ -327,12 +350,13 @@ class DbSqlite extends Db
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param string $str  SQL指令
+     * @param string $str SQL指令
      +----------------------------------------------------------
      * @return string
      +----------------------------------------------------------
      */
-    public function escape_string($str) {
+    public function escape_string($str)
+    {
         return sqlite_escape_string($str);
     }
 
@@ -345,16 +369,18 @@ class DbSqlite extends Db
      * @return string
      +----------------------------------------------------------
      */
-    public function parseLimit($limit) {
+    public function parseLimit($limit)
+    {
         $limitStr    = '';
-        if(!empty($limit)) {
+        if (!empty($limit)) {
             $limit  =   explode(',',$limit);
-            if(count($limit)>1) {
+            if (count($limit)>1) {
                 $limitStr .= ' LIMIT '.$limit[1].' OFFSET '.$limit[0].' ';
-            }else{
+            } else {
                 $limitStr .= ' LIMIT '.$limit[0].' ';
             }
         }
+
         return $limitStr;
     }
 
@@ -371,4 +397,3 @@ class DbSqlite extends Db
         $this->close();
     }
 }//类定义结束
-?>

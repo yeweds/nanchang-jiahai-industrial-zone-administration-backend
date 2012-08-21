@@ -22,8 +22,9 @@
   +------------------------------------------------------------------------------
  */
 // 设置和获取统计数据
-function N($key, $step=0) {
-    static $_num = array();
+function N($key, $step=0)
+{
+    public static $_num = array();
     if (!isset($_num[$key])) {
         $_num[$key] = 0;
     }
@@ -34,7 +35,8 @@ function N($key, $step=0) {
 }
 
 // URL组装 支持不同模式和路由
-function U($url, $params=array(), $redirect=false, $suffix=true) {
+function U($url, $params=array(), $redirect=false, $suffix=true)
+{
     if (0 === strpos($url, '/'))
         $url = substr($url, 1);
     if (!strpos($url, '://')) // 没有指定项目名 使用当前项目名
@@ -106,7 +108,7 @@ function U($url, $params=array(), $redirect=false, $suffix=true) {
         }
         if ($suffix && C('URL_HTML_SUFFIX'))
             $url .= C('URL_HTML_SUFFIX');
-    }else {
+    } else {
         $params = http_build_query($params);
         $params = !empty($params) ? '&' . $params : '';
         if (isset($group)) {
@@ -140,17 +142,20 @@ function U($url, $params=array(), $redirect=false, $suffix=true) {
  * @return string
   +----------------------------------------------------------
  */
-function parse_name($name, $type=0) {
+function parse_name($name, $type=0)
+{
     if ($type) {
         return ucfirst(preg_replace("/_([a-zA-Z])/e", "strtoupper('\\1')", $name));
     } else {
         $name = preg_replace("/[A-Z]/", "_\\0", $name);
+
         return strtolower(trim($name, "_"));
     }
 }
 
 // 错误输出
-function halt($error) {
+function halt($error)
+{
     if (IS_CLI)
         exit($error);
     $e = array();
@@ -195,7 +200,8 @@ function halt($error) {
 }
 
 // URL重定向
-function redirect($url, $time=0, $msg='') {
+function redirect($url, $time=0, $msg='')
+{
     //多行URL地址支持
     $url = str_replace(array("\n", "\r"), '', $url);
     if (empty($msg))
@@ -218,7 +224,8 @@ function redirect($url, $time=0, $msg='') {
 }
 
 // 自定义异常处理
-function throw_exception($msg, $type='ThinkException', $code=0) {
+function throw_exception($msg, $type='ThinkException', $code=0)
+{
     if (IS_CLI)
         exit($msg);
     if (class_exists($type, false))
@@ -228,14 +235,16 @@ function throw_exception($msg, $type='ThinkException', $code=0) {
 }
 
 // 区间调试开始
-function debug_start($label='') {
+function debug_start($label='')
+{
     $GLOBALS[$label]['_beginTime'] = microtime(TRUE);
     if (MEMORY_LIMIT_ON)
         $GLOBALS[$label]['_beginMem'] = memory_get_usage();
 }
 
 // 区间调试结束，显示指定标记到当前位置的调试
-function debug_end($label='') {
+function debug_end($label='')
+{
     $GLOBALS[$label]['_endTime'] = microtime(TRUE);
     echo '<div style="text-align:center;width:100%">Process ' . $label . ': Times ' . number_format($GLOBALS[$label]['_endTime'] - $GLOBALS[$label]['_beginTime'], 6) . 's ';
     if (MEMORY_LIMIT_ON) {
@@ -246,7 +255,8 @@ function debug_end($label='') {
 }
 
 // 浏览器友好的变量输出
-function dump($var, $echo=true, $label=null, $strict=true) {
+function dump($var, $echo=true, $label=null, $strict=true)
+{
     $label = ($label === null) ? '' : rtrim($label) . ' ';
     if (!$strict) {
         if (ini_get('html_errors')) {
@@ -266,14 +276,17 @@ function dump($var, $echo=true, $label=null, $strict=true) {
     }
     if ($echo) {
         echo($output);
+
         return null;
     }else
+
         return $output;
 }
 
 // 取得对象实例 支持调用类的静态方法
-function get_instance_of($name, $method='', $args=array()) {
-    static $_instance = array();
+function get_instance_of($name, $method='', $args=array())
+{
+    public static $_instance = array();
     $identify = empty($args) ? $name . $method : $name . $method . to_guid_string($args);
     if (!isset($_instance[$identify])) {
         if (class_exists($name)) {
@@ -284,13 +297,12 @@ function get_instance_of($name, $method='', $args=array()) {
                 } else {
                     $_instance[$identify] = $o->$method();
                 }
-            }
-            else
+            } else
                 $_instance[$identify] = $o;
-        }
-        else
+        } else
             halt(L('_CLASS_NOT_EXIST_') . ':' . $name);
     }
+
     return $_instance[$identify];
 }
 
@@ -304,7 +316,8 @@ function get_instance_of($name, $method='', $args=array()) {
  * @return void
   +----------------------------------------------------------
  */
-function __autoload($name) {
+function __autoload($name)
+{
     // 检查是否存在别名定义
     if (alias_import($name))
         return;
@@ -325,12 +338,14 @@ function __autoload($name) {
             }
         }
     }
+
     return;
 }
 
 // 优化的require_once
-function require_cache($filename) {
-    static $_importFiles = array();
+function require_cache($filename)
+{
+    public static $_importFiles = array();
     $filename = realpath($filename);
     if (!isset($_importFiles[$filename])) {
         if (file_exists_case($filename)) {
@@ -340,18 +355,22 @@ function require_cache($filename) {
             $_importFiles[$filename] = false;
         }
     }
+
     return $_importFiles[$filename];
 }
 
 // 区分大小写的文件存在判断
-function file_exists_case($filename) {
+function file_exists_case($filename)
+{
     if (is_file($filename)) {
         if (IS_WIN && C('APP_FILE_CASE')) {
             if (basename(realpath($filename)) != basename($filename))
                 return false;
         }
+
         return true;
     }
+
     return false;
 }
 
@@ -367,9 +386,10 @@ function file_exists_case($filename) {
  * @return boolen
   +----------------------------------------------------------
  */
-function import($class, $baseUrl = '', $ext='.class.php') {
-    static $_file = array();
-    static $_class = array();
+function import($class, $baseUrl = '', $ext='.class.php')
+{
+    public static $_file = array();
+    public static $_class = array();
     $class = str_replace(array('.', '#'), array('/', '.'), $class);
     if ('' === $baseUrl && false === strpos($class, '/')) {
         // 检查别名导入
@@ -421,7 +441,8 @@ function import($class, $baseUrl = '', $ext='.class.php') {
  * @return void
   +----------------------------------------------------------
  */
-function load($name, $baseUrl='', $ext='.php') {
+function load($name, $baseUrl='', $ext='.php')
+{
     $name = str_replace(array('.', '#'), array('/', '.'), $name);
     if (empty($baseUrl)) {
         if (0 === strpos($name, '@/')) {
@@ -441,28 +462,34 @@ function load($name, $baseUrl='', $ext='.php') {
 // 快速导入第三方框架类库
 // 所有第三方框架的类库文件统一放到 系统的Vendor目录下面
 // 并且默认都是以.php后缀导入
-function vendor($class, $baseUrl = '', $ext='.php') {
+function vendor($class, $baseUrl = '', $ext='.php')
+{
     if (empty($baseUrl))
         $baseUrl = VENDOR_PATH;
+
     return import($class, $baseUrl, $ext);
 }
 
 // 快速定义和导入别名
-function alias_import($alias, $classfile='') {
-    static $_alias = array();
+function alias_import($alias, $classfile='')
+{
+    public static $_alias = array();
     if ('' !== $classfile) {
         // 定义别名导入
         $_alias[$alias] = $classfile;
+
         return;
     }
     if (is_string($alias)) {
         if (isset($_alias[$alias]))
             return require_cache($_alias[$alias]);
-    }elseif (is_array($alias)) {
+    } elseif (is_array($alias)) {
         foreach ($alias as $key => $val)
             $_alias[$key] = $val;
+
         return;
     }
+
     return false;
 }
 
@@ -476,8 +503,9 @@ function alias_import($alias, $classfile='') {
  * @return Model
   +----------------------------------------------------------
  */
-function D($name='', $app='') {
-    static $_model = array();
+function D($name='', $app='')
+{
+    public static $_model = array();
     if (empty($name))
         return new Model;
     if (empty($app))
@@ -500,6 +528,7 @@ function D($name='', $app='') {
         $model = new Model($name);
     }
     $_model[$app . $OriClassName] = $model;
+
     return $model;
 }
 
@@ -512,10 +541,12 @@ function D($name='', $app='') {
  * @return Model
   +----------------------------------------------------------
  */
-function M($name='', $class='Model') {
-    static $_model = array();
+function M($name='', $class='Model')
+{
+    public static $_model = array();
     if (!isset($_model[$name . '_' . $class]))
         $_model[$name . '_' . $class] = new $class($name);
+
     return $_model[$name . '_' . $class];
 }
 
@@ -529,8 +560,9 @@ function M($name='', $class='Model') {
  * @return Action
   +----------------------------------------------------------
  */
-function A($name, $app='@') {
-    static $_action = array();
+function A($name, $app='@')
+{
+    public static $_action = array();
     if (isset($_action[$app . $name]))
         return $_action[$app . $name];
     $OriClassName = $name;
@@ -546,6 +578,7 @@ function A($name, $app='@') {
     if (class_exists($className)) {
         $action = new $className();
         $_action[$app . $OriClassName] = $action;
+
         return $action;
     } else {
         return false;
@@ -553,7 +586,8 @@ function A($name, $app='@') {
 }
 
 // 远程调用模块的操作方法
-function R($module, $action, $app='@') {
+function R($module, $action, $app='@')
+{
     $class = A($module, $app);
     if ($class)
         return call_user_func(array(&$class, $action));
@@ -562,8 +596,9 @@ function R($module, $action, $app='@') {
 }
 
 // 获取和设置语言定义(不区分大小写)
-function L($name=null, $value=null) {
-    static $_lang = array();
+function L($name=null, $value=null)
+{
+    public static $_lang = array();
     // 空参数返回所有定义
     if (empty($name))
         return $_lang;
@@ -574,17 +609,20 @@ function L($name=null, $value=null) {
         if (is_null($value))
             return isset($_lang[$name]) ? $_lang[$name] : $name;
         $_lang[$name] = $value; // 语言定义
+
         return;
     }
     // 批量定义
     if (is_array($name))
         $_lang = array_merge($_lang, array_change_key_case($name, CASE_UPPER));
+
     return;
 }
 
 // 获取配置值
-function C($name=null, $value=null) {
-    static $_config = array();
+function C($name=null, $value=null)
+{
+    public static $_config = array();
     // 无参数时获取所有
     if (empty($name))
         return $_config;
@@ -595,6 +633,7 @@ function C($name=null, $value=null) {
             if (is_null($value))
                 return isset($_config[$name]) ? $_config[$name] : null;
             $_config[$name] = $value;
+
             return;
         }
         // 二维数组设置和获取支持
@@ -603,6 +642,7 @@ function C($name=null, $value=null) {
         if (is_null($value))
             return isset($_config[$name[0]][$name[1]]) ? $_config[$name[0]][$name[1]] : null;
         $_config[$name[0]][$name[1]] = $value;
+
         return;
     }
     // 批量设置
@@ -612,7 +652,8 @@ function C($name=null, $value=null) {
 }
 
 // 处理标签
-function tag($name, $params=array()) {
+function tag($name, $params=array())
+{
     $tags = C('_TAGS_.' . $name);
     if (!empty($tags)) {
         foreach ($tags as $key => $call) {
@@ -622,7 +663,8 @@ function tag($name, $params=array()) {
 }
 
 // 过滤器方法
-function filter($name, &$content) {
+function filter($name, &$content)
+{
     $class = $name . 'Filter';
     require_cache(LIB_PATH . 'Filter/' . $class . '.class.php');
     $filter = new $class();
@@ -630,15 +672,18 @@ function filter($name, &$content) {
 }
 
 // 执行行为
-function B($name, $params=array()) {
+function B($name, $params=array())
+{
     $class = $name . 'Behavior';
     require_cache(LIB_PATH . 'Behavior/' . $class . '.class.php');
     $behavior = new $class();
+
     return $behavior->run($params);
 }
 
 // 渲染输出Widget
-function W($name, $data=array(), $return=false) {
+function W($name, $data=array(), $return=false)
+{
     $class = $name . 'Widget';
     require_cache(LIB_PATH . 'Widget/' . $class . '.class.php');
     if (!class_exists($class))
@@ -652,8 +697,9 @@ function W($name, $data=array(), $return=false) {
 }
 
 // 全局缓存设置和读取
-function S($name, $value='', $expire='', $type='') {
-    static $_cache = array();
+function S($name, $value='', $expire='', $type='')
+{
+    public static $_cache = array();
     alias_import('Cache');
     //取得缓存对象实例
     $cache = Cache::getInstance($type);
@@ -663,12 +709,14 @@ function S($name, $value='', $expire='', $type='') {
             $result = $cache->rm($name);
             if ($result)
                 unset($_cache[$type . '_' . $name]);
+
             return $result;
-        }else {
+        } else {
             // 缓存数据
             $cache->set($name, $value, $expire);
             $_cache[$type . '_' . $name] = $value;
         }
+
         return;
     }
     if (isset($_cache[$type . '_' . $name]))
@@ -676,12 +724,14 @@ function S($name, $value='', $expire='', $type='') {
     // 获取缓存数据
     $value = $cache->get($name);
     $_cache[$type . '_' . $name] = $value;
+
     return $value;
 }
 
 // 快速文件数据读取和保存 针对简单类型数据 字符串、数组
-function F($name, $value='', $path=DATA_PATH) {
-    static $_cache = array();
+function F($name, $value='', $path=DATA_PATH)
+{
+    public static $_cache = array();
     $filename = $path . $name . '.php';
     if ('' !== $value) {
         if (is_null($value)) {
@@ -693,6 +743,7 @@ function F($name, $value='', $path=DATA_PATH) {
             // 目录不存在则创建
             if (!is_dir($dir))
                 mkdir($dir);
+
             return file_put_contents($filename, "<?php\nreturn " . var_export($value, true) . ";\n?>");
         }
     }
@@ -705,11 +756,13 @@ function F($name, $value='', $path=DATA_PATH) {
     } else {
         $value = false;
     }
+
     return $value;
 }
 
 // 根据PHP各种类型变量生成唯一标识号
-function to_guid_string($mix) {
+function to_guid_string($mix)
+{
     if (is_object($mix) && function_exists('spl_object_hash')) {
         return spl_object_hash($mix);
     } elseif (is_resource($mix)) {
@@ -717,13 +770,15 @@ function to_guid_string($mix) {
     } else {
         $mix = serialize($mix);
     }
+
     return md5($mix);
 }
 
 //[RUNTIME]
 // 编译文件
 // 去除代码中的空白和注释
-function strip_whitespace($content) {
+function strip_whitespace($content)
+{
     $stripStr = '';
     //分析php源码
     $tokens = token_get_all($content);
@@ -751,10 +806,12 @@ function strip_whitespace($content) {
             }
         }
     }
+
     return $stripStr;
 }
 
-function compile($filename, $runtime=false) {
+function compile($filename, $runtime=false)
+{
     $content = file_get_contents($filename);
     if (true === $runtime)
     // 替换预编译指令
@@ -762,11 +819,13 @@ function compile($filename, $runtime=false) {
     $content = substr(trim($content), 5);
     if ('?>' == substr($content, -2))
         $content = substr($content, 0, -2);
+
     return $content;
 }
 
 // 根据数组生成常量定义
-function array_define($array) {
+function array_define($array)
+{
     $content = '';
     foreach ($array as $key => $val) {
         $key = strtoupper($key);
@@ -781,12 +840,14 @@ function array_define($array) {
             $content .= "define('" . $key . "','" . addslashes($val) . "');";
         }
     }
+
     return $content;
 }
 
 //[/RUNTIME]
 // 循环创建目录
-function mk_dir($dir, $mode = 0777) {
+function mk_dir($dir, $mode = 0777)
+{
     if (is_dir($dir) || @mkdir($dir, $mode))
         return true;
     if (!mk_dir(dirname($dir), $mode))
@@ -795,7 +856,8 @@ function mk_dir($dir, $mode = 0777) {
 }
 
 // 自动转换字符集 支持数组转换
-function auto_charset($fContents, $from='gbk', $to='utf-8') {
+function auto_charset($fContents, $from='gbk', $to='utf-8')
+{
     $from = strtoupper($from) == 'UTF8' ? 'utf-8' : $from;
     $to = strtoupper($to) == 'UTF8' ? 'utf-8' : $to;
     if (strtoupper($from) === strtoupper($to) || empty($fContents) || (is_scalar($fContents) && !is_string($fContents))) {
@@ -817,23 +879,26 @@ function auto_charset($fContents, $from='gbk', $to='utf-8') {
             if ($key != $_key)
                 unset($fContents[$key]);
         }
+
         return $fContents;
-    }
-    else {
+    } else {
         return $fContents;
     }
 }
 
 // xml编码
-function xml_encode($data, $encoding='utf-8', $root="think") {
+function xml_encode($data, $encoding='utf-8', $root="think")
+{
     $xml = '<?xml version="1.0" encoding="' . $encoding . '"?>';
     $xml.= '<' . $root . '>';
     $xml.= data_to_xml($data);
     $xml.= '</' . $root . '>';
+
     return $xml;
 }
 
-function data_to_xml($data) {
+function data_to_xml($data)
+{
     if (is_object($data)) {
         $data = get_object_vars($data);
     }
@@ -845,6 +910,7 @@ function data_to_xml($data) {
         list($key, ) = explode(' ', $key);
         $xml.="</$key>";
     }
+
     return $xml;
 }
 
@@ -862,7 +928,8 @@ function data_to_xml($data) {
  * 支持数组形式对参数设置:cookie('name','value',array('expire'=>1,'prefix'=>'think_'))
  * 支持query形式字符串对参数设置:cookie('name','value','prefix=tp_&expire=10000')
  */
-function cookie($name, $value='', $option=null) {
+function cookie($name, $value='', $option=null)
+{
     // 默认设置
     $config = array(
         'prefix' => C('COOKIE_PREFIX'), // cookie 名称前缀
@@ -892,6 +959,7 @@ function cookie($name, $value='', $option=null) {
                 }
             }
         }
+
         return;
     }
     $name = $config['prefix'] . $name;
@@ -909,5 +977,3 @@ function cookie($name, $value='', $option=null) {
         }
     }
 }
-
-?>

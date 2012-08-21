@@ -40,7 +40,7 @@ class HashMap extends Think  implements IteratorAggregate
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param string $values  初始化数组元素
+     * @param string $values 初始化数组元素
      +----------------------------------------------------------
      */
     public function __construct($values = array())
@@ -82,7 +82,7 @@ class HashMap extends Think  implements IteratorAggregate
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param string $key  键名
+     * @param string $key 键名
      +----------------------------------------------------------
      * @return boolen
      +----------------------------------------------------------
@@ -98,7 +98,7 @@ class HashMap extends Think  implements IteratorAggregate
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param string $value  键值
+     * @param string $value 键值
      +----------------------------------------------------------
      * @return boolen
      +----------------------------------------------------------
@@ -114,18 +114,18 @@ class HashMap extends Think  implements IteratorAggregate
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param string $key  键名
-     * @param string $value  键值
+     * @param string $key   键名
+     * @param string $value 键值
      +----------------------------------------------------------
      * @return boolen
      +----------------------------------------------------------
      */
     public function contains($key, $value)
     {
-        if ($this->containsKey($key))
-        {
+        if ($this->containsKey($key)) {
             return ($this->get($key) == $value);
         }
+
         return false;
     }
 
@@ -135,7 +135,7 @@ class HashMap extends Think  implements IteratorAggregate
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param string $key  键名
+     * @param string $key 键名
      +----------------------------------------------------------
      * @return mixed
      +----------------------------------------------------------
@@ -198,8 +198,8 @@ class HashMap extends Think  implements IteratorAggregate
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param string $key  键名
-     * @param string $value  键值
+     * @param string $key   键名
+     * @param string $value 键值
      +----------------------------------------------------------
      * @return mixed
      +----------------------------------------------------------
@@ -208,14 +208,17 @@ class HashMap extends Think  implements IteratorAggregate
     {
         $previous = $this->get($key);
         $this->_values[$key] =&$value;
+
         return $previous;
     }
 
-    public function __get($name) {
+    public function __get($name)
+    {
         return $this->get($name);
     }
 
-    public function __set($name,$value) {
+    public function __set($name,$value)
+    {
         return $this->put($name,$value);
     }
 
@@ -225,7 +228,7 @@ class HashMap extends Think  implements IteratorAggregate
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param array $values  数组
+     * @param array $values 数组
      +----------------------------------------------------------
      */
     public function putAll($values)
@@ -253,6 +256,7 @@ class HashMap extends Think  implements IteratorAggregate
     {
         $value = $this->get($key);
         if (!is_null($value)) { unset($this->_values[$key]); }
+
         return $value;
     }
 
@@ -285,4 +289,3 @@ class HashMap extends Think  implements IteratorAggregate
     }
 
 }//类定义结束
-?>

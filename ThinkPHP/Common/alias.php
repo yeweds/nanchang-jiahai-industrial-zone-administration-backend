@@ -29,4 +29,3 @@ alias_import(array(
     'RelationModel' => THINK_PATH.'/Lib/Think/Core/Model/RelationModel.class.php',
     )
 );
-?>

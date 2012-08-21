@@ -15,12 +15,14 @@
  * ThinkPHP 模板引擎Lite版本
  +------------------------------------------------------------------------------
  */
-class ThinkTemplateLite {
+class ThinkTemplateLite
+{
     // 属性定义
     protected $var = array();//模板变量
     protected $config =  array();// 模板配置
     // 架构方法
-    public function __construct(){
+    public function __construct()
+    {
         $this->config['cache_path']        =  CACHE_PATH;//C('CACHE_PATH');
         $this->config['template_suffix']   =  C('TMPL_TEMPLATE_SUFFIX');
         $this->config['cache_suffix']       =  C('TMPL_CACHFILE_SUFFIX');
@@ -34,21 +36,26 @@ class ThinkTemplateLite {
         $this->config['tag_level']            =  C('TAG_NESTED_LEVEL');
     }
     // 正则替换的转义 方便定制
-    private function stripPreg($str) {
+    private function stripPreg($str)
+    {
         $str = str_replace(array('{','}','(',')','|','[',']'),array('\{','\}','\(','\)','\|','\[','\]'),$str);
+
         return $str;
     }
     // 模板配置赋值
-    public function __set($name,$value='') {
-        if(is_array($name)) {
+    public function __set($name,$value='')
+    {
+        if (is_array($name)) {
             $this->config   =  array_merge($this->config,$name);
-        }else{
+        } else {
             $this->config[$name]= $value;
         }
     }
     // 模板配置取值
-    public function __get($name) {
+    public function __get($name)
+    {
         if(isset($this->config[$name]))
+
             return $this->config[$name];
         else
             return null;
@@ -56,15 +63,17 @@ class ThinkTemplateLite {
     // 模板变量赋值
     public function assign($name,$value)
     {
-        if(is_array($name)) {
+        if (is_array($name)) {
             $this->var   =  array_merge($this->var,$name);
-        }else{
+        } else {
             $this->var[$name]= $value;
         }
     }
     // 模板变量取值
-    public function get($name) {
+    public function get($name)
+    {
         if(isset($this->var[$name]))
+
             return $this->var[$name];
         else
             return false;
@@ -83,7 +92,8 @@ class ThinkTemplateLite {
         include $tmplCacheFile;
     }
     // 读取并编译模板
-    protected function loadTemplate($templateFile,$tmplCacheFile) {
+    protected function loadTemplate($templateFile,$tmplCacheFile)
+    {
         // 需要更新模版 读出原模板内容
         $tmplContent = file_get_contents($templateFile);
         //编译模板内容
@@ -96,20 +106,23 @@ class ThinkTemplateLite {
             throw_exception(L('_CACHE_WRITE_ERROR_').':'.$tmplCacheFile);
     }
     // 模板编译
-    protected function compiler($tmplContent,$templateFile) {
+    protected function compiler($tmplContent,$templateFile)
+    {
         $compiler = new ThinkTemplateCompiler();
+
         return $compiler->parse($tmplContent,$templateFile);
     }
     // 检查缓存
-    protected function checkCache($tmplTemplateFile,$tmplCacheFile) {
+    protected function checkCache($tmplTemplateFile,$tmplCacheFile)
+    {
         if (!$this->config['tmpl_cache']) // 优先对配置检测
             return false;
-        if(!is_file($tmplCacheFile)){
+        if (!is_file($tmplCacheFile)) {
             return false;
-        }elseif (filemtime($tmplTemplateFile) > filemtime($tmplCacheFile)) {
+        } elseif (filemtime($tmplTemplateFile) > filemtime($tmplCacheFile)) {
             // 模板文件如果有更新则缓存需要更新
             return false;
-        }elseif ($this->config['cache_time'] != -1 && time() > filemtime($tmplCacheFile)+$this->config['cache_time']) {
+        } elseif ($this->config['cache_time'] != -1 && time() > filemtime($tmplCacheFile)+$this->config['cache_time']) {
             // 缓存是否在有效期
             return false;
         }
@@ -117,4 +130,3 @@ class ThinkTemplateLite {
         return true;
     }
 }
-?>

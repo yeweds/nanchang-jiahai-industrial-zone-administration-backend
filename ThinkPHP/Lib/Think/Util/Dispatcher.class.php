@@ -34,47 +34,47 @@ class Dispatcher extends Think
      * @return void
      +----------------------------------------------------------
      */
-    static public function dispatch()
+    public static function dispatch()
     {
         $urlMode  =  C('URL_MODEL');
-        if($urlMode == URL_REWRITE ) {
+        if ($urlMode == URL_REWRITE) {
             //当前项目地址
             $url    =   dirname(_PHP_FILE_);
             if($url == '/' || $url == '\\')
                 $url    =   '';
             define('PHP_FILE',$url);
-        }elseif($urlMode == URL_COMPAT){
+        } elseif ($urlMode == URL_COMPAT) {
             define('PHP_FILE',_PHP_FILE_.'?'.C('VAR_PATHINFO').'=');
-        }else {
+        } else {
             //当前项目地址
             define('PHP_FILE',_PHP_FILE_);
         }
 
         // 开启子域名部署
-        if(C('APP_SUB_DOMAIN_DEPLOY')) {
+        if (C('APP_SUB_DOMAIN_DEPLOY')) {
             $rules = C('APP_SUB_DOMAIN_RULES');
             $subDomain    = strtolower(substr($_SERVER['HTTP_HOST'],0,strpos($_SERVER['HTTP_HOST'],'.')));
             define('SUB_DOMAIN',$subDomain); // 二级域名定义
-            if($subDomain && array_key_exists($subDomain,$rules)) {
+            if ($subDomain && array_key_exists($subDomain,$rules)) {
                 $rule =  $rules[$subDomain];
-            }elseif(isset($rules['*'])){ // 泛域名支持
-                if('www' != $subDomain && !in_array($subDomain,C('APP_SUB_DOMAIN_DENY'))) {
+            } elseif (isset($rules['*'])) { // 泛域名支持
+                if ('www' != $subDomain && !in_array($subDomain,C('APP_SUB_DOMAIN_DENY'))) {
                     $rule =  $rules['*'];
                 }
             }
-            if(!empty($rule)) {
+            if (!empty($rule)) {
                 // 子域名部署规则 '子域名'=>array('分组名/[模块名]','var1=a&var2=b');
                 $array   =  explode('/',$rule[0]);
                 $module = array_pop($array);
-                if(!empty($module)) {
+                if (!empty($module)) {
                     $_GET[C('VAR_MODULE')] = $module;
                     $domainModule   =  true;
                 }
-                if(!empty($array)) {
+                if (!empty($array)) {
                     $_GET[C('VAR_GROUP')]  = array_pop($array);
                     $domainGroup =  true;
                 }
-                if(isset($rule[1])) { // 传入参数
+                if (isset($rule[1])) { // 传入参数
                     parse_str($rule[1],$parms);
                     $_GET   =  array_merge($_GET,$parms);
                 }
@@ -84,17 +84,17 @@ class Dispatcher extends Think
         // 分析PATHINFO信息
         self::getPathInfo();
 
-        if(!self::routerCheck()){   // 检测路由规则 如果没有则按默认规则调度URL
+        if (!self::routerCheck()) {   // 检测路由规则 如果没有则按默认规则调度URL
             $paths = explode($depr,trim($_SERVER['PATH_INFO'],'/'));
             $var  =  array();
-            if (C('APP_GROUP_LIST') && !isset($_GET[C('VAR_GROUP')])){
+            if (C('APP_GROUP_LIST') && !isset($_GET[C('VAR_GROUP')])) {
                 $var[C('VAR_GROUP')] = in_array(strtolower($paths[0]),explode(',',strtolower(C('APP_GROUP_LIST'))))? array_shift($paths) : '';
-                if(C('APP_GROUP_DENY') && in_array(strtolower($var[C('VAR_GROUP')]),explode(',',strtolower(C('APP_GROUP_DENY'))))) {
+                if (C('APP_GROUP_DENY') && in_array(strtolower($var[C('VAR_GROUP')]),explode(',',strtolower(C('APP_GROUP_DENY'))))) {
                     // 禁止直接访问分组
                     exit;
                 }
             }
-            if(!isset($_GET[C('VAR_MODULE')])) {// 还没有定义模块名称
+            if (!isset($_GET[C('VAR_MODULE')])) {// 还没有定义模块名称
                 $var[C('VAR_MODULE')]  =   array_shift($paths);
             }
             $var[C('VAR_ACTION')]  =   array_shift($paths);
@@ -104,8 +104,7 @@ class Dispatcher extends Think
         }
 
         // 获取分组 模块和操作名称
-        if (C('APP_GROUP_LIST'))
-        {
+        if (C('APP_GROUP_LIST')) {
             define('GROUP_NAME', self::getGroup(C('VAR_GROUP')));
             // 加载分组配置文件
             if(is_file(CONFIG_PATH.GROUP_NAME.'/config.php'))
@@ -125,11 +124,11 @@ class Dispatcher extends Think
         define('__APP__',PHP_FILE);
         // 当前模块和分组地址
         $module = defined('P_MODULE_NAME')?P_MODULE_NAME:MODULE_NAME;
-        if(defined('GROUP_NAME')) {
+        if (defined('GROUP_NAME')) {
             $group   = C('URL_CASE_INSENSITIVE') ?strtolower(GROUP_NAME):GROUP_NAME;
             define('__GROUP__',(!empty($domainGroup) || GROUP_NAME == C('DEFAULT_GROUP') )?__APP__ : __APP__.'/'.$group);
             define('__URL__',!empty($domainModule)?__GROUP__.$depr : __GROUP__.$depr.$module);
-        }else{
+        } else {
             define('__URL__',!empty($domainModule)?__APP__.'/' : __APP__.'/'.$module);
         }
         // 当前操作地址
@@ -149,41 +148,40 @@ class Dispatcher extends Think
     */
     public static function getPathInfo()
     {
-        if(!empty($_GET[C('VAR_PATHINFO')])) {
+        if (!empty($_GET[C('VAR_PATHINFO')])) {
             // 兼容PATHINFO 参数
             $path = $_GET[C('VAR_PATHINFO')];
             unset($_GET[C('VAR_PATHINFO')]);
-        }elseif(!empty($_SERVER['PATH_INFO'])){
+        } elseif (!empty($_SERVER['PATH_INFO'])) {
             $pathInfo = $_SERVER['PATH_INFO'];
             if(0 === strpos($pathInfo,$_SERVER['SCRIPT_NAME']))
                 $path = substr($pathInfo, strlen($_SERVER['SCRIPT_NAME']));
             else
                 $path = $pathInfo;
-        }elseif(!empty($_SERVER['ORIG_PATH_INFO'])) {
+        } elseif (!empty($_SERVER['ORIG_PATH_INFO'])) {
             $pathInfo = $_SERVER['ORIG_PATH_INFO'];
             if(0 === strpos($pathInfo, $_SERVER['SCRIPT_NAME']))
                 $path = substr($pathInfo, strlen($_SERVER['SCRIPT_NAME']));
             else
                 $path = $pathInfo;
-        }elseif (!empty($_SERVER['REDIRECT_PATH_INFO'])){
+        } elseif (!empty($_SERVER['REDIRECT_PATH_INFO'])) {
             $path = $_SERVER['REDIRECT_PATH_INFO'];
-        }elseif(!empty($_SERVER["REDIRECT_Url"])){
+        } elseif (!empty($_SERVER["REDIRECT_Url"])) {
             $path = $_SERVER["REDIRECT_Url"];
-            if(empty($_SERVER['QUERY_STRING']) || $_SERVER['QUERY_STRING'] == $_SERVER["REDIRECT_QUERY_STRING"])
-            {
+            if (empty($_SERVER['QUERY_STRING']) || $_SERVER['QUERY_STRING'] == $_SERVER["REDIRECT_QUERY_STRING"]) {
                 $parsedUrl = parse_url($_SERVER["REQUEST_URI"]);
-                if(!empty($parsedUrl['query'])) {
+                if (!empty($parsedUrl['query'])) {
                     $_SERVER['QUERY_STRING'] = $parsedUrl['query'];
                     parse_str($parsedUrl['query'], $GET);
                     $_GET = array_merge($_GET, $GET);
                     reset($_GET);
-                }else {
+                } else {
                     unset($_SERVER['QUERY_STRING']);
                 }
                 reset($_SERVER);
             }
         }
-        if(C('URL_HTML_SUFFIX') && !empty($path)) {
+        if (C('URL_HTML_SUFFIX') && !empty($path)) {
             $path = preg_replace('/\.'.trim(C('URL_HTML_SUFFIX'),'.').'$/', '', $path);
         }
         $_SERVER['PATH_INFO'] = empty($path) ? '/' : $path;
@@ -198,7 +196,8 @@ class Dispatcher extends Think
      * @return void
      +----------------------------------------------------------
      */
-    static public function routerCheck() {
+    public static function routerCheck()
+    {
         $regx = trim($_SERVER['PATH_INFO'],'/');
         if(empty($regx)) return true;
         // 是否开启路由使用
@@ -208,11 +207,10 @@ class Dispatcher extends Think
         if(is_array(C('_routes_')))
             $routes = C('_routes_');
         // 路由处理
-        if(!empty($routes))
-        {
+        if (!empty($routes)) {
             $depr = C('URL_PATHINFO_DEPR');
-            foreach ($routes as $key=>$route){
-                if(0 === stripos($regx.$depr,$route[0].$depr)) {
+            foreach ($routes as $key=>$route) {
+                if (0 === stripos($regx.$depr,$route[0].$depr)) {
                     // 简单路由定义：array('路由定义','分组/模块/操作名', '路由对应变量','额外参数'),
                     $var  =  self::parseUrl($route[1]);
                     //  获取当前路由参数对应的变量
@@ -223,12 +221,13 @@ class Dispatcher extends Think
                     // 解析剩余的URL参数
                     $res = preg_replace('@(\w+)\/([^,\/]+)@e', '$var[\'\\1\']="\\2";', implode('/',$paths));
                     $_GET   =  array_merge($var,$_GET);
-                    if(isset($route[3])) {
+                    if (isset($route[3])) {
                         parse_str($route[3],$params);
                         $_GET   =   array_merge($_GET,$params);
                     }
+
                     return true;
-                }elseif(1 < substr_count($route[0],'/') && preg_match($route[0],$regx,$matches)) {
+                } elseif (1 < substr_count($route[0],'/') && preg_match($route[0],$regx,$matches)) {
                     // 路由定义规则：array('正则定义','分组/模块/操作名', '路由对应变量','额外参数'),
                     $var  =  self::parseUrl($route[1]);
                     //  获取当前路由参数对应的变量
@@ -238,23 +237,27 @@ class Dispatcher extends Think
                     // 解析剩余的URL参数
                     $res = preg_replace('@(\w+)\/([^,\/]+)@e', '$var[\'\\1\']="\\2";', str_replace($matches[0],'',$regx));
                     $_GET   =  array_merge($var,$_GET);
-                    if(isset($route[3])) {
+                    if (isset($route[3])) {
                         parse_str($route[3],$params);
                         $_GET   =   array_merge($_GET,$params);
                     }
+
                     return true;
                 }
             }
         }
+
         return false;
     }
 
-    static private function parseUrl($route) {
+    private static function parseUrl($route)
+    {
         $array   =  explode('/',$route);
         $var  =  array();
         $var[C('VAR_ACTION')] = array_pop($array);
         $var[C('VAR_MODULE')] = array_pop($array);
         if(!empty($array)) $var[C('VAR_GROUP')]  = array_pop($array);
+
         return $var;
     }
 
@@ -267,16 +270,17 @@ class Dispatcher extends Think
      * @return string
      +----------------------------------------------------------
      */
-    static private function getModule($var)
+    private static function getModule($var)
     {
         $module = (!empty($_GET[$var])? $_GET[$var]:C('DEFAULT_MODULE'));
-        if(C('URL_CASE_INSENSITIVE')) {
+        if (C('URL_CASE_INSENSITIVE')) {
             // URL地址不区分大小写
             define('P_MODULE_NAME',strtolower($module));
             // 智能识别方式 index.php/user_type/index/ 识别到 UserTypeAction 模块
             $module = ucfirst(parse_name(P_MODULE_NAME,1));
         }
         unset($_GET[$var]);
+
         return $module;
     }
 
@@ -289,12 +293,13 @@ class Dispatcher extends Think
      * @return string
      +----------------------------------------------------------
      */
-    static private function getAction($var)
+    private static function getAction($var)
     {
         $action   = !empty($_POST[$var]) ?
             $_POST[$var] :
             (!empty($_GET[$var])?$_GET[$var]:C('DEFAULT_ACTION'));
         unset($_POST[$var],$_GET[$var]);
+
         return C('URL_CASE_INSENSITIVE')?strtolower($action):$action;
     }
 
@@ -307,11 +312,11 @@ class Dispatcher extends Think
      * @return string
      +----------------------------------------------------------
      */
-    static private function getGroup($var)
+    private static function getGroup($var)
     {
         $group   = (!empty($_GET[$var])?$_GET[$var]:C('DEFAULT_GROUP'));
         unset($_GET[$var]);
+
         return ucfirst(strtolower($group));
     }
 }//类定义结束
-?>

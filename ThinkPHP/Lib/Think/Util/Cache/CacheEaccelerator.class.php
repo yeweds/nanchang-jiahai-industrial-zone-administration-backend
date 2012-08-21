@@ -50,9 +50,9 @@ class CacheEaccelerator extends Cache
      public function get($name)
      {
         N('cache_read',1);
+
          return eaccelerator_get($name);
      }
-
 
     /**
      +----------------------------------------------------------
@@ -60,8 +60,8 @@ class CacheEaccelerator extends Cache
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param string $name 缓存变量名
-     * @param mixed $value  存储数据
+     * @param string $name  缓存变量名
+     * @param mixed  $value 存储数据
      +----------------------------------------------------------
      * @return boolen
      +----------------------------------------------------------
@@ -74,9 +74,9 @@ class CacheEaccelerator extends Cache
         else
             $expire = $this->expire;
          eaccelerator_lock($name);
+
          return eaccelerator_put ($name, $value, $expire);
      }
-
 
     /**
      +----------------------------------------------------------
@@ -95,4 +95,3 @@ class CacheEaccelerator extends Cache
      }
 
 }//类定义结束
-?>

@@ -20,4 +20,3 @@ return array(
     THINK_PATH.'/Mode/Thin/Action.class.php',// 控制器类
     THINK_PATH.'/Mode/Thin/alias.php', // 加载别名
 );
-?>

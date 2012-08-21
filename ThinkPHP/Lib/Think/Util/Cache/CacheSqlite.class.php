@@ -36,7 +36,7 @@ class CacheSqlite extends Cache
         if ( !extension_loaded('sqlite') ) {
             throw_exception(L('_NOT_SUPPERT_').':sqlite');
         }
-        if(empty($options)){
+        if (empty($options)) {
             $options= array
             (
                 'db'        => ':memory:',
@@ -83,7 +83,7 @@ class CacheSqlite extends Cache
     public function get($name)
     {
         N('cache_read',1);
-		$name   = sqlite_escape_string($name);
+        $name   = sqlite_escape_string($name);
         $sql = 'SELECT '.$this->options['value'].
                ' FROM '.$this->options['table'].
                ' WHERE '.$this->options['var'].'=\''.$name.'\' AND ('.$this->options['expire'].'=-1 OR '.$this->options['expire'].'>'.time().
@@ -91,12 +91,14 @@ class CacheSqlite extends Cache
         $result = sqlite_query($this->handler, $sql);
         if (sqlite_num_rows($result)) {
             $content   =  sqlite_fetch_single($result);
-            if(C('DATA_CACHE_COMPRESS') && function_exists('gzcompress')) {
+            if (C('DATA_CACHE_COMPRESS') && function_exists('gzcompress')) {
                 //启用数据压缩
                 $content   =   gzuncompress($content);
             }
+
             return unserialize($content);
         }
+
         return false;
     }
 
@@ -106,8 +108,8 @@ class CacheSqlite extends Cache
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param string $name 缓存变量名
-     * @param mixed $value  存储数据
+     * @param string $name  缓存变量名
+     * @param mixed  $value 存储数据
      +----------------------------------------------------------
      * @return boolen
      +----------------------------------------------------------
@@ -119,7 +121,7 @@ class CacheSqlite extends Cache
         $name  = sqlite_escape_string($name);
         $value = sqlite_escape_string(serialize($value));
         $expire =  ($expireTime==-1)?-1: (time()+$expire);
-        if( C('DATA_CACHE_COMPRESS') && function_exists('gzcompress')) {
+        if ( C('DATA_CACHE_COMPRESS') && function_exists('gzcompress')) {
             //数据压缩
             $value   =   gzcompress($value,3);
         }
@@ -127,6 +129,7 @@ class CacheSqlite extends Cache
                 ' ('.$this->options['var'].', '.$this->options['value'].','.$this->options['expire'].
                 ') VALUES (\''.$name.'\', \''.$value.'\', \''.$expire.'\')';
         sqlite_query($this->handler, $sql);
+
         return true;
     }
 
@@ -147,6 +150,7 @@ class CacheSqlite extends Cache
         $sql  = 'DELETE FROM '.$this->options['table'].
                ' WHERE '.$this->options['var'].'=\''.$name.'\'';
         sqlite_query($this->handler, $sql);
+
         return true;
     }
 
@@ -163,7 +167,7 @@ class CacheSqlite extends Cache
     {
         $sql  = 'delete from `'.$this->options['table'].'`';
         sqlite_query($this->handler, $sql);
+
         return ;
     }
 }//类定义结束
-?>

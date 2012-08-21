@@ -18,7 +18,6 @@
 abstract class Action extends Think
 {//类定义开始
 
-
     /**
      +----------------------------------------------------------
      * 魔术方法 有不存在的操作的时候执行
@@ -26,17 +25,17 @@ abstract class Action extends Think
      * @access public
      +----------------------------------------------------------
      * @param string $method 方法名
-     * @param array $parms 参数
+     * @param array  $parms  参数
      +----------------------------------------------------------
      * @return mixed
      +----------------------------------------------------------
      */
-    public function __call($method,$parms) {
+    public function __call($method,$parms)
+    {
         // 如果定义了_empty操作 则调用
-        if(method_exists($this,'_empty')) {
+        if (method_exists($this,'_empty')) {
             $this->_empty($method,$parms);
         }
     }
 
 }//类定义结束
-?>

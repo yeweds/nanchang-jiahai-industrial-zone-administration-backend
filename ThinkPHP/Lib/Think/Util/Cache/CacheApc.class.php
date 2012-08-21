@@ -24,7 +24,6 @@
 class CacheApc extends Cache
 {//类定义开始
 
-
     /**
      +----------------------------------------------------------
      * 架构函数
@@ -32,12 +31,12 @@ class CacheApc extends Cache
      * @access public
      +----------------------------------------------------------
      */
-    function __construct($options='')
+    public function __construct($options='')
     {
-		if(!function_exists('apc_cache_info')) {
-			throw_exception(L('_NOT_SUPPERT_').':Apc');
-		}
-		$this->expire = isset($options['expire'])?$options['expire']:C('DATA_CACHE_TIME');
+        if (!function_exists('apc_cache_info')) {
+            throw_exception(L('_NOT_SUPPERT_').':Apc');
+        }
+        $this->expire = isset($options['expire'])?$options['expire']:C('DATA_CACHE_TIME');
         $this->type = strtoupper(substr(__CLASS__,6));
     }
 
@@ -55,6 +54,7 @@ class CacheApc extends Cache
      function get($name)
      {
         N('cache_read',1);
+
          return apc_fetch($name);
      }
 
@@ -65,8 +65,8 @@ class CacheApc extends Cache
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
-     * @param string $name 缓存变量名
-     * @param mixed $value  存储数据
+     * @param string $name  缓存变量名
+     * @param mixed  $value 存储数据
      +----------------------------------------------------------
      * @return boolen
      +----------------------------------------------------------
@@ -78,6 +78,7 @@ class CacheApc extends Cache
             $expire = $ttl;
         else
             $expire = $this->expire;
+
          return apc_store($name, $value, $expire);
      }
 
@@ -107,10 +108,9 @@ class CacheApc extends Cache
      * @return boolen
      +----------------------------------------------------------
      */
-    function clear()
+    public function clear()
     {
         return apc_clear_cache();
     }
 
 }//类定义结束
-?>
