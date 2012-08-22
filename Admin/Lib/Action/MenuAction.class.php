@@ -30,7 +30,7 @@ class MenuAction extends GlobalAction{
         $action = $_REQUEST['action'];
         switch ($action){
             case 'Systemconfig':$url=__APP__.'/System/sys_cfg';break;
-            case 'Info':$url=__APP__.'/Shop';break;
+            case 'Info':$url=__APP__.'/News';break;
             case 'Class':$url=__APP__.'/Class';break;
             case 'Statistics':$url=__APP__.'/Statistics';break;
             case 'Pics':$url=__APP__.'/Pic';break;

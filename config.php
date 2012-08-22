@@ -27,7 +27,7 @@ $array  =   array(
     'LANG_SWITCH_ON'    => true,   // 默认关闭多语言包功能
     'LANG_AUTO_DETECT'  => true,   // 自动侦测语言 开启多语言功能后有效
     
-    'COOKIE_EXPIRE'     =>  3600 * 24 * 30,     // Cookie有效期
+    'COOKIE_EXPIRE'     =>  3600,     // Cookie有效期之前一个月，现在改成1个小时
     // 'COOKIE_DOMAIN'     =>  '', // Cookie有效域名
     'COOKIE_PATH'       =>  '/',            // Cookie路径
     'COOKIE_PREFIX'     =>  'h_', // Cookie前缀 避免冲突
