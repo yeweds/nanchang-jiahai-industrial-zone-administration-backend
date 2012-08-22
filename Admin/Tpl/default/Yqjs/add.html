@@ -1,0 +1,181 @@
+<include file="Public:header" />
+<!--导入编辑器开始-->
+<link rel="stylesheet" href="__PUBLIC__/Js/Kindeditor/themes/default/default.css" />
+<script charset="utf-8" src="__PUBLIC__/Js/Kindeditor/kindeditor.js"></script>
+<script charset="utf-8" src="__PUBLIC__/Js/Kindeditor/lang/zh_CN.js"></script>
+<script type="text/javascript">
+//-- 自定义在线编辑器
+    var editor;
+    var mini_items = ['source','undo','redo','fontname','fontsize','forecolor',
+                      'hilitecolor','bold','italic','emoticons','removeformat',
+                      'fullscreen'];  //迷你元素
+    var full_items = ['source', '|', 'undo', 'redo', '|', 'preview', 'print', 'template', 'cut', 'copy', 'paste',
+        'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+        'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+        'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
+        'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+        'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image',
+        'flash', 'insertfile', 'table', 'hr', 'emoticons', 'pagebreak',
+        'link', 'unlink' ];  //完全元素
+    
+    KindEditor.ready(function(K) {
+        editor = K.create('#my_editor', {
+                     themeType : 'default',//样式
+                     newlineTag: 'br', //换行格式
+                     filterMode: true, //过滤代码
+                     uploadJson: '__PUBLIC__/Js/Kindeditor/php/upload_json.php',
+                     fileManagerJson : '__PUBLIC__/Js/Kindeditor/php/file_manager_json.php',
+                     allowFileManager : true,                                            
+                     items: full_items  //当前自定义元素列表
+        });
+    });
+
+    //获取数据  
+    function checkForm(){
+        editor.sync('my_editor'); //同步编辑器内容
+        return true;
+    }
+</script>
+<!-- 编辑器调用结束 -->
+
+<div class="bodyTitle">
+    <div class="bodyTitleLeft"></div>
+  <div class="bodyTitleText">添加园区介绍</div>
+</div>
+<h3 class="marginbot"><a href="__URL__/" class="sgbtn">返回园区介绍管理</a></h3>
+        
+          <table width="100%">
+          <form method="post" name="form1" action="__URL__/Insert" enctype ="multipart/form-data" onSubmit="return checkForm();">
+            <tr>
+              <td width="13%">主标题</td>
+              <td width="87%">
+                <input name="title" type="text"  class="txt" id="title" size="60"/>(长)
+                颜色：<select name="title_color" id="title_color">
+                <option value="">-无-</option>
+                <option value="r" style="background-color:#ff0000;color:#ff0000">red</option>
+                <option value="g" style="background-color:#006600;color:#006600">green</option>
+                <option value="b" style="background-color:#0000ff;color:#0000ff">blue</option>
+                </select>
+                </td>
+            </tr>
+            <tr>
+              <td width="13%">副标题</td>
+              <td width="87%">
+                <input name="sub_title" type="text"  class="txt" id="sub_title" size="50"/>(短)
+                <label for="isshow_sub_title">
+                <input class='np' type='checkbox' name='isshow_sub_title' id='isshow_sub_title' value='1' 
+                <empty name='vo.isshow_sub_title'><else/>checked</empty> >设置为首页显示副标</label>
+              </td>
+            </tr>
+            <tr>
+            <td width="105">自定义属性</td>
+            <td width="526">
+                <input class='np' type='checkbox' name='flag[]' id='flagsh' value='h' />头条,置顶[h]
+                <input class='np' type='checkbox' name='flag[]' id='flagsc' value='c' />推荐[c]
+                <input class='np' type='checkbox' name='flag[]' id='flagsf' value='f' />幻灯[f]
+                <input class='np' type='checkbox' name='flag[]' id='flagsa' value='a' />焦点[a]
+                <input class='np' type='checkbox' name='flag[]' id='flagss' value='s' />滚动[s]
+                <input class='np' type='checkbox' name='flag[]' id='flagsb' value='b' />加粗[b]
+                <input class='np' type='checkbox' name='flag[]' id='flagsp' value='p' />图片[p]
+            </td>
+           </tr>
+           <tr>
+          <td width="90">TAG标签</td>
+          <td><input name="tag" type="text" id="tags" value="" style="width:300px" />(','号分开，单个标签小于12字节)&nbsp;&nbsp;
+            权重(排序)：<input name="sortrank" type="text" id="weight" style="width:50px" value="0" />(越大越靠前,最大1000)</td>
+           </tr>
+           <tr>
+          <td width="90">关键字</td>
+          <td width="448"><input type="text" name="keywords" id="keywords" style="width:80%" value="" />手动填写用","分开<br/></td>
+        </tr>
+
+           <tr>
+            <td width="90">文章来源</td>
+            <td width="240">
+                <input name="source" type="text" id="source" style="width:160px" value="南昌佳海产业园" size="16"/> &nbsp;&nbsp;作者：
+                <input name="author" type="text" id="author" style="width:160px" value="{$realname}" size="16"/> ( 均可修改 )
+            </td>
+          </tr>
+            <tr>
+              <td width="13%">上传缩略图片</td>
+              <td width="87%"><input name="pic" type="file"  class="txt" id="pic" size="50"/>&nbsp;建议尺寸:228*196像素</td>
+            </tr>
+            <tr>
+            <tr>
+              <td width="13%">选择园区介绍栏目</td>
+              <td width="87%">
+                <select name="class_id" id="class_id" value="{$vo.class_id}">{$vo.name}
+                    <present name="list_class" > 
+                        <volist name="list_class" id="vo_class" >
+                            <neq name="vo_class._child" value="">
+                                <optgroup label="{$vo_class.name}">
+                                    <volist name="vo_class._child" id="sub" >
+                                        <option value="{$sub.id}">|- {$sub.name}</option>
+                                    </volist>
+                                </optgroup>
+                            <else/>
+                                <option value="{$vo_class.id}">{$vo_class.name}</option>
+                                <volist name="vo_class._child" id="sub" >
+                                    <option value="{$sub.id}">|- {$sub.name}</option>
+                                </volist>
+                            </neq>
+                            
+                        </volist> 
+                    </present>
+                </select> 注: 若该分类下有子分类，则不允许选中
+            </tr>
+            <!-- <tr>
+              <td width="13%">关联商家</td>
+              <td width="87%">
+                <select name="info_id[]" id="info_id[]" size="10" multiple="multiple">
+                   <option value=''>a null-不关联</option>
+                    <present name="loupan_list" > 
+                    <volist name="loupan_list" id="vo_loupan" >
+                    <option value="{$vo_loupan.id}" >{$vo_loupan.head_py|substr=###,0,1}&nbsp;&nbsp;{$vo_loupan.name}</option>        
+                    </volist> 
+                    </present>
+                </select>
+                (默认不关联)
+                </td>
+            </tr> -->
+            <tr>
+              <td class="red">转向链接</td>
+              <td>
+                <input name="redirecturl" size="70" id="redirecturl" />
+              地址前必须带有 http:// 仅在需要跳转时使用，平时留空</td>
+            </tr>
+            <tr>
+              <td>摘要</td>
+              <td>
+                <textarea name="remark" cols="60" rows="4" id="remark"></textarea>
+              简单概要描述，可以留空</td>
+            </tr>
+            <tr>
+              <td>内容</td>
+              <td><!-- 编辑器调用开始 --><textarea id="my_editor" name="content" style="width:700px;height:300px;"></textarea>
+              <!-- 编辑器调用结束 --> </td>
+            </tr>
+            <tr>
+              <td>是否发布</td>
+              <td><label for="ispub_0"><input type="radio" name="ispublish" id="ispub_0" value="0" checked/>否</label>&nbsp;
+              &nbsp;<label for="ispub_1"><input type="radio" name="ispublish" id="ispub_1" value="1"/>是</label>
+              </td>
+            </tr>
+            <tr>
+              <td width="13%">编辑</td>
+              <td width="87%"><input type="hidden" name="user_id" size="5" value="{$user_id}"/>{$username}</td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+              <td>
+                <input type="submit"  value="确定新增" class="df_button" />
+                <input type="reset"  value="还原重填" class="df_button" /></td>
+            </tr>
+          </form></table>
+        <p class="i">删除不可恢复,谨慎操作</p>
+<br>
+<include file="Public:footer" />

@@ -1,0 +1,65 @@
+<include file="Public:header" />
+
+<div class="bodyTitle">
+    <div class="bodyTitleLeft"></div>
+  <div class="bodyTitleText">回收站</div>
+</div>
+
+<h3 class="marginbot">
+<!-- <a href="__URL__/add" class="sgbtn">＋标注新坐标</a> -->
+<script>
+function gopart(){
+    var cid = document.getElementById("class_id").value;
+    if(cid>0){
+        window.location.href="__URL__/index/class_id/"+cid;
+    }
+}
+</script>
+<h3 class="marginbot">
+<a href="__URL__" class="sgbtn">返回回收站管理</a>
+<select name="class_id" id="class_id"  onchange="javascript:gopart();">
+        <eq name="typeid" value=""><option>请选择</option></eq>
+        <present name="list_class" > 
+            <volist name="list_class" id="vo_class" >
+            <option value="{$vo_class.id}" <eq name="vo_class.id" value="$typeid">selected</eq> >{$vo_class.name}</option>        
+            </volist> 
+        </present>
+</select>
+<!-- <a href='__URL__/index/<eq name="typeid" value=""><else/>class_id/{$typeid}</eq>/ispublish/0' class="sgbtn">只显示未发布</a>
+<a href='__URL__/index/<eq name="typeid" value=""><else/>class_id/{$typeid}</eq>/ispublish/1' class="sgbtn">只显示已发布</a> -->
+&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="#" onClick="delAll()" class="sgbtn">－删除选中(谨慎!不可恢复)</a>
+</h3>
+
+<div id="result" class="none result" style="letter-spacing:10px"></div>
+</h3>
+
+<table id="articlelist" class="datalist fixwidth">
+      <tr align="center">
+        <td width="6%"><input type="checkbox" onClick="selAll(this,'id[]')" value="选择全部" class="checkbox">选择</td>
+        <td width="4%">ID</th>
+        <td width="20%">标题</td>
+        <td width="12%">所属栏目</td>
+        <td width="12%">摘要</td>
+        <td width="10%">发布时间</td>
+        <td width="6%">发布状态</td>
+        <td width="12%">作者</td>
+        <td>操作</td>
+      </tr>
+      <foreach name="list" item="vo">
+      <tr >
+         <td align="center"><input name="id[]" type="checkbox" id="id[]" value="{$vo.id}" /></td>
+         <td height="22" align="center">{$vo.id}</td>
+         <td align="center"><a href="__APP__/../index.php/News/view/id/{$vo.id}" target="_blank" style="color:#3C3C3C;">{$vo.title}</a></td>
+         <td align="center"><a href="__URL__/index/class_id/{$vo.class_id}" title="{$vo.name}" style="color:blue;">{$vo.name}</a></td>
+         <td align="center">{$vo.remark}</td>
+         <td align="center">{$vo.add_time|date="Y-m-d",###}</td>
+         <td align="center">{$vo.ispublish}</td>
+         <td align="center">{$vo.author}</td>
+         <td align="center">[<a href="javascript:edit({$vo.id})" >还原</a>]&nbsp;[<a href="javascript:del({$vo.id})">删除</a>]</td>
+      </tr>    
+      </foreach>
+</table>
+      <div class="page">{$page}</div>
+
+<include file="Public:footer" />

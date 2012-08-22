@@ -1,0 +1,80 @@
+<include file="Public:header" />
+<script>
+function gopart(){
+    var cid = document.getElementById("class_id").value;
+	if(cid>0){
+	    window.location.href="__URL__/index/class_id/"+cid+"/";
+	}
+}
+</script>
+<div class="bodyTitle">
+	<div class="bodyTitleLeft"></div>
+  <div class="bodyTitleText">园区介绍管理</div>
+</div>
+
+<!-- <a href="__URL__/add" class="sgbtn">＋标注新坐标</a> -->
+<table border="0" cellspacing="0" cellpadding="0" style="margin:6px 0px;">
+  <tr>
+    <td width="21%" height="30"><a href="__URL__/" class="sgbtn">返回园区介绍管理</a> </td>
+ <form method="post" action="__URL__/" id="search" >
+  <td width="40%" align="right"><input type="text" name="title" title="标题查询" style="width:300px;" /></td>
+    <td width="25%" align="center">
+	 <select name="field" class="datainput" id="field">
+		<option value="title">按标题</option>
+		<option value="id">按园区介绍ID</option>
+     </select>
+	</td>
+    <td width="14%"><input type="submit" class="df_button_green" value="查 询" ></td>
+</form>
+  </tr>
+</table>
+
+<h3 class="marginbot">
+<a href="#" onClick="delAll()" class="sgbtn">－删除选中</a>
+<select name="class_id" id="class_id"  onchange="javascript:gopart();">
+        <eq name="typeid" value=""><option>请选择</option></eq>
+		<present name="list_class" > 
+			<volist name="list_class" id="vo_class" >
+			<option value="{$vo_class.id}" <eq name="vo_class.id" value="$typeid">selected</eq> >{$vo_class.name}</option>		  
+			</volist> 
+		</present>
+</select>
+<a href='__URL__/index<neq name="typeid" value="">/class_id/{$typeid}</neq>/ispublish/0' class="sgbtn">仅未发布</a>
+<a href='__URL__/index<neq name="typeid" value="">/class_id/{$typeid}</neq>/ispublish/1' class="sgbtn">仅已发布</a>
+<!-- <a href='__URL__/clear<neq name="typeid" value="">/class_id/{$typeid}</neq>' class="sgbtn">
+清空<eq name="typeid" value="">'全部'栏目<else/>'{$typename}'栏目</eq>下所有未发布状态(谨慎!不可恢复)</a> -->
+</h3>
+
+<div id="result" class="none result" style="letter-spacing:10px"></div>
+</h3>
+
+<table id="articlelist" class="datalist fixwidth">
+	  <tr align="center">
+	    <td width="6%"><input type="checkbox" onClick="selAll(this,'id[]')" value="选择全部" class="checkbox">选择</td>
+	    <td width="4%">ID</th>
+		<td width="32%">标题(摘要)</td>
+		<td width="12%">所属栏目</td>
+		<td width="10%">属性</td>
+		<td width="10%">发布时间</td>
+		<td width="6%">发布状态</td>
+		<td width="12%">编辑</td>
+        <td>操作</td>
+	  </tr>
+      <iterate name="list" id="vo">
+	  <tr >
+	     <td align="center"><input name="id[]" type="checkbox" id="id[]" value="{$vo.id}" /></td>
+		 <td height="22" align="center">{$vo.id}</td>
+		 <td align="center"><a href="{$Think.config.cfg_domain}/news-{$vo.id}" target="_blank" style="color:#3C3C3C;"
+		 title="{$vo.remark}">{$vo.title}</a></td>
+		 <td align="center"><a href="__URL__/index/class_id/{$vo.class_id}" title="{$vo.name}" style="color:blue;">{$vo.name}</a></td>
+		 <td align="center">{$vo.flag}</td>
+		 <td align="center">{$vo.add_time|date="Y-m-d",###}</td>
+		 <td align="center">{$vo.ispublish}</td>
+		 <td align="center">{$vo.author}</td>
+		 <td align="center">[<a href="javascript:edit({$vo.id})" >编辑</a>]&nbsp;[<a href="javascript:del({$vo.id})">删除</a>]</td>
+	  </tr>    
+	  </iterate>
+</table>
+	  <div class="page">{$page}</div>
+
+<include file="Public:footer" />

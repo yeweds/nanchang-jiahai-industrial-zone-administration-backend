@@ -35,27 +35,9 @@ function refreshMainFrame(url)
 <switch name="action">
 
 <case value="Info">
-    <!-- <dl>
-        <dt><a href="" onclick="return showHide('items1');" target="_self">商家模块</a></dt>  
-        <dd id="items1" style="display:block;">
-            <ul>
-                <li><a href='__APP__/Shop'>查看商家</a></li>
-                <li><a href='__APP__/Shop/add'>添加商家</a></li>
-                <li><a href='__APP__/Series'>商家套系管理</a></li>
-                <li><a href='__APP__/Attach'>附件管理</a></li>
-            </ul>
-        </dd>  
-        <dt><a href="" onclick="return showHide('items2');" target="_self">名人堂模块</a></dt>  
-        <dd id="items2" style="display:block;">
-            <ul>
-                <li><a href='__APP__/Personage'>名人管理</a></li>
-                <li><a href='__APP__/Personage/add'>添加名人</a></li>
-            </ul>
-        </dd>   
-    </dl> -->
     <dl>
-        <dt><a href="" onclick="return showHide('items3');" target="_self">新闻模块</a></dt>
-        <dd id="items3" style="display:block;">
+        <dt><a href="" onclick="return showHide('items1');" target="_self">新闻模块</a></dt>
+        <dd id="items1" style="display:block;">
             <ul>
                 <li><a href='__APP__/News'>新闻列表</a></li>
                 <li><a href='__APP__/News/add'>添加新闻</a></li>
@@ -66,18 +48,38 @@ function refreshMainFrame(url)
             </ul>
         </dd>
     </dl>
-    <!-- <dl>
-        <dt><a href="" onclick="return showHide('items4');" target="_self">爱情故事</a></dt>
-        <dd id="items4" style="display:block;">
-            <ul>
-                <li><a href='__APP__/Story'>故事管理</a></li>
-                <li><a href='__APP__/Story/add'>添加故事</a></li>
 
+    <dl>
+        <dt><a href="" onclick="return showHide('items2');" target="_self">园区介绍模块</a></dt>
+        <dd id="items2" style="display:block;">
+            <ul>
+                <li><a href='__APP__/Yqjs'>园区介绍列表</a></li>
+                <li><a href='__APP__/Yqjs/add'>添加园区介绍</a></li>
+                <li><a href='__APP__/Yqjs_recycler'>园区介绍回收站</a></li>
+                <li></li>
+                <!-- <li><a href='__APP__/NewsTopic'>话题PK管理</a></li>
+                <li><a href='__APP__/NewsTopic/add'>添加话题</a></li> -->
             </ul>
         </dd>
-    </dl> -->
+    </dl>
+
+    <dl>
+        <dt><a href="" onclick="return showHide('items3');" target="_self">招商模块</a></dt>
+        <dd id="items3" style="display:block;">
+            <ul>
+                <li><a href='__APP__/Zhaoshang'>招商信息列表</a></li>
+                <li><a href='__APP__/Zhaoshang/add'>添加招商信息</a></li>
+                <li><a href='__APP__/Zhaoshang_recycler'>招商信息回收站</a></li>
+                <li></li>
+                <!-- <li><a href='__APP__/NewsTopic'>话题PK管理</a></li>
+                <li><a href='__APP__/NewsTopic/add'>添加话题</a></li> -->
+            </ul>
+        </dd>
+    </dl>
+
     <script type="text/javascript">refreshMainFrame('{$url}');</script>
 </case>
+
 <case value="Pics">
     <dl>
         <dt><a href="" onclick="return showHide('items0');" target="_self">图片管理</a></dt>

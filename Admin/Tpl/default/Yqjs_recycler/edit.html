@@ -1,0 +1,119 @@
+<include file="Public:header" />
+
+<div class="bodyTitle">
+	<div class="bodyTitleLeft"></div>
+  <div class="bodyTitleText">编辑新闻</div>
+</div>
+<br><h3 class="marginbot"><a href="__URL__" class="sgbtn">＋返回回收站管理</a></h3>
+
+          <table width="100%">  
+		  <form method="post" name="form1" action="__URL__/save" enctype ="multipart/form-data">
+          <input name="id" type="hidden" id="id" value="{$vo.id}" />
+            <tr>
+              <td width="13%">标题</td>
+              <td width="87%">
+                <input name="title" type="text"  class="txt" id="title" value="{$vo.title}" size="50"/></td>
+            </tr>
+			<tr>
+            <td width="105">自定义属性</td>
+            <td width="526">
+            	<input class='np' type='checkbox' name='flag[]' id='flagsh' value='h' <empty name='h'><else/>checked</empty> >头条,置顶[h]
+				<input class='np' type='checkbox' name='flag[]' id='flagsc' value='c' <empty name='c'><else/>checked</empty> >推荐[c]
+				<input class='np' type='checkbox' name='flag[]' id='flagsf' value='f' <empty name='f'><else/>checked</empty> >幻灯[f]
+				<input class='np' type='checkbox' name='flag[]' id='flagsa' value='a' <empty name='a'><else/>checked</empty> >特荐[a]
+				<input class='np' type='checkbox' name='flag[]' id='flagss' value='s' <empty name='s'><else/>checked</empty> >滚动[s]
+				<input class='np' type='checkbox' name='flag[]' id='flagsb' value='b' <empty name='b'><else/>checked</empty> >加粗[b]
+				<input class='np' type='checkbox' name='flag[]' id='flagsp' value='p' <empty name='p'><else/>checked</empty> >图片[p]
+            </td>
+           </tr>
+		   <tr>
+          <td width="90">TAG标签</td>
+          <td><input name="tag" type="text" id="tags" value="{$vo.tag}" style="width:300px" />(','号分开，单个标签小于12字节)&nbsp;&nbsp;
+            权重：<input name="pr" type="text" id="weight" style="width:50px" value="{$vo.pr}" />(越大越靠前,最大1000)</td>
+           </tr>
+		   <tr>
+          <td width="90">关键字</td>
+          <td width="448"><input type='text' name="keywords" id="keywords" style="width:80%" value="{$vo.keywords}" />手动填写用","分开<br/></td>
+        </tr>
+
+		   <tr>
+            <td width="90">文章来源</td>
+            <td width="240">
+            	<input name="source" type="text" id="source" style="width:160px" value="{$vo.source}" size="16"/>
+            </td>
+          </tr>
+
+			<tr>
+              <td width="13%">上传图片</td>
+              <td width="87%">
+                <input name="pic" type="file"  class="txt" id="pic" size="50" value="{$vo.pic_url}"/>&nbsp;&nbsp;{$vo.pic_url}
+				<input name="pic_url" type="hidden"  class="txt" id="pic_url" size="50" value="{$vo.pic_url}"/>
+				</td>
+            </tr>
+			<tr>
+              <td width="13%">栏目</td>
+              <td width="87%">
+                <select name="class_id" id="class_id" value="{$vo.class_id}">
+					<present name="list_class" > 
+					<volist name="list_class" id="vo_class" >
+					<option value="{$vo_class.id}" <eq name="vo_class.name" value="$typename">selected</eq> >{$vo_class.name}</option>		  
+					</volist> 
+					</present>
+				</select>
+            </tr>
+			<tr>
+              <td width="13%">关联楼盘</td>
+              <td width="87%">
+                <select name="info_id" id="info_id" >
+					<present name="loupan_list" > 
+					<volist name="loupan_list" id="vo_loupan" >
+					<option value="{$vo_loupan.info_id}" <eq name="vo_loupan.info_id" value="$info_id">selected</eq> >{$vo_loupan.head_py}{$vo_loupan.title}</option>		  
+					</volist> 
+					</present>
+				</select>
+            </tr>
+            <tr>
+              <td>摘要</td>
+              <td>
+                <textarea name="remark" cols="60" rows="4" id="remark">{$vo.remark}</textarea>
+              简单概要描述，可以留空</td>
+            </tr>
+            <tr>
+              <td>内容</td>
+              <td><!-- 编辑器调用开始 --><script type="text/javascript" src="__PUBLIC__/Js/FCKeditor/fckeditor.js"></script>
+	<textarea id="editor" name="content">{$vo.content}</textarea>
+	<script type="text/javascript"> var oFCKeditor = new FCKeditor( "editor","80%","320px" ) ; oFCKeditor.BasePath = "__PUBLIC__/Js/FCKeditor/" ; oFCKeditor.ReplaceTextarea() ;function resetEditor(){setContents("editor",document.getElementById("editor").value)}; function saveEditor(){document.getElementById("editor").value = getContents("editor");} function InsertHTML(html){ var oEditor = FCKeditorAPI.GetInstance("editor") ;if (oEditor.EditMode == FCK_EDITMODE_WYSIWYG ){oEditor.InsertHtml(html) ;}else	alert( "FCK必须处于WYSIWYG模式!" ) ;}</script> <!-- 编辑器调用结束 --></td>
+            </tr>
+            <tr>
+              <td>排序</td>
+              <td><input type="text" value="{$vo.sortrank}" name="sortrank" size="5" /></td>
+            </tr>
+			<tr>
+              <td>是否发布</td>
+              <td><input type="radio" name="ispublish" value="0" <eq name="vo.ispublish" value="0">checked</eq> />否
+			  <input type="radio" name="ispublish" value="1" <eq name="vo.ispublish" value="1">checked</eq>/>是
+			  </td>
+            </tr>
+			<tr>
+              <td>点击量</td>
+              <td><input type="text" value="{$vo.click}" name="click" size="5" /></td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+              <td>
+                <input type="submit"  value="提交更新" class="df_button" />
+                <input type="reset" value="还原重填" class="df_button" /></td>
+            </tr>
+          </form>
+		  <tr>
+              <td width="13%">作者</td>
+              <td width="87%">{$vo.username}</td>
+            </tr>
+		  </table>
+        <p class="i">删除不可恢复,谨慎操作</p>
+        <br>
+<include file="Public:footer" />
